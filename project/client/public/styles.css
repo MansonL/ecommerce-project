@@ -1,0 +1,38 @@
+body{
+    background-color: #0E131F;
+  }
+  .text-color, th, td {
+    color: #FCFAEE;
+  }
+  .card {
+    background-color: #38405F;
+    border-radius: 3.5rem;
+  }
+  td {
+    
+  }
+  #table-container {
+    height: 18rem;
+    overflow-y: auto;
+  }
+  i {
+    font-size: 0.9rem; 
+    color: #429E69;
+  }
+  .card-body {
+    height: 15rem ;
+    overflow-y: auto;
+  }
+  #msg-received {
+    text-align: left;
+  }
+  #msg-sent {
+    text-align: right
+  }
+  b {
+    color: #0457DC;
+  }
+  span {
+    color: #6C370E;
+  }
+ 
