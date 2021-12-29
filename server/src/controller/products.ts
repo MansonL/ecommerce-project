@@ -1,5 +1,5 @@
 import { Request, NextFunction, Response } from 'express';
-import { ApiError } from '../utils/errorApi';
+import { ApiError } from '../api/errorApi';
 import { EProductsErrors } from '../common/EErrors';
 import { productsApi } from '../api/products';
 import {

@@ -2,7 +2,7 @@ import { Request } from "express";
 import passportFacebook, { Profile, VerifyFunctionWithRequest } from 'passport-facebook'
 import {  INew_User, } from "../interfaces/interfaces";
 import { usersApi } from "../api/users";
-import { ApiError } from "../utils/errorApi";
+import { ApiError } from "../api/errorApi";
 import { isCUDResponse, isUser } from "../interfaces/checkType";
 import * as dotenv from 'dotenv'
 import moment from "moment";

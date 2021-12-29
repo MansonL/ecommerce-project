@@ -4,7 +4,7 @@ import { productsApi } from '../api/products';
 import { EProductsErrors } from '../common/EErrors';
 import { isCartProduct, isCUDResponse, isProduct } from '../interfaces/checkType';
 import { CUDResponse, IMongoCartProduct, IMongoProduct, InternalError } from '../interfaces/interfaces';
-import { ApiError } from '../utils/errorApi';
+import { ApiError } from '../api/errorApi';
 import { validator } from '../utils/joiSchemas';
 
 /**

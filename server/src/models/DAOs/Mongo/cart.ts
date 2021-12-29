@@ -10,7 +10,7 @@ import {
     INew_Product,
     InternalError,
 } from '../../../interfaces/interfaces';
-import { ApiError } from '../../../utils/errorApi';
+import { ApiError } from '../../../api/errorApi';
 import { models } from './models';
 
 export class MongoCart implements DBCartClass {

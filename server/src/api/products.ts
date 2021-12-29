@@ -8,7 +8,7 @@ import {
     InternalError,
 } from '../interfaces/interfaces';
 import { MongoProducts } from '../models/DAOs/Mongo/products';
-import { ApiError } from '../utils/errorApi';
+import { ApiError } from './errorApi';
 import { storage } from '../models/usersFactory';
 
 /**

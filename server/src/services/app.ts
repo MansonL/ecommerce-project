@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import { router } from '../routes';
-import { errorHandler } from '../utils/errorHandler';
-import { unknownRoute } from '../utils/unknownRoute';
+import { errorHandler } from '../middleware/errorHandler';
+import { unknownRoute } from '../middleware/unknownRoute';
 import { mongoConnection } from '../models/DAOs/Mongo/connection';
 import session from 'express-session'
 import MongoStore from 'connect-mongo'

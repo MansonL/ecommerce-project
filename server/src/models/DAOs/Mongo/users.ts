@@ -8,7 +8,7 @@ import {
     InternalError
 } from '../../../interfaces/interfaces';
 import { Utils } from '../../../common/utils';
-import { ApiError } from '../../../utils/errorApi';
+import { ApiError } from '../../../api/errorApi';
 import { EUsersErrors } from '../../../common/EErrors';
 
 export class MongoUsers {

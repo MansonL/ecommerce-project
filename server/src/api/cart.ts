@@ -6,7 +6,7 @@ import {
 } from '../interfaces/interfaces';
 import { CartFactory } from '../models/cartFactory';
 import { MongoCart } from '../models/DAOs/Mongo/cart';
-import { ApiError } from '../utils/errorApi';
+import { ApiError } from './errorApi';
 import { storage } from '../models/usersFactory';
 
 /**

@@ -3,7 +3,7 @@ import { messagesApi } from '../api/messages';
 import { normalizeData } from '../common/compression';
 import { isCUDResponse, isMessages } from '../interfaces/checkType';
 import { CUDResponse, IMongoMessage, INew_Message, InternalError } from '../interfaces/interfaces';
-import { ApiError } from '../utils/errorApi';
+import { ApiError } from '../api/errorApi';
 import { validator } from '../utils/joiSchemas';
 
 /**

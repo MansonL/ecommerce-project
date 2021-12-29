@@ -5,7 +5,7 @@ import { usersApi } from "../api/users";
 import { Utils } from "../common/utils";
 import { isCUDResponse, isUser } from "../interfaces/checkType";
 import { CUDResponse, IMongoUser, INew_User, InternalError } from "../interfaces/interfaces";
-import { ApiError } from "../utils/errorApi";
+import { ApiError } from "../api/errorApi";
 
 
 export const passportLogin: VerifyFunctionWithRequest = async (req: Request, username: string, password: string, done: doneFunction) => {

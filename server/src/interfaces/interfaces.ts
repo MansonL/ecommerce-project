@@ -1,4 +1,4 @@
-import { ApiError } from "../utils/errorApi";
+import { ApiError } from "../api/errorApi";
 
 /**
  *

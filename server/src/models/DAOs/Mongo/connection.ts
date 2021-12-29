@@ -13,6 +13,3 @@ export const mongoConnection = ()   => {
         })
     
 };
-//.then(m => {
-//console.log('Mongo DB Connected');
-//return m.connection.getClient();

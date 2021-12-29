@@ -7,7 +7,7 @@ import {
 import { storage } from '../models/usersFactory';
 import { MongoMessages } from '../models/DAOs/Mongo/messages';
 import { MessagesFactory } from '../models/messagesFactory';
-import { ApiError } from '../utils/errorApi';
+import { ApiError } from './errorApi';
 
 export class MessagesApi {
     private messages: MongoMessages;

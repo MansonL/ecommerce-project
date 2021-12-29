@@ -2,7 +2,7 @@ import { INew_User, CUDResponse, IMongoUser, InternalError } from '../interfaces
 import { storage } from '../models/usersFactory';
 import { UsersFactory } from '../models/usersFactory';
 import { MongoUsers } from '../models/DAOs/Mongo/users';
-import { ApiError } from '../utils/errorApi';
+import { ApiError } from './errorApi';
 
 export class UsersApi {
     private users: MongoUsers;

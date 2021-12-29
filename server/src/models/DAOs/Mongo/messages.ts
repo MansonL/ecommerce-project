@@ -9,7 +9,7 @@ import {
 import { models, WelcomeMessage } from './models';
 import { Model, connect } from 'mongoose';
 import { Utils } from '../../../common/utils';
-import { ApiError } from '../../../utils/errorApi';
+import { ApiError } from '../../../api/errorApi';
 
 export class MongoMessages implements DBMessagesClass {
     private messages: Model<INew_Message>;

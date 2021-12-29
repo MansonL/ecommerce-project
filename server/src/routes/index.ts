@@ -15,6 +15,8 @@ router.use('/messages', messagesRouter);
 router.use('/users', usersRouter);
 router.use('/auth', authRouter)
 
+/*
+
 router.get('/info', (req: Request, res: Response) => {
     res.json({
         inputValues: commandData,
@@ -45,4 +47,4 @@ router.get('/randoms', (req: Request, res: Response) => {
     
 })
 
-
+*/

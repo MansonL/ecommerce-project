@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { EProductsErrors, EUsersErrors } from '../common/EErrors';
 import { CUDResponse, IMongoUser, INew_User, InternalError } from '../interfaces/interfaces';
-import { ApiError } from '../utils/errorApi';
+import { ApiError } from '../api/errorApi';
 import { validator } from '../utils/joiSchemas';
 import { usersApi } from '../api/users';
 import moment from 'moment';

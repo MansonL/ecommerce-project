@@ -12,7 +12,7 @@ import {
 import { mockProducts } from '../../mockProducts';
 import moment from 'moment';
 import { Utils } from '../../../common/utils';
-import { ApiError } from '../../../utils/errorApi';
+import { ApiError } from '../../../api/errorApi';
 import { EProductsErrors } from '../../../common/EErrors';
 
 export class MongoProducts implements DBProductsClass {
