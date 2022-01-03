@@ -1,11 +1,10 @@
 import { model, Model, Schema } from 'mongoose';
-import { Utils } from '../../../common/utils';
 import { ApiError } from '../../../api/errorApi';
 import { EUsersErrors } from '../../../common/EErrors';
 import moment from 'moment';
 import { IMongoUser, INew_User } from '../../../common/interfaces/users';
-import { CUDResponse, InternalError } from '../../../common/interfaces/others';
-
+import { CUDResponse } from '../../../common/interfaces/others';
+import bcrypt from 'bcrypt';
 
 const usersSchema = new Schema({
     createdAt: { type: String, required: true },
@@ -25,20 +24,39 @@ const usersSchema = new Schema({
         addresses: [
             {
                 street1: {
-                    name: { type: String, required: true },
-                    number: { type: String, required: true },
+                    name: { type: String },
+                    number: { type: String },
                 },
                 street2: { type: String },
                 street3: { type: String },
-                zipcode: { type: String, required: true },
+                zipcode: { type: String },
                 floor: { type: String },
                 department: { type: String },
-                city: { type: String, required: true }
+                city: { type: String }
             }
         ]
     },
     isAdmin: { type: Boolean, required: true }
 });
+
+usersSchema.set('toJSON', {
+    transform: (document, returnedDocument) => {
+        delete returnedDocument.__v;
+        delete returnedDocument.data.password;
+    }
+});
+
+usersSchema.methods.isValidPassword = async function(password: string)  {
+    const valid = await bcrypt.compare(password, this.password);
+    return valid
+}
+
+usersSchema.pre('save', async function(next){
+    const hash = await bcrypt.hash(this.password, 10);
+    this.password = hash;
+    this.repeatedPassword = hash;
+    next()
+})
 
 const usersModel = model<INew_User, Model<INew_User>>('users', usersSchema)
 
@@ -47,26 +65,14 @@ const botData: INew_User = {
     modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     data: {
         username: `test@gmail.com`,
-        password: Utils.createHash('test123'),
-        repeatedPassword: Utils.createHash('test123'),
+        password: 'test123',
+        repeatedPassword: 'test123',
         name: `Manson`,
         surname: `Bot`,
         age: "27/12/2000",
         avatar: `https://cdn.icon-icons.com/icons2/1371/PNG/512/robot02_90810.png`,
         facebookID: '',
         photos: [],
-        addresses: {
-            street1: {
-                name: '',
-                number: 0,
-            },
-            street2: '',
-            street3: '',
-            floor: '',
-            department: '',
-            zipcode: '',
-            city: '',
-        }
     },
     isAdmin: false,
 };
@@ -84,81 +90,59 @@ export class MongoUsers {
         await WelcomeBot.save();
         console.log(`Users initialized`);
     }
-    async get(id?: string | undefined): Promise<IMongoUser[] | ApiError | InternalError> {
+    async get(id?: string | undefined): Promise<IMongoUser[] | ApiError > {
       try {
         if (id != null) {
-            const docs = await this.users.find({ _id: id });
-            if (docs.length > 0) {
-                const user: IMongoUser[] = Utils.extractMongoUsers(docs);
-                return user;
-            } else {
+            const doc = await this.users.findOne({ _id: id });
+            if (doc) 
+                return [doc]
+            else 
                 return ApiError.badRequest(EUsersErrors.UserNotFound)
-            }
         } else {
             const docs = await this.users.find({});
-            if (docs.length > 0) {
-                const users: IMongoUser[] = Utils.extractMongoUsers(docs);
-                return users;
-            } else {
+            if (docs.length > 0) 
+                return docs;
+            else 
                 return ApiError.notFound(EUsersErrors.NoUsers)
-            }
         }
        } catch (error) {
-          return {
-              error: error,
-              message: "An error occured",
-          } 
-    }
-    }
+          return ApiError.internalError(`An error occured.`)
+        }   
+    } 
     /* PASSPORT SIGNUP LOCAL */
-    async getByUser(username: string): Promise<IMongoUser | ApiError | InternalError> {
+    async getByUser(username: string): Promise<IMongoUser | ApiError > {
         try {
-            const doc = await this.users.findOne({ username: username });
-            console.log(doc);
-            if(doc){
-                const user : IMongoUser = Utils.extractMongoUsers([doc])[0]
-                return user
-            }else{
+            const doc = await this.users.findOne({ "data.username" : username });
+            if(doc)
+                return doc
+            else
                 return ApiError.notFound(EUsersErrors.UserNotFound);
-            }
         } catch (error) {
-            return {
-                error: error,
-                message: "An error occured" 
-            }
+            return ApiError.internalError(`An error occured.`)
         }
     }
     /* PASSPORT SIGNUP & LOGIN FACEBOOK */
-    async getByFacebookID (id: string): Promise<IMongoUser | ApiError | InternalError> {
+    async getByFacebookID (id: string): Promise<IMongoUser | ApiError > {
         try {
-            const doc = await this.users.findOne({ facebookID: id });
-            if(doc){
-                const user : IMongoUser = Utils.extractMongoUsers([doc])[0]
-                return user
-            }else{
+            const doc = await this.users.findOne({ "data.facebookID": id });
+            if(doc)
+                return doc
+            else
                 return ApiError.notFound(EUsersErrors.UserNotFound);
-            }
         } catch (error) {
-            return {
-                error: error,
-                message: "An error occured" 
-            }
+            return ApiError.internalError(`An error occured.`)
         }
     }
 
-    async add(user: INew_User): Promise<CUDResponse | InternalError> {
+    async add(user: INew_User): Promise<CUDResponse | ApiError> {
         try {
             const doc = await this.users.create(user);
-            const result = Utils.extractMongoUsers([doc])[0];
             return {
                 message: `User successfully created.`,
-                data: result,
+                data: doc,
             };
         }catch (error) {
-            return {
-                error: error,
-                message: "An error occured",
-            }
+            return ApiError.internalError(`An error occured.`)
         }
 }
 

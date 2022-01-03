@@ -101,11 +101,11 @@ export interface IQuery {
  */
  export interface DBProductsClass {
     init?(): Promise<void>;
-    get(id?: string | undefined): Promise<IMongoProduct[] | ApiError | InternalError>;
-    add(newProduct: INew_Product): Promise<CUDResponse | InternalError>;
-    update(id: string | number, data: IUpdate): Promise<CUDResponse | InternalError>;
-    delete(id: string | number): Promise<CUDResponse | InternalError>;
-    query(options: IQuery): Promise<IMongoProduct[] | ApiError | InternalError>;
+    get(id?: string | undefined): Promise<IMongoProduct[] | ApiError>;
+    add(newProduct: INew_Product): Promise<CUDResponse | ApiError>;
+    update(id: string | number, data: IUpdate): Promise<CUDResponse | ApiError>;
+    delete(id: string | number): Promise<CUDResponse | ApiError>;
+    query(options: IQuery): Promise<IMongoProduct[] | ApiError>;
 }
 
 /**
@@ -116,10 +116,10 @@ export interface IQuery {
 export interface DBCartClass {
     init?(): Promise<void>;
     get(
-        id?: string | undefined
-    ): Promise<IMongoCart[] | ApiError | InternalError>;
-    add(user_id: string, product_id: string): Promise<CUDResponse | InternalError>;
-    delete(id: string): Promise<CUDResponse | InternalError>;
+        user_id?: string | undefined
+    ): Promise<IMongoCart[] | ApiError>;
+    add(user_id: string, product_id: string): Promise<CUDResponse | ApiError>;
+    delete(user_id: string, product_id: string): Promise<CUDResponse | ApiError>;
 }
 
 /**

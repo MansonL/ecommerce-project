@@ -1,34 +1,36 @@
-import { INew_User, CUDResponse, IMongoUser, InternalError } from '../common/interfaces/others';
+
 import { storage } from '../models/usersFactory';
 import { UsersFactory } from '../models/usersFactory';
 import { MongoUsers } from '../models/DAOs/Mongo/users';
 import { ApiError } from './errorApi';
+import { IMongoUser, INew_User } from '../common/interfaces/users';
+import { CUDResponse } from '../common/interfaces/others';
 
 export class UsersApi {
     private users: MongoUsers;
     constructor() {
         this.users = UsersFactory.get(storage);
     }
-    async getUser(id: string): Promise<IMongoUser[] | ApiError | InternalError> {
-        const result: IMongoUser[] | ApiError | InternalError = await this.users.get(id);
+    async getUser(id: string): Promise<IMongoUser[] | ApiError > {
+        const result: IMongoUser[] | ApiError  = await this.users.get(id);
         return result;
     }
-    async getUsers(): Promise<IMongoUser[] | ApiError | InternalError> {
-        const result: IMongoUser[] | ApiError | InternalError = await this.users.get();
+    async getUsers(): Promise<IMongoUser[] | ApiError > {
+        const result: IMongoUser[] | ApiError  = await this.users.get();
         return result;
     }
-    async getUserByUsername(username: string): Promise <IMongoUser | ApiError | InternalError> {
+    async getUserByUsername(username: string): Promise <IMongoUser | ApiError > {
         const result = await this.users.getByUser(username);
         return result
     }
     
-    async getUserByFacebookID(id: string): Promise <IMongoUser | ApiError | InternalError> {
-        const result : IMongoUser | ApiError | InternalError = await this.users.getByFacebookID(id);
+    async getUserByFacebookID(id: string): Promise <IMongoUser | ApiError > {
+        const result : IMongoUser | ApiError  = await this.users.getByFacebookID(id);
         return result
     }
 
-    async addUser(message: INew_User): Promise<CUDResponse | InternalError> {
-        const result: CUDResponse | InternalError = await this.users.add(message);
+    async addUser(message: INew_User): Promise<CUDResponse | ApiError> {
+        const result: CUDResponse | ApiError = await this.users.add(message);
         return result;
     }
 }

@@ -4,7 +4,7 @@ import { normalizeData } from '../common/compression';
 import { isCUDResponse, isMessages } from '../common/interfaces/checkType';
 import { CUDResponse, IMongoMessage, INew_Message, InternalError } from '../common/interfaces/others';
 import { ApiError } from '../api/errorApi';
-import { validator } from '../utils/joiSchemas';
+import { validator } from '../common/interfaces/joiSchemas';
 
 /**
  *

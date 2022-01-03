@@ -10,7 +10,7 @@ import {
     IQuery,
     IUpdate,
 } from '../common/interfaces/others';
-import { validator } from '../utils/joiSchemas';
+import { validator } from '../common/interfaces/joiSchemas';
 import { Utils } from '../common/utils';
 import { isCUDResponse, isProduct } from '../common/interfaces/checkType';
 

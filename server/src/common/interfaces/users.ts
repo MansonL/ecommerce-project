@@ -8,6 +8,7 @@ import { CUDResponse, InternalError } from "./others"
  *
  */
  export interface IMongoUser extends Document{
+    _id: string;
     createdAt: string;
     modifiedAt: string;
     data: {
@@ -18,7 +19,7 @@ import { CUDResponse, InternalError } from "./others"
         avatar: string;
         photos: string[];
         facebookID?: string;
-        addresses: UserAddresses;
+        addresses?: UserAddresses;
     },
     isAdmin: boolean;
 }
@@ -67,8 +68,8 @@ export interface INew_User {
  */
  export interface DBUsersClass {
     init?(): Promise<void>;
-    get(id?: string | undefined): Promise<IMongoUser[] | ApiError | InternalError>;
-    getByUser(username: string): Promise <IMongoUser | ApiError | InternalError>  // This method is for checking and not storing repeated users.
+    get(id?: string | undefined): Promise<IMongoUser[] | ApiError >;
+    getByUser(username: string): Promise <IMongoUser | ApiError >  // This method is for checking and not storing repeated users.
     add(user: INew_User): Promise<CUDResponse | ApiError>;
 }
 

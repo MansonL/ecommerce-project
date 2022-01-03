@@ -1,7 +1,6 @@
-import { model, Model, Schema } from 'mongoose';
+import { Document, model, Model, Schema, Types } from 'mongoose';
 import { mockProducts } from '../../mockProducts';
 import moment from 'moment';
-import { Utils } from '../../../common/utils';
 import { ApiError } from '../../../api/errorApi';
 import { EProductsErrors } from '../../../common/EErrors';
 import { DBProductsClass, IMongoProduct, INew_Product, IQuery, IUpdate } from '../../../common/interfaces/products';
@@ -26,7 +25,7 @@ productSchema.set('toJSON', {
     transform: (document, returnedDocument) => {
         delete returnedDocument.__v;
     }
-})
+});
 
 const productModel = model<INew_Product, Model<INew_Product>>(
     'products',
@@ -45,89 +44,73 @@ export class MongoProducts implements DBProductsClass {
         await this.products.insertMany(mockProducts);
         console.log(`Mock data inserted `);
     }
-    async get(id?: string | undefined): Promise<IMongoProduct[] | ApiError | InternalError> {
+    async get(id?: string | undefined): Promise<IMongoProduct[] | ApiError> {
       try {
         if (id != null) {
-            const docs = await this.products.find({ _id: id });
-            if (docs.length > 0) {
-                const product: IMongoProduct[] =
-                    Utils.extractMongoProducts(docs);
-                return product;
-            }
-            return ApiError.notFound(EProductsErrors.ProductNotFound)
+            const doc = await this.products.findOne({ _id: id });
+            if (doc) return [doc]
+            else return ApiError.notFound(EProductsErrors.ProductNotFound)
         } else {
             const docs = await this.products.find({});
-            if (docs.length > 0) {
-                const products: IMongoProduct[] =
-                    Utils.extractMongoProducts(docs);
-                return products;
-            }
-            return ApiError.notFound(EProductsErrors.NoProducts)
+            if (docs.length > 0) return docs
+            else return ApiError.notFound(EProductsErrors.NoProducts)
         }
       } catch (error) {
-            return {
-                error: error,
-                message: "An error occured"
-            }
+            return ApiError.internalError(`An error occured.`)
       }
     }
-    async add(product: INew_Product): Promise<CUDResponse | InternalError> {
+    async add(product: INew_Product): Promise<CUDResponse | ApiError> {
         try {
             const doc = await this.products.create(product);
-            const doc2 = new this.products(product)
-            const result: IMongoProduct = Utils.extractMongoProducts([doc])[0];
             return {
                 message: `Product successfully saved.`,
-                data: result,
+                data: doc,
             };
         } catch (error) {
-            return {
-                error: error,
-                message: "An error occured"
-            }
+            return ApiError.internalError(`An error occured.`)
         }
         
     }
-    async update(id: string, data: IUpdate): Promise<CUDResponse | InternalError> {
+    async update(id: string, data: IUpdate): Promise<CUDResponse | ApiError> {
         try {
-            const doc = await this.products.find({ _id: id });
-            const product: IMongoProduct = Utils.extractMongoProducts(doc)[0];
-            const newProduct = { ...product, ...data };
-            newProduct.modifiedAt = moment().format('YYYY-MM-DD HH:mm:ss');
-            console.log(newProduct);
-            await this.products.replaceOne({ _id: id }, newProduct);
-            return {
-                message: `Product successfully updated.`,
-                data: newProduct,
-            };
-        } catch (error) {
-            return {
-                error: error,
-                message: "An error occured"
+            const doc = await this.products.findOne({ _id: id }).lean();
+            if(doc){
+                const newProduct = { ...doc, ...data };
+                newProduct.modifiedAt = moment().format('YYYY-MM-DD HH:mm:ss');
+                console.log(newProduct);
+                await this.products.replaceOne({ _id: id }, newProduct);
+                return {
+                    message: `Product successfully updated.`,
+                    data: { _id: id, ...newProduct},
+                }
+            }else{
+                return ApiError.notFound(EProductsErrors.ProductNotFound)
             }
+            
+        } catch (error) {
+            return ApiError.internalError(`An error occured.`)
         }
         
     }
-    async delete(id: string): Promise<CUDResponse | InternalError> {
+    async delete(id: string): Promise<CUDResponse | ApiError> {
         try {
-            const deletedDoc = await this.products.find({ _id: id });
-            const deletedProduct: IMongoProduct =
-                Utils.extractMongoProducts(deletedDoc)[0];
-            await this.products.deleteOne({ _id: id });
-            return {
-                message: `Product successfully deleted`,
-                data: deletedProduct,
-            };
-        } catch (error) {
-            return {
-                error: error,
-                message: "An error occured"
+            const deletedDoc = await this.products.findOne({ _id: id });
+            if(deletedDoc){
+                await this.products.deleteOne({ _id: id });
+                return {
+                    message: `Product successfully deleted`,
+                    data: deletedDoc,
+                };
+            }else{
+                return ApiError.notFound(EProductsErrors.ProductNotFound)
             }
+        } catch (error) {
+            return ApiError.internalError(`An error occured.`)
         }
         
     }
 
-    async query(options: IQuery): Promise<IMongoProduct[] | ApiError | InternalError> {
+    async query(options: IQuery): Promise<IMongoProduct[] | ApiError> {
         try {
             const titleRegex =
                 options.title === ''
@@ -137,7 +120,7 @@ export class MongoProducts implements DBProductsClass {
                 options.code === ''
                     ? new RegExp(`.*`)
                     : new RegExp(`(${options.code})`);
-            const doc = await this.products.find({
+            const docs = await this.products.find({
                 title: { $regex: titleRegex },
                 code: { $regex: codeRegex },
                 price: {
@@ -149,17 +132,10 @@ export class MongoProducts implements DBProductsClass {
                     $lte: options.stock.maxStock,
                 },
             });
-            if (doc.length > 0) {
-                const products: IMongoProduct[] = Utils.extractMongoProducts(doc);
-                return products;
-            } else {
-                return ApiError.notFound(`No products matching the query`);
-            }
+            if (docs.length > 0) return docs;
+            else return ApiError.notFound(`No products matching the query`); 
         } catch (error) {
-            return {
-                error: error,
-                message: "An error occured"
-            }
+            return ApiError.internalError(`An error occured.`)
         }
         
     }

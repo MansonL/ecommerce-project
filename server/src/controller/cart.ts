@@ -3,9 +3,11 @@ import { cartApi } from '../api/cart';
 import { productsApi } from '../api/products';
 import { EProductsErrors } from '../common/EErrors';
 import { ApiError } from '../api/errorApi';
-import { validator } from '../utils/joiSchemas';
+import { validator } from '../common/interfaces/joiSchemas';
 import { IMongoCart, IMongoProduct, isCartProduct, isProduct } from '../common/interfaces/products';
-import { CUDResponse, InternalError, isCUDResponse } from '../common/interfaces/others';
+import { CUDResponse, isCUDResponse } from '../common/interfaces/others';
+import { logger } from '../services/logger';
+import { ObjectId } from 'mongodb';
 
 /**
  *
@@ -18,16 +20,18 @@ class CartController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const id: string | undefined = req.params.id;
-        console.log(`[PATH] Inside controller.`);
-        const { error } = await validator.id.validateAsync(id);
-        if (error) {
+        const user_id: string | undefined = req.params.id;
+        logger.info(`[PATH]: Inside Cart Controller`);
+        if (!ObjectId.isValid(user_id))
             next(ApiError.badRequest(EProductsErrors.IdIncorrect));
-        } else {
-            const result: IMongoCart[] | InternalError | ApiError = await cartApi.get(
-                id
+        else {
+            const result: IMongoCart[]  | ApiError = await cartApi.get(
+                user_id
             );
-            
+            if(result instanceof ApiError)
+                res.status(result.error).send(result);
+            else
+                res.status(200).send(result)
         }
     }
     async getCart(
@@ -35,15 +39,12 @@ class CartController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const result: IMongoCart[] | ApiError | InternalError = await cartApi.get();
-        console.log(`[PATH] Inside controller.`);
-        if (isCartProduct(result)) {
+        logger.info(`[PATH]: Inside Cart Controller`)
+        const result: IMongoCart[] | ApiError  = await cartApi.get();
+        if(result instanceof ApiError)
+            res.status(result.error).send(result);
+        else
             res.status(200).send(result);
-        }else if(result instanceof ApiError){
-            res.status(result.error).send(result)
-        }else{
-            res.status(500).send(result)  // Internal Error sent.
-        }
     }
 
     async addToCart(
@@ -53,30 +54,27 @@ class CartController {
     ): Promise<void> {
         const productID : string = req.params.id;
         const userID : string = req.body
-        console.log(`[PATH] Inside controller.`);
-        const { error } = await validator.id.validate(productID);
-        if (error) {
+        logger.info(`[PATH]: Inside Cart Controller`)
+        if (ObjectId.isValid(productID)) {
             next(ApiError.badRequest(EProductsErrors.IdIncorrect));
         } else {
-            const firstResult: IMongoProduct[] | ApiError | InternalError = await productsApi.getProduct(
+            const firstResult: IMongoProduct[] | ApiError  = await productsApi.getProduct(
                 productID
             );
             if (isProduct(firstResult)) {
                 /**
                  * Cause the data was previously checked to be MongoProducts
                  */
-                const result : CUDResponse | InternalError = await cartApi.addProduct(
+                const result : CUDResponse | ApiError = await cartApi.addProduct(
                     userID, productID
                 );
                 if(isCUDResponse(result)){
                     res.status(201).send(result);
                 }else{
-                    res.status(500).send(result) // Internal Error sent, generated at the product saving to cart.
+                    res.status(result.error).send(result) // Internal Error sent, generated at the product saving to cart.
                 }
             } else if(firstResult instanceof ApiError){
                 res.status(firstResult.error).send(firstResult)
-            }else{
-                res.status(500).send(firstResult) // Internal Error sent, generated at the searched of the required product to be added to the cart
             }
         }
     }
@@ -87,15 +85,15 @@ class CartController {
         next: NextFunction
     ): Promise<void> {
         const id: string = req.params.id;
-        console.log(`[PATH] Inside controller.`);
+        logger.info(`[PATH]: Inside Cart Controller`)
         const { error } = await validator.id.validate(id);
         if (error) {
             next(ApiError.badRequest(EProductsErrors.IdIncorrect));
         } else {
-            const firstResult: IMongoCart[] | ApiError | InternalError =
+            const firstResult: IMongoCart[] | ApiError  =
                 await cartApi.getProduct(id);
             if(isProduct(firstResult)){
-                const result: CUDResponse | InternalError = await cartApi.deleteProduct(id);
+                const result: CUDResponse | ApiError = await cartApi.deleteProduct(id);
                 if(isCUDResponse(result)){
                     res.status(201).send(result)
                 }else{

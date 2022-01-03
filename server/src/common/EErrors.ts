@@ -11,5 +11,10 @@ export enum EUsersErrors {
     UserNotFound = `User not found.`,
     NoUsers = `There's no users registered...`,
     IncorrectProperties = `Fields incorrect, please check them...`,
-    
+}
+
+export enum ECartErrors {
+    EmptyCart = `Cart is empty.`,
+    NoCarts = `There are no carts created.`,
+    ProductNotInCart = `The product isn't in the cart.`
 }

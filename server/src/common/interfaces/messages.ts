@@ -1,6 +1,7 @@
+import { Document } from "mongoose";
 import { ApiError } from "../../api/errorApi";
-import { CUDResponse, InternalError } from "./others";
-import { IMongoUser } from "./users";
+import { CUDResponse } from "./others";
+
 
 /**
  * 
@@ -28,7 +29,7 @@ import { IMongoUser } from "./users";
  */
 export interface INew_Message {
     timestamp: string;
-    author: IMongoUser;
+    author: string;
     message: string;
 }
 
@@ -39,8 +40,8 @@ export interface INew_Message {
  */
  export interface DBMessagesClass {
     init?(): Promise<void>;
-    get(): Promise<IMongoMessage[] | ApiError | InternalError>;
-    add(msg: INew_Message): Promise<CUDResponse | InternalError>;
+    get(user_id: string): Promise<IMongoMessage[] | ApiError >;
+    add(msg: INew_Message): Promise<CUDResponse | ApiError>;
 }
 
 /**

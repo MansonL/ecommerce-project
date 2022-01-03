@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import moment from 'moment';
-import { INew_Product, IQuery, IUpdate } from '../common/interfaces/products';
-import { INew_User, UserInfo } from '../common/interfaces/users';
+import { INew_Product, IQuery, IUpdate } from './products';
+import { INew_User, UserInfo } from './users';
 
 
 const maxDate = moment().subtract(10, 'y').format('MM/DD/YYYY');
@@ -11,7 +11,6 @@ class Validations {
     newProduct: Joi.ObjectSchema<INew_Product>;
     update: Joi.ObjectSchema<IUpdate>;
     query: Joi.ObjectSchema<IQuery>;
-    id: Joi.StringSchema | Joi.NumberSchema;
     user: Joi.ObjectSchema<UserInfo>;
     constructor() {
         /**
@@ -76,8 +75,6 @@ class Validations {
             photos: Joi.array().items(Joi.string().uri()),
             facebookID: Joi.string(),
         });
-
-        this.id = Joi.string().min(2).required();
     }
 }
 export const validator = new Validations();

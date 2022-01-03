@@ -4,12 +4,14 @@
  *
  */
 
-export class ApiError {
+export class ApiError extends Error {
     error: number;
     message: string;
     constructor(error: number, message: string) {
+        super();
         this.error = error;
         this.message = message;
+        Error.captureStackTrace(this);
     }
 
     /**
@@ -23,4 +25,7 @@ export class ApiError {
     static notFound = (msg: string) => {
         return new ApiError(404, msg);
     };
+    static internalError = (msg: string) => {
+        return new ApiError(500, msg);
+    }
 }
