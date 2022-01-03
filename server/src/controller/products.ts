@@ -9,10 +9,10 @@ import {
     InternalError,
     IQuery,
     IUpdate,
-} from '../interfaces/interfaces';
+} from '../common/interfaces/others';
 import { validator } from '../utils/joiSchemas';
 import { Utils } from '../common/utils';
-import { isCUDResponse, isProduct } from '../interfaces/checkType';
+import { isCUDResponse, isProduct } from '../common/interfaces/checkType';
 
 /**
  *

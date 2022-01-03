@@ -1,8 +1,8 @@
 import { Request, NextFunction, Response } from 'express';
 import { messagesApi } from '../api/messages';
 import { normalizeData } from '../common/compression';
-import { isCUDResponse, isMessages } from '../interfaces/checkType';
-import { CUDResponse, IMongoMessage, INew_Message, InternalError } from '../interfaces/interfaces';
+import { isCUDResponse, isMessages } from '../common/interfaces/checkType';
+import { CUDResponse, IMongoMessage, INew_Message, InternalError } from '../common/interfaces/others';
 import { ApiError } from '../api/errorApi';
 import { validator } from '../utils/joiSchemas';
 

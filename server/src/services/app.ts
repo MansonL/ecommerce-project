@@ -8,6 +8,7 @@ import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import cookieParser from 'cookie-parser'
 import passport from '../passport/index'
+import fileUpload from 'express-fileupload';
 
 export const app: express.Application = express();
 app.use(cors({
@@ -18,6 +19,10 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/',
+}));
 app.use(session({
     secret: 'secret',
     resave: true,

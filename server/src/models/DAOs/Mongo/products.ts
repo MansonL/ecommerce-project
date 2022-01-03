@@ -1,24 +1,43 @@
-import { connect, Model } from 'mongoose';
-import { models } from './models';
-import {
-    DBProductsClass,
-    INew_Product,
-    IMongoProduct,
-    CUDResponse,
-    IUpdate,
-    IQuery,
-    InternalError,
-} from '../../../interfaces/interfaces';
+import { model, Model, Schema } from 'mongoose';
 import { mockProducts } from '../../mockProducts';
 import moment from 'moment';
 import { Utils } from '../../../common/utils';
 import { ApiError } from '../../../api/errorApi';
 import { EProductsErrors } from '../../../common/EErrors';
+import { DBProductsClass, IMongoProduct, INew_Product, IQuery, IUpdate } from '../../../common/interfaces/products';
+import { CUDResponse, InternalError } from '../../../common/interfaces/others';
+
+
+const productSchema = new Schema({
+    createdAt: { type: String, required: true },
+    modifiedAt: { type: String, required: true },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    code: { type: String, required: true },
+    img: [{
+        id: { type: String, required: true },
+        url: { type: String, required: true }
+    }],
+    stock: { type: Number, required: true },
+    price: { type: Number, required: true },
+});
+
+productSchema.set('toJSON', {
+    transform: (document, returnedDocument) => {
+        delete returnedDocument.__v;
+    }
+})
+
+const productModel = model<INew_Product, Model<INew_Product>>(
+    'products',
+    productSchema
+)
+
 
 export class MongoProducts implements DBProductsClass {
     private products: Model<INew_Product>;
     constructor(type: string) {
-        this.products = models.products;
+        this.products = productModel;
         this.init();
     }
     async init(): Promise<void> {
@@ -55,6 +74,7 @@ export class MongoProducts implements DBProductsClass {
     async add(product: INew_Product): Promise<CUDResponse | InternalError> {
         try {
             const doc = await this.products.create(product);
+            const doc2 = new this.products(product)
             const result: IMongoProduct = Utils.extractMongoProducts([doc])[0];
             return {
                 message: `Product successfully saved.`,
@@ -73,7 +93,7 @@ export class MongoProducts implements DBProductsClass {
             const doc = await this.products.find({ _id: id });
             const product: IMongoProduct = Utils.extractMongoProducts(doc)[0];
             const newProduct = { ...product, ...data };
-            newProduct.timestamp = moment().format('YYYY-MM-DD HH:mm:ss');
+            newProduct.modifiedAt = moment().format('YYYY-MM-DD HH:mm:ss');
             console.log(newProduct);
             await this.products.replaceOne({ _id: id }, newProduct);
             return {

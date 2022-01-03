@@ -1,7 +1,7 @@
 import http from 'http';
-import { PORT } from '.';
-import { app } from './services/app';
-import { socketConnection } from './services/socket';
+import { PORT } from '..';
+import { app } from './app';
+import { socketConnection } from './socket';
 
 
 

@@ -1,25 +1,30 @@
-import {
-    DBMessagesClass,
-    IMongoMessage,
-    INew_Message,
-    CUDResponse,
-    IMongoUser,
-    InternalError,
-} from '../../../interfaces/interfaces';
-import { models, WelcomeMessage } from './models';
-import { Model, connect } from 'mongoose';
+
+import { Model, Schema, model } from 'mongoose';
 import { Utils } from '../../../common/utils';
 import { ApiError } from '../../../api/errorApi';
+import { DBMessagesClass, IMongoMessage, INew_Message } from '../../../common/interfaces/messages';
+import { CUDResponse, InternalError } from '../../../common/interfaces/others';
+
+
+const messagesSchema = new Schema({
+    timestamp: { type: String, required: true },
+    author: { type: Schema.Types.ObjectId, required: true },
+    message: { type: String, required: true },
+});
+
+const messagesModel = model<INew_Message, Model<INew_Message>>(
+    'messages',
+    messagesSchema
+)
 
 export class MongoMessages implements DBMessagesClass {
     private messages: Model<INew_Message>;
     constructor(type: string) {
-        this.messages = models.messages;
+        this.messages = messagesModel;
         this.init();
     }
     async init() {
         await this.messages.deleteMany({});
-        await WelcomeMessage.save();
         console.log(`Messages initialized`);
     }
     async get(): Promise<IMongoMessage[] | ApiError | InternalError> {

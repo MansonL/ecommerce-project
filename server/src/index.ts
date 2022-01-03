@@ -19,7 +19,7 @@ export const PORT = commandData[0] && commandData[0].length  === 4 && !isNaN(Num
 export const CPUs = cpus().length
 
 if(Config.MODE === "FORK"){
-    const child_server = fork('./src/server.ts');
+    const child_server = fork('./src/services/server.ts');
     child_server.on("exit", () => {
         console.log(`Process ${process.pid} killed.`);
     })

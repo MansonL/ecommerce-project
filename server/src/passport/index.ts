@@ -1,7 +1,7 @@
 import passport from "passport";
-import { IMongoUser } from "../interfaces/interfaces";
+import { IMongoUser } from "../common/interfaces/others";
 import { usersApi } from "../api/users";
-import { isUser } from "../interfaces/checkType";
+import { isUser } from "../common/interfaces/checkType";
 import { FacebookStrategy, facebookVerify, passportFBConfig } from "./facebook";
 import { LocalStrategy, passportLocalConfig, passportLogin, passportSignUp } from "./local";
 

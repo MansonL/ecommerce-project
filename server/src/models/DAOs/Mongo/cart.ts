@@ -1,22 +1,37 @@
-import { connect, Model } from 'mongoose';
+import { model, Model, Schema } from 'mongoose';
 import { EProductsErrors } from '../../../common/EErrors';
 import { Utils } from '../../../common/utils';
-import { isCartProduct } from '../../../interfaces/checkType';
-import {
-    CUDResponse,
-    DBCartClass,
-    ICartProduct,
-    IMongoCartProduct,
-    INew_Product,
-    InternalError,
-} from '../../../interfaces/interfaces';
 import { ApiError } from '../../../api/errorApi';
-import { models } from './models';
+import { DBCartClass, ICart, IMongoCart, isCartProduct } from '../../../common/interfaces/products';
+import { CUDResponse, InternalError } from '../../../common/interfaces/others';
+import moment from 'moment';
+
+
+
+
+const cartSchema = new Schema({
+    createdAt: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: 'users' },
+    products: [{
+        product: { type: Schema.Types.ObjectId, ref: 'products'},
+        quantity: { type: Number, required: true },
+    }],
+});
+
+cartSchema.set('toJSON', {
+    transform: (document, returnedDocument) => {
+        delete returnedDocument.__v;
+    }
+});
+
+const cartModel = model<ICart, Model<ICart>>('cart', cartSchema)
+
+
 
 export class MongoCart implements DBCartClass {
-    private cart: Model<ICartProduct>;
+    private cart: Model<ICart>;
     constructor(type: string) {
-        this.cart = models.cart;
+        this.cart = cartModel;
         this.init();
     }
     async init(): Promise<void> {
@@ -55,14 +70,39 @@ export class MongoCart implements DBCartClass {
         }
         
     }
-    async add(id: string, product: INew_Product): Promise<CUDResponse | InternalError> {
+    async add(user_id: string, product_id: string): Promise<CUDResponse | InternalError> {
         try {
-            const cartProduct = { product_id: id, ...product };
-            await this.cart.create(cartProduct);
-            return {
-                message: `Product successfully added.`,
-                data: { _id: id, ...product },
-            };
+            const cartDoc = await this.cart.findOne({ user: user_id })
+            if(cartDoc){
+                const product = cartDoc.products.find(product => product.product === product_id);
+                product ? product.quantity++ : cartDoc.products.push({
+                    product: product_id,
+                    quantity: 1,
+                });
+                cartDoc.save();
+                const cart = (await (await cartDoc.populate({ path: 'products.product', select: 'title price img'})).populate<{ user: string }>({ path: 'user', select: 'data.username' }))
+                console.log(cart)
+                return {
+                    message: `Product successfully added.`,
+                    data: cart,
+                };
+            }else{
+                const newCart : ICart = {
+                    createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+                    user: user_id,
+                    products: [{
+                        product: product_id,
+                        quantity: 1,
+                    }]
+                }
+                const cartDoc = await this.cart.create(newCart);
+                const cart = (await (await cartDoc.populate({ path: 'products', select: 'title price img'})).populate({ path: 'user', select: 'data.username' }));
+                return {
+                    message: `Product successfully added.`,
+                    data: cart
+                }
+            }
+            
         } catch (error) {
             return {
                 error: error,

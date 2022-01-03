@@ -1,4 +1,4 @@
-import { INew_User, CUDResponse, IMongoUser, InternalError } from '../interfaces/interfaces';
+import { INew_User, CUDResponse, IMongoUser, InternalError } from '../common/interfaces/others';
 import { storage } from '../models/usersFactory';
 import { UsersFactory } from '../models/usersFactory';
 import { MongoUsers } from '../models/DAOs/Mongo/users';

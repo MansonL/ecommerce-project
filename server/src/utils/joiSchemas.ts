@@ -1,23 +1,25 @@
 import Joi from 'joi';
-import {
-    INew_Product,
-    IQuery,
-    IUpdate,
-    INew_User,
-} from '../interfaces/interfaces';
+import moment from 'moment';
+import { INew_Product, IQuery, IUpdate } from '../common/interfaces/products';
+import { INew_User, UserInfo } from '../common/interfaces/users';
+
+
+const maxDate = moment().subtract(10, 'y').format('MM/DD/YYYY');
+const minDate = moment().subtract(99, 'y').format('MM/DD/YYYY');
 
 class Validations {
     newProduct: Joi.ObjectSchema<INew_Product>;
     update: Joi.ObjectSchema<IUpdate>;
     query: Joi.ObjectSchema<IQuery>;
     id: Joi.StringSchema | Joi.NumberSchema;
-    user: Joi.ObjectSchema<INew_User>;
+    user: Joi.ObjectSchema<UserInfo>;
     constructor() {
         /**
          * JOI Schema to validate the objects to be saved from the frontend
          */
         this.newProduct = Joi.object<INew_Product>({
-            timestamp: Joi.string().required(),
+            createdAt: Joi.string().required(),
+            modifiedAt: Joi.string().required(),
             title: Joi.string()
                 .min(4)
                 .max(100)
@@ -28,7 +30,10 @@ class Validations {
                 .max(1000)
                 .pattern(/^\s*\w+(?:[^\w,]+\w+)*[^,\w]*$/),
             code: Joi.string().min(5).required(),
-            img: Joi.string().uri().required(),
+            img: Joi.array().items(Joi.object().keys({
+                id: Joi.string().required(),
+                url: Joi.string().uri(),
+            })),
             price: Joi.number().min(0.01).required(),
             stock: Joi.number().min(0).required(),
         });
@@ -59,15 +64,17 @@ class Validations {
         /**
          * JOI Schema to validate users.
          */
-        this.user = Joi.object<INew_User>({
-            timestamp: Joi.string().required(),
-            username: Joi.string().email({ tlds: { allow: false } }),
-            
+        this.user = Joi.object<UserInfo>({
+            username: Joi.string().email({ tlds: { allow: false } }).required(),
+            password: Joi.string().alphanum().min(6).max(20).required(),
+            repeatedPassword: Joi.any().equal(Joi.ref('password'))
+            .required(),
             name: Joi.string().min(4).max(20).required(),
             surname: Joi.string().min(4).max(20).required(),
             age: Joi.number().min(10).max(100).required(),
-            alias: Joi.string().min(5).max(35),
             avatar: Joi.string().uri(),
+            photos: Joi.array().items(Joi.string().uri()),
+            facebookID: Joi.string(),
         });
 
         this.id = Joi.string().min(2).required();

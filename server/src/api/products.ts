@@ -6,7 +6,7 @@ import {
     IMongoProduct,
     IQuery,
     InternalError,
-} from '../interfaces/interfaces';
+} from '../common/interfaces/others';
 import { MongoProducts } from '../models/DAOs/Mongo/products';
 import { ApiError } from './errorApi';
 import { storage } from '../models/usersFactory';

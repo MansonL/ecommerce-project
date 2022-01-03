@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import { EProductsErrors, EUsersErrors } from '../common/EErrors';
-import { CUDResponse, IMongoUser, INew_User, InternalError } from '../interfaces/interfaces';
 import { ApiError } from '../api/errorApi';
 import { validator } from '../utils/joiSchemas';
 import { usersApi } from '../api/users';
 import moment from 'moment';
-import { isCUDResponse, isUser } from '../interfaces/checkType';
+import { IMongoUser, INew_User, isUser } from '../common/interfaces/users';
+import { CUDResponse, InternalError, isCUDResponse } from '../common/interfaces/others';
+
 
 /**
  *
@@ -51,8 +52,8 @@ class UsersController {
         }
     }
     async save(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const user: INew_User = req.body;
-        const { error } = validator.user.validate(user);
+        const userInfo = req.body;
+        const { error } = validator.user.validate(userInfo);
         if (error) {
             next(ApiError.badRequest(EUsersErrors.IncorrectProperties));
         } else {

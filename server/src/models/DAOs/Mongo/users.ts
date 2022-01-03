@@ -1,20 +1,82 @@
-import { WelcomeBot } from './models';
-import {  models } from './models';
-import { Model } from 'mongoose';
-import {
-    INew_User,
-    IMongoUser,
-    CUDResponse,
-    InternalError
-} from '../../../interfaces/interfaces';
+import { model, Model, Schema } from 'mongoose';
 import { Utils } from '../../../common/utils';
 import { ApiError } from '../../../api/errorApi';
 import { EUsersErrors } from '../../../common/EErrors';
+import moment from 'moment';
+import { IMongoUser, INew_User } from '../../../common/interfaces/users';
+import { CUDResponse, InternalError } from '../../../common/interfaces/others';
+
+
+const usersSchema = new Schema({
+    createdAt: { type: String, required: true },
+    modifiedAt: { type: String, required: true },
+    data: {
+        username: { type: String, required: true },
+        password: { type: String, required: true },
+        repeatedPassword: { type: String, required: true },
+        name: { type: String, required: true },
+        surname: { type: String, required: true },
+        age: { type: String, required: true },
+        avatar: { type: String, required: true },
+        photos : [{
+        type: String,
+        }],
+        facebookID: { type: String },
+        addresses: [
+            {
+                street1: {
+                    name: { type: String, required: true },
+                    number: { type: String, required: true },
+                },
+                street2: { type: String },
+                street3: { type: String },
+                zipcode: { type: String, required: true },
+                floor: { type: String },
+                department: { type: String },
+                city: { type: String, required: true }
+            }
+        ]
+    },
+    isAdmin: { type: Boolean, required: true }
+});
+
+const usersModel = model<INew_User, Model<INew_User>>('users', usersSchema)
+
+const botData: INew_User = {
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+    modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+    data: {
+        username: `test@gmail.com`,
+        password: Utils.createHash('test123'),
+        repeatedPassword: Utils.createHash('test123'),
+        name: `Manson`,
+        surname: `Bot`,
+        age: "27/12/2000",
+        avatar: `https://cdn.icon-icons.com/icons2/1371/PNG/512/robot02_90810.png`,
+        facebookID: '',
+        photos: [],
+        addresses: {
+            street1: {
+                name: '',
+                number: 0,
+            },
+            street2: '',
+            street3: '',
+            floor: '',
+            department: '',
+            zipcode: '',
+            city: '',
+        }
+    },
+    isAdmin: false,
+};
+
+export const WelcomeBot = new usersModel(botData);
 
 export class MongoUsers {
     private users: Model<INew_User>;
     constructor(type: string) {
-        this.users = models.users;
+        this.users = usersModel;
         this.init();
     }
     async init() {

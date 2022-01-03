@@ -2,10 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 import { cartApi } from '../api/cart';
 import { productsApi } from '../api/products';
 import { EProductsErrors } from '../common/EErrors';
-import { isCartProduct, isCUDResponse, isProduct } from '../interfaces/checkType';
-import { CUDResponse, IMongoCartProduct, IMongoProduct, InternalError } from '../interfaces/interfaces';
 import { ApiError } from '../api/errorApi';
 import { validator } from '../utils/joiSchemas';
+import { IMongoCart, IMongoProduct, isCartProduct, isProduct } from '../common/interfaces/products';
+import { CUDResponse, InternalError, isCUDResponse } from '../common/interfaces/others';
 
 /**
  *
@@ -24,7 +24,7 @@ class CartController {
         if (error) {
             next(ApiError.badRequest(EProductsErrors.IdIncorrect));
         } else {
-            const result: IMongoCartProduct[] | InternalError | ApiError = await cartApi.getProduct(
+            const result: IMongoCart[] | InternalError | ApiError = await cartApi.get(
                 id
             );
             
@@ -35,7 +35,7 @@ class CartController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const result: IMongoCartProduct[] | ApiError | InternalError = await cartApi.getProduct();
+        const result: IMongoCart[] | ApiError | InternalError = await cartApi.get();
         console.log(`[PATH] Inside controller.`);
         if (isCartProduct(result)) {
             res.status(200).send(result);
@@ -51,7 +51,8 @@ class CartController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const productID: string = req.params.id;
+        const productID : string = req.params.id;
+        const userID : string = req.body
         console.log(`[PATH] Inside controller.`);
         const { error } = await validator.id.validate(productID);
         if (error) {
@@ -64,11 +65,8 @@ class CartController {
                 /**
                  * Cause the data was previously checked to be MongoProducts
                  */
-                const products = firstResult as IMongoProduct[]; 
-                const { _id, ...product } = products[0];
                 const result : CUDResponse | InternalError = await cartApi.addProduct(
-                    _id.toString(),
-                    product
+                    userID, productID
                 );
                 if(isCUDResponse(result)){
                     res.status(201).send(result);
@@ -94,7 +92,7 @@ class CartController {
         if (error) {
             next(ApiError.badRequest(EProductsErrors.IdIncorrect));
         } else {
-            const firstResult: IMongoCartProduct[] | ApiError | InternalError =
+            const firstResult: IMongoCart[] | ApiError | InternalError =
                 await cartApi.getProduct(id);
             if(isProduct(firstResult)){
                 const result: CUDResponse | InternalError = await cartApi.deleteProduct(id);

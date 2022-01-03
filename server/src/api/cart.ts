@@ -1,13 +1,9 @@
-import {
-    CUDResponse,
-    IMongoCartProduct,
-    INew_Product,
-    InternalError,
-} from '../interfaces/interfaces';
 import { CartFactory } from '../models/cartFactory';
 import { MongoCart } from '../models/DAOs/Mongo/cart';
 import { ApiError } from './errorApi';
 import { storage } from '../models/usersFactory';
+import { IMongoCart } from '../common/interfaces/products';
+import { CUDResponse, InternalError } from '../common/interfaces/others';
 
 /**
  *
@@ -20,21 +16,21 @@ class CartApi {
     constructor() {
         this.products = CartFactory.get(storage);
     }
-    async getProduct(
+    async get(
         id?: string | undefined
-    ): Promise<IMongoCartProduct[] | ApiError | InternalError> {
+    ): Promise<IMongoCart[] | ApiError | InternalError> {
         if (id != null) {
-            const product: IMongoCartProduct[] | ApiError | InternalError = await this.products.get(
+            const product: IMongoCart[] | ApiError | InternalError = await this.products.get(
                 id
             );
             return product;
         } else {
-            const product: IMongoCartProduct[] | ApiError | InternalError = await this.products.get();
+            const product: IMongoCart[] | ApiError | InternalError = await this.products.get();
             return product;
         }
     }
-    async addProduct(id: string, product: INew_Product): Promise<CUDResponse | InternalError> {
-        const result : CUDResponse | InternalError = await this.products.add(id, product);
+    async addProduct(user_id: string, product_id: string ): Promise<CUDResponse | InternalError> {
+        const result : CUDResponse | InternalError = await this.products.add(user_id, product_id);
         return result;
     }
     async deleteProduct(id: string): Promise<CUDResponse | InternalError> {

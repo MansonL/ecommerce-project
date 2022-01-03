@@ -3,7 +3,7 @@ import {
     CUDResponse,
     INew_Message,
     InternalError,
-} from '../interfaces/interfaces';
+} from '../common/interfaces/others';
 import { storage } from '../models/usersFactory';
 import { MongoMessages } from '../models/DAOs/Mongo/messages';
 import { MessagesFactory } from '../models/messagesFactory';

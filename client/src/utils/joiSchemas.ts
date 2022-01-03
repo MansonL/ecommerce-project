@@ -51,7 +51,6 @@ class Validations {
             surname: Joi.string().min(4).max(20).required(),
             password: Joi.string().alphanum().min(6).max(20).required(),
             age: Joi.date().min(minDate).max(maxDate).required(),
-            alias: Joi.string().min(5).max(35).optional(),
             avatar: Joi.string().uri().required(),
         });
         /**

@@ -3,8 +3,8 @@ import passportLocal, { IStrategyOptionsWithRequest, VerifyFunctionWithRequest }
 import { doneFunction } from ".";
 import { usersApi } from "../api/users";
 import { Utils } from "../common/utils";
-import { isCUDResponse, isUser } from "../interfaces/checkType";
-import { CUDResponse, IMongoUser, INew_User, InternalError } from "../interfaces/interfaces";
+import { isCUDResponse, isUser } from "../common/interfaces/checkType";
+import { CUDResponse, IMongoUser, INew_User, InternalError } from "../common/interfaces/others";
 import { ApiError } from "../api/errorApi";
 
 

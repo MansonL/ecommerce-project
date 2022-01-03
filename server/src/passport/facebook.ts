@@ -1,9 +1,9 @@
 import { Request } from "express";
 import passportFacebook, { Profile, VerifyFunctionWithRequest } from 'passport-facebook'
-import {  INew_User, } from "../interfaces/interfaces";
+import {  INew_User, } from "../common/interfaces/others";
 import { usersApi } from "../api/users";
 import { ApiError } from "../api/errorApi";
-import { isCUDResponse, isUser } from "../interfaces/checkType";
+import { isCUDResponse, isUser } from "../common/interfaces/checkType";
 import * as dotenv from 'dotenv'
 import moment from "moment";
 import { Utils } from "../common/utils";
@@ -26,16 +26,31 @@ export const facebookVerify: VerifyFunctionWithRequest = async (req: Request, ac
          return done(null, firstResult);
     }else if(firstResult instanceof ApiError){
         const newUser : INew_User = {
-            timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
-            username: profile.emails ? profile.emails[0].value : '',
-            photos: profile.photos ? profile.photos.map(photo => photo.value) : [''],
-            name: profile.displayName.split(" ")[0],
-            surname: profile.displayName.split(" ")[1],
-            age: profile.birthday ? profile.birthday : 'none',
-            facebookID: profile.id,
-            password: Utils.createHash(''),
-            alias: '',
-            avatar: profile.photos ? profile.photos[0].value : 'https://scontent.fmdz5-1.fna.fbcdn.net/v/t1.30497-1/cp0/c15.0.50.50a/p50x50/84628273_176159830277856_972693363922829312_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=12b3be&_nc_eui2=AeGFVppcWlKdc7aGtqBjr_qUik--Qfnh2B6KT75B-eHYHjmg8hXUxKd83x9Quvqm7QJihxiVWmgPNHt_JQZRXFjE&_nc_ohc=lreSzZHG1jMAX8WENYk&_nc_ht=scontent.fmdz5-1.fna&edm=AP4hL3IEAAAA&oh=7ca8884c54739b55368dd37ab5389c49&oe=61DA6438',
+            createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+            modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+            data: {
+                username: profile.emails ? profile.emails[0].value : '',
+                photos: profile.photos ? profile.photos.map(photo => photo.value) : [''],
+                name: profile.displayName.split(" ")[0],
+                surname: profile.displayName.split(" ")[1],
+                age: profile.birthday ? profile.birthday : 'none',
+                facebookID: profile.id,
+                password: Utils.createHash(''),
+                avatar: profile.photos ? profile.photos[0].value : 'https://scontent.fmdz5-1.fna.fbcdn.net/v/t1.30497-1/cp0/c15.0.50.50a/p50x50/84628273_176159830277856_972693363922829312_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=12b3be&_nc_eui2=AeGFVppcWlKdc7aGtqBjr_qUik--Qfnh2B6KT75B-eHYHjmg8hXUxKd83x9Quvqm7QJihxiVWmgPNHt_JQZRXFjE&_nc_ohc=lreSzZHG1jMAX8WENYk&_nc_ht=scontent.fmdz5-1.fna&edm=AP4hL3IEAAAA&oh=7ca8884c54739b55368dd37ab5389c49&oe=61DA6438',
+                addresses: {
+                    street1:{
+                        name: '',
+                        number: 0,
+                    },
+                    street2: '',
+                    street3: '',
+                    zipcode: '',
+                    city: '',
+                    floor: '',
+                    department: '',
+                }
+            },
+            isAdmin: false,
         }
         const result = await usersApi.addUser(newUser);
         if(isCUDResponse(result)){
@@ -47,6 +62,8 @@ export const facebookVerify: VerifyFunctionWithRequest = async (req: Request, ac
         return done(firstResult);
     }
 }
+
+
 
 /**
  * 
