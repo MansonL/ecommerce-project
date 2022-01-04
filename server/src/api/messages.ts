@@ -13,7 +13,7 @@ export class MessagesApi {
     constructor() {
         this.messages = MessagesFactory.get(storage);
     }
-    async getMsg(user_id: string): Promise<IMongoMessage[] | ApiError > {
+    async getMsg(user_id: string | undefined): Promise<IMongoMessage[] | ApiError > {
         const result : IMongoMessage[] | ApiError  = await this.messages.get(user_id);
         return result;
     }

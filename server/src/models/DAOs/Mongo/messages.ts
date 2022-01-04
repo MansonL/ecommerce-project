@@ -33,18 +33,32 @@ export class MongoMessages implements DBMessagesClass {
         await this.messages.deleteMany({});
         console.log(`Messages initialized`);
     }
-    async get(user_id: string): Promise<IMongoMessage[] | ApiError > {
+    async get(user_id: string | undefined): Promise<IMongoMessage[] | ApiError > {
         try {
             const docs = await this.messages.find({});
         if (docs.length > 0) {
-            let messages : (Document<any, any, INew_Message> & INew_Message & {
-                _id: Types.ObjectId;
-            })[] = [];
-            docs.map(async document => {
-                const populatedDoc = await document.populate({ path: 'author', select: 'data.username' });
-                messages.push(populatedDoc)
-            })
-            return messages as IMongoMessage[]
+            if(user_id){
+                let messages: (Document<any, any, INew_Message> & INew_Message & {
+                    _id: Types.ObjectId;
+                     })[] = [];
+                docs.forEach(async document => {
+                    if(document.author === user_id){
+                        const populatedDoc = await document.populate({ path: 'author', select: 'data.username' });
+                        messages.push(populatedDoc);
+                    }
+                })
+                return messages as IMongoMessage[]
+
+            }else{
+                let messages : (Document<any, any, INew_Message> & INew_Message & {
+                    _id: Types.ObjectId;
+                     })[] = [];
+                docs.map(async document => {
+                    const populatedDoc = await document.populate({ path: 'author', select: 'data.username' });
+                    messages.push(populatedDoc)
+                })
+                return messages as IMongoMessage[]
+            }
         } else {
             return ApiError.notFound(`No messages.`)
         }

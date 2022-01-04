@@ -1,10 +1,10 @@
 import { Document, model, Model, Schema, Types } from 'mongoose';
-import { mockProducts } from '../../mockProducts';
 import moment from 'moment';
 import { ApiError } from '../../../api/errorApi';
 import { EProductsErrors } from '../../../common/EErrors';
 import { DBProductsClass, IMongoProduct, INew_Product, IQuery, IUpdate } from '../../../common/interfaces/products';
-import { CUDResponse, InternalError } from '../../../common/interfaces/others';
+import { CUDResponse } from '../../../common/interfaces/others';
+import { logger } from '../../../services/logger';
 
 
 const productSchema = new Schema({
@@ -41,8 +41,8 @@ export class MongoProducts implements DBProductsClass {
     }
     async init(): Promise<void> {
         await this.products.deleteMany({});
-        await this.products.insertMany(mockProducts);
-        console.log(`Mock data inserted `);
+        //await this.products.insertMany(mockProducts);
+        logger.info(`Mock data inserted.`)
     }
     async get(id?: string | undefined): Promise<IMongoProduct[] | ApiError> {
       try {

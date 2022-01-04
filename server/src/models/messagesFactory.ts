@@ -12,7 +12,7 @@ import { MongoMessages } from './DAOs/Mongo/messages';
  */
 
 export class MessagesFactory {
-    static get(type: MemoryType): MongoMessages {
+    static get(type: string): MongoMessages {
         switch (type) {
             case MemoryType.MongoAtlas:
                 console.log(`Using MongoAtlas`);

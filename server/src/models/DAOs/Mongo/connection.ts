@@ -4,7 +4,6 @@ import { storage } from '../../usersFactory';
 import { MemoryType } from '../../usersFactory';
 import * as dotenv from 'dotenv';
 
-dotenv.config();
 
 const atlasURI = `mongodb+srv://${Config.ATLAS_DB_USER}:${Config.ATLAS_DB_PASSWORD}@project.lofof.mongodb.net/${Config.DB_NAME}?retryWrites=true&w=majority`;
 
@@ -12,7 +11,7 @@ const mongoURI = `mongodb://${Config.ATLAS_DB_USER}:${Config.ATLAS_DB_PASSWORD}@
 
 const mongoURL = storage === MemoryType.MongoAtlas ? atlasURI : mongoURI;
 
-
+console.log(Config)
 export const mongoConnection = ()   => {
         return mongoose.connect(mongoURL).then((data) => {
             console.log(`MongoDB Connected`);

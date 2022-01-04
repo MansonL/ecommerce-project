@@ -22,6 +22,7 @@ import { CUDResponse, InternalError } from "./others"
         addresses?: UserAddresses;
     },
     isAdmin: boolean;
+    isValidPassword: (password: string) => Promise<boolean>
 }
 
 export type UserAddresses = {

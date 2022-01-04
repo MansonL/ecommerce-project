@@ -1,3 +1,4 @@
+import { Config } from "../config/config";
 import { MongoUsers } from "./DAOs/Mongo/users";
 
 /**
@@ -11,10 +12,10 @@ import { MongoUsers } from "./DAOs/Mongo/users";
     LocalMongo = 'Local-Mongo',
 }
 
-export const storage = MemoryType.MongoAtlas;
+export const storage = Config.PERSISTANCE
 
 export class UsersFactory {
-    static get(type: MemoryType): MongoUsers {
+    static get(type: string): MongoUsers {
         switch (type) {
             case MemoryType.MongoAtlas:
                 console.log(`Using MongoAtlas`);

@@ -2,7 +2,7 @@ import { MongoCart } from './DAOs/Mongo/cart';
 import { MemoryType } from './usersFactory';
 
 export class CartFactory {
-    static get(type: MemoryType): MongoCart {
+    static get(type: string): MongoCart {
         switch (type) {
             case MemoryType.MongoAtlas:
                 console.log(`Using ATLAS`);

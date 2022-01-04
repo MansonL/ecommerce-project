@@ -5,6 +5,7 @@ import moment from 'moment';
 import { IMongoUser, INew_User } from '../../../common/interfaces/users';
 import { CUDResponse } from '../../../common/interfaces/others';
 import bcrypt from 'bcrypt';
+import { logger } from '../../../services/logger';
 
 const usersSchema = new Schema({
     createdAt: { type: String, required: true },
@@ -43,6 +44,7 @@ usersSchema.set('toJSON', {
     transform: (document, returnedDocument) => {
         delete returnedDocument.__v;
         delete returnedDocument.data.password;
+        delete returnedDocument.data.repeatedPassword;
     }
 });
 
@@ -52,7 +54,8 @@ usersSchema.methods.isValidPassword = async function(password: string)  {
 }
 
 usersSchema.pre('save', async function(next){
-    const hash = await bcrypt.hash(this.password, 10);
+    logger.info(this.data.password)
+    const hash = await bcrypt.hash(this.data.password, 10);
     this.password = hash;
     this.repeatedPassword = hash;
     next()
@@ -95,13 +98,13 @@ export class MongoUsers {
         if (id != null) {
             const doc = await this.users.findOne({ _id: id });
             if (doc) 
-                return [doc]
+                return [doc] as unknown as IMongoUser[]
             else 
                 return ApiError.badRequest(EUsersErrors.UserNotFound)
         } else {
             const docs = await this.users.find({});
             if (docs.length > 0) 
-                return docs;
+                return docs as unknown as IMongoUser[]
             else 
                 return ApiError.notFound(EUsersErrors.NoUsers)
         }
@@ -114,7 +117,7 @@ export class MongoUsers {
         try {
             const doc = await this.users.findOne({ "data.username" : username });
             if(doc)
-                return doc
+                return doc as unknown as IMongoUser
             else
                 return ApiError.notFound(EUsersErrors.UserNotFound);
         } catch (error) {
@@ -126,7 +129,7 @@ export class MongoUsers {
         try {
             const doc = await this.users.findOne({ "data.facebookID": id });
             if(doc)
-                return doc
+                return doc as unknown as IMongoUser
             else
                 return ApiError.notFound(EUsersErrors.UserNotFound);
         } catch (error) {
@@ -139,7 +142,7 @@ export class MongoUsers {
             const doc = await this.users.create(user);
             return {
                 message: `User successfully created.`,
-                data: doc,
+                data: doc as unknown as IMongoUser,
             };
         }catch (error) {
             return ApiError.internalError(`An error occured.`)

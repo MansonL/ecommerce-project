@@ -1,10 +1,11 @@
 import { Request, NextFunction, Response } from 'express';
 import { messagesApi } from '../api/messages';
 import { normalizeData } from '../common/compression';
-import { isCUDResponse, isMessages } from '../common/interfaces/checkType';
-import { CUDResponse, IMongoMessage, INew_Message, InternalError } from '../common/interfaces/others';
 import { ApiError } from '../api/errorApi';
-import { validator } from '../common/interfaces/joiSchemas';
+import { ObjectId } from 'mongodb';
+import { EUsersErrors } from '../common/EErrors';
+import { IMongoMessage, INew_Message } from '../common/interfaces/messages';
+import { CUDResponse } from '../common/interfaces/others';
 
 /**
  *
@@ -13,33 +14,36 @@ import { validator } from '../common/interfaces/joiSchemas';
  */
 
 class MessagesController {
-    async get(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const result: IMongoMessage[] | ApiError | InternalError = await messagesApi.getMsg();
-        console.log(`[PATH] Inside controller.`);
-        if(isMessages(result)){
+    
+    async getAllMessages(req: Request, res: Response, next: NextFunction): Promise<void> {
+        const result: IMongoMessage[] | ApiError = await messagesApi.getMsg(undefined);
+        if(result instanceof ApiError) 
+            next(result)
+        else 
+            res.status(200).send(result)    
+    }
 
-            /**
-             * Result was previously checked to have properties according to Messages interface
-             */
-
-            const normalizedData = normalizeData(result as IMongoMessage[]);
-            res.status(200).send(normalizedData);
-        
-        }else if(result instanceof ApiError){
-            res.status(result.error).send(result);
+    async getUserMessages(req: Request, res: Response, next: NextFunction): Promise<void> {
+        const user_id : string | undefined = req.params.id
+        if(ObjectId.isValid(user_id)){
+            const result : IMongoMessage[] | ApiError = await messagesApi.getMsg(user_id);
+            if(result instanceof ApiError) 
+                next(result)
+            else 
+                res.status(200).send(result); 
         }else{
-            res.status(500).send(result) // Internal Error sent.
+            const error = ApiError.badRequest(EUsersErrors.UserNotFound);
+            res.status(error.error).send(error)
         }
     }
+
     async save(req: Request, res: Response, next: NextFunction): Promise<void> {
         const message: INew_Message = req.body;
-        console.log(`[PATH] Inside controller.`);
-        const result : CUDResponse | InternalError = await messagesApi.addMsg(message);
-        if(isCUDResponse(result)){
-            res.status(201).send(result)
-        }else{
-            res.status(500).send(result) // Internal Error sent.
-        }
+        const result : CUDResponse | ApiError = await messagesApi.addMsg(message);
+        if(result instanceof ApiError) 
+            next(result)
+        else 
+            res.status(201).send(result);
     }
 }
 

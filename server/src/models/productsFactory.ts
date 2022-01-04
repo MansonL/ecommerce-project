@@ -13,7 +13,7 @@ import { MemoryType } from './usersFactory';
  */
 
 export class ProductsFactory {
-    static get(type: MemoryType): MongoProducts {
+    static get(type: string): MongoProducts {
         switch (type) {
             case MemoryType.MongoAtlas:
                 console.log(`Using MongoAtlas`);

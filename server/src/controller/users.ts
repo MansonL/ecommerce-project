@@ -3,9 +3,10 @@ import { EProductsErrors, EUsersErrors } from '../common/EErrors';
 import { ApiError } from '../api/errorApi';
 import { validator } from '../common/interfaces/joiSchemas';
 import { usersApi } from '../api/users';
-import moment from 'moment';
 import { IMongoUser, INew_User, isUser } from '../common/interfaces/users';
 import { CUDResponse, InternalError, isCUDResponse } from '../common/interfaces/others';
+import { logger } from '../services/logger';
+import { ObjectId } from 'mongodb';
 
 
 /**
@@ -20,20 +21,16 @@ class UsersController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const id: string = req.params.id;
-        console.log(`[PATH] Inside controller.`);
-        const { error } = await validator.id.validateAsync(id);
-        if (error) {
+        const user_id: string = req.params.id;
+        logger.info(`[PATH]: Inside User Controller`)
+        if (new ObjectId(user_id).toString() === user_id ) {
             next(ApiError.badRequest(EProductsErrors.IdIncorrect));
         } else {
-            const result:  IMongoUser[] | ApiError | InternalError = await usersApi.getUser(id);
-            if(isUser(result)){
+            const result:  IMongoUser[] | ApiError  = await usersApi.getUser(user_id);
+            if(result instanceof ApiError)
+                next(result)
+            else
                 res.status(200).send(result)
-            }else if(result instanceof ApiError){
-                res.status(result.error).send(result)
-            }else{
-                res.status(500).send(result)     // Internal Error sent.
-            }
         }
     }
     async getAll(
@@ -41,29 +38,25 @@ class UsersController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        console.log(`[PATH] Inside controller.`);
-        const result: IMongoUser[] | ApiError | InternalError = await usersApi.getUsers();
-        if(isUser(result)){
+        logger.info(`[PATH]: Inside User Controller`)
+        const result: IMongoUser[] | ApiError  = await usersApi.getUsers();
+        if(result instanceof ApiError)
+            next(result)
+        else
             res.status(200).send(result)
-        }else if(result instanceof ApiError){
-            res.status(result.error).send(result)
-        }else{
-            res.status(500).send(result) // Internal Error sent.
-        }
     }
     async save(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const userInfo = req.body;
-        const { error } = validator.user.validate(userInfo);
-        if (error) {
+        const userInfo : INew_User = req.body;
+        logger.info(`[PATH]: Inside User Controller`)
+        const { error } = await validator.user.validateAsync(userInfo);
+        if (error) 
             next(ApiError.badRequest(EUsersErrors.IncorrectProperties));
-        } else {
-            console.log(`[PATH] Inside controller.`);
-            const result: CUDResponse | InternalError = await usersApi.addUser(user);
-            if(isCUDResponse(result)){
+         else {
+            const result: CUDResponse | ApiError = await usersApi.addUser(userInfo);
+            if(result instanceof ApiError)
+                next(result)
+            else
                 res.status(201).send(result)
-            }else{
-                res.status(500).send(result) // Internal Error sent.
-            }
         }
     }
 }

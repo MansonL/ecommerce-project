@@ -2,57 +2,68 @@ import { Request } from "express";
 import passportLocal, { IStrategyOptionsWithRequest, VerifyFunctionWithRequest } from "passport-local";
 import { doneFunction } from ".";
 import { usersApi } from "../api/users";
-import { Utils } from "../common/utils";
-import { isCUDResponse, isUser } from "../common/interfaces/checkType";
-import { CUDResponse, IMongoUser, INew_User, InternalError } from "../common/interfaces/others";
 import { ApiError } from "../api/errorApi";
+import { IMongoUser, INew_User } from "../common/interfaces/users";
+import { logger } from "../services/logger";
+import { CUDResponse, isCUDResponse } from "../common/interfaces/others";
 
 
 export const passportLogin: VerifyFunctionWithRequest = async (req: Request, username: string, password: string, done: doneFunction) => {
-    console.log('Inside passportLogin');
-    const result : IMongoUser | ApiError | InternalError = await usersApi.getUserByUsername(username);
-    if(isUser(result)){
-        if(Utils.validPassword(result, password)){
-            return done(null, result)
-        }else{
-            return done(null, null, {message: "Wrong credentials."});
-        }
-    }else if(result instanceof ApiError){
+    logger.info(`
+    ----------------------- PASSPORT LOCAL (FUTURE JWT) LOGIN--------------------------------------
+    `);
+    const result : IMongoUser | ApiError  = await usersApi.getUserByUsername(username);
+    if(result instanceof ApiError && result.error !== 500)
         return done(null, null, {message: result.message});
-    }else{
+    else if(result instanceof ApiError)
         return done(result)
+    else{
+        if(await result.isValidPassword(password))
+        return done(null, result)
+    else
+        return done(null, null, {message: "Wrong credentials."});
     }
  }
  
  export const passportSignUp : VerifyFunctionWithRequest = async (req: Request, username: string, password: string, done: doneFunction) => {
-        console.log('Inside passportSignUp')     
-        console.log('\n----------------- REQ BODY -------------------------\n');
-        console.log(req.body);
-        const firstResult : IMongoUser | ApiError | InternalError = await usersApi.getUserByUsername(username);
-        if(isUser(firstResult)){
-            return done(null, null, { message: `The email submitted is already in use.` });
-        }else if(firstResult instanceof ApiError){
+        logger.info(`
+        --------------------- PASSPORT LOCAL (FUTURE JWT) SIGN UP -------------------------------
+        
+                                          REQ.BODY
+                                        
+        `);
+        logger.info(req.body)
+        
+        const firstResult : IMongoUser | ApiError  = await usersApi.getUserByUsername(username);
+        if(firstResult instanceof ApiError && firstResult.error !== 500){
             const newUser : INew_User = {
-                timestamp: req.body.timestamp,
-                username: username,
-                password: Utils.createHash(password),
-                name: req.body.name,
-                surname: req.body.surname,
-                age: req.body.age,
-                alias: req.body.alias,
-                avatar: req.body.avatar,
-                facebookID: '',
-                photos: [req.body.avatar],
+                createdAt: req.body.createdAt,
+                modifiedAt: req.body.modifiedAt,
+                data: {
+                    username: username,
+                    password: password,
+                    repeatedPassword: password, // Checked at fronted if both passwords matches
+                    name: req.body.name,
+                    surname: req.body.surname,
+                    age: req.body.age,
+                    avatar: req.body.avatar,
+                    facebookID: '',
+                    photos: [req.body.avatar]
+                },
+                isAdmin: false,
             };
-            const result : CUDResponse | InternalError = await usersApi.addUser(newUser);
-            if(isCUDResponse(result)){
-                return done(null, result)
-            }else{
+            const result : CUDResponse | ApiError = await usersApi.addUser(newUser);
+            if(result instanceof ApiError && result.error !== 500)
+                return done(null, null, result.message)
+            else if(result instanceof ApiError && result.error === 500 )
                 return done(result)  // Internal Error sent, generated at the attempt to register a new user.
-            }
-        }else{
-            return done(firstResult) // Internal Error sent, generated at the search of an existing user with the submitted username.
-        }
+            else if(isCUDResponse(result))
+                return done(null, result.data)
+
+        }else if(firstResult instanceof ApiError && firstResult.error === 500)
+            return done(firstResult)   // Internal Error sent, generated at the search of an existing user with the submitted username.
+        else  
+            return done(null, null, { message: `The email submitted is already in use.` });
  }
 
 export const LocalStrategy = passportLocal.Strategy

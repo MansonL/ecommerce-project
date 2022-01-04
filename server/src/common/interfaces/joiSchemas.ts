@@ -28,7 +28,7 @@ class Validations {
                 .min(10)
                 .max(1000)
                 .pattern(/^\s*\w+(?:[^\w,]+\w+)*[^,\w]*$/),
-            code: Joi.string().min(5).required(),
+            code: Joi.string().min(5).max(10).required(),
             img: Joi.array().items(Joi.object().keys({
                 id: Joi.string().required(),
                 url: Joi.string().uri(),

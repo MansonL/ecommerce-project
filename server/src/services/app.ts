@@ -9,6 +9,7 @@ import MongoStore from 'connect-mongo'
 import cookieParser from 'cookie-parser'
 import passport from '../passport/index'
 import fileUpload from 'express-fileupload';
+import { Config } from '../config/config';
 
 export const app: express.Application = express();
 app.use(cors({
@@ -24,7 +25,7 @@ app.use(fileUpload({
     tempFileDir: '/tmp/',
 }));
 app.use(session({
-    secret: 'secret',
+    secret: Config.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
     rolling: true,
@@ -35,7 +36,7 @@ app.use(session({
         autoRemoveInterval: 1,
     }),
     cookie: {
-        maxAge: 1000 * 60 * 10, // Ten minutes before session expiration
+        maxAge: Number(Config.SESSION_COOKIE_TIMEOUT),
         httpOnly: true,
     }
 }));

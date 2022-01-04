@@ -19,7 +19,7 @@ class CartApi {
     async get(
         user_id?: string | undefined
     ): Promise<IMongoCart[] | ApiError > {
-        if (id != null) {
+        if (user_id != null) {
             const product: IMongoCart[] | ApiError  = await this.products.get(
                 user_id
             );

@@ -1,0 +1,40 @@
+Jan-04-2022 09:24:26 | [31merror[39m : Error: 404. Message: There's no products.... Stack: Error: There's no products...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoProducts.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-04-2022 09:26:36 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:27:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 09:27:17 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:28:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 09:30:01 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:27:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)

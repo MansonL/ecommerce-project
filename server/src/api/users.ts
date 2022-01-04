@@ -11,8 +11,8 @@ export class UsersApi {
     constructor() {
         this.users = UsersFactory.get(storage);
     }
-    async getUser(id: string): Promise<IMongoUser[] | ApiError > {
-        const result: IMongoUser[] | ApiError  = await this.users.get(id);
+    async getUser(user_id: string): Promise<IMongoUser[] | ApiError > {
+        const result: IMongoUser[] | ApiError  = await this.users.get(user_id);
         return result;
     }
     async getUsers(): Promise<IMongoUser[] | ApiError > {
@@ -24,13 +24,13 @@ export class UsersApi {
         return result
     }
     
-    async getUserByFacebookID(id: string): Promise <IMongoUser | ApiError > {
-        const result : IMongoUser | ApiError  = await this.users.getByFacebookID(id);
+    async getUserByFacebookID(user_id: string): Promise <IMongoUser | ApiError > {
+        const result : IMongoUser | ApiError  = await this.users.getByFacebookID(user_id);
         return result
     }
 
-    async addUser(message: INew_User): Promise<CUDResponse | ApiError> {
-        const result: CUDResponse | ApiError = await this.users.add(message);
+    async addUser(user: INew_User): Promise<CUDResponse | ApiError> {
+        const result: CUDResponse | ApiError = await this.users.add(user);
         return result;
     }
 }
