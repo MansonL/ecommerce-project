@@ -247,3 +247,105 @@ Jan-05-2022 09:32:54 | [31merror[39m : Error: 400. Message: You must be logged
     at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
     at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
     at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 18:11:34 | [31merror[39m : Error: 404. Message: User not found.. Stack: Error: User not found.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:26:16)
+    at MongoUsers.<anonymous> (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\models\DAOs\Mongo\users.ts:142:33)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\models\DAOs\Mongo\users.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Jan-05-2022 18:15:46 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:112:35
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:90:14)
+    at module.exports (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:94:10)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:110:19
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+Jan-05-2022 18:15:57 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:117:35
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:223:12
+    at getSecret (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:90:14)
+    at module.exports (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:94:10)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:110:19
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+Jan-05-2022 18:16:34 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:117:35
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:223:12
+    at getSecret (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:90:14)
+    at module.exports (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:94:10)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:110:19
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+Jan-05-2022 18:19:41 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:121:27
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:4:12)
+    at isAdmin (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:108:16)
+    at Layer.handle [as handle_request] (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 18:19:48 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:112:35
+    at module.exports (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:63:12)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:110:19
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:4:12)
+    at isAdmin (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:108:16)
+Jan-05-2022 18:20:04 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:112:35
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:133:14
+    at getSecret (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:90:14)
+    at module.exports (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:94:10)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:110:19
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+Jan-05-2022 18:22:53 | [31merror[39m : Error: 400. Message: Product quantity needs to be specified.. Stack: Error: Product quantity needs to be specified.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\cart.ts:76:31
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\cart.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\cart.ts:4:12)
+    at addToCart (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\cart.ts:47:16)
+    at Layer.handle [as handle_request] (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 19:38:38 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:96:35
+    at module.exports (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:75:12)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:94:19
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:4:12)
+    at isAuthorized (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:90:16)
+Jan-05-2022 19:38:51 | [31merror[39m : Error: 404. Message: The product wasn't found. Try another id.... Stack: Error: The product wasn't found. Try another id...
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:26:16)
+    at MongoProducts.<anonymous> (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\models\DAOs\Mongo\products.ts:64:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\models\DAOs\Mongo\products.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

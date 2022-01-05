@@ -109,12 +109,11 @@ class AuthController {
             const bearerJWToken = authHeader.split(' ')[1];
             verify(bearerJWToken, Config.JWT_SECRET, (err: VerifyErrors | null, token: JwtPayload | undefined) => {
                 if(err)
-                    throw ApiError.badRequest(EAuthErrors.NotLoggedIn)
-                else if(token && token.isAdmin){
+                    next(ApiError.badRequest(EAuthErrors.NotAuthorizedUser))
+                else if(token && token.user.isAdmin){
                     req.user = token.user
                     next();
-                }else
-                    next(ApiError.badRequest(EAuthErrors.NotLoggedIn))
+                }
                     
             })
         }else

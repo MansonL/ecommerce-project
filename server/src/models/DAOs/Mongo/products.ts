@@ -71,6 +71,17 @@ export class MongoProducts implements DBProductsClass {
             return ApiError.internalError(`An error occured.`)
       }
     }
+
+    async getByCategory (category: string): Promise<IMongoProduct[] | ApiError> {
+        try {
+            const docs = await this.products.find({ category: category });
+            if(docs.length > 0) return docs
+                return ApiError.notFound(EProductsErrors.NoProducts)
+        } catch (error) {
+            return ApiError.internalError(`An error occured.`)
+        }
+    }
+
     async add(product: INew_Product): Promise<CUDResponse | ApiError> {
         try {
             const doc = await this.products.create(product);
@@ -132,9 +143,11 @@ export class MongoProducts implements DBProductsClass {
                 options.code === ''
                     ? new RegExp(`.*`)
                     : new RegExp(`(${options.code})`);
+            const categoryRegex = options.category === '' ? new RegExp(`.*`) : new RegExp(`(${options.category})`)
             const docs = await this.products.find({
                 title: { $regex: titleRegex },
                 code: { $regex: codeRegex },
+                category: { $regex: categoryRegex },
                 price: {
                     $gte: options.price.minPrice,
                     $lte: options.price.maxPrice,

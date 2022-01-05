@@ -6,5 +6,5 @@ export const cartRouter: Router = express.Router();
 
 cartRouter.get('/list', authController.isAdmin, cart_controller.getCarts);
 cartRouter.get('/list/:id', authController.isAuthorized, cart_controller.getOneCart);
-cartRouter.post('/add/:id', authController.isAuthorized, cart_controller.addToCart);
-cartRouter.delete('/delete/:id', authController.isAuthorized, cart_controller.deleteFromCart);
+cartRouter.post('/add', authController.isAuthorized, cart_controller.addToCart);
+cartRouter.delete('/delete', authController.isAuthorized, cart_controller.deleteFromCart);

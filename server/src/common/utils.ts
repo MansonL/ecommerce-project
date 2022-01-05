@@ -10,6 +10,7 @@ import { INew_Message } from './interfaces/messages';
 import { ApiError } from '../api/errorApi';
 import { EProductsErrors } from './EErrors';
 import { uploadManyImages } from '../middleware/cloudinary';
+import { productsApi } from '../api/products';
 
 export class Utils {
     /**
@@ -39,6 +40,14 @@ export class Utils {
     static generateCode = (): string => {
         return `_${Math.random().toString(36).substr(2, 9)}`;
     };
+
+    static validateCartModification = async (product_id: string, quantity: number): Promise<boolean> => {
+        const doc = await productsApi.getProduct(product_id) as IMongoProduct[] ; 
+        
+        // It's already checked that the product exists at the controller.
+
+        return quantity <= doc[0].stock;
+    }
 
     static validateAndUploadImages = async (files: {
         file: string;

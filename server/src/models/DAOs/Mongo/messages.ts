@@ -53,7 +53,7 @@ export class MongoMessages implements DBMessagesClass {
                     _id: Types.ObjectId;
                      })[] = [];
                 docs.forEach(async document => {
-                    if(document.author === user_id){
+                    if(document.author.toString() === user_id){
                         const populatedDoc = await document.populate({ path: 'author', select: 'data.username' });
                         messages.push(populatedDoc);
                     }

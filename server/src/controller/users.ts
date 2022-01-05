@@ -23,7 +23,7 @@ class UsersController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const user_id: string = req.params.id;
+        const { user_id } = req.user as Express.User;
         logger.info(`[PATH]: Inside User Controller`);
         if (isValidObjectId(user_id)) {
             const result:  IMongoUser[] | ApiError  = await usersApi.getUser(user_id);
@@ -52,7 +52,7 @@ class UsersController {
         logger.info(`[PATH]: Inside User Controller`)
         const { error } = await validator.user.validateAsync(userInfo);
         if (error) 
-            next(ApiError.badRequest(EUsersErrors.IncorrectProperties));
+            next(ApiError.badRequest(error.message));
          else {
             const result: CUDResponse | ApiError = await usersApi.addUser(userInfo);
             if(result instanceof ApiError)

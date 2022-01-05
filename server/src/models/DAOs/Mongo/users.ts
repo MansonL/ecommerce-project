@@ -19,13 +19,16 @@ const usersSchema = new Schema({
         name: { type: String, required: true },
         surname: { type: String, required: true },
         age: { type: String, required: true },
-        avatar: { type: String, required: true },
-        photos : [{
-        type: String,
+        avatar: { type: String },
+        phoneNumber: { type: String, required: true },
+        images : [{
+            url: { type: String, required: true },
+            photo_id: { type: String, required: true },
         }],
         facebookID: { type: String },
         addresses: [
             {
+                alias: { type: String },
                 street1: {
                     name: { type: String },
                     number: { type: String },
@@ -45,8 +48,11 @@ const usersSchema = new Schema({
 usersSchema.set('toJSON', {
     transform: (document, returnedDocument) => {
         delete returnedDocument.__v;
-        delete returnedDocument.data.password;
-        delete returnedDocument.data.repeatedPassword;
+        logger.info(returnedDocument)
+        if(returnedDocument.data.password){
+            delete returnedDocument.data.password;
+            delete returnedDocument.data.repeatedPassword;
+        }
     }
 });
 
@@ -57,8 +63,15 @@ usersSchema.methods.isValidPassword = async function(password: string)  {
 
 usersSchema.pre('save', async function(next){
     const hash = await bcrypt.hash(this.data.password, 10);
-    this.password = hash;
-    this.repeatedPassword = hash;
+    this.data.password = hash;
+    this.data.repeatedPassword = hash;
+    if(this.data.images.length === 0)
+        this.data.images.push({
+            url: 'https://www.pinclipart.com/picdir/middle/169-1692839_default-avatar-transparent-clipart.png',
+            photo_id: 'default_avatar_image'
+        });
+        if(this.data.avatar)
+            this.data.avatar = 'https://www.pinclipart.com/picdir/middle/169-1692839_default-avatar-transparent-clipart.png'
     next()
 })
 
@@ -74,9 +87,10 @@ const botData: INew_User = {
         name: `Manson`,
         surname: `Bot`,
         age: "27/12/2000",
-        avatar: `https://cdn.icon-icons.com/icons2/1371/PNG/512/robot02_90810.png`,
+        phoneNumber: '+5492612345678',
+        avatar: '',
         facebookID: '',
-        photos: [],
+        images: [],
         isAdmin: true,
     },
 };

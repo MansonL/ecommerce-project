@@ -1,7 +1,6 @@
-import { Document } from "mongodb";
+import { Document, ObjectId } from "mongodb";
 import { ApiError } from "../../api/errorApi";
-import { CUDResponse, InternalError } from "./others";
-
+import { CUDResponse, } from "./others";
 
 /**
  * 
@@ -20,10 +19,10 @@ export interface IMongoCart extends ICart, Document {
 export interface ICart {
     createdAt: string;
     user: string;
-    products: [{
-        product: string;
+    products: {
+        product: ObjectId;
         quantity: number;
-    }];
+    }[];
 
 }
 
@@ -47,10 +46,7 @@ export interface INew_Product {
     createdAt: string; 
     modifiedAt: string;
     code: string; 
-    img: [{
-        id: string;
-        url: string;
-    }];
+    images: { url: string; photo_id: string; }[]
     stock: number;
     price: number;
     category: string;
@@ -68,10 +64,11 @@ export interface IUpdate {
     title?: string;
     description?: string;
     code?: string;
-    img?: [{
+    category?: string;
+    img?: {
         id: string;
         url: string;   
-    }]
+    }[]
     stock?: number;
     price?: number;
 }
@@ -84,6 +81,7 @@ export interface IUpdate {
 export interface IQuery {
     title: string;
     code: string;
+    category: string;
     stock: {
         minStock: number;
         maxStock: number;
@@ -119,8 +117,8 @@ export interface DBCartClass {
     get(
         user_id?: string | undefined
     ): Promise<IMongoCart[] | ApiError>;
-    add(user_id: string, product_id: string): Promise<CUDResponse | ApiError>;
-    delete(user_id: string, product_id: string): Promise<CUDResponse | ApiError>;
+    add(user_id: string, product_id: string, quantity: number): Promise<CUDResponse | ApiError>;
+    delete(user_id: string, product_id: string, quantity: number): Promise<CUDResponse | ApiError>;
 }
 
 /**

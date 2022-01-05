@@ -25,7 +25,7 @@ class CartController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const { user_id } = req.user as Express.User
+        const { user_id } = req.user as Express.User;
         logger.info(`[PATH]: Inside Cart Controller`);
             const result: IMongoCart[]  | ApiError = await cartApi.get(
             user_id
@@ -53,28 +53,29 @@ class CartController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const productID : string = req.params.id;
-        const userID : string = req.body
+        const { product_id, quantity } = req.body
+        const { user_id } = req.user as Express.User;
         logger.info(`[PATH]: Inside Cart Controller`)
-        if (isValidObjectId(productID)) {
-            const firstResult: IMongoProduct[] | ApiError  = await productsApi.getProduct(
-                productID
-            );
-            if (isProduct(firstResult)) {
-                const result : CUDResponse | ApiError = await cartApi.addProduct(
-                    userID, productID
+        if (isValidObjectId(product_id)) {
+            if(quantity){
+                const firstResult: IMongoProduct[] | ApiError  = await productsApi.getProduct(
+                    product_id
                 );
-                if(result instanceof ApiError)
-                    next(result)
-                else
-                    res.status(201).send(result)
-            } else if(firstResult instanceof ApiError)
-                next(firstResult)
-            
-            
+                if (firstResult instanceof ApiError)
+                    next(firstResult)
+                else{
+                    const result : CUDResponse | ApiError = await cartApi.addProduct(
+                        user_id, product_id, quantity
+                    );    
+                    if(result instanceof ApiError)
+                        next(result)
+                    else
+                        res.status(201).send(result)
+                } 
+            }else
+                next(ApiError.badRequest(`Product quantity needs to be specified.`))
         } else 
             next(ApiError.badRequest(EProductsErrors.IdIncorrect));
-        
     }
 
     async deleteFromCart(
@@ -82,22 +83,24 @@ class CartController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const product_id: string = req.params.id;
-        const user_id : string = req.body;
+        const { product_id, quantity } = req.body
+        const { user_id } = req.user as Express.User;
         logger.info(`[PATH]: Inside Cart Controller`)
         if (isValidObjectId(product_id) && isValidObjectId(user_id)){
-            const firstResult: IMongoProduct[] | ApiError  =
-                await productsApi.getProduct(product_id);
-            if(isProduct(firstResult)){
-                const result: CUDResponse | ApiError = await cartApi.deleteProduct(user_id, product_id);
-                if(result instanceof ApiError)
-                    next(result)
-                else
-                    res.status(201).send(result)    
-                
-            }else if(firstResult instanceof ApiError)
-                next(firstResult);
-            
+            if(Number(quantity)){
+                const firstResult: IMongoProduct[] | ApiError  =
+                    await productsApi.getProduct(product_id);
+                if(firstResult instanceof ApiError){
+                    next(firstResult);    
+                }else{
+                    const result: CUDResponse | ApiError = await cartApi.deleteProduct(user_id, product_id, Number(quantity));
+                    if(result instanceof ApiError)
+                        next(result)
+                    else
+                        res.status(201).send(result)
+                }
+            }else 
+                next(ApiError.badRequest(`Product quantity needs to be specified.`));
         }else 
             next(ApiError.badRequest(EProductsErrors.IdIncorrect));
     }

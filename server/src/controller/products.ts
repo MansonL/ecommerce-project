@@ -4,7 +4,7 @@ import { EProductsErrors } from '../common/EErrors';
 import { productsApi } from '../api/products';
 import { validator } from '../common/interfaces/joiSchemas';
 import { Utils } from '../common/utils';
-import { IMongoProduct, INew_Product, IQuery, isProduct, IUpdate } from '../common/interfaces/products';
+import { IMongoProduct, INew_Product, IQuery, IUpdate } from '../common/interfaces/products';
 import { CUDResponse } from '../common/interfaces/others';
 import { logger } from '../services/logger';
 import { isValidObjectId } from 'mongoose';
@@ -49,12 +49,24 @@ class ProductController {
         }
     }
 
+    async getByCategory(req: Request, res: Response, next: NextFunction): Promise<void> {
+        const category = req.params.category;
+        if(category){
+            const result : IMongoProduct[] | ApiError = await productsApi.getByCategory(category);
+            if(result instanceof ApiError)
+                next(result);
+            else
+                res.status(200).send(result)
+        }else 
+            next(ApiError.badRequest(`Category name needed.`))
+    }
+
     async save(req: Request, res: Response, next: NextFunction): Promise<void> {
         const product: INew_Product = req.body;
         logger.info(`[PATH]: Inside Products Controller.`)
         const { error } = await validator.newProduct.validateAsync(product);
         if (error) {
-            next(ApiError.badRequest(EProductsErrors.PropertiesIncorrect));
+            next(ApiError.badRequest(error.message));
         } else {
             if(req.files){
             const files = (req.files.photos as UploadedFile[]).map(file => {
@@ -85,25 +97,26 @@ class ProductController {
     ): Promise<void> {
         const product_id: string = req.params.id;
         const newProperties: IUpdate = req.body;
-        const propsValidation = await validator.update.validateAsync(newProperties);
+        const { error } = await validator.update.validateAsync(newProperties);
         logger.info(`[PATH]: Inside Products Controller.`)
         if (isValidObjectId(product_id)){
-            const firstResult: IMongoProduct[] | ApiError = await productsApi.getProduct(product_id);
-            if(firstResult instanceof ApiError)
-                next(firstResult)
+            if(error)
+                next(ApiError.badRequest(error.message))
             else{
-                const result : CUDResponse | ApiError = await productsApi.updateProduct(product_id, newProperties);
-                if(result instanceof ApiError)
-                    next(result)
-                else
-                    res.status(201).send(result)
+                const firstResult: IMongoProduct[] | ApiError = await productsApi.getProduct(product_id);
+                if(firstResult instanceof ApiError)
+                    next(firstResult)
+                else{
+                    const result : CUDResponse | ApiError = await productsApi.updateProduct(product_id, newProperties);
+                    if(result instanceof ApiError)
+                        next(result)
+                    else
+                        res.status(201).send(result)
+                }
             }
             
-        }else if(propsValidation.error)
-            next(ApiError.badRequest(EProductsErrors.PropertiesIncorrect));
-        else
-            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
-        
+        }else
+            next(ApiError.badRequest(EProductsErrors.IdIncorrect))
     }
 
     async delete(
@@ -136,13 +149,14 @@ class ProductController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        let { title, code, minPrice, maxPrice, minStock, maxStock } = {
+        let { title, code, minPrice, maxPrice, minStock, maxStock, category } = {
             title: req.query.title as string,
             code: req.query.code as string,
             minPrice: req.query.minPrice as string,
             maxPrice: req.query.maxPrice as string,
             minStock: req.query.minStock as string,
             maxStock: req.query.maxStock as string,
+            category: req.query.category as string,
         };
         const firstResult: IMongoProduct[] | ApiError = await productsApi.getProduct();
         if(firstResult instanceof ApiError)
@@ -160,6 +174,7 @@ class ProductController {
 
             title = title != null ? title : '';
             code = code != null ? code : '';
+            category = category !== null ? category : '';
             minPrice = minPrice != null ? minPrice : '0.01';
             maxPrice =
                 maxPrice != null
@@ -173,6 +188,7 @@ class ProductController {
             const options: IQuery = {
                 title: title,
                 code: code,
+                category: category,
                 price: {
                     minPrice: Number(minPrice),
                     maxPrice: Number(maxPrice),

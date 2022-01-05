@@ -13,6 +13,7 @@ import { CUDResponse, InternalError } from "./others"
 }
 
 export type UserAddresses = {
+    alias?: string;
     street1: {
         name: string;
         number: number;
@@ -32,10 +33,11 @@ export type UserInfo = {
     name: string;
     surname: string;
     age: string;
-    avatar: string;
-    photos: string[];
+    avatar?: string;
+    phoneNumber: string;
+    images: { url: string; photo_id: string;}[];
     facebookID?: string;
-    addresses?: UserAddresses;
+    addresses?: UserAddresses[];
     isAdmin: boolean;
 }
 /**

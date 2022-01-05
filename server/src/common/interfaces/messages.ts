@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { Document } from "mongoose";
 import { ApiError } from "../../api/errorApi";
 import { CUDResponse } from "./others";
@@ -29,7 +30,7 @@ import { CUDResponse } from "./others";
  */
 export interface INew_Message {
     timestamp: string;
-    author: string;
+    author: ObjectId;
     message: string;
 }
 

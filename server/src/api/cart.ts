@@ -29,12 +29,12 @@ class CartApi {
             return product;
         }
     }
-    async addProduct(username: string, product_id: string ): Promise<CUDResponse | ApiError> {
-        const result : CUDResponse | ApiError = await this.products.add(username, product_id);
+    async addProduct(username: string, product_id: string, quantity: number): Promise<CUDResponse | ApiError> {
+        const result : CUDResponse | ApiError = await this.products.add(username, product_id, quantity);
         return result;
     }
-    async deleteProduct(username: string, product_id: string): Promise<CUDResponse | ApiError > {
-        const result : CUDResponse | ApiError = await this.products.delete(username, product_id);
+    async deleteProduct(username: string, product_id: string, quantity: number): Promise<CUDResponse | ApiError > {
+        const result : CUDResponse | ApiError = await this.products.delete(username, product_id, quantity);
         return result;
     }
 }

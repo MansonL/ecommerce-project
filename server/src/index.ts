@@ -42,19 +42,9 @@ if(Config.MODE === "FORK"){
 }
 
 /**
- * Need to add the user_id to every cart, order & message.list/id message.save controller with req.user
- * 
- * Authorizations --> function as a middleware for authorized endpoints.
- * 
- * Users --> telephone field, pass & repeated validation.
  * 
  * Images --> full endpoint.
  * 
- * Products --> category endpoint.
- * 
- * Cart --> modifications for adding & deleting products with { id, quantity } = req.body 
- * 
- * All of cart endpoints needs authorization with Bearer JWT.
  * 
  * Orders --> full endpoint. 
  * All of orders endpoints needs authorization with Bearer JWT.

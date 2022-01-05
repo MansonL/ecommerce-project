@@ -30,12 +30,18 @@ export const facebookVerify: VerifyFunctionWithRequest = async (req: Request, ac
             modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
             data: {
                 username: profile.emails ? profile.emails[0].value : '',
-                photos: profile.photos ? profile.photos.map(photo => photo.value) : [''],
+                images: profile.photos ? profile.photos.map(photo => {
+                    return {
+                        url: photo.value,
+                        photo_id: 'facebook_image'
+                    }
+                }) : [],
                 name: profile.displayName.split(" ")[0],
                 surname: profile.displayName.split(" ")[1],
                 age: profile.birthday ? profile.birthday : 'none',
                 facebookID: profile.id,
                 password: '',
+                phoneNumber: '',
                 repeatedPassword: '',
                 avatar: profile.photos ? profile.photos[0].value : 'https://scontent.fmdz5-1.fna.fbcdn.net/v/t1.30497-1/cp0/c15.0.50.50a/p50x50/84628273_176159830277856_972693363922829312_n.jpg?_nc_cat=1&ccb=1-5&_nc_sid=12b3be&_nc_eui2=AeGFVppcWlKdc7aGtqBjr_qUik--Qfnh2B6KT75B-eHYHjmg8hXUxKd83x9Quvqm7QJihxiVWmgPNHt_JQZRXFjE&_nc_ohc=lreSzZHG1jMAX8WENYk&_nc_ht=scontent.fmdz5-1.fna&edm=AP4hL3IEAAAA&oh=7ca8884c54739b55368dd37ab5389c49&oe=61DA6438',
                 isAdmin: false,
