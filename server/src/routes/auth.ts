@@ -1,36 +1,22 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Router } from "express";
+import passport from "passport";
 import { authController } from "../controller/auth";
-import passport from "../passport/index";
+import { usersController } from "../controller/users";
+
 
 
 export const authRouter : Router = Router();
 
 /**
  * 
- * PASSPORT-LOCAL ROUTES
+ * JWT AUTH ROUTES
  * 
  */
 
-authRouter.post('/signup', (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('signup', function(err: any, user: any, info){
-        if(err){
-            return res.status(500).send(err);
-        }
-        if(user){
-            return res.status(201).send(user)
-        }
-        return res.send(info)
-    })(req,res,next);
-});
-
-authRouter.post('/login', passport.authenticate('login'), (req: Request, res: Response) => {
-    res.status(200).send({data: req.user, message: "Successfully logged in!"});
-})
-
-
 authRouter.get('/login', authController.login);
-authRouter.get('/logout', authController.logout)
 authRouter.get('/signup', authController.signup)
+authRouter.post('/login', authController.loginPost) 
+authRouter.post('/signup', usersController.save);
 
 
 /**

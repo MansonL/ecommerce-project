@@ -24,16 +24,13 @@ class MessagesController {
     }
 
     async getUserMessages(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const user_id : string | undefined = req.params.id
+        const { user_id } = req.user as Express.User
         if(ObjectId.isValid(user_id)){
             const result : IMongoMessage[] | ApiError = await messagesApi.getMsg(user_id);
             if(result instanceof ApiError) 
                 next(result)
             else 
                 res.status(200).send(result); 
-        }else{
-            const error = ApiError.badRequest(EUsersErrors.UserNotFound);
-            res.status(error.error).send(error)
         }
     }
 

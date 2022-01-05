@@ -7,6 +7,8 @@ export const Config = {
     PORT: process.env.PORT || 8080,
     MODE: process.env.MODE || 'noCluster',
     PERSISTANCE: process.env.PERSISTANCE || 'persistance type',
+    JWT_SECRET: process.env.JWT_SECRET || 'secret string for jwt signature & verify',
+    JWT_EXPIRATION_TIME: Number(process.env.JWT_EXPIRATION_TIME) || 60*15, // 15 minutes 
     SESSION_SECRET: process.env.SESSION_SECRET || 'secret string for express-sessions',
     SESSION_COOKIE_TIMEOUT: process.env.SESSION_COOKIE_TIMEOUT || 'timeour for session cookies',
     DB_NAME: process.env.DB_NAME || 'ecommerce',

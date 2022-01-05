@@ -7,7 +7,7 @@ import { mongoConnection } from '../models/DAOs/Mongo/connection';
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import cookieParser from 'cookie-parser'
-import passport from '../passport/index'
+import passport from '../passport/facebook'
 import fileUpload from 'express-fileupload';
 import { Config } from '../config/config';
 

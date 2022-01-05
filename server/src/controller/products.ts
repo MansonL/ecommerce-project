@@ -7,7 +7,8 @@ import { Utils } from '../common/utils';
 import { IMongoProduct, INew_Product, IQuery, isProduct, IUpdate } from '../common/interfaces/products';
 import { CUDResponse } from '../common/interfaces/others';
 import { logger } from '../services/logger';
-import { ObjectId } from 'mongodb';
+import { isValidObjectId } from 'mongoose';
+import { UploadedFile } from 'express-fileupload';
 
 /**
  *
@@ -35,16 +36,16 @@ class ProductController {
     ): Promise<void> {
         const product_id: string = req.params.id;
         logger.info(`[PATH]: Inside Products Controller.`)
-        if (ObjectId.isValid(product_id)) 
-            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
-         else {
+        if (isValidObjectId(product_id)){
             const result: IMongoProduct[] | ApiError = await productsApi.getProduct(
-                product_id
+            product_id
             );
             if(result instanceof ApiError)
                 next(result)
             else
                 res.status(200).send(result)
+        }else {
+            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
         }
     }
 
@@ -55,11 +56,26 @@ class ProductController {
         if (error) {
             next(ApiError.badRequest(EProductsErrors.PropertiesIncorrect));
         } else {
-            const result: CUDResponse | ApiError = await productsApi.addProduct(product);
-            if(result instanceof ApiError)
-                next(result)
-            else
-                res.status(201).send(result)
+            if(req.files){
+            const files = (req.files.photos as UploadedFile[]).map(file => {
+                return {
+                    file: file.tempFilePath,
+                    name: file.name,
+                    mimetype: file.mimetype
+                }
+            });
+            const validatedImages = Utils.validateAndUploadImages(files, product.category);
+            if(validatedImages instanceof ApiError)
+                next(validatedImages)
+            else{
+                const result: CUDResponse | ApiError = await productsApi.addProduct(product);
+                if(result instanceof ApiError)
+                    next(result)
+                else
+                    res.status(201).send(result)
+                }
+            }else
+                next(ApiError.badRequest(EProductsErrors.NoImagesUploaded))
         }
     }
     async update(
@@ -71,11 +87,7 @@ class ProductController {
         const newProperties: IUpdate = req.body;
         const propsValidation = await validator.update.validateAsync(newProperties);
         logger.info(`[PATH]: Inside Products Controller.`)
-        if (ObjectId.isValid(product_id)){
-            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
-        }else if(propsValidation.error){
-            next(ApiError.badRequest(EProductsErrors.PropertiesIncorrect));
-        }else{
+        if (isValidObjectId(product_id)){
             const firstResult: IMongoProduct[] | ApiError = await productsApi.getProduct(product_id);
             if(firstResult instanceof ApiError)
                 next(firstResult)
@@ -86,7 +98,12 @@ class ProductController {
                 else
                     res.status(201).send(result)
             }
-        }
+            
+        }else if(propsValidation.error)
+            next(ApiError.badRequest(EProductsErrors.PropertiesIncorrect));
+        else
+            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
+        
     }
 
     async delete(
@@ -96,21 +113,21 @@ class ProductController {
     ): Promise<void> {
         const product_id = req.params.id;
         logger.info(`[PATH]: Inside Products Controller.`)
-        if (ObjectId.isValid(product_id)){
-            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
-        }else{
+        if (isValidObjectId(product_id)){
             const firstResult: IMongoProduct[] | ApiError = await productsApi.getProduct(product_id);
             if(firstResult instanceof ApiError)
                 next(firstResult)
             else{
                 const result : CUDResponse | ApiError = await productsApi.deleteProduct(product_id);
-                if(result instanceof ApiError){
+                if(result instanceof ApiError)
                     next(result)
-                }else{
+                else
                     res.status(201).send(result)    
-                }
-            }   
-        }
+                
+            }  
+            
+        }else
+            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
         
     }
 

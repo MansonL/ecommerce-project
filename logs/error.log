@@ -38,3 +38,212 @@ Jan-04-2022 09:30:01 | [31merror[39m : Error: 400. Message: Please, type a val
     at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
     at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
     at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:08:08 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:28:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:14:46 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:28:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:15:21 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:28:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:17:36 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:28:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:18:46 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:30:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:20:58 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:29:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:22:24 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:29:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:26:08 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:30:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:27:40 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:31:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:32:16 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:29:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-04-2022 22:34:13 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:30:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at getOne (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:26:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 01:55:19 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:107:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAdmin (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:107:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 01:56:43 | [31merror[39m : Error: 400. Message: Username or password not correct.... Stack: Error: Username or password not correct...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:48:35
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-05-2022 02:00:01 | [31merror[39m : Error: 500. Message: Expected "payload" to be a plain object.. Stack: Error: Expected "payload" to be a plain object.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:39:43
+    at failure (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:101:14)
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:117:14)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:37:25
+Jan-05-2022 02:01:48 | [31merror[39m : Error: 500. Message: invalid expiresIn option for string payload. Stack: Error: invalid expiresIn option for string payload
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:39:43
+    at failure (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:101:14)
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:128:14)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:37:25
+Jan-05-2022 02:03:17 | [31merror[39m : Error: 500. Message: invalid expiresIn option for string payload. Stack: Error: invalid expiresIn option for string payload
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:40:43
+    at failure (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:101:14)
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:128:14)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:38:25
+Jan-05-2022 02:08:47 | [31merror[39m : Error: 500. Message: Expected "payload" to be a plain object.. Stack: Error: Expected "payload" to be a plain object.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:40:43
+    at failure (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:101:14)
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:117:14)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:38:25
+Jan-05-2022 02:09:41 | [31merror[39m : Error: 500. Message: Expected "payload" to be a plain object.. Stack: Error: Expected "payload" to be a plain object.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:40:43
+    at failure (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:101:14)
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\sign.js:117:14)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:38:25
+Jan-05-2022 02:13:18 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:107:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAdmin (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:107:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 02:15:33 | [31merror[39m : Error: 404. Message: There are no carts created.. Stack: Error: There are no carts created.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoCart.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:79:37)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-05-2022 09:14:10 | [31merror[39m : Error: 400. Message: Username or password not correct.... Stack: Error: Username or password not correct...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:50:35
+Jan-05-2022 09:14:57 | [31merror[39m : Error: 400. Message: Username or password not correct.... Stack: Error: Username or password not correct...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:50:35
+Jan-05-2022 09:32:54 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:35:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)

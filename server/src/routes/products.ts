@@ -1,11 +1,13 @@
 import e, { Router } from 'express';
+import { authController } from '../controller/auth';
 import { products_controller } from '../controller/products';
 
 export const productsRouter: e.Router = Router();
 
 productsRouter.get('/list', products_controller.getAll);
 productsRouter.get('/list/?:id', products_controller.getOne);
+productsRouter.get('/list/?:category')
 productsRouter.get('/query', products_controller.query)
-productsRouter.post('/save', products_controller.save);
-productsRouter.put('/update/?:id', products_controller.update);
-productsRouter.delete('/delete/?:id', products_controller.delete);
+productsRouter.post('/save', authController.isAdmin, products_controller.save);
+productsRouter.patch('/update/?:id', authController.isAdmin, products_controller.update);
+productsRouter.delete('/delete/?:id', authController.isAdmin, products_controller.delete);

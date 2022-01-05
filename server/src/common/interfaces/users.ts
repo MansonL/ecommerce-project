@@ -7,21 +7,8 @@ import { CUDResponse, InternalError } from "./others"
  * Type of User Object to be stored and query from Mongo.
  *
  */
- export interface IMongoUser extends Document{
+ export interface IMongoUser extends Document, INew_User{
     _id: string;
-    createdAt: string;
-    modifiedAt: string;
-    data: {
-        username: string; 
-        name: string;
-        surname: string;
-        age: string;
-        avatar: string;
-        photos: string[];
-        facebookID?: string;
-        addresses?: UserAddresses;
-    },
-    isAdmin: boolean;
     isValidPassword: (password: string) => Promise<boolean>
 }
 
@@ -49,6 +36,7 @@ export type UserInfo = {
     photos: string[];
     facebookID?: string;
     addresses?: UserAddresses;
+    isAdmin: boolean;
 }
 /**
  *
@@ -59,7 +47,6 @@ export interface INew_User {
     createdAt: string;
     modifiedAt: string;
     data: UserInfo;
-    isAdmin: boolean;
 }
 
 /**

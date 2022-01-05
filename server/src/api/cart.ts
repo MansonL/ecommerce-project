@@ -17,11 +17,11 @@ class CartApi {
         this.products = CartFactory.get(storage);
     }
     async get(
-        user_id?: string | undefined
+        username?: string | undefined
     ): Promise<IMongoCart[] | ApiError > {
-        if (user_id != null) {
+        if (username != null) {
             const product: IMongoCart[] | ApiError  = await this.products.get(
-                user_id
+                username
             );
             return product;
         } else {
@@ -29,12 +29,12 @@ class CartApi {
             return product;
         }
     }
-    async addProduct(user_id: string, product_id: string ): Promise<CUDResponse | ApiError> {
-        const result : CUDResponse | ApiError = await this.products.add(user_id, product_id);
+    async addProduct(username: string, product_id: string ): Promise<CUDResponse | ApiError> {
+        const result : CUDResponse | ApiError = await this.products.add(username, product_id);
         return result;
     }
-    async deleteProduct(user_id: string, product_id: string): Promise<CUDResponse | ApiError > {
-        const result : CUDResponse | ApiError = await this.products.delete(user_id, product_id);
+    async deleteProduct(username: string, product_id: string): Promise<CUDResponse | ApiError > {
+        const result : CUDResponse | ApiError = await this.products.delete(username, product_id);
         return result;
     }
 }

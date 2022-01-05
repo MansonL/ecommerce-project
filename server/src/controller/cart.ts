@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import e, { NextFunction, Request, Response } from 'express';
 import { cartApi } from '../api/cart';
 import { productsApi } from '../api/products';
 import { EProductsErrors } from '../common/EErrors';
@@ -8,6 +8,11 @@ import { IMongoCart, IMongoProduct, isCartProduct, isProduct } from '../common/i
 import { CUDResponse, isCUDResponse } from '../common/interfaces/others';
 import { logger } from '../services/logger';
 import { ObjectId } from 'mongodb';
+import { isValidObjectId } from 'mongoose';
+import { UserInfo } from '../common/interfaces/users';
+
+
+
 
 /**
  *
@@ -20,19 +25,15 @@ class CartController {
         res: Response,
         next: NextFunction
     ): Promise<void> {
-        const user_id: string | undefined = req.params.id;
+        const { user_id } = req.user as Express.User
         logger.info(`[PATH]: Inside Cart Controller`);
-        if (!ObjectId.isValid(user_id))
-            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
-        else {
             const result: IMongoCart[]  | ApiError = await cartApi.get(
-                user_id
+            user_id
             );
             if(result instanceof ApiError)
                 next(result);
             else
-                res.status(200).send(result)
-        }
+                res.status(200).send(result)       
     }
     async getCarts(
         req: Request,
@@ -55,9 +56,7 @@ class CartController {
         const productID : string = req.params.id;
         const userID : string = req.body
         logger.info(`[PATH]: Inside Cart Controller`)
-        if (ObjectId.isValid(productID)) {
-            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
-        } else {
+        if (isValidObjectId(productID)) {
             const firstResult: IMongoProduct[] | ApiError  = await productsApi.getProduct(
                 productID
             );
@@ -69,10 +68,13 @@ class CartController {
                     next(result)
                 else
                     res.status(201).send(result)
-            } else if(firstResult instanceof ApiError){
+            } else if(firstResult instanceof ApiError)
                 next(firstResult)
-            }
-        }
+            
+            
+        } else 
+            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
+        
     }
 
     async deleteFromCart(
@@ -83,9 +85,7 @@ class CartController {
         const product_id: string = req.params.id;
         const user_id : string = req.body;
         logger.info(`[PATH]: Inside Cart Controller`)
-        if (!ObjectId.isValid(product_id) && ObjectId.isValid(user_id)) 
-            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
-         else {
+        if (isValidObjectId(product_id) && isValidObjectId(user_id)){
             const firstResult: IMongoProduct[] | ApiError  =
                 await productsApi.getProduct(product_id);
             if(isProduct(firstResult)){
@@ -98,7 +98,8 @@ class CartController {
             }else if(firstResult instanceof ApiError)
                 next(firstResult);
             
-        }
+        }else 
+            next(ApiError.badRequest(EProductsErrors.IdIncorrect));
     }
 }
 

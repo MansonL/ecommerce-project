@@ -1,5 +1,8 @@
 import { MemoryType } from './usersFactory';
 import { MongoMessages } from './DAOs/Mongo/messages';
+import { logger } from '../services/logger';
+import { Config } from '../config/config';
+import cluster from 'cluster';
 
 /**
  *
@@ -15,14 +18,40 @@ export class MessagesFactory {
     static get(type: string): MongoMessages {
         switch (type) {
             case MemoryType.MongoAtlas:
-                console.log(`Using MongoAtlas`);
+            if(Config.MODE === 'CLUSTER'){
+                if(cluster.isMaster){
+                    logger.info(`Using MongoAtlas`);
+                    return new MongoMessages('atlas');
+                }
                 return new MongoMessages('atlas');
+            }else{
+                logger.info(`Using MongoAtlas`);
+                return new MongoMessages('atlas');
+            }
+            
             case MemoryType.LocalMongo:
-                console.log(`Using Local Mongo`);
+            if(Config.MODE === 'CLUSTER'){
+                if(cluster.isMaster){
+                    logger.info(`Using Local Mongo`);
+                    return new MongoMessages('local');
+                }
                 return new MongoMessages('local');
+            }else{
+                logger.info(`Using Local Mongo`);
+                return new MongoMessages('local');
+            }
+            
             default:
-                console.log(`DEFAULT: MongoAtlas`);
+            if(Config.MODE === 'CLUSTER'){
+                if(cluster.isMaster){
+                    logger.info(`DEFAULT: MongoAtlas`);
+                    return new MongoMessages('atlas');
+                }
                 return new MongoMessages('atlas');
+            }else{
+                logger.info(`DEFAULT: MongoAtlas`);
+                return new MongoMessages('atlas');
+            }
         }
     }
 }

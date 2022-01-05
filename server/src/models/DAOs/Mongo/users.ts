@@ -6,6 +6,8 @@ import { IMongoUser, INew_User } from '../../../common/interfaces/users';
 import { CUDResponse } from '../../../common/interfaces/others';
 import bcrypt from 'bcrypt';
 import { logger } from '../../../services/logger';
+import { Config } from '../../../config/config';
+import cluster from 'cluster';
 
 const usersSchema = new Schema({
     createdAt: { type: String, required: true },
@@ -35,9 +37,9 @@ const usersSchema = new Schema({
                 department: { type: String },
                 city: { type: String }
             }
-        ]
+        ],
+        isAdmin: { type: Boolean, required: true }
     },
-    isAdmin: { type: Boolean, required: true }
 });
 
 usersSchema.set('toJSON', {
@@ -49,12 +51,11 @@ usersSchema.set('toJSON', {
 });
 
 usersSchema.methods.isValidPassword = async function(password: string)  {
-    const valid = await bcrypt.compare(password, this.password);
+    const valid = await bcrypt.compare(password, this.data.password)
     return valid
 }
 
 usersSchema.pre('save', async function(next){
-    logger.info(this.data.password)
     const hash = await bcrypt.hash(this.data.password, 10);
     this.password = hash;
     this.repeatedPassword = hash;
@@ -76,8 +77,8 @@ const botData: INew_User = {
         avatar: `https://cdn.icon-icons.com/icons2/1371/PNG/512/robot02_90810.png`,
         facebookID: '',
         photos: [],
+        isAdmin: true,
     },
-    isAdmin: false,
 };
 
 export const WelcomeBot = new usersModel(botData);
@@ -89,9 +90,17 @@ export class MongoUsers {
         this.init();
     }
     async init() {
-        await this.users.deleteMany({});
-        await WelcomeBot.save();
-        console.log(`Users initialized`);
+        if(Config.MODE === 'CLUSTER'){
+            if(cluster.isMaster){
+                await this.users.deleteMany({});
+                await WelcomeBot.save();
+                logger.info(`Users initialized`);
+            }
+        }else{
+            await this.users.deleteMany({});
+            await WelcomeBot.save();
+            logger.info(`Users initialized`);
+        } 
     }
     async get(id?: string | undefined): Promise<IMongoUser[] | ApiError > {
       try {

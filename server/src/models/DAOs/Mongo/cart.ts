@@ -2,9 +2,12 @@ import { Document, model, Model, Schema, Types } from 'mongoose';
 import { ECartErrors } from '../../../common/EErrors';
 import { ApiError } from '../../../api/errorApi';
 import { DBCartClass, ICart, IMongoCart, IMongoProduct, isCartProduct } from '../../../common/interfaces/products';
-import { CUDResponse, InternalError } from '../../../common/interfaces/others';
+import { CUDResponse } from '../../../common/interfaces/others';
 import moment from 'moment';
 import { productsApi } from '../../../api/products';
+import { Config } from '../../../config/config';
+import { logger } from '../../../services/logger';
+import cluster from 'cluster';
 
 
 
@@ -36,8 +39,16 @@ export class MongoCart implements DBCartClass {
         this.init();
     }
     async init(): Promise<void> {
-        await this.cart.deleteMany({});
-        console.log(`Cart cleaned`);
+        if(Config.MODE === 'CLUSTER'){
+            if(cluster.isMaster){
+                await this.cart.deleteMany({});
+                logger.info(`Cart cleaned`);
+            }
+        }else{
+            await this.cart.deleteMany({});
+            logger.info(`Cart cleaned`);
+        }
+        
     }
     async get(user_id?: string | undefined): Promise<IMongoCart[] | ApiError > {
         try {
@@ -47,7 +58,7 @@ export class MongoCart implements DBCartClass {
                 });
                 console.log(doc);
                 if(doc){
-                    const cart = await (await doc.populate({ path: 'products.product', select: 'title price img' })).populate({ path: 'user', select: 'data.username' });
+                    const cart = await (await doc.populate({ path: 'products.product', select: 'title price img' })).populate({ path: 'user', select: 'data.user_id' });
                     return [cart]
                 } else {
                     return ApiError.notFound(ECartErrors.EmptyCart)
@@ -59,7 +70,7 @@ export class MongoCart implements DBCartClass {
                         _id: Types.ObjectId;
                     })[] = [];
                     docs.map(async (document) => {
-                        const cart = await (await document.populate({ path: 'products.product', select: 'title price img' })).populate({ path: 'user', select: 'data.username' });
+                        const cart = await (await document.populate({ path: 'products.product', select: 'title price img' })).populate({ path: 'user', select: 'data.user_id' });
                         carts.push(cart);
                     })
                     console.log(carts)
@@ -83,7 +94,7 @@ export class MongoCart implements DBCartClass {
                     quantity: 1,
                 });
                 await cartDoc.save();
-                const cart = await (await cartDoc.populate({ path: 'products.product', select: 'title price img'})).populate({ path: 'user', select: 'data.username' })
+                const cart = await (await cartDoc.populate({ path: 'products.product', select: 'title price img'})).populate({ path: 'user', select: 'data.user_id' })
                 console.log(cart)
                 return {
                     message: `Product successfully added.`,
@@ -99,7 +110,7 @@ export class MongoCart implements DBCartClass {
                     }]
                 }
                 const cartDoc = await this.cart.create(newCart);
-                const cart = (await (await cartDoc.populate({ path: 'products', select: 'title price img'})).populate({ path: 'user', select: 'data.username' }));
+                const cart = (await (await cartDoc.populate({ path: 'products', select: 'title price img'})).populate({ path: 'user', select: 'data.user_id' }));
                 console.log(cart)
                 return {
                     message: `Product successfully added.`,

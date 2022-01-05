@@ -5,6 +5,9 @@ import { EProductsErrors } from '../../../common/EErrors';
 import { DBProductsClass, IMongoProduct, INew_Product, IQuery, IUpdate } from '../../../common/interfaces/products';
 import { CUDResponse } from '../../../common/interfaces/others';
 import { logger } from '../../../services/logger';
+import { Config } from '../../../config/config';
+import cluster from 'cluster';
+import { mockProducts } from '../../mockProducts';
 
 
 const productSchema = new Schema({
@@ -14,8 +17,8 @@ const productSchema = new Schema({
     description: { type: String, required: true },
     code: { type: String, required: true },
     img: [{
-        id: { type: String, required: true },
-        url: { type: String, required: true }
+        photo_id: { type: String },
+        url: { type: String }
     }],
     stock: { type: Number, required: true },
     price: { type: Number, required: true },
@@ -40,9 +43,18 @@ export class MongoProducts implements DBProductsClass {
         this.init();
     }
     async init(): Promise<void> {
-        await this.products.deleteMany({});
-        //await this.products.insertMany(mockProducts);
-        logger.info(`Mock data inserted.`)
+        //console.log(mockProducts[0].img)
+        if(Config.MODE === 'CLUSTER'){
+            if(cluster.isMaster){
+                await this.products.deleteMany({});
+                await this.products.insertMany(mockProducts);
+                logger.info(`Mock data inserted.`)
+            }
+        }else{
+            await this.products.deleteMany({});
+            await this.products.insertMany(mockProducts);
+            logger.info(`Mock data inserted.`)
+        }
     }
     async get(id?: string | undefined): Promise<IMongoProduct[] | ApiError> {
       try {

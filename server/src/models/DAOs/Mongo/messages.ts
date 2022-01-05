@@ -4,6 +4,9 @@ import { Utils } from '../../../common/utils';
 import { ApiError } from '../../../api/errorApi';
 import { DBMessagesClass, IMongoMessage, INew_Message } from '../../../common/interfaces/messages';
 import { CUDResponse } from '../../../common/interfaces/others';
+import { Config } from '../../../config/config';
+import cluster from 'cluster';
+import { logger } from '../../../services/logger';
 
 
 const messagesSchema = new Schema({
@@ -30,8 +33,16 @@ export class MongoMessages implements DBMessagesClass {
         this.init();
     }
     async init() {
-        await this.messages.deleteMany({});
-        console.log(`Messages initialized`);
+        if(Config.MODE === 'CLUSTER'){
+            if(cluster.isMaster){
+                await this.messages.deleteMany({});
+                logger.info(`Messages initialized`);
+            }
+        }else{
+            await this.messages.deleteMany({});
+            logger.info(`Messages initialized`);
+        }
+        
     }
     async get(user_id: string | undefined): Promise<IMongoMessage[] | ApiError > {
         try {

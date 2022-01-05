@@ -53,6 +53,7 @@ export interface INew_Product {
     }];
     stock: number;
     price: number;
+    category: string;
 }
 
 
