@@ -1,6 +1,5 @@
 import {
-    CUDResponse,
-    InternalError,
+    CUDResponse 
 } from '../common/interfaces/others';
 import { storage } from '../models/usersFactory';
 import { MongoMessages } from '../models/DAOs/Mongo/messages';

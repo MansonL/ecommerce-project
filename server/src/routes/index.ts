@@ -7,6 +7,7 @@ import { authRouter } from './auth';
 import { fork } from 'child_process';
 import { CPUs } from '..';
 import { commandData } from '../passport/facebook';
+import { ordersRouter } from './orders';
 
 export const router: e.Router = Router();
 router.use('/products', productsRouter);
@@ -14,6 +15,7 @@ router.use('/cart', cartRouter);
 router.use('/messages', messagesRouter);
 router.use('/users', usersRouter);
 router.use('/auth', authRouter)
+router.use('/orders', ordersRouter)
 
 
 

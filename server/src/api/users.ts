@@ -3,7 +3,7 @@ import { storage } from '../models/usersFactory';
 import { UsersFactory } from '../models/usersFactory';
 import { MongoUsers } from '../models/DAOs/Mongo/users';
 import { ApiError } from './errorApi';
-import { IMongoUser, INew_User } from '../common/interfaces/users';
+import { IMongoUser, INew_User, UserAddresses } from '../common/interfaces/users';
 import { CUDResponse } from '../common/interfaces/others';
 
 export class UsersApi {
@@ -32,6 +32,11 @@ export class UsersApi {
     async addUser(user: INew_User): Promise<CUDResponse | ApiError> {
         const result: CUDResponse | ApiError = await this.users.add(user);
         return result;
+    }
+
+    async addAddress(user_id: string, address: UserAddresses): Promise<CUDResponse | ApiError> {
+        const result : CUDResponse | ApiError = await this.users.addAddress(user_id, address)
+        return result
     }
 }
 

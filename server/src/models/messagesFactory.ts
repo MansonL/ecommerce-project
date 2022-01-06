@@ -21,36 +21,36 @@ export class MessagesFactory {
             if(Config.MODE === 'CLUSTER'){
                 if(cluster.isMaster){
                     logger.info(`Using MongoAtlas`);
-                    return new MongoMessages('atlas');
+                    return new MongoMessages();
                 }
-                return new MongoMessages('atlas');
+                return new MongoMessages();
             }else{
                 logger.info(`Using MongoAtlas`);
-                return new MongoMessages('atlas');
+                return new MongoMessages();
             }
             
             case MemoryType.LocalMongo:
             if(Config.MODE === 'CLUSTER'){
                 if(cluster.isMaster){
                     logger.info(`Using Local Mongo`);
-                    return new MongoMessages('local');
+                    return new MongoMessages();
                 }
-                return new MongoMessages('local');
+                return new MongoMessages();
             }else{
                 logger.info(`Using Local Mongo`);
-                return new MongoMessages('local');
+                return new MongoMessages();
             }
             
             default:
             if(Config.MODE === 'CLUSTER'){
                 if(cluster.isMaster){
                     logger.info(`DEFAULT: MongoAtlas`);
-                    return new MongoMessages('atlas');
+                    return new MongoMessages();
                 }
-                return new MongoMessages('atlas');
+                return new MongoMessages();
             }else{
                 logger.info(`DEFAULT: MongoAtlas`);
-                return new MongoMessages('atlas');
+                return new MongoMessages();
             }
         }
     }

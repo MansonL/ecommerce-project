@@ -60,15 +60,15 @@ export class MongoCart implements DBCartClass {
                     user: user_id
                 });
                 if(doc){
-                    const cart = await (await doc.populate({ path: 'products.product', select: 'title price images' })).populate({ path: 'user', select: 'data.username' });
+                    const cart = await (await doc.populate({ path: 'products.product', select: 'title price images' })).populate({ path: 'user', select: 'data.username' }) as IMongoCart;
                     return [cart]
                 } else {
                     return ApiError.notFound(ECartErrors.EmptyCart)
                 }
             } else {
-                const docs = await this.cart.find({}).populate({ path: 'products.product', select: 'title price images' }).populate({ path: 'user', select: 'data.username' });
+                const docs = await this.cart.find({}).populate({ path: 'products.product', select: '_id title price images' }).populate({ path: 'user', select: 'data.username' }) as IMongoCart[];
                 if (docs.length > 0) {
-                    return docs;
+                    return docs
                 } else {
                     return ApiError.notFound(ECartErrors.NoCarts)
                 }
@@ -92,7 +92,7 @@ export class MongoCart implements DBCartClass {
                                 quantity: quantity,
                         });
                     await cartDoc.save();
-                    const cart = await (await cartDoc.populate({ path: 'products.product', select: 'title price images'})).populate({ path: 'user', select: 'data.username' })
+                    const cart = await (await cartDoc.populate({ path: 'products.product', select: '_id title price images'})).populate({ path: 'user', select: 'data.username' }) as IMongoCart
                     logger.info(cart)
                     return {
                         message: `Product successfully added.`,
@@ -108,7 +108,7 @@ export class MongoCart implements DBCartClass {
                         }]
                     }
                     const cartDoc = await this.cart.create(newCart);
-                    const cart = (await (await cartDoc.populate({ path: 'products.product', select: 'title price images'})).populate({ path: 'user', select: 'data.username' }));
+                    const cart = (await (await cartDoc.populate({ path: 'products.product', select: '_id title price images'})).populate({ path: 'user', select: 'data.username' })) as IMongoCart
                     logger.info(cart)
                     return {
                         message: `Product successfully added.`,
@@ -140,7 +140,7 @@ export class MongoCart implements DBCartClass {
                     await cartDoc.set('products', newProducts)
                     logger.info(cartDoc)
                     await cartDoc.save()
-                    const newCart = await (await cartDoc.populate({ path: 'products.product', select: 'title price images' })).populate({ path: 'user', select: 'data.username' })
+                    const newCart = await (await cartDoc.populate({ path: 'products.product', select: '_id title price images' })).populate({ path: 'user', select: 'data.username' }) as IMongoCart
                     return {
                         data: newCart,
                         message: `Product successfully deleted from cart.`

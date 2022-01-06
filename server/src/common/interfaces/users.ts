@@ -1,6 +1,6 @@
-import { Document } from "mongodb"
+import { Document, ObjectId } from "mongodb"
 import { ApiError } from "../../api/errorApi"
-import { CUDResponse, InternalError } from "./others"
+import { CUDResponse } from "./others"
 
 /**
  *
@@ -13,6 +13,7 @@ import { CUDResponse, InternalError } from "./others"
 }
 
 export type UserAddresses = {
+    _id: string;
     alias?: string;
     street1: {
         name: string;

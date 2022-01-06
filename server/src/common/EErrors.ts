@@ -28,5 +28,7 @@ export enum EAuthErrors {
 
 export enum EOrdersErrors {
     NoOrdersCreated = `There are no orders created...`,
-    OrderNotFound = `Order not found. Please try with another id...` 
+    OrderNotFound = `Order not found. Please try with another id...`,
+    GreaterQuantity = `The amount of one or more products you want to confirm in your order exceed the available stock.`,
+    DeletedProduct = `It seems that one or more of the products you want to confirm in your order have been deleted.`
 }

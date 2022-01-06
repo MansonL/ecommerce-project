@@ -43,7 +43,7 @@ class ProductController {
             if(result instanceof ApiError)
                 next(result)
             else
-                res.status(200).send(result)
+                res.status(200).send(result[0])
         }else {
             next(ApiError.badRequest(EProductsErrors.IdIncorrect));
         }

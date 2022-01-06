@@ -2,7 +2,7 @@ import { model, Model, Schema } from 'mongoose';
 import { ApiError } from '../../../api/errorApi';
 import { EUsersErrors } from '../../../common/EErrors';
 import moment from 'moment';
-import { IMongoUser, INew_User } from '../../../common/interfaces/users';
+import { IMongoUser, INew_User, UserAddresses } from '../../../common/interfaces/users';
 import { CUDResponse } from '../../../common/interfaces/others';
 import bcrypt from 'bcrypt';
 import { logger } from '../../../services/logger';
@@ -40,7 +40,6 @@ const usersSchema = new Schema({
                 floor: { type: String },
                 department: { type: String },
                 city: { type: String },
-                _id: false
             }
         ],
         isAdmin: { type: Boolean, required: true }
@@ -109,13 +108,13 @@ export class MongoUsers {
     async init() {
         if(Config.MODE === 'CLUSTER'){
             if(cluster.isMaster){
-                await this.users.deleteMany({});
-                await WelcomeBot.save();
+                //await this.users.deleteMany({});
+                //await WelcomeBot.save();
                 logger.info(`Users initialized`);
             }
         }else{
-            await this.users.deleteMany({});
-            await WelcomeBot.save();
+            //await this.users.deleteMany({});
+            //await WelcomeBot.save();
             logger.info(`Users initialized`);
         } 
     }
@@ -174,6 +173,21 @@ export class MongoUsers {
             return ApiError.internalError(`An error occured.`)
         }
 }
-
+    async addAddress(user_id: string, address: UserAddresses): Promise<CUDResponse | ApiError> {
+        try {
+            const doc = await this.users.findOne({ _id: user_id });
+            if(doc){
+                doc.data.addresses ? doc.data.addresses.push(address) : doc.data.addresses = [address];
+                await doc.save();
+                return {
+                    message: `Address added succesfully`,
+                    data: doc as unknown as IMongoUser
+                }
+            }else
+                return ApiError.notFound(EUsersErrors.UserNotFound)
+        } catch (error) {
+            return ApiError.internalError(`An error occured.`)
+        }
+    }
     
 }

@@ -11,23 +11,23 @@ export class CartFactory {
             if(Config.MODE === 'CLUSTER'){
                 if(cluster.isMaster){
                     logger.info(`Using MongoAtlas`);
-                    return new MongoCart('Atlas'); 
+                    return new MongoCart(); 
                 }
-                return new MongoCart('Atlas');
+                return new MongoCart();
             }else{
                 logger.info(`Using MongoAtlas`);
-                return new MongoCart('Atlas');
+                return new MongoCart();
             }    
             case MemoryType.LocalMongo:
             if(Config.MODE === 'CLUSTER'){
                 if(cluster.isMaster){
                     logger.info(`Using Local Mongo`);
-                    return new MongoCart('local');
+                    return new MongoCart();
                 }
-                return new MongoCart('local');
+                return new MongoCart();
             }else{
                 logger.info(`Using Local Mongo`);
-                return new MongoCart('local');
+                return new MongoCart();
             }    
             default:
             if(Config.MODE === 'CLUSTER'){
@@ -35,10 +35,10 @@ export class CartFactory {
                     logger.info(`DEFAULT: MongoAtlas`);
                     
                 }
-                return new MongoCart('atlas');
+                return new MongoCart();
             }else{
                 logger.info(`DEFAULT: MongoAtlas`);
-                return new MongoCart('atlas');
+                return new MongoCart();
             }    
         }
     }

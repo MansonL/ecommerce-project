@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import moment from 'moment';
 import { INew_Product, IQuery, IUpdate } from './products';
-import { INew_User, UserInfo } from './users';
+import { INew_User, UserAddresses, UserInfo } from './users';
 
 
 const maxDate = moment().subtract(10, 'y').format('MM/DD/YYYY');
@@ -18,6 +18,7 @@ class Validations {
     update: Joi.ObjectSchema<IUpdate>;
     query: Joi.ObjectSchema<IQuery>;
     user: Joi.ObjectSchema<UserInfo>;
+    address: Joi.ObjectSchema<UserAddresses>;
     constructor() {
         /**
          * JOI Schema to validate the objects to be saved from the frontend
@@ -193,6 +194,45 @@ class Validations {
             facebookID: Joi.string(),
             isAdmin: Joi.boolean().required(),
         });
+
+        this.address = Joi.object<UserAddresses>({
+            alias: Joi.string().min(1).max(15).optional().messages({
+                'string.min': `Alias should be at least 1 character long.`,
+                'string.max': `Alias must be shorter than 16 characters.`
+            }),
+            street1: Joi.object().keys({
+                name: Joi.string().min(5).max(40).required().messages({
+                    'string.empty': `You must provide at least the street name where you live.`,
+                    'string.min': `The name of the street must be longer than 4 characters.`,
+                    'string.max': `The name of the street must be shorter than 41 characters.`
+                }),
+                number: Joi.number().min(0).max(10000).required().messages({
+                    'number.base': `You must provide a number for the main street.`,
+                    'number.min': `The minimum street number is 0.`,
+                    'number.max': `The maximum street number is 10000.`
+                })
+            }).required(),
+            street2: Joi.string().min(5).max(40).optional().messages(streetStringErrorMsg),
+            street3: Joi.string().min(5).max(40).optional().messages(streetStringErrorMsg),
+            zipcode: Joi.string().min(2).max(10).required().messages({
+                'string.empty': `You must provide this address zipcode.`,
+                'string.min': `The zipcode must be longer than 1 character.`,
+                'string.max': `The zipcode must be shorter than 11 characters.`,
+            }),
+            floor: Joi.string().min(1).max(5).optional().messages({
+                // Won't be empty cause if it's empty it will be undefined.
+                'string.max': `Floor must be shorter than 5 characters.`,
+            }),
+            department: Joi.string().min(1).max(5).optional().messages({
+                'string.max': `Department must be shorter than 5 characters.`,
+            }),
+            city: Joi.string().min(3).max(30).required().messages({
+                'string.empty': `Must provide this address city.`,
+                'string.min': `The city name must be longer than 2 characters.`,
+                'string.max': `The city name must be shorter than 31 characters.`,
+            })
+        })
     }
+
 }
 export const validator = new Validations();

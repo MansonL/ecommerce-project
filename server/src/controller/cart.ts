@@ -3,13 +3,11 @@ import { cartApi } from '../api/cart';
 import { productsApi } from '../api/products';
 import { EProductsErrors } from '../common/EErrors';
 import { ApiError } from '../api/errorApi';
-import { validator } from '../common/interfaces/joiSchemas';
-import { IMongoCart, IMongoProduct, isCartProduct, isProduct } from '../common/interfaces/products';
-import { CUDResponse, isCUDResponse } from '../common/interfaces/others';
+import { IMongoCart, IMongoProduct } from '../common/interfaces/products';
+import { CUDResponse } from '../common/interfaces/others';
 import { logger } from '../services/logger';
 import { ObjectId } from 'mongodb';
 import { isValidObjectId } from 'mongoose';
-import { UserInfo } from '../common/interfaces/users';
 
 
 
@@ -33,7 +31,7 @@ class CartController {
             if(result instanceof ApiError)
                 next(result);
             else
-                res.status(200).send(result)       
+                res.status(200).send(result[0])       
     }
     async getCarts(
         req: Request,

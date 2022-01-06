@@ -1,16 +1,15 @@
 
-import faker from 'faker';
-import moment from 'moment';
-import { randomNumber } from '../models/mockProducts';
-import { Document, Types } from 'mongoose';
-import bcrypt from 'bcrypt'
-import { ICart, IMongoCart, IMongoProduct, INew_Product } from './interfaces/products';
-import { IMongoUser } from './interfaces/users';
-import { INew_Message } from './interfaces/messages';
+import {  IMongoProduct } from './interfaces/products';
 import { ApiError } from '../api/errorApi';
-import { EProductsErrors } from './EErrors';
+import { EOrdersErrors, EProductsErrors } from './EErrors';
 import { uploadManyImages } from '../middleware/cloudinary';
 import { productsApi } from '../api/products';
+import { IMongoOrderPopulated, IOrder, IOrderPopulated, IUserOrder, OrderProducts } from './interfaces/orders';
+import { Types, Document } from 'mongoose';
+import { IMongoUser, UserAddresses } from './interfaces/users';
+import { usersApi } from '../api/users';
+import { ObjectId } from 'mongodb';
+import { logger } from '../services/logger';
 
 export class Utils {
     /**
@@ -67,4 +66,68 @@ export class Utils {
         }), folder);
         return uploadedData
     }
+
+    static isValidOrder = async (orderProducts: OrderProducts[]): Promise<boolean | string | ApiError > => {
+        const ids = orderProducts.map(product => String(product.product_id));
+        const DBProducts = await productsApi.getByIds(ids);
+        if(DBProducts instanceof ApiError)
+            return DBProducts
+        else{
+            if(DBProducts.length === ids.length){
+                const order : {
+                    [index: string]: number;
+                } = {};
+                orderProducts.forEach(product => {
+                    order[String(product.product_id)] = product.quantity;
+                });
+                const valid = DBProducts.every(DBproduct => {
+                   return order[DBproduct._id] <= DBproduct.stock
+                });
+                return valid ? valid : EOrdersErrors.GreaterQuantity
+            }else{
+                return EOrdersErrors.DeletedProduct
+            }
+        }
+    }
+
+    static async  populatedAddressDeep (ordersDocs: (Document<any, any, IUserOrder> & IUserOrder & {
+        _id: Types.ObjectId;
+    })[]): Promise<IMongoOrderPopulated[] | ApiError> {
+        const users : IMongoUser[] | ApiError = await usersApi.getUsers();
+            if(users instanceof ApiError)
+                return users
+            else {
+                const populatedAddressDocs : IMongoOrderPopulated[] = [];
+                const populatedOrders : IOrderPopulated[] = []
+                ordersDocs.forEach(orderDoc => {
+                    orderDoc.orders.forEach(order => {
+                        const orderCreator = users.find(user => 
+                             user._id == String(orderDoc.user)
+                        ) as IMongoUser
+                        logger.info(JSON.stringify(order))
+                        logger.info(JSON.stringify(orderCreator))
+                        populatedOrders.push({
+                            createdAt: order.createdAt,
+                            products: order.products,
+                            status: order.status,
+                            _id: order._id,
+                            total: order.total,
+                            address: orderCreator.data.addresses?.find(address => address._id == String(order.address)) as UserAddresses
+                        })
+                    populatedAddressDocs.push({
+                        user: {
+                            data: {
+                                username: users.find(user => user._id == String(orderDoc.user))?.data.username as string
+                            }
+                        },
+                        orders: [...populatedOrders]                    
+                    });
+                    
+                    populatedOrders.length = 0; // Truncating array of orders.
+                });
+
+        })
+        return populatedAddressDocs
+    }
+  }
 }

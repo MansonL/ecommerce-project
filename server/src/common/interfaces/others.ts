@@ -1,5 +1,5 @@
 import { IMongoMessage } from "./messages";
-import { IMongoOrder } from "./orders";
+import { IOrder, IOrderPopulated } from "./orders";
 import { IMongoCart, IMongoProduct } from "./products";
 import { IMongoUser } from "./users";
 
@@ -12,7 +12,7 @@ import { IMongoUser } from "./users";
 
 export interface CUDResponse {
     message: string;
-    data: IMongoProduct | IMongoMessage | IMongoUser | IMongoCart | IMongoOrder | [];
+    data: IMongoProduct | IMongoMessage | IMongoUser | IMongoCart | IOrderPopulated | IOrder | [];
 }
 
 

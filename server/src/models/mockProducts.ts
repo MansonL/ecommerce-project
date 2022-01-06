@@ -15,7 +15,6 @@ const generateCode = (): string => {
     return `_${Math.random().toString(36).substr(2, 9)}`;
 };
 
-
 export const mockProducts  = [
     {
         title: 'Beef Choice Angus Rump Roast, 2.25 - 3.87 lb',

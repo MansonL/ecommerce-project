@@ -31,6 +31,13 @@ export class ProductsApi {
         const result: IMongoProduct[] | ApiError = await this.products.getByCategory(category);
         return result
     }
+    async getByIds(ids: string[]): Promise<{
+        _id: string;
+        stock: number;
+    }[] | ApiError> {
+        const result : { _id: string, stock: number }[] | ApiError = await this.products.getByIds(ids);
+        return result
+    }
     async addProduct(product: INew_Product): Promise<CUDResponse | ApiError> {
         const result : CUDResponse | ApiError = await this.products.add(product);
         return result;

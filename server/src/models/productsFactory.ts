@@ -22,23 +22,23 @@ export class ProductsFactory {
                 if(Config.MODE === 'CLUSTER'){
                     if(cluster.isMaster){
                         logger.info(`Using MongoAtlas`);
-                        return new MongoProducts('atlas');
+                        return new MongoProducts();
                     }
-                    return new MongoProducts('atlas');
+                    return new MongoProducts();
                 }else{
                     logger.info(`Using MongoAtlas`);
-                    return new MongoProducts('atlas');
+                    return new MongoProducts();
             } 
             case MemoryType.LocalMongo:
                 if(Config.MODE === 'CLUSTER'){
                     if(cluster.isMaster){
                         logger.info(`Using Local Mongo`);
-                        return new MongoProducts('local');
+                        return new MongoProducts();
                     }
-                    return new MongoProducts('local');
+                    return new MongoProducts();
                 }else{
                     logger.info(`Using Local Mongo`);
-                    return new MongoProducts('local');
+                    return new MongoProducts();
                 } 
             
             default:
@@ -47,10 +47,10 @@ export class ProductsFactory {
                         logger.info(`DEFAULT: MongoAtlas`);
                         
                     }
-                    return new MongoProducts('atlas');
+                    return new MongoProducts();
                 }else{
                     logger.info(`DEFAULT: MongoAtlas`);
-                    return new MongoProducts('atlas');
+                    return new MongoProducts();
             } 
             
         }

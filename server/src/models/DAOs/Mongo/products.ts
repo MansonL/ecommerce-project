@@ -134,6 +134,23 @@ export class MongoProducts implements DBProductsClass {
         
     }
 
+    async getByIds(ids: string[]): Promise<{
+        _id: string;
+        stock: number;
+    }[] | ApiError> {
+        try {
+            const docs = await this.products.find({ _id: { $in: ids } });
+            return docs.map(document => {
+                return {
+                    _id: document.id,
+                    stock: document.stock
+                }
+            });
+        } catch (error) {
+            return ApiError.internalError(`An error occured.`)
+        }
+    }
+
     async query(options: IQuery): Promise<IMongoProduct[] | ApiError> {
         try {
             const titleRegex =

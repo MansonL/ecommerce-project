@@ -7,8 +7,22 @@ import { CUDResponse, } from "./others";
  * Type of Mongo DB Product to be queried.
  * 
  */
-export interface IMongoCart extends ICart, Document {
-    _id: string;
+export interface IMongoCart extends Document {
+    _id: ObjectId;
+    createdAt: string;
+    user: ObjectId;
+    products: {
+        product: {
+            _id: ObjectId;
+            title: string;
+            images: {
+                url: string;
+                photo_id: string;
+            }[];
+            price: number;
+        },
+        quantity: number;
+    }[];
 }
 
 /**
