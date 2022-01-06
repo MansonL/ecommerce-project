@@ -24,6 +24,7 @@ const usersSchema = new Schema({
         images : [{
             url: { type: String, required: true },
             photo_id: { type: String, required: true },
+            _id: false,
         }],
         facebookID: { type: String },
         addresses: [
@@ -38,7 +39,8 @@ const usersSchema = new Schema({
                 zipcode: { type: String },
                 floor: { type: String },
                 department: { type: String },
-                city: { type: String }
+                city: { type: String },
+                _id: false
             }
         ],
         isAdmin: { type: Boolean, required: true }
@@ -48,10 +50,11 @@ const usersSchema = new Schema({
 usersSchema.set('toJSON', {
     transform: (document, returnedDocument) => {
         delete returnedDocument.__v;
-        logger.info(returnedDocument)
-        if(returnedDocument.data.password){
+        if(returnedDocument.data.password && returnedDocument.data.repeatedPassword){
             delete returnedDocument.data.password;
-            delete returnedDocument.data.repeatedPassword;
+            delete returnedDocument.data.repeatedPassword
+        
+            // Cause this function executes on every doc retrieving, so in some populated documents this fields won't be defined, such as cart populated doc...
         }
     }
 });
@@ -99,7 +102,7 @@ export const WelcomeBot = new usersModel(botData);
 
 export class MongoUsers {
     private users: Model<INew_User>;
-    constructor(type: string) {
+    constructor() {
         this.users = usersModel;
         this.init();
     }

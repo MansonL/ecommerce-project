@@ -16,9 +16,10 @@ const productSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
     code: { type: String, required: true },
-    img: [{
+    images: [{
         photo_id: { type: String },
-        url: { type: String }
+        url: { type: String },
+        _id: false,
     }],
     stock: { type: Number, required: true },
     price: { type: Number, required: true },
@@ -38,7 +39,7 @@ const productModel = model<INew_Product, Model<INew_Product>>(
 
 export class MongoProducts implements DBProductsClass {
     private products: Model<INew_Product>;
-    constructor(type: string) {
+    constructor() {
         this.products = productModel;
         this.init();
     }

@@ -25,3 +25,8 @@ export enum EAuthErrors {
     NotAuthorizedUser = `You lack of permission for performing this operation...`,
     NotLoggedIn = `You must be logged in.`
 }
+
+export enum EOrdersErrors {
+    NoOrdersCreated = `There are no orders created...`,
+    OrderNotFound = `Order not found. Please try with another id...` 
+}

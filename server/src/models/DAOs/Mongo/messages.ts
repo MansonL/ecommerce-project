@@ -28,7 +28,7 @@ const messagesModel = model<INew_Message, Model<INew_Message>>(
 
 export class MongoMessages implements DBMessagesClass {
     private messages: Model<INew_Message>;
-    constructor(type: string) {
+    constructor() {
         this.messages = messagesModel;
         this.init();
     }

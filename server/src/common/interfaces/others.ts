@@ -1,4 +1,5 @@
 import { IMongoMessage } from "./messages";
+import { IMongoOrder } from "./orders";
 import { IMongoCart, IMongoProduct } from "./products";
 import { IMongoUser } from "./users";
 
@@ -11,23 +12,8 @@ import { IMongoUser } from "./users";
 
 export interface CUDResponse {
     message: string;
-    data: IMongoProduct | IMongoMessage | IMongoUser | IMongoCart | [];
+    data: IMongoProduct | IMongoMessage | IMongoUser | IMongoCart | IMongoOrder | [];
 }
-
-export const isCUDResponse = (data: any): data is CUDResponse => {
-    return 'data' in data
-}
-
-/**
- * 
- * Internal Error Response type
- * 
- */
-export interface InternalError {
-    error: any;
-    message: string;
-}
-
 
 
 

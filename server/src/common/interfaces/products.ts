@@ -18,7 +18,7 @@ export interface IMongoCart extends ICart, Document {
  */
 export interface ICart {
     createdAt: string;
-    user: string;
+    user: ObjectId;
     products: {
         product: ObjectId;
         quantity: number;

@@ -27,19 +27,19 @@ class Validations {
         this.newProduct = Joi.object<INew_Product>({
             createdAt: Joi.string().required(),
             modifiedAt: Joi.string().required(),
-            title: Joi.string().alphanum()
+            title: Joi.string()
                 .min(4)
                 .max(100)
                 .required()
                 .messages({
                     'string.empty': `Product must have a title of at least 4 characters.`,
-                    'string.alphanum': `Title must have only numbers and strings.`,
                     'string.min': `The title of the product must be at least 4 characters long.`,
                     'string.max': `The title of the product must be shorter than 31 characters.`,
                 }),
             description: Joi.string()
                 .min(10)
-                .max(150)
+                .max(500)
+                .required()
                 .messages({
                     'string.empty': `Product must have a description of at least 10 characters.`,
                     'string.min': `The description should be longer than 9 characters.`,
@@ -59,6 +59,11 @@ class Validations {
                 'number.base': 'The stock must be a number and equal to or greater than 0.',
                 'number.min': `Stock must be positive or equal to 0.`
             }),
+            category: Joi.string().min(3).max(20).required().messages({
+                'string.empty': `Must provide a category.`,
+                'string.min': `Category must be longer than 2 characters.`,
+                'string.max': `Category must be shorter than 21 characters.`
+            })
         });
         /**
          * JOI Schema to validate the objects from the frontend for updates.
@@ -66,13 +71,12 @@ class Validations {
          * Images will be validated at the controller.
          */
         this.update = Joi.object<IUpdate>({
-            title: Joi.string().alphanum().min(4).max(30).optional().messages({
+            title: Joi.string().min(4).max(30).optional().messages({
                 // Won't be empty cause if it's empty it will be undefined.
-                'string.alphanum': `Title must have only numbers and strings.`,
                 'string.min': `The title of the product must be at least 4 characters long.`,
                 'string.max': `The title of the product must be shorter than 31 characters.`,
             }),
-            description: Joi.string().min(10).max(150).optional().messages({
+            description: Joi.string().min(10).max(500).optional().messages({
                 // Won't be empty cause if it's empty it will be undefined.
                 'string.min': `The description should be longer than 9 characters.`,
                 'string.max': `The description must be shorter than 151 characters.`,
@@ -90,11 +94,16 @@ class Validations {
                 'number.base': 'The stock must be a number and equal to or greater than 0.',
                 'number.min': `Stock must be positive or equal to 0.`
             }),
+            category: Joi.string().min(3).max(20).optional().messages({
+                'string.empty': `Must provide a category.`,
+                'string.min': `Category must be longer than 2 characters.`,
+                'string.max': `Category must be shorter than 21 characters.`
+            })
         });
 
         this.query = Joi.object<IQuery>({
-            title: Joi.string().alphanum().allow('').optional(),
-            code: Joi.string().alphanum().allow('').optional(),
+            title: Joi.string().allow('').optional(),
+            code: Joi.string().allow('').optional(),
             price: {
                 minPrice: Joi.number().min(0.01).optional(),
                 maxPrice: Joi.number().min(0).optional(),
@@ -103,6 +112,7 @@ class Validations {
                 minStock: Joi.number().min(0).optional(),
                 maxStock: Joi.number().min(0).optional(),
             },
+            category: Joi.string().allow('').optional(),
         });
         /**
          * JOI Schema to validate users.
@@ -144,8 +154,7 @@ class Validations {
                 'string.pattern.base': `The phone number submitted is not a valid one.`,
             }),
             addresses: Joi.array().items(Joi.object().keys({
-                alias: Joi.string().alphanum().min(1).max(15).optional().messages({
-                    'string.alphanum': `Alias only can contain letters and numbers.`,
+                alias: Joi.string().min(1).max(15).optional().messages({
                     'string.min': `Alias should be at least 1 character long.`,
                     'string.max': `Alias must be shorter than 16 characters.`
                 }),

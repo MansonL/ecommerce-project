@@ -20,6 +20,7 @@ const cartSchema = new Schema({
     products: [{
         product: { type: Schema.Types.ObjectId, ref: 'products'},
         quantity: { type: Number, required: true },
+        _id: false,
     }],
 });
 
@@ -36,7 +37,7 @@ const cartModel = model<ICart, Model<ICart>>('cart', cartSchema)
 
 export class MongoCart implements DBCartClass {
     private cart: Model<ICart>;
-    constructor(type: string) {
+    constructor() {
         this.cart = cartModel;
         this.init();
     }
@@ -58,7 +59,6 @@ export class MongoCart implements DBCartClass {
                 const doc = await this.cart.findOne({
                     user: user_id
                 });
-                logger.info(doc);
                 if(doc){
                     const cart = await (await doc.populate({ path: 'products.product', select: 'title price images' })).populate({ path: 'user', select: 'data.username' });
                     return [cart]
@@ -66,17 +66,9 @@ export class MongoCart implements DBCartClass {
                     return ApiError.notFound(ECartErrors.EmptyCart)
                 }
             } else {
-                const docs = await this.cart.find({});
+                const docs = await this.cart.find({}).populate({ path: 'products.product', select: 'title price images' }).populate({ path: 'user', select: 'data.username' });
                 if (docs.length > 0) {
-                    let carts: (Document<any, any, ICart> & ICart & {
-                        _id: Types.ObjectId;
-                    })[] = [];
-                    docs.map(async (document) => {
-                        const cart = await (await document.populate({ path: 'products.product', select: 'title price images' })).populate({ path: 'user', select: 'data.username' });
-                        carts.push(cart);
-                    })
-                    logger.info(carts)
-                    return carts;
+                    return docs;
                 } else {
                     return ApiError.notFound(ECartErrors.NoCarts)
                 }
@@ -100,7 +92,7 @@ export class MongoCart implements DBCartClass {
                                 quantity: quantity,
                         });
                     await cartDoc.save();
-                    const cart = await (await cartDoc.populate({ path: 'products.product', select: 'title price images'})).populate({ path: 'user', select: 'username' })
+                    const cart = await (await cartDoc.populate({ path: 'products.product', select: 'title price images'})).populate({ path: 'user', select: 'data.username' })
                     logger.info(cart)
                     return {
                         message: `Product successfully added.`,
@@ -109,7 +101,7 @@ export class MongoCart implements DBCartClass {
                 }else{
                     const newCart : ICart = {
                         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-                        user: user_id,
+                        user: new ObjectId(user_id),
                         products: [{
                             product: new ObjectId(product_id),
                             quantity: quantity,
@@ -139,16 +131,16 @@ export class MongoCart implements DBCartClass {
                 logger.info(deleted)
                 if(deleted.length > 0 && (deleted[0].quantity >= quantity)){
                     const newProducts = deleted[0].quantity === quantity ?
-                        cartDoc.products.filter(product => product.product.toString() === product_id) :
+                        cartDoc.products.filter(product => product.product.toString() !== product_id) :
                         cartDoc.products.map(product => {
                             if(product.product.toString() === product_id)
-                                product.quantity - quantity
+                                product.quantity = quantity
                             return product
                         });
                     await cartDoc.set('products', newProducts)
                     logger.info(cartDoc)
                     await cartDoc.save()
-                    const newCart = await (await cartDoc.populate({ path: 'products', select: 'title price images' })).populate({ path: 'user', select: 'data.username' })
+                    const newCart = await (await cartDoc.populate({ path: 'products.product', select: 'title price images' })).populate({ path: 'user', select: 'data.username' })
                     return {
                         data: newCart,
                         message: `Product successfully deleted from cart.`

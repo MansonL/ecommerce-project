@@ -349,3 +349,151 @@ Jan-05-2022 19:38:51 | [31merror[39m : Error: 404. Message: The product wasn't
     at Generator.next (<anonymous>)
     at fulfilled (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\models\DAOs\Mongo\products.ts:5:58)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Jan-05-2022 21:57:47 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:78:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:4:12)
+    at addToCart (D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:47:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 21:57:51 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:78:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:4:12)
+    at addToCart (D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:47:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 21:57:53 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:78:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:4:12)
+    at addToCart (D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:47:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 21:58:03 | [31merror[39m : Error: 404. Message: The product wasn't found. Try another id.... Stack: Error: The product wasn't found. Try another id...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoProducts.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:65:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-05-2022 21:58:08 | [31merror[39m : Error: 400. Message: Please, type a valid id.. Stack: Error: Please, type a valid id.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:78:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:4:12)
+    at addToCart (D:\ESTUDIO\ecommerce\server\src\controller\cart.ts:47:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 22:19:16 | [31merror[39m : Error: 404. Message: There are no carts created.. Stack: Error: There are no carts created.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoCart.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:88:37)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-05-2022 22:31:42 | [31merror[39m : Error: 400. Message: Title must have only numbers and strings.. Stack: Error: Title must have only numbers and strings.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:105:31
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:4:12)
+    at update (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:100:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 22:31:57 | [31merror[39m : Error: 400. Message: Title must have only numbers and strings.. Stack: Error: Title must have only numbers and strings.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:105:31
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:4:12)
+    at update (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:100:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-05-2022 22:35:06 | [31merror[39m : Error: 400. Message: You lack of permission for performing this operation.... Stack: Error: You lack of permission for performing this operation...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:111:35
+    at D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:90:14)
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:94:10)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:109:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+Jan-05-2022 22:40:02 | [31merror[39m : Error: undefined. Message: Unexpected token 	 in JSON at position 2. Stack: SyntaxError: Unexpected token 	 in JSON at position 2
+    at JSON.parse (<anonymous>)
+    at createStrictSyntaxError (D:\ESTUDIO\ecommerce\server\node_modules\body-parser\lib\types\json.js:158:10)
+    at parse (D:\ESTUDIO\ecommerce\server\node_modules\body-parser\lib\types\json.js:83:15)
+    at D:\ESTUDIO\ecommerce\server\node_modules\body-parser\lib\read.js:121:18
+    at invokeCallback (D:\ESTUDIO\ecommerce\server\node_modules\raw-body\index.js:224:16)
+    at done (D:\ESTUDIO\ecommerce\server\node_modules\raw-body\index.js:213:7)
+    at IncomingMessage.onEnd (D:\ESTUDIO\ecommerce\server\node_modules\raw-body\index.js:273:7)
+    at IncomingMessage.emit (events.js:327:22)
+    at endReadableNT (internal/streams/readable.js:1327:12)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)
+Jan-05-2022 22:40:46 | [31merror[39m : Error: undefined. Message: Unexpected token 	 in JSON at position 2. Stack: SyntaxError: Unexpected token 	 in JSON at position 2
+    at JSON.parse (<anonymous>)
+    at createStrictSyntaxError (D:\ESTUDIO\ecommerce\server\node_modules\body-parser\lib\types\json.js:158:10)
+    at parse (D:\ESTUDIO\ecommerce\server\node_modules\body-parser\lib\types\json.js:83:15)
+    at D:\ESTUDIO\ecommerce\server\node_modules\body-parser\lib\read.js:121:18
+    at invokeCallback (D:\ESTUDIO\ecommerce\server\node_modules\raw-body\index.js:224:16)
+    at done (D:\ESTUDIO\ecommerce\server\node_modules\raw-body\index.js:213:7)
+    at IncomingMessage.onEnd (D:\ESTUDIO\ecommerce\server\node_modules\raw-body\index.js:273:7)
+    at IncomingMessage.emit (events.js:327:22)
+    at endReadableNT (internal/streams/readable.js:1327:12)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)
+Jan-05-2022 22:43:18 | [31merror[39m : Error: 400. Message: The description must be shorter than 151 characters.. Stack: Error: The description must be shorter than 151 characters.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:69:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-05-2022 22:44:33 | [31merror[39m : Error: 400. Message: The code must contain only letters and numbers.. Stack: Error: The code must contain only letters and numbers.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:69:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-05-2022 22:45:15 | [31merror[39m : Error: 400. Message: "category" is not allowed. Stack: Error: "category" is not allowed
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:69:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-05-2022 22:49:36 | [31merror[39m : Error: 400. Message: Please, upload at least one product image.... Stack: Error: Please, upload at least one product image...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:90:31
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-05-2022 22:54:05 | [31merror[39m : Error: 404. Message: No products matching the query. Stack: Error: No products matching the query
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoProducts.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:162:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)

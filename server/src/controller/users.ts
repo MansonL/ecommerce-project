@@ -50,7 +50,7 @@ class UsersController {
     async save(req: Request, res: Response, next: NextFunction): Promise<void> {
         const userInfo : INew_User = req.body;
         logger.info(`[PATH]: Inside User Controller`)
-        const { error } = await validator.user.validateAsync(userInfo);
+        const { error } = await validator.user.validate(userInfo);
         if (error) 
             next(ApiError.badRequest(error.message));
          else {

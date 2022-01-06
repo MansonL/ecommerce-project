@@ -62,7 +62,7 @@ export const mockProducts  = [
         title: `John Soules Foods Chicken Fajitas, 16oz`,
         description: `John Soules Foods Fully Cooked Chicken Fajitas. It is important to us that all of our products are made with the same care and ingredients you would make for your family. At John Soules Foods our goal is to give you the best quality product we can make.`,
         images: [{
-            id:'sample_1',
+            photo_id:'sample_1',
             url: `https://i5.walmartimages.com/asr/1f819423-8ce1-4491-a770-c11c61db4828_3.c23e25eeb6851afc1df99f6b6797777d.jpeg?odnWidth=undefined&odnHeight=undefined&odnBg=ffffff`
         }],
         code: ``,

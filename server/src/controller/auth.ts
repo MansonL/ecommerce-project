@@ -41,7 +41,6 @@ class AuthController {
         if(result instanceof ApiError)
             next(result)
         else{
-        
             result.isValidPassword(password)
                 .then(() => {
                     const userData = { user: {

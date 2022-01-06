@@ -64,7 +64,7 @@ class ProductController {
     async save(req: Request, res: Response, next: NextFunction): Promise<void> {
         const product: INew_Product = req.body;
         logger.info(`[PATH]: Inside Products Controller.`)
-        const { error } = await validator.newProduct.validateAsync(product);
+        const { error } = await validator.newProduct.validate(product);
         if (error) {
             next(ApiError.badRequest(error.message));
         } else {
@@ -97,7 +97,7 @@ class ProductController {
     ): Promise<void> {
         const product_id: string = req.params.id;
         const newProperties: IUpdate = req.body;
-        const { error } = await validator.update.validateAsync(newProperties);
+        const { error } = validator.update.validate(newProperties);
         logger.info(`[PATH]: Inside Products Controller.`)
         if (isValidObjectId(product_id)){
             if(error)
@@ -198,7 +198,7 @@ class ProductController {
                     maxStock: Number(maxStock),
                 },
             };
-            const { error } = await validator.query.validateAsync(options);
+            const { error } = await validator.query.validate(options);
             if (error) {
                 next(ApiError.badRequest(error.message));
             } else {
