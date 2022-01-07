@@ -58,6 +58,7 @@ export class Utils {
             if(!typesAllowed.test(file.mimetype))
                 return ApiError.badRequest(EProductsErrors.UnsupportedImageType)
         }
+        logger.info(`Inside Utils function ${JSON.stringify(files, null, '\t')}`)
         const uploadedData = await uploadManyImages(files.map(file => {
             return {
                 file: file.file,

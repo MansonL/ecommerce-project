@@ -8,7 +8,7 @@ import { IMongoProduct, INew_Product, IQuery, IUpdate } from '../common/interfac
 import { CUDResponse } from '../common/interfaces/others';
 import { logger } from '../services/logger';
 import { isValidObjectId } from 'mongoose';
-import { UploadedFile } from 'express-fileupload';
+import { FileArray, UploadedFile } from 'express-fileupload';
 
 /**
  *
@@ -69,17 +69,30 @@ class ProductController {
             next(ApiError.badRequest(error.message));
         } else {
             if(req.files){
-            const files = (req.files.photos as UploadedFile[]).map(file => {
-                return {
-                    file: file.tempFilePath,
-                    name: file.name,
-                    mimetype: file.mimetype
+                const files : {
+                    file: string;
+                    name: string;
+                    mimetype: string;
+                }[] = [];
+                if(Array.isArray(req.files.images)){
+                    req.files.images.forEach(image => files.push({
+                        file: image.tempFilePath,
+                        name: image.name,
+                        mimetype: image.mimetype,
+                    }))
+                }else{
+                    const file = req.files.images;
+                    files.push({
+                        file: file.tempFilePath,
+                        name: file.name,
+                        mimetype: file.mimetype
+                    });
                 }
-            });
-            const validatedImages = Utils.validateAndUploadImages(files, product.category);
+            const validatedImages = await Utils.validateAndUploadImages(files, product.category);
             if(validatedImages instanceof ApiError)
                 next(validatedImages)
             else{
+                product.images = validatedImages;
                 const result: CUDResponse | ApiError = await productsApi.addProduct(product);
                 if(result instanceof ApiError)
                     next(result)

@@ -640,3 +640,80 @@ Jan-06-2022 16:13:44 | [31merror[39m : Error: 400. Message: It seems that one 
     at Generator.next (<anonymous>)
     at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\orders.ts:5:58)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-06-2022 23:11:04 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:59:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-06-2022 23:19:13 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:59:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-06-2022 23:47:59 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:59:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-06-2022 23:48:15 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:59:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-06-2022 23:49:39 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:59:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-06-2022 23:53:48 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:60:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-06-2022 23:53:59 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:60:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-07-2022 00:05:00 | [31merror[39m : Error: 400. Message: The code must contain only letters and numbers.. Stack: Error: The code must contain only letters and numbers.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:69:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-07-2022 00:05:05 | [31merror[39m : Error: 400. Message: "category" is required. Stack: Error: "category" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:69:27
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-07-2022 00:05:22 | [31merror[39m : Error: 400. Message: Please, upload at least one product image.... Stack: Error: Please, upload at least one product image...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\products.ts:102:31
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-07-2022 00:29:29 | [31merror[39m : Error: 404. Message: User not found.. Stack: Error: User not found.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:147:33)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
