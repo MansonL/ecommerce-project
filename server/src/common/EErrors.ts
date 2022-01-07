@@ -2,7 +2,7 @@ export enum EProductsErrors {
     NoProducts = `There's no products...`,
     ProductNotFound = `The product wasn't found. Try another id...`,
     PropertiesIncorrect = `Properties are incorrect, try again...`,
-    IdIncorrect = `Please, type a valid id.`,
+    IdIncorrect = `Invalid id.`,
     NoImagesUploaded = `Please, upload at least one product image...`,
     UnsupportedImageType = `Please upload an jpeg, png or jpg image...`
 }

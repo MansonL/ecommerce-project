@@ -79,8 +79,8 @@ export interface IUpdate {
     description?: string;
     code?: string;
     category?: string;
-    img?: {
-        id: string;
+    images?: {
+        photo_id: string;
         url: string;   
     }[]
     stock?: number;

@@ -1,12 +1,12 @@
-import { fork } from "child_process";
 import cluster from "cluster";
 import * as dotenv from 'dotenv'
 import { cpus } from "os";
 import path from 'path';
 import { Config } from "./config/config";
 import { commandData } from "./passport/facebook";
-
 import { app } from "./services/app";
+import { server } from "./services/server";
+import { socketConnection } from "./services/socket";
 
 const envPath = path.resolve(__dirname, '../.env');
 
@@ -19,10 +19,10 @@ export const PORT = commandData[0] && commandData[0].length  === 4 && !isNaN(Num
 export const CPUs = cpus().length
 
 if(Config.MODE === "FORK"){
-    const child_server = fork('./src/services/server.ts');
-    child_server.on("exit", () => {
-        console.log(`Process ${process.pid} killed.`);
-    })
+    server.listen(PORT, () => {
+        console.log(`Server hosted at PORT: ${PORT}`);
+        socketConnection(server);
+    });
 }else{
     if(cluster.isMaster){
         console.log(`Primary process ${process.pid}`)
@@ -33,7 +33,10 @@ if(Config.MODE === "FORK"){
             console.log(`Worker ${worker.process.pid} died.`);
             cluster.fork();
         });
-
+        server.listen(PORT, () => {
+            console.log(`Server hosted at PORT: ${PORT}`);
+            socketConnection(server);
+        });
     }else{
         app.listen(PORT, () => {
             console.log(`Worker ${process.pid} server hosted at port ${PORT}`)
@@ -43,10 +46,8 @@ if(Config.MODE === "FORK"){
 
 /**
  * 
- * Images --> full endpoint.
+ * Implement emails & messages for order creation and chats.
  * 
- * 
- * Orders --> full endpoint. 
- * All of orders endpoints needs authorization with Bearer JWT.
+ * Cloudinary deletion images.
  * 
  */

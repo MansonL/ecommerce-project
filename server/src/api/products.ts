@@ -50,6 +50,10 @@ export class ProductsApi {
         const result : CUDResponse | ApiError = await this.products.delete(id);
         return result;
     }
+    async deleteImages(photos_id: string[], product_id: string): Promise<CUDResponse | ApiError> {
+        const result : CUDResponse | ApiError = await this.products.deleteImages(photos_id, product_id);
+        return result
+    }
     async query(options: IQuery): Promise<IMongoProduct[] | ApiError > {
         const result : IMongoProduct[] | ApiError  = await this.products.query(options);
         return result;

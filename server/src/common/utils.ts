@@ -58,14 +58,13 @@ export class Utils {
             if(!typesAllowed.test(file.mimetype))
                 return ApiError.badRequest(EProductsErrors.UnsupportedImageType)
         }
-        logger.info(`Inside Utils function ${JSON.stringify(files, null, '\t')}`)
         const uploadedData = await uploadManyImages(files.map(file => {
             return {
                 file: file.file,
                 name: file.name
             }
         }), folder);
-        return uploadedData
+        return uploadedData.length > 0 ? uploadedData : ApiError.internalError(`An error at uploading images`);
     }
 
     static isValidOrder = async (orderProducts: OrderProducts[]): Promise<boolean | string | ApiError > => {

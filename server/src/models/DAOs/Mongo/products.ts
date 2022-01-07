@@ -134,6 +134,26 @@ export class MongoProducts implements DBProductsClass {
         
     }
 
+    async deleteImages(photos_ids: string[], product_id: string): Promise<ApiError | CUDResponse> {
+        try {
+            const doc = await this.products.findOne({ _id: product_id});
+            if(doc){
+                const newImages = doc.images.filter(image => !photos_ids.some(ids => image.photo_id === ids));
+                doc.images = newImages;
+                await doc.save();
+                return {
+                    message: `Images deleted successfully.`,
+                    data: doc
+                }
+            }else
+                return ApiError.notFound(EProductsErrors.ProductNotFound)
+        } catch (error) {
+            return ApiError.internalError(`An error occured.`)
+        }
+    }
+
+    // Function implemented for retrieving the products selected to buy in an order.
+
     async getByIds(ids: string[]): Promise<{
         _id: string;
         stock: number;

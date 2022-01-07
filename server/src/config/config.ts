@@ -5,7 +5,7 @@ dotenv.config()
 export const Config = {
     NODE_ENV: process.env.NODE_ENV || 'development',
     PORT: process.env.PORT || 8080,
-    MODE: process.env.MODE || 'noCluster',
+    MODE: process.env.MODE || "FORK",
     PERSISTANCE: process.env.PERSISTANCE || 'persistance type',
     JWT_SECRET: process.env.JWT_SECRET || 'secret string for jwt signature & verify',
     JWT_EXPIRATION_TIME: Number(process.env.JWT_EXPIRATION_TIME) || 60*15, // 15 minutes 

@@ -4,10 +4,8 @@ import { messagesRouter } from './messages';
 import { usersRouter } from './users';
 import { cartRouter } from './cart';
 import { authRouter } from './auth';
-import { fork } from 'child_process';
-import { CPUs } from '..';
-import { commandData } from '../passport/facebook';
 import { ordersRouter } from './orders';
+import { imagesRouter } from './images';
 
 export const router: e.Router = Router();
 router.use('/products', productsRouter);
@@ -16,14 +14,10 @@ router.use('/messages', messagesRouter);
 router.use('/users', usersRouter);
 router.use('/auth', authRouter)
 router.use('/orders', ordersRouter)
+router.use('/images', imagesRouter)
 
 
 
-
-router.post('/images', (req: Request, res: Response) => {
-    const files = req.files;
-    console.log(files)
-})
 /*
 
 router.get('/info', (req: Request, res: Response) => {

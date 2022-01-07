@@ -99,7 +99,11 @@ class Validations {
                 'string.empty': `Must provide a category.`,
                 'string.min': `Category must be longer than 2 characters.`,
                 'string.max': `Category must be shorter than 21 characters.`
-            })
+            }),
+            images: Joi.array().items(Joi.object().keys({
+                url: Joi.string().uri().required(),
+                photo_id: Joi.string().required(),
+            }).required()).optional()
         });
 
         this.query = Joi.object<IQuery>({

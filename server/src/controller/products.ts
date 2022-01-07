@@ -8,13 +8,24 @@ import { IMongoProduct, INew_Product, IQuery, IUpdate } from '../common/interfac
 import { CUDResponse } from '../common/interfaces/others';
 import { logger } from '../services/logger';
 import { isValidObjectId } from 'mongoose';
-import { FileArray, UploadedFile } from 'express-fileupload';
 
 /**
  *
  * Product Controller Class
  *
  */
+
+ declare global {
+    namespace Express {
+        interface Request {
+            product_data: {
+                product_id: string;
+                category: string; // For storing the images in the category folder at cloudinary.
+            };
+        }
+    }
+}
+
 
 class ProductController {
     async getAll(
@@ -65,42 +76,21 @@ class ProductController {
         const product: INew_Product = req.body;
         logger.info(`[PATH]: Inside Products Controller.`)
         const { error } = await validator.newProduct.validate(product);
-        if (error) {
+        if (error)
             next(ApiError.badRequest(error.message));
-        } else {
-            if(req.files){
-                const files : {
-                    file: string;
-                    name: string;
-                    mimetype: string;
-                }[] = [];
-                if(Array.isArray(req.files.images)){
-                    req.files.images.forEach(image => files.push({
-                        file: image.tempFilePath,
-                        name: image.name,
-                        mimetype: image.mimetype,
-                    }))
-                }else{
-                    const file = req.files.images;
-                    files.push({
-                        file: file.tempFilePath,
-                        name: file.name,
-                        mimetype: file.mimetype
-                    });
-                }
-            const validatedImages = await Utils.validateAndUploadImages(files, product.category);
-            if(validatedImages instanceof ApiError)
-                next(validatedImages)
+         else {
+            const result : ApiError | CUDResponse = await productsApi.addProduct(product);
+            if(result instanceof ApiError)
+                next(result)
             else{
-                product.images = validatedImages;
-                const result: CUDResponse | ApiError = await productsApi.addProduct(product);
-                if(result instanceof ApiError)
-                    next(result)
-                else
-                    res.status(201).send(result)
+                const product = result.data as IMongoProduct;
+                req.product_data = {
+                    product_id: product._id,
+                    category: product.category
                 }
-            }else
-                next(ApiError.badRequest(EProductsErrors.NoImagesUploaded))
+                next() // To image upload controller function to upload the images to cloudinary and
+                       // finish the product addition.
+            }
         }
     }
     async update(
@@ -127,7 +117,6 @@ class ProductController {
                         res.status(201).send(result)
                 }
             }
-            
         }else
             next(ApiError.badRequest(EProductsErrors.IdIncorrect))
     }
