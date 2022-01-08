@@ -16,13 +16,13 @@ class ImagesController {
                 Array.isArray(images) ? images.map(image => {
                     return {
                         file: image.tempFilePath,
-                        name: image.name,
+                        name: image.name.split('.')[0],
                         mimetype: image.mimetype
                     }
                 }) :
                 [{
                     file: images.tempFilePath,
-                    name: images.name,
+                    name: images.name.split('.')[0],
                     mimetype: images.mimetype
                 }], 
                 category

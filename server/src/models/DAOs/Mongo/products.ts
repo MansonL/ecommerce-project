@@ -101,8 +101,7 @@ export class MongoProducts implements DBProductsClass {
             if(doc){
                 const newProduct = { ...doc, ...data };
                 newProduct.modifiedAt = moment().format('YYYY-MM-DD HH:mm:ss');
-                console.log(newProduct);
-                await this.products.replaceOne({ _id: id }, newProduct);
+                await this.products.replaceOne({ _id: id }, newProduct)
                 return {
                     message: `Product successfully updated.`,
                     data: { _id: id, ...newProduct},

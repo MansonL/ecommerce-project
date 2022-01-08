@@ -717,3 +717,14 @@ Jan-07-2022 00:29:29 | [31merror[39m : Error: 404. Message: User not found.. S
     at Generator.next (<anonymous>)
     at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:5:58)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-08-2022 12:02:40 | [31merror[39m : Error: 400. Message: Please, upload at least one product image.... Stack: Error: Please, upload at least one product image...
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\images.ts:42:27
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\images.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\images.ts:4:12)
+    at save (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\images.ts:20:16)
+    at Layer.handle [as handle_request] (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\express\lib\router\route.js:137:13)
