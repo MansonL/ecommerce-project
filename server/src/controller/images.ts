@@ -47,13 +47,18 @@ class ImagesController {
         if(Array.isArray(photos_ids) && photos_ids.length > 0){
             if(isValidObjectId(product_id)){
                 photos_ids.forEach(ids => {
-                    if(!isValidObjectId(ids)) next(ApiError.badRequest(EProductsErrors.IdIncorrect))
+                    if(typeof ids !== 'string') next(ApiError.badRequest(EProductsErrors.IdIncorrect))
                 });
                 const result : ApiError | CUDResponse = await productsApi.deleteImages(photos_ids, product_id);
                 if(result instanceof ApiError)
                     next(result)
-                else 
-                    res.status(201).send(result)
+                else{
+                    const cloudDeletionResult : boolean | ApiError = await Utils.deleteImagesFromCloud(photos_ids);
+                    if(cloudDeletionResult instanceof ApiError) 
+                        next(cloudDeletionResult)
+                    else 
+                        res.status(201).send(result)
+                }
             }else
                 next(ApiError.badRequest(EProductsErrors.IdIncorrect));
         }else

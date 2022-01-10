@@ -33,10 +33,6 @@ if(Config.MODE === "FORK"){
             console.log(`Worker ${worker.process.pid} died.`);
             cluster.fork();
         });
-        server.listen(PORT, () => {
-            console.log(`Server hosted at PORT: ${PORT}`);
-            socketConnection(server);
-        });
     }else{
         app.listen(PORT, () => {
             console.log(`Worker ${process.pid} server hosted at port ${PORT}`)
@@ -48,6 +44,6 @@ if(Config.MODE === "FORK"){
  * 
  * Implement emails & messages for order creation and chats.
  * 
- * Cloudinary deletion images.
+ * 
  * 
  */

@@ -29,6 +29,11 @@ export class UsersApi {
         return result
     }
 
+    async getAdmins(): Promise<string[] | ApiError> {
+        const result: string[] | ApiError = await this.users.getAdmins();
+        return result
+    }
+
     async addUser(user: INew_User): Promise<CUDResponse | ApiError> {
         const result: CUDResponse | ApiError = await this.users.add(user);
         return result;

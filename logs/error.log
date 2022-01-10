@@ -728,3 +728,60 @@ Jan-08-2022 12:02:40 | [31merror[39m : Error: 400. Message: Please, upload at 
     at save (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\images.ts:20:16)
     at Layer.handle [as handle_request] (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\express\lib\router\layer.js:95:5)
     at next (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\express\lib\router\route.js:137:13)
+Jan-08-2022 19:50:05 | [31merror[39m : Error: 404. Message: The product wasn't found. Try another id.... Stack: Error: The product wasn't found. Try another id...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoProducts.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:110:33)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-08-2022 20:07:55 | [31merror[39m : Error: 500. Message: An error occured.. Stack: Error: An error occured.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at MongoProducts.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:114:29)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-08-2022 20:11:29 | [31merror[39m : Error: 500. Message: An error occured.. Stack: Error: An error occured.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at MongoProducts.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:114:29)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-08-2022 20:34:26 | [31merror[39m : Error: 500. Message: An error occured.. Stack: Error: An error occured.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at MongoProducts.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:114:29)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-08-2022 20:34:40 | [31merror[39m : Error: 500. Message: An error occured.. Stack: Error: An error occured.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at MongoProducts.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:114:29)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\products.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-08-2022 20:48:26 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:119:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAdmin (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:108:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-08-2022 20:49:15 | [31merror[39m : Error: 400. Message: No photo ids received.. Stack: Error: No photo ids received.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\images.ts:62:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\images.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\images.ts:4:12)
+    at delete (D:\ESTUDIO\ecommerce\server\src\controller\images.ts:53:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)

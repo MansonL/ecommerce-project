@@ -25,6 +25,7 @@ export interface IOrderPopulated {
 
 export interface OrderProducts {
     product_id: ObjectId,
+    product_title: string,
     quantity: number;
     price: number;
 }

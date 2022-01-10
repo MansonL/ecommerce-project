@@ -137,7 +137,7 @@ export class MongoUsers {
           return ApiError.internalError(`An error occured.`)
         }   
     } 
-    /* PASSPORT SIGNUP LOCAL */
+    /* NEW USER CREATION */
     async getByUser(username: string): Promise<IMongoUser | ApiError > {
         try {
             const doc = await this.users.findOne({ "data.username" : username });
@@ -149,6 +149,22 @@ export class MongoUsers {
             return ApiError.internalError(`An error occured.`)
         }
     }
+    /*  FOR EMAILING TO ALL ADMINS AT A NEW ORDER   */
+    async getAdmins(): Promise<string[] | ApiError> {
+        try {
+            const docs = await this.users.find({ "data.isAdmin": true });
+            if(docs.length > 0){
+                const emails = docs.map(document => document.data.username);
+                return emails
+            }else
+                // This line is just for any error at app launching. At launching there should be at least
+                // one user as administrator.
+                return ApiError.notFound(`No admin users created.`)
+        } catch (error) {
+            return ApiError.internalError(`An error occured.`)
+        }
+    }
+
     /* PASSPORT SIGNUP & LOGIN FACEBOOK */
     async getByFacebookID (id: string): Promise<IMongoUser | ApiError > {
         try {

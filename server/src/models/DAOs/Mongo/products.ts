@@ -104,7 +104,7 @@ export class MongoProducts implements DBProductsClass {
                 await this.products.replaceOne({ _id: id }, newProduct)
                 return {
                     message: `Product successfully updated.`,
-                    data: { _id: id, ...newProduct},
+                    data: {_id: id, ...newProduct}
                 }
             }else{
                 return ApiError.notFound(EProductsErrors.ProductNotFound)
