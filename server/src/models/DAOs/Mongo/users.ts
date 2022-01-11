@@ -97,7 +97,27 @@ const botData: INew_User = {
     },
 };
 
-export const WelcomeBot = new usersModel(botData);
+const customerTest: INew_User = {
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+    modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+    data: {
+        username: `mansonlautaro@gmail.com`,
+        password: 'test123',
+        repeatedPassword: 'test123',
+        name: `Manson`,
+        surname: `Lautaro`,
+        age: "27/12/2000",
+        phoneNumber: '+5492612345678',
+        avatar: '',
+        facebookID: '',
+        images: [],
+        isAdmin: true,
+    },
+};
+
+const WelcomeBot = new usersModel(botData);
+const CustomerTest = new usersModel(customerTest)
+
 
 export class MongoUsers {
     private users: Model<INew_User>;
@@ -110,11 +130,13 @@ export class MongoUsers {
             if(cluster.isMaster){
                 //await this.users.deleteMany({});
                 //await WelcomeBot.save();
+                //await CustomerTest.save();
                 logger.info(`Users initialized`);
             }
         }else{
             //await this.users.deleteMany({});
             //await WelcomeBot.save();
+            //await CustomerTest.save()
             logger.info(`Users initialized`);
         } 
     }

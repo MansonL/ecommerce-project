@@ -785,3 +785,28 @@ Jan-08-2022 20:49:15 | [31merror[39m : Error: 400. Message: No photo ids recei
     at delete (D:\ESTUDIO\ecommerce\server\src\controller\images.ts:53:16)
     at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
     at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-11-2022 08:52:12 | [31merror[39m : Error: 400. Message: "value" is required. Stack: Error: "value" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:75:27
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:4:12)
+    at addAddress (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:68:16)
+    at Layer.handle [as handle_request] (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ESTUDIO\ecommerce\server\node_modules\express\lib\router\route.js:137:13)
+Jan-11-2022 08:53:51 | [31merror[39m : Error: 500. Message: An error occured.. Stack: Error: An error occured.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at MongoOrders.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\orders.ts:129:29)
+    at Generator.throw (<anonymous>)
+    at rejected (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\orders.ts:6:65)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-11-2022 08:56:54 | [31merror[39m : Error: 500. Message: An error occured.. Stack: Error: An error occured.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.internalError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:29:16)
+    at MongoOrders.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\orders.ts:129:29)
+    at Generator.throw (<anonymous>)
+    at rejected (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\orders.ts:6:65)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)

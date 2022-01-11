@@ -65,7 +65,7 @@ class Validations {
                 'string.min': `Category must be longer than 2 characters.`,
                 'string.max': `Category must be shorter than 21 characters.`
             })
-        });
+        }).required();
         /**
          * JOI Schema to validate the objects from the frontend for updates.
          * 
@@ -104,7 +104,7 @@ class Validations {
                 url: Joi.string().uri().required(),
                 photo_id: Joi.string().required(),
             }).required()).optional()
-        });
+        }).required();
 
         this.query = Joi.object<IQuery>({
             title: Joi.string().allow('').optional(),
@@ -118,7 +118,7 @@ class Validations {
                 maxStock: Joi.number().min(0).optional(),
             },
             category: Joi.string().allow('').optional(),
-        });
+        }).required();
         /**
          * JOI Schema to validate users.
          * 
@@ -197,7 +197,7 @@ class Validations {
             })).optional(),
             facebookID: Joi.string(),
             isAdmin: Joi.boolean().required(),
-        });
+        }).required();
 
         this.address = Joi.object<UserAddresses>({
             alias: Joi.string().min(1).max(15).optional().messages({
@@ -235,7 +235,7 @@ class Validations {
                 'string.min': `The city name must be longer than 2 characters.`,
                 'string.max': `The city name must be shorter than 31 characters.`,
             })
-        })
+        }).required()
     }
 
 }

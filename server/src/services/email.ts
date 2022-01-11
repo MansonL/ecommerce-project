@@ -4,7 +4,7 @@ import { Config } from "../config/config";
 
 /*                                  SENDGRID NODEMAILER IMPLEMENTATION                                         */
 
-const transportOptions : SMTPTransport.Options ={
+const transportOptions : SMTPTransport.Options = {
     port: 587,
     host: 'smtp.sendgrid.net',
     auth: {
@@ -13,7 +13,8 @@ const transportOptions : SMTPTransport.Options ={
     }
 }
 
-const transporter = createTransport(transportOptions, { from: 'noreply@ecommercecoderhouse.com' });
+const transporter = createTransport(transportOptions, { from: 'noreply@ecommercecoderhouse.com',
+tls: {rejectUnauthorized: false} });
 
 
 export default transporter

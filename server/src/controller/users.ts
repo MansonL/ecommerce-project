@@ -70,7 +70,7 @@ class UsersController {
         const { address } = req.body as {
             address: UserAddresses
         };
-        const { error } = await validator.address.validate(address);
+        const { error } =  validator.address.validate(address);
         if(error)
             next(ApiError.badRequest(error.message));
         else{
