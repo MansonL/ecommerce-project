@@ -3,7 +3,7 @@ import { JwtPayload, sign, verify, VerifyErrors } from "jsonwebtoken";
 import { ApiError } from "../api/errorApi";
 import { usersApi } from "../api/users";
 import { EAuthErrors, EUsersErrors } from "../common/EErrors";
-import { IMongoUser, UserInfo } from "../common/interfaces/users";
+import { IMongoUser, INew_User, UserInfo } from "../common/interfaces/users";
 import { Config } from "../config/config";
 
 declare global {
@@ -85,6 +85,16 @@ class AuthController {
                 data: {}
             })
     }
+
+    async signupPost (req: Request, res: Response, next: NextFunction) {
+        const newUser : INew_User = req.body;
+        const result : IMongoUser | ApiError = await usersApi.getUserByUsername(newUser.data.username);
+        if(result instanceof ApiError){
+            next();
+        }else
+            res.status(400).send(`Username has been already taken.`);
+    }
+
 
     async isAuthorized (req: Request, res: Response, next: NextFunction) {
         const authHeader = req.headers.authorization
