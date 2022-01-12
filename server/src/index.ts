@@ -42,7 +42,6 @@ if(Config.MODE === "FORK"){
 
 /**
  * 
- * Implement emails & messages for chats.
  * 
  * Auth JWT Sign Up.
  * 

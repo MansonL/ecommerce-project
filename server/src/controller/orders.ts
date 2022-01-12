@@ -118,8 +118,8 @@ import { logger } from "../services/logger";
                 else{
                     const adminsSubject = `[NEW ORDER]: ${user.data.name} ${user.data.surname} has made an order.`;
                     const adminsTo = adminsResult.join(', ');
-                    const customerMail = Utils.createHTMLEmail((result.data as IOrderPopulated).products, Utils.addressHTMLFormat(selectedAddress), total, ['You have made an order!', 'Your order will be delivered to']);
-                    const adminsMail = Utils.createHTMLEmail((result.data as IOrderPopulated).products, Utils.addressHTMLFormat(selectedAddress), total, ['A new order was made!', 'Address'])
+                    const customerMail = Utils.createHTMLOrderEmail((result.data as IOrderPopulated).products, Utils.addressHTMLFormat(selectedAddress), total, ['You have made an order!', 'Your order will be delivered to']);
+                    const adminsMail = Utils.createHTMLOrderEmail((result.data as IOrderPopulated).products, Utils.addressHTMLFormat(selectedAddress), total, ['A new order was made!', 'Address'])
                     await Utils.sendEmail(customerTo, customerSubject, customerMail);
                     await Utils.sendEmail(adminsTo, adminsSubject, adminsMail)
                     res.status(201).send(result)

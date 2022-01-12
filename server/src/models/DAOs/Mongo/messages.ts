@@ -2,7 +2,7 @@
 import { Model, Schema, model, Document, Types } from 'mongoose';
 import { Utils } from '../../../common/utils';
 import { ApiError } from '../../../api/errorApi';
-import { DBMessagesClass, IMongoMessage, INew_Message } from '../../../common/interfaces/messages';
+import { DBMessagesClass, IMessageSentPopulated, IMongoMessage, INew_Message } from '../../../common/interfaces/messages';
 import { CUDResponse } from '../../../common/interfaces/others';
 import { Config } from '../../../config/config';
 import cluster from 'cluster';
@@ -11,7 +11,8 @@ import { logger } from '../../../services/logger';
 
 const messagesSchema = new Schema({
     timestamp: { type: String, required: true },
-    author: { type: Schema.Types.ObjectId, ref: 'users' },
+    from: { type: Schema.Types.ObjectId, ref: 'users' },
+    to: { type: Schema.Types.ObjectId, ref: 'users' },
     message: { type: String, required: true },
 });
 
@@ -52,20 +53,23 @@ export class MongoMessages implements DBMessagesClass {
                 let messages: (Document<any, any, INew_Message> & INew_Message & {
                     _id: Types.ObjectId;
                      })[] = [];
-                docs.forEach(async document => {
-                    if(document.author.toString() === user_id){
-                        const populatedDoc = await document.populate({ path: 'author', select: 'data.username' });
+                await docs.forEach(async document => {
+                    if(String(document.from) == user_id){
+                        const populatedDoc = await document.populate({ path: 'to', select: 'data.username data.name data.surname' });
                         messages.push(populatedDoc);
+                    }else if(String(document.to) == user_id){
+                        const populatedDoc = await document.populate({ path: 'from', select: 'data.username data.name data.surname' });
+                        messages.push(populatedDoc)
                     }
-                })
+                });
                 return messages as IMongoMessage[]
 
             }else{
                 let messages : (Document<any, any, INew_Message> & INew_Message & {
                     _id: Types.ObjectId;
                      })[] = [];
-                docs.map(async document => {
-                    const populatedDoc = await document.populate({ path: 'author', select: 'data.username' });
+                await docs.forEach(async document => {
+                    const populatedDoc = await document.populate({ path: 'from to', select: 'data.username' });
                     messages.push(populatedDoc)
                 })
                 return messages as IMongoMessage[]
@@ -80,7 +84,7 @@ export class MongoMessages implements DBMessagesClass {
     }
     async add(msg: INew_Message): Promise<CUDResponse | ApiError> {
         try {
-            const doc = await (await this.messages.create(msg)).populate({ path: 'author', select: 'data.username' }) as IMongoMessage;
+            const doc = await (await this.messages.create(msg)).populate({ path: 'to', select: 'data.username' }) as IMessageSentPopulated;
         return {
             message: `Message successfully added.`,
             data: doc,

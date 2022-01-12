@@ -1,4 +1,4 @@
-import { IMongoMessage } from "./messages";
+import { IMessageSentPopulated, IMongoMessage } from "./messages";
 import { IOrder, IOrderPopulated } from "./orders";
 import { IMongoCart, IMongoProduct } from "./products";
 import { IMongoUser } from "./users";
@@ -12,7 +12,7 @@ import { IMongoUser } from "./users";
 
 export interface CUDResponse {
     message: string;
-    data: IMongoProduct | IMongoMessage | IMongoUser | IMongoCart | IOrderPopulated | IOrder | [];
+    data: IMongoProduct | IMongoMessage | IMongoUser | IMongoCart | IOrderPopulated | IOrder | IMessageSentPopulated | [];
 }
 
 

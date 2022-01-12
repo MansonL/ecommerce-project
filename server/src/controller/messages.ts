@@ -4,8 +4,9 @@ import { normalizeData } from '../common/compression';
 import { ApiError } from '../api/errorApi';
 import { ObjectId } from 'mongodb';
 import { EUsersErrors } from '../common/EErrors';
-import { IMongoMessage, INew_Message } from '../common/interfaces/messages';
+import { IMessageSentPopulated, IMongoMessage, INew_Message } from '../common/interfaces/messages';
 import { CUDResponse } from '../common/interfaces/others';
+import { htmlFooter, htmlGeneral, Utils } from '../common/utils';
 
 /**
  *
@@ -36,11 +37,18 @@ class MessagesController {
 
     async save(req: Request, res: Response, next: NextFunction): Promise<void> {
         const message: INew_Message = req.body;
+        const { name, surname } = req.user as Express.User;
         const result : CUDResponse | ApiError = await messagesApi.addMsg(message);
         if(result instanceof ApiError) 
             next(result)
-        else 
+        else{
+            
+            const htmlEmail = htmlGeneral.concat(`<h2>You have received a new message!</h2><h4>Here are the details:</h4>`.concat(`<p ="products-list" style="text-align: left; margin-left: 2.5rem;">${message.timestamp} | ${name} ${surname}: ${message.message}</p>`)).concat(htmlFooter)
+            const toEmail = (result.data as IMessageSentPopulated).to.data.username;
+            await Utils.sendEmail(toEmail, `[NEW MESSAGE]: You have received a new message from ${name} ${surname}`, htmlEmail);
+
             res.status(201).send(result);
+        }
     }
 }
 

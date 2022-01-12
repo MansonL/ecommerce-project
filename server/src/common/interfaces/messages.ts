@@ -15,6 +15,20 @@ import { CUDResponse } from "./others";
 }
 
 /**
+ * Type of Message Object after being popualted
+ */
+export interface IMessageSentPopulated {
+    timestamp: string;
+    from: ObjectId;
+    to: {
+        data: {
+            username: string;
+        }
+    }
+    message: string;
+}
+
+/**
  *
  * Type of Message Object to be stored and query from Mongo.
  *
@@ -30,7 +44,8 @@ import { CUDResponse } from "./others";
  */
 export interface INew_Message {
     timestamp: string;
-    author: ObjectId;
+    from: ObjectId;
+    to: ObjectId;
     message: string;
 }
 

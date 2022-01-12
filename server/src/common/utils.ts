@@ -13,6 +13,27 @@ import cloudinary from '../services/cloudinary';
 import Mail from 'nodemailer/lib/mailer';
 import { createTransporter } from '../services/email';
 
+export const htmlGeneral = `<!doctype html>
+                    <html>
+                      <head>
+                        <meta name="viewport" contsent="width=device-width" />
+                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                        <title>New order html email</title>
+                      </head>
+                      <body><table ="container" style="margin: auto; background-color: white; width: 80%; padding: 0.5rem; text-align: center; font-family: 'Helvetica', sans-seriff;" width="80%" bgcolor="white" align="center">
+                      <tr>
+                        <td>
+                          <div ="header-container" style="background-color: #f1faee; border-radius: 0.4rem; max-height: 10rem; padding: 1rem; margin-bottom: 0.2rem;">
+                            <img src="https://www.seekpng.com/png/full/428-4289671_logo-e-commerce-good-e-commerce-logo.png" alt="" style="width: auto; max-height: 5rem;">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div ="main-container">`;
+
+export const htmlFooter = `</div></td></tr></table></body></html>`;
+
 export class Utils {
     
     
@@ -148,28 +169,9 @@ export class Utils {
     }
 
 
-    /* ----------------------------- HTML EMAIL FUNCTION CREATOR --------------------------------------- */
-    static createHTMLEmail = (products: OrderProducts[], htmlAddress: string, total: number, customerOrAdminFiller: [string, string]) => {
-        const htmlGeneral = `<!doctype html>
-                    <html>
-                      <head>
-                        <meta name="viewport" contsent="width=device-width" />
-                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-                        <title>New order html email</title>
-                      </head>
-                      <body><table ="container" style="margin: auto; background-color: white; width: 80%; padding: 0.5rem; text-align: center; font-family: 'Helvetica', sans-seriff;" width="80%" bgcolor="white" align="center">
-                      <tr>
-                        <td>
-                          <div ="header-container" style="background-color: #f1faee; border-radius: 0.4rem; max-height: 10rem; padding: 1rem; margin-bottom: 0.2rem;">
-                            <img src="https://www.seekpng.com/png/full/428-4289671_logo-e-commerce-good-e-commerce-logo.png" alt="" style="width: auto; max-height: 5rem;">
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div ="main-container">`;
+    /* ----------------------------- HTML EMAIL FUNCTION CREATOR ------------------------------ */
+    static createHTMLOrderEmail = (products: OrderProducts[], htmlAddress: string, total: number, customerOrAdminFiller: [string, string]) => {
         
-
         const productsHTML : string = products.length > 1 ? 
                 products.map(product => {
                     return `<p ="products-list" style="text-align: left; margin-left: 2.5rem;">
@@ -185,8 +187,7 @@ export class Utils {
                 <b>Total:</b> <span ="price" style="margin-left: 0.5rem; font-size: 1.5rem; color: green;">${total}</span>
                 </p>`;
 
-        const htmlFooter = `</div></td></tr></table></body></html>`;
-
+    
         return  htmlGeneral.concat(`<h2>${customerOrAdminFiller[0]}</h2><h4>Here are the details:</h4>`.
         concat(productsHTML.concat(htmlTotal)).concat(`<p ="order-text" style="font-size: 1.2rem; text-align: left; margin-left: 1.2rem;">
         ${customerOrAdminFiller[1]}: <b>${htmlAddress}</b>
