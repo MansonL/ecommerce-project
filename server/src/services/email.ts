@@ -1,51 +1,14 @@
-import { createTransport } from "nodemailer";
-import SMTPTransport from "nodemailer/lib/smtp-transport";
-import { Config } from "../config/config";
-
-/*                                  SENDGRID NODEMAILER IMPLEMENTATION                                         */
-
-const transportOptions : SMTPTransport.Options = {
-    port: 587,
-    host: 'smtp.sendgrid.net',
-    auth: {
-        user: 'apikey',
-        pass: Config.SENDGRID_APIKEY
-    }
-}
-
-const transporter = createTransport(transportOptions, { from: 'noreply@ecommercecoderhouse.com',
-tls: {rejectUnauthorized: false} });
-
-
-export default transporter
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*import { OAuth2Client } from "google-auth-library"
+import { OAuth2Client } from "google-auth-library"
 import { Config } from "../config/config"
 import { createTransport, SentMessageInfo, Transporter } from 'nodemailer'
 import { GaxiosError, GaxiosResponse } from "gaxios";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
-import { ApiError } from "../api/errorApi";*/
+import { ApiError } from "../api/errorApi";
 
-/*
-                            GMAIL NODEMAILER IMPLEMENTATION
 
-const createTransporter : () => Promise<Transporter<SentMessageInfo> | ApiError> = async () => {
+//                            GMAIL NODEMAILER IMPLEMENTATION
+
+export const createTransporter : () => Promise<Transporter<SentMessageInfo> | ApiError> = async () => {
     const oauth2Client = new OAuth2Client({
         clientId: Config.GOOGLE_CLIENT_ID,
         clientSecret: Config.GOOGLE_CLIENT_SECRET,
@@ -80,10 +43,3 @@ const createTransporter : () => Promise<Transporter<SentMessageInfo> | ApiError>
         return accessToken
     }
 }
-
-const transporter = createTransporter();
-
-*/
-
-
-

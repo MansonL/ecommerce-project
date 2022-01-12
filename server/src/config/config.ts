@@ -23,5 +23,4 @@ export const Config = {
     CLOUDINARY_CLOUD_NAME : process.env.CLOUDINARY_CLOUD_NAME || 'admin cloudinary cloud name',
     CLOUDINARY_API_KEY : process.env.CLOUDINARY_API_KEY || 'admin cloudinary api_key',
     CLOUDINARY_API_SECRET : process.env.CLOUDINARY_API_SECRET || 'admin cloudinary api_secret',
-    SENDGRID_APIKEY : process.env.SENDGRID_APIKEY || 'your sendgrid apikey for emailing from a free noreply email.'
 }

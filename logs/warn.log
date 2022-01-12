@@ -810,3 +810,25 @@ Jan-11-2022 08:56:54 | [31merror[39m : Error: 500. Message: An error occured..
     at Generator.throw (<anonymous>)
     at rejected (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\orders.ts:6:65)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-11-2022 23:02:12 | [31merror[39m : Error: 400. Message: You lack of permission for performing this operation.... Stack: Error: You lack of permission for performing this operation...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:111:35
+    at D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:90:14)
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:94:10)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:109:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+Jan-11-2022 23:03:12 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:95:35
+    at D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:90:14)
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:94:10)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:93:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)

@@ -110,63 +110,18 @@ import { logger } from "../services/logger";
             else{
                 const user = (await usersApi.getUser(user_id) as IMongoUser[])[0];
                 const customerTo = user.data.username
-                const customerSubject = `[NEW ORDER]: You have created a new order at Ecommerce.`
+                const customerSubject = `[NEW ORDER]: You have created a new order at Ecommerce.`;
+                const selectedAddress = (result.data as IOrderPopulated).address;
                 let adminsResult = await usersApi.getAdmins();
                 if(adminsResult instanceof ApiError)
                     res.send(adminsResult)
                 else{
                     const adminsSubject = `[NEW ORDER]: ${user.data.name} ${user.data.surname} has made an order.`;
                     const adminsTo = adminsResult.join(', ');
-                    logger.info(`Admin emails array: ${adminsTo}`);
-                    const htmlGeneral = `<!doctype html>
-                    <html>
-                      <head>
-                        <meta name="viewport" contsent="width=device-width" />
-                        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-                        <title>New order html email</title>
-                      </head>
-                      <body><table ="container" style="margin: auto; background-color: white; width: 80%; padding: 0.5rem; text-align: center; font-family: 'Helvetica', sans-seriff;" width="80%" bgcolor="white" align="center">
-                      <tr>
-                        <td>
-                          <div ="header-container" style="background-color: #f1faee; border-radius: 0.4rem; max-height: 10rem; padding: 1rem; margin-bottom: 0.2rem;">
-                            <img src="https://www.seekpng.com/png/full/428-4289671_logo-e-commerce-good-e-commerce-logo.png" alt="" style="width: auto; max-height: 5rem;">
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div ="main-container">`
-
-                        let productsHTML : string = '';
-                        if(products.length > 1)
-    
-                            products.forEach(product => {
-                              productsHTML.concat(`<p ="products-list" style="font-size: 1.2rem; text-align: left; margin-left: 2.5rem;">
-                              ${product.product_title} x${product.quantity} <span style="margin-left:0.2rem; font-size: 1.2rem; color: green;">${product.price*product.quantity}</span>
-                              </p>`)
-                              })
-                        else
-                            productsHTML = `<p ="products-list" style="font-size: 1.2rem; text-align: left; margin-left: 2.5rem;">
-                            ${products[0].product_title} x${products[0].quantity} <span style="margin-left:0.2rem; font-size: 1.2rem; color: green;">${products[0].price*products[0].quantity}</span>
-                            </p>`;
-
-                        const totalMail = `<p ="order-text" style="font-size: 1.2rem; text-align: left; margin-left: 1.2rem;">
-                        <b>Total:</b> <span ="price" style="margin-left: 0.5rem; font-size: 1.5rem; color: green;">${total}</span>
-                      </p>`;
-
-                        const mailFooter = `</div></td></tr></table></body></html>`
-
-                        const customerMail = htmlGeneral.concat(`<h2>You have made an order!</h2><h4>Here are the details:</h4>`.
-                        concat(productsHTML.concat(totalMail)).concat(`<p ="order-text" style="font-size: 1.2rem; text-align: left; margin-left: 1.2rem;">
-                        The address you selected is: <b>${(result.data as IOrderPopulated).address}</b>
-                      </p>`)).concat(mailFooter);
-
-                        const adminsMail = htmlGeneral.concat(`<h2>A new order was made!</h2><h4>Here is the order that ${user.data.name} ${user.data.surname} made:</h4>`.concat(productsHTML.concat(totalMail)).concat(`<p ="order-text" style="font-size: 1.2rem; text-align: left; margin-left: 1.2rem;">
-                        The address selected is: <b>${(result.data as IOrderPopulated).address}</b>
-                      </p>`)).concat(mailFooter)
-                        
-                        await Utils.sendEmail(customerTo, customerSubject, customerMail);
-                        await Utils.sendEmail(adminsTo, adminsSubject, adminsMail)
+                    const customerMail = Utils.createHTMLEmail((result.data as IOrderPopulated).products, Utils.addressHTMLFormat(selectedAddress), total, ['You have made an order!', 'Your order will be delivered to']);
+                    const adminsMail = Utils.createHTMLEmail((result.data as IOrderPopulated).products, Utils.addressHTMLFormat(selectedAddress), total, ['A new order was made!', 'Address'])
+                    await Utils.sendEmail(customerTo, customerSubject, customerMail);
+                    await Utils.sendEmail(adminsTo, adminsSubject, adminsMail)
                     res.status(201).send(result)
                 }
             }
