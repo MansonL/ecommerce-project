@@ -36,7 +36,6 @@ export type UserInfo = {
     age: string;
     avatar?: string;
     phoneNumber: string;
-    images: { url: string; photo_id: string;}[];
     facebookID?: string;
     addresses?: UserAddresses[];
     isAdmin: boolean;

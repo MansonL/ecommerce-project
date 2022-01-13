@@ -7,6 +7,7 @@ import { IMongoUser, INew_User, UserAddresses } from '../common/interfaces/users
 import { CUDResponse } from '../common/interfaces/others';
 import { logger } from '../services/logger';
 import { isValidObjectId } from 'mongoose';
+import { ObjectId } from 'mongodb';
 
 
 
@@ -57,6 +58,7 @@ class UsersController {
         if (error) 
             next(ApiError.badRequest(error.message));
          else {
+            if(userInfo.data.addresses) userInfo.data.addresses[0]._id = String(new ObjectId());
             const result: CUDResponse | ApiError = await usersApi.addUser(userInfo);
             if(result instanceof ApiError)
                 next(result)

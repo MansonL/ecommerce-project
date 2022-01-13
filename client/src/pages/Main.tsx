@@ -10,14 +10,10 @@ import { DBProducts } from './DBProducts';
 import { Cart } from './Cart';
 import { LogIn } from './LogIn';
 import { SignUp } from './SignUp';
-import { IMongoUser } from '../utils/interfaces';
 import { Profile } from './Profile';
 
 
-export interface authResponse {
-    message: string;
-    data: IMongoUser 
-}
+
 
 export function Main () {
   const dropdownMenu = useRef(null);

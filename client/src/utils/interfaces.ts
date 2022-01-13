@@ -1,133 +1,90 @@
-/**
- *
- * Type of Product to be stored and query from Mongo
- *
- */
- export interface IMongoProduct extends INew_Product {
-    _id: string;
-}
+import { IMongoCart } from "../../../server/src/common/interfaces/products";
+import { INew_User, UserAddresses } from "../../../server/src/common/interfaces/users";
 
-/**
- *
- * Type of Cart Product to be query from Mongo
- *
- */
-export interface IMongoCartProduct extends ICartProduct {
-    _id: string;
-}
-
-/**
- * Type of Cart Product to be stored to Mongo DB
- *
- */
-export interface ICartProduct extends INew_Product {
-    product_id: string;
-}
-
-/**
- *
- * Type of Product Object we are receiving from the frontend.
- *
- */
-export interface INew_Product {
-    [key: string]: number | string;
-    title: string;
-    description: string;
-    timestamp: string; // Will have this type after the controller set product's
-    code: string; // timestamp.
-    img: string;
-    stock: number;
-    price: number;
-}
-
-/**
- *
- * Type of Message Object to be stored and query from Mongo.
- *
- */
-export interface IMongoMessage extends INew_Message {
-    _id: string;
-}
-
-/**
- *
- * Type of Message Object receiving from the frontend.
- *
- */
-export interface INew_Message {
-    timestamp: string;
-    author: IMongoUser;
-    message: string;
-}
-
-
-/**
- *
- * Type of User Object to be stored and query from Mongo.
- *
- */
-export interface IMongoUser extends INew_User {
-    _id: string;
-}
-
-/**
- *
- * Type of User Object receiving from the frontend.
- *
- */
-export interface INew_User {
-    [key: string]: string | string[];
-    timestamp: string;
+export interface IUserInfo {
     username: string;
     password: string;
+    repeatedPassword: string;
     name: string;
     surname: string;
     age: string;
-    alias: string;
-    avatar: string;
-    photos: string[];
-    facebookID: string;
+    avatar?: string | undefined;
+    phoneNumber: string;
+    facebookID?: string | undefined;
+    addresses?: UserAddresses[] | undefined;
+    isAdmin: boolean;
+    user_id: string;
 }
 
-/**
- *
- * Type of the possible Update Object properties in an update request.
- *
- */
-export interface IUpdate {
-    title?: string;
-    description?: string;
-    code?: string;
-    img?: string;
-    stock?: number;
-    price?: number;
+export const userDefaultValue : IUserInfo = {
+    user_id: '',
+username: '',
+password: '',
+repeatedPassword: '',
+name: '',
+surname: '',
+age: '',
+avatar: '',
+phoneNumber: '',
+facebookID: '',
+addresses: [{
+    _id: '',
+    alias: '',
+    street1: {
+        name: '',
+        number: 0,
+    },
+    street2: '',
+    street3: '',
+    zipcode: '',
+    floor: '',
+    department: '',
+    city: '',
+}],
+isAdmin: false,
 }
 
-/**
- *
- * Type of the possible Query Object properties in a query request.
- *
- */
-export interface IQuery {
-    title: string;
-    code: string;
-    stock: {
-        minStock: number;
-        maxStock: number;
-    };
-    price: {
-        minPrice: number;
-        maxPrice: number;
-    };
+export const newUserDefault : INew_User = { 
+    createdAt: '',
+    modifiedAt: '',
+    data: {
+        username: '',
+    password: '',
+    repeatedPassword: '',
+    name: '',
+    surname: '',
+    age: '',
+    avatar: '',
+    phoneNumber: '',
+    facebookID: '',
+    addresses: [{
+    _id: '',
+    alias: '',
+    street1: {
+        name: '',
+        number: 0,
+    },
+    street2: '',
+    street3: '',
+    zipcode: '',
+    floor: '',
+    department: '',
+    city: '',
+    }],
+    isAdmin: false,
+    }
 }
 
-/**
- *
- * Response type of adding, deleting & updating products from storage.
- *
- */
-
- export interface CUDResponse {
+export interface authResponse {
     message: string;
-    data: IMongoProduct | IMongoMessage | IMongoUser | [];
+    data: {} | string; 
+}
+
+export interface cartGetResponse {
+    message: string;
+    data: IMongoCart[];
+}
+export interface cartModificationResponse {
+    message: string;
+    data: IMongoCart
 }

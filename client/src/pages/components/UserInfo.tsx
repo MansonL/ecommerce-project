@@ -82,7 +82,7 @@ export function UserInfo (){
         </div>
         
         <div className="info-row">
-          <div className="row-form"><input type="text" className="label-styled-input" disabled={true} value={user.alias} /><label className="hasContent">Alias</label>
+          <div className="row-form"><input type="text" className="label-styled-input" disabled={true} value={user.phoneNumber} /><label className="hasContent">Phone Number</label>
             <span className="form-border"></span>
           </div>
          <div className="change-container">

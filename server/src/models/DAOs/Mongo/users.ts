@@ -92,7 +92,6 @@ const botData: INew_User = {
         phoneNumber: '+5492612345678',
         avatar: '',
         facebookID: '',
-        images: [],
         isAdmin: true,
     },
 };
@@ -110,7 +109,6 @@ const customerTest: INew_User = {
         phoneNumber: '+5492612345678',
         avatar: '',
         facebookID: '',
-        images: [],
         isAdmin: true,
     },
 };

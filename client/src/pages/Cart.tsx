@@ -1,14 +1,14 @@
-import axios, { Axios, AxiosError } from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { IMongoCartProduct, IMongoProduct } from "../utils/interfaces";
 import { socket } from "../lib/socket";
 import { Products } from "./Products";
 import React from "react";
+import { cartGetResponse } from "../utils/interfaces";
 
 export function Cart () {
     const [products, setProducts] = useState<IMongoCartProduct[]>([]);
     const [noProducts, setNoProducts] = useState(true);
-    //const [noProductsMsg, setNoProductsMsg] = useState(''); 
+    const [noProductsMsg, setNoProductsMsg] = useState(''); 
 
     const updateProducts = (newProducts: IMongoProduct[] | IMongoCartProduct[] | [], msg: string | undefined) => {
       setProducts(newProducts as IMongoCartProduct[]);
@@ -23,9 +23,9 @@ export function Cart () {
     }
 
       const updateListener = () => {
-          axios.get<IMongoCartProduct[]>('http://localhost:8080/api/cart/list').then(response => {
-            console.log(`Cart Products received`);
-            const newProducts = response.data
+          axios.get<cartGetResponse>('http://localhost:8080/api/cart/list')
+          .then(response => {
+            const newProducts = response.data.data;
             setProducts(newProducts);
             setNoProducts(false)
           }).catch(error => {

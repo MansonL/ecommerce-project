@@ -1,97 +1,45 @@
 import { createContext, useEffect, useState } from "react";
-import { IMongoUser } from "../../../../server/src/interfaces/interfaces";
 import axios from 'axios'
 import { authResponse } from '../Main';
-import { isUser } from "../../utils/utilities";
+import { verifyToken } from "../../utils/utilities";
+import { IUserInfo, userDefaultValue } from "../../utils/interfaces";
 
 interface ClickableProps {
     children: JSX.Element[] | JSX.Element;
   }
 
 
+
 export const UserContext = createContext({
-    user: {
-        _id: '',
-    timestamp: '',
-    username: '',
-    password: '',
-    name: '',
-    surname: '',
-    alias: '',
-    age: '',
-    avatar: '',
-    photos: [''],
-    facebookID: '',
-    },
+    user: userDefaultValue,
     loggedIn: false,
-    updateLoginStatus: () => {},
-    updateDBUser: (user: IMongoUser) => {},
+    updateLoginStatus: (): void => {}
 });
 
 export function UserProvider (props: ClickableProps) {
-    const [user, setUser] = useState<IMongoUser>({
-        _id: '',
-        timestamp: '',
-        username: '',
-        password: '',
-        name: '',
-        surname: '',
-        alias: '',
-        age: '',
-        avatar: '',
-        facebookID:'',
-        photos: [''],
-    });
+    const [user, setUser] = useState<IUserInfo>(userDefaultValue);
     const [loggedIn, setLoggedIn] = useState(false);
+    const [token, setToken] = useState('');
 
     const updateLoginStatus = () => {
         setLoggedIn(loggedIn ? false : true);
         if(loggedIn){
-            setUser({
-            _id: '',
-            timestamp: '',
-            username: '',
-            password: '',
-            name: '',
-            surname: '',
-            alias: '',
-            age: '',
-            avatar: '',
-            photos: [''],
-            facebookID: ''
-            })
+            setUser(userDefaultValue)
         }
     }
 
-    const updateDBUser = (user: IMongoUser) => {
-        setUser(user)
-    }
-
-
     const fetchUser = () => {
-        axios.get<authResponse>('http://localhost:8080/api/auth/login', { withCredentials: true }).then(response => {
-            console.log("Updating status")
-            const data = response.data;
-            console.log(data);
-            if(isUser(data.data)){
-                setLoggedIn(true);
-                setUser(data.data)
-            }else {
+        axios.get<authResponse>('http://localhost:8080/api/auth/login', { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }).then(async response => {
+            if(response.status >= 200){
+               setToken(response.data.data as string);
+                const user = await verifyToken(response.data.data as string);
+               setLoggedIn(true);
+               setUser(user)
+            }
+        }).catch(error => {
+            if(error.response){
                 setLoggedIn(false);
-                setUser({
-                    _id: '',
-                timestamp: '',
-                username: '',
-                password: '',
-                name: '',
-                surname: '',
-                alias: '',
-                age: '',
-                avatar: '',
-                photos: [''],
-                facebookID: '',
-                })
-                
+                setUser(userDefaultValue);
             }
         })
     }
@@ -101,7 +49,7 @@ export function UserProvider (props: ClickableProps) {
     },[])
 
     return (
-        <UserContext.Provider value={{user, loggedIn, updateLoginStatus, updateDBUser}}>
+        <UserContext.Provider value={{user, loggedIn, updateLoginStatus}}>
             {props.children}
         </UserContext.Provider>
     )

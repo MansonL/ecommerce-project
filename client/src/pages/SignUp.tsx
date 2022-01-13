@@ -2,14 +2,16 @@ import axios from "axios";
 import moment from "moment";
 import React from "react";
 import { useContext, useState } from "react";
-import { INew_User } from "../utils/interfaces";
-import { validation } from "../utils/joiSchemas";
+import { INew_User } from "../../../server/src/common/interfaces/users";
+import { validator } from "../../../server/src/common/interfaces/joiSchemas";
 import { SignUpForm } from "./components/SignUpForm";
 import { authResponse } from "./Main";
 import { UserContext } from './components/UserProvider'
 import './SignUp.css'
 import { Profile } from "./Profile";
 import { LogSignHeaderWrapper } from "./components/LogSignHeaderWrapper";
+import { newUserDefault } from "../utils/interfaces";
+import { cleanEmptyProperties } from "../utils/utilities";
 
 export function SignUp () {
     
@@ -26,18 +28,7 @@ export function SignUp () {
       setShowResult(false);
     }
 
-    const [newUser, setNewUser] = useState<INew_User>({
-        timestamp: '',
-        username: '',
-        password: '',
-        name: '',
-        surname: '',
-        age: '',
-        alias: '',
-        avatar: '',
-        facebookID: '',
-        photos: [''],
-    })
+    const [newUser, setNewUser] = useState<INew_User>(newUserDefault)
     const [repeatedPassword, setRepeatedPassword] = useState('')
     //const [showPassRequirements, setShowPassRequirements] = useState([false, false]);
     
@@ -70,13 +61,13 @@ export function SignUp () {
      */
     const signupSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
-        const user : INew_User= {
-            ...newUser,
-            facebookID: '',
-            photos: [newUser.avatar],
-            timestamp: moment().format('YYYY-MM-DD HH:mm:ss')
-        }
-        const { error } = validation.user.validate(user);
+        let user : INew_User= {
+               ...newUser,
+            createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+            modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss')
+        };
+        user =  cleanEmptyProperties(user);
+        const { error } = validator.user.validate(user);
         if(error){
           setShowResult(true);
           setLoginSignResult(false);

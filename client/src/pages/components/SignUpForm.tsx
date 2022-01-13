@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { INew_User } from "../../utils/interfaces";
+import { INew_User } from "../../../../server/src/common/interfaces/users";
 import '../SignUp.css'
 
 interface SignUpFormProps {
@@ -25,50 +25,50 @@ export function SignUpForm(props: SignUpFormProps) {
 
           <div className="row-form">
 
-            <div className="effect-input"><input type="text" className="label-styled-input" value={props.newUser.name} onChange={props.onChange} name="name" />
-              <label className={props.newUser.name !== '' ? "hasContent" : "label-styled"}>Name</label>
+            <div className="effect-input"><input type="text" className="label-styled-input" value={props.newUser.data.name} onChange={props.onChange} name="name" />
+              <label className={props.newUser.data.name !== '' ? "hasContent" : "label-styled"}>Name</label>
               <span className="form-border" />
             </div>
           </div>
           <div className="row-form">
             <div className="effect-input">
-              <input type="text" className="label-styled-input" name="surname" onChange={props.onChange} value={props.newUser.surname}/>
-              <label className={props.newUser.surname !== '' ? "hasContent" : "label-styled"}>Surname</label>
+              <input type="text" className="label-styled-input" name="surname" onChange={props.onChange} value={props.newUser.data.surname}/>
+              <label className={props.newUser.data.surname !== '' ? "hasContent" : "label-styled"}>Surname</label>
               <span className="form-border"/>
             </div>
           </div>
           <div className="row-form">
             <div className="effect-input">
-              <input type="date" min="1922-11-28" max="2011-11-28" className="label-styled-input" name="age" onChange={props.onChange} value={props.newUser.age}/>
+              <input type="date" min="1922-11-28" max="2011-11-28" className="label-styled-input" name="age" onChange={props.onChange} value={props.newUser.data.age}/>
               <label className="hasContent">Born date</label>
               <span className="form-border"/>
             </div>
           </div>
           <div className="row-form">
             <div className="effect-input">
-              <input type="text" className="label-styled-input" name="alias" onChange={props.onChange} value={props.newUser.alias}/>
-              <label className={props.newUser.alias !== '' ? "hasContent" : "label-styled"}>Alias</label>
+              <input type="text" className="label-styled-input" name="phoneNumber" onChange={props.onChange} value={props.newUser.data.phoneNumber}/>
+              <label className={props.newUser.data.phoneNumber !== '' ? "hasContent" : "label-styled"}>Phone Number</label>
               <span className="form-border"/>
             </div>
           </div>
           <div className="row-form">
             <div className="effect-input">
-              <input type="url" className="label-styled-input" name="avatar" onChange={props.onChange} value={props.newUser.avatar}/>
-              <label className={props.newUser.avatar !== '' ? "hasContent" : "label-styled"}>Avatar (url image)</label>
+              <input type="url" className="label-styled-input" name="avatar" onChange={props.onChange} value={props.newUser.data.avatar}/>
+              <label className={props.newUser.data.avatar !== '' ? "hasContent" : "label-styled"}>Avatar (url image)</label>
               <span className="form-border"/>
             </div>
           </div>
           <div className="row-form">
             <div className="effect-input">
-              <input type="email" className="label-styled-input" name="username" onChange={props.onChange} value={props.newUser.username}/>
-              <label className={props.newUser.username !== '' ? "hasContent" : "label-styled"}>Email</label>
+              <input type="email" className="label-styled-input" name="username" onChange={props.onChange} value={props.newUser.data.username}/>
+              <label className={props.newUser.data.username !== '' ? "hasContent" : "label-styled"}>Email</label>
               <span className="form-border"/>
             </div>
           </div>
           <div className="pswd-form">
             
-            <div className="effect-input"><input type={showHide ? "text" : "password" } className="label-styled-input" value={props.newUser.password} onChange={props.onChange} name="password" />
-              <label className={props.newUser.password !== '' ? "hasContent" : "label-styled"}>Password</label>
+            <div className="effect-input"><input type={showHide ? "text" : "password" } className="label-styled-input" value={props.newUser.data.password} onChange={props.onChange} name="password" />
+              <label className={props.newUser.data.password !== '' ? "hasContent" : "label-styled"}>Password</label>
               <span className="form-border"></span>
               
             </div>
