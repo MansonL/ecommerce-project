@@ -13,11 +13,11 @@ const options : LoggerOptions = {
     transports: [
         new transports.Console(),
         new transports.File({
-            filename: '../logs/error.log',
+            filename: './logs/error.log',
             level: 'error'
         }),
         new transports.File({
-            filename: '../logs/warn.log',
+            filename: './logs/warn.log',
             level: 'warn'
         })
     ]

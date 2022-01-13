@@ -10,7 +10,7 @@ import { IMongoOrderPopulated, IOrder, IOrderPopulated, OrderProducts } from "..
 import { CUDResponse } from "../common/interfaces/others";
 import { IMongoUser } from "../common/interfaces/users";
 import { Utils } from "../common/utils";
-import { logger } from "../services/logger";
+
 
 
 
@@ -35,7 +35,7 @@ import { logger } from "../services/logger";
             if(isValidObjectId(order_id)){
                 const result : IMongoOrderPopulated[] | IOrderPopulated[] | ApiError = await ordersApi.get('order', order_id);
                 
-                // Will be IOrder if there's no error.
+                // Will be IOrderPopulated if there's no error.
 
                 if(result instanceof ApiError)
                     next(result);
@@ -47,7 +47,7 @@ import { logger } from "../services/logger";
         }else{
             const result: IMongoOrderPopulated[] | IOrderPopulated[] | ApiError = await ordersApi.get(undefined, undefined);    
 
-            // Will be IMongoOrder[] of every user if there's no error.
+            // Will be IMongoOrderPopulated[] of every user if there's no error.
 
             if(result instanceof ApiError)
                 next(result)

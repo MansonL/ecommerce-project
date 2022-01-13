@@ -83,6 +83,18 @@ export class MongoProducts implements DBProductsClass {
         }
     }
 
+    async getStock(): Promise<IMongoProduct[] | ApiError> {
+        try {
+            const docs = await this.products.find({}).select('title stock');
+            if(docs.length > 0)
+                return docs
+            else
+                return ApiError.notFound(EProductsErrors.NoProducts)
+        } catch (error) {
+            return ApiError.internalError(`An error occured.`)
+        }
+    }
+
     async add(product: INew_Product): Promise<CUDResponse | ApiError> {
         try {
             const doc = await this.products.create(product);

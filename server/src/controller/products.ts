@@ -34,6 +34,8 @@ class ProductController {
         next: NextFunction
     ): Promise<void> {
         logger.info(`[PATH]: Inside Products Controller.`)
+        const test = await productsApi.getStock();
+        logger.info(JSON.stringify(test,null,'\t'));
         const result: IMongoProduct[] | ApiError = await productsApi.getProduct();
         if(result instanceof ApiError)
             next(result)

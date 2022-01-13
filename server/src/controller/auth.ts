@@ -3,8 +3,9 @@ import { JwtPayload, sign, verify, VerifyErrors } from "jsonwebtoken";
 import { ApiError } from "../api/errorApi";
 import { usersApi } from "../api/users";
 import { EAuthErrors, EUsersErrors } from "../common/EErrors";
-import { IMongoUser, INew_User, UserInfo } from "../common/interfaces/users";
+import { IMongoUser, INew_User, UserAddresses, UserInfo } from "../common/interfaces/users";
 import { Config } from "../config/config";
+import { logger } from "../services/logger";
 
 declare global {
     namespace Express {
@@ -14,6 +15,24 @@ declare global {
     }
 }
 
+declare module "jsonwebtoken" {
+    export interface JwtPayload {
+        user:  {
+            username: string;
+            password: string;
+            repeatedPassword: string;
+            name: string;
+            surname: string;
+            age: string;
+            avatar?: string | undefined;
+            phoneNumber: string;
+            facebookID?: string | undefined;
+            addresses?: UserAddresses[] | undefined;
+            isAdmin: boolean;
+            user_id: string;
+        };
+    }
+}
 
 
 class AuthController {

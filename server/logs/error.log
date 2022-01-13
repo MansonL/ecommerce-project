@@ -872,3 +872,14 @@ Jan-12-2022 09:10:37 | [31merror[39m : Error: 400. Message: You must be logged
     at Generator.next (<anonymous>)
     at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
     at new Promise (<anonymous>)
+Jan-13-2022 17:05:53 | [31merror[39m : Error: 400. Message: You lack of permission for performing this operation.... Stack: Error: You lack of permission for performing this operation...
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:16)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:124:35
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:90:14)
+    at module.exports (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\node_modules\jsonwebtoken\verify.js:94:10)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:122:19
+    at Generator.next (<anonymous>)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)

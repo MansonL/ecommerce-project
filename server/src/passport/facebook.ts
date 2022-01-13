@@ -30,12 +30,6 @@ export const facebookVerify: VerifyFunctionWithRequest = async (req: Request, ac
             modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
             data: {
                 username: profile.emails ? profile.emails[0].value : '',
-                images: profile.photos ? profile.photos.map(photo => {
-                    return {
-                        url: photo.value,
-                        photo_id: 'facebook_image'
-                    }
-                }) : [],
                 name: profile.displayName.split(" ")[0],
                 surname: profile.displayName.split(" ")[1],
                 age: profile.birthday ? profile.birthday : 'none',

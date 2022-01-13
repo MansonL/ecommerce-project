@@ -1,10 +1,23 @@
 import {  verify } from "jsonwebtoken"
-import { INew_User } from "../../../server/src/common/interfaces/users";
+import { INew_User, UserAddresses } from "../../../server/src/common/interfaces/users";
 import { IUserInfo } from "./interfaces";
 
 declare module "jsonwebtoken" {
     export interface JwtPayload {
-        user: IUserInfo
+        user:  {
+            username: string;
+            password: string;
+            repeatedPassword: string;
+            name: string;
+            surname: string;
+            age: string;
+            avatar?: string | undefined;
+            phoneNumber: string;
+            facebookID?: string | undefined;
+            addresses?: UserAddresses[] | undefined;
+            isAdmin: boolean;
+            user_id: string;
+        };
     }
 }
 

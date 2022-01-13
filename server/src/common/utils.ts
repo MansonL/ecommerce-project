@@ -1,10 +1,10 @@
 
-import {  IMongoProduct } from './interfaces/products';
+import {  IMongoCart, IMongoProduct } from './interfaces/products';
 import { ApiError } from '../api/errorApi';
 import { EOrdersErrors, EProductsErrors } from './EErrors';
 import { uploadManyImages } from '../middleware/cloudinary';
 import { productsApi } from '../api/products';
-import { IMongoOrderPopulated, IOrder, IOrderPopulated, IUserOrder, OrderProducts } from './interfaces/orders';
+import { IMongoOrderPopulated, IOrderPopulated, IUserOrder, OrderProducts } from './interfaces/orders';
 import { Types, Document } from 'mongoose';
 import { IMongoUser, UserAddresses } from './interfaces/users';
 import { usersApi } from '../api/users';
@@ -12,6 +12,9 @@ import { logger } from '../services/logger';
 import cloudinary from '../services/cloudinary';
 import Mail from 'nodemailer/lib/mailer';
 import { createTransporter } from '../services/email';
+import { ordersApi } from '../api/order';
+import { cartApi } from '../api/cart'
+import { JwtPayload } from 'jsonwebtoken';
 
 export const htmlGeneral = `<!doctype html>
                     <html>
@@ -68,10 +71,30 @@ export class Utils {
      */
 
     static generateCode = (): string => {
-        return `_${Math.random().toString(36).substr(2, 9)}`;
+        return `${Math.random().toString(36).substr(2, 9)}`;
     };
 
-
+    /* ----------------------------- BOT MESSAGE IMPLEMENTATION --------------------------------------- */
+    
+    static botAnswer = async (message: string, user_id: string, username: string): Promise<string> => {
+        switch(message.toLowerCase()){
+            case 'stock' : {
+                        const result : IMongoProduct[] | ApiError = await productsApi.getStock();
+                        return result instanceof ApiError ? result.message : JSON.stringify(result, null, '\t')
+                        }
+            case 'order': {
+                        const result : IOrderPopulated[] | IMongoOrderPopulated[] | ApiError = await ordersApi.get('user', user_id)
+                        return result instanceof ApiError ? result.message : JSON.stringify(result, null, '\t')
+                        }
+            case 'cart': {
+                        const result : IMongoCart[] | ApiError = await cartApi.get(username);
+                        return result instanceof ApiError ? result.message : JSON.stringify(result, null, '\t')
+                    }
+            default: 
+                    return `Please, type a valid option among the followings: order, stock or cart.`
+        }
+    }
+    
     /*----------------------------- CART UTIL FUNCTION ---------------------------------------------------- */
 
 
