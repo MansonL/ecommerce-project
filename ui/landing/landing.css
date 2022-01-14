@@ -1,0 +1,25 @@
+.welcome-text {
+    margin-top: 9rem;
+    text-align: center;
+    color: white;
+  }
+  .first-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+  }
+  .second-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 2rem;
+  }
+  .welcome-products-btn {
+    background-color: #fcde67;
+    border-radius: 1rem;
+    border: none;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    padding: 1rem;
+  }
