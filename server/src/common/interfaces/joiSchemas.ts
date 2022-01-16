@@ -234,6 +234,10 @@ class Validations {
                 'string.empty': `Must provide this address city.`,
                 'string.min': `The city name must be longer than 2 characters.`,
                 'string.max': `The city name must be shorter than 31 characters.`,
+            }),
+            extra_info: Joi.string().min(5).max(100).optional().messages({
+                'string.min': `Extra instructions must be longer than 5 characters.`,
+                'string.max' : `Extra instructions must be shorter than 101 characters.`
             })
         }).required()
     }

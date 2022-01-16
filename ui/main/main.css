@@ -8,8 +8,8 @@
     height: 8vh;
   }
   .cart-counter{
-    left: 40%;
-    top: 39%;
+    left: 43%;
+    top: 42%;
   }
   .welcome-products-btn {
     left: 28%;
@@ -24,15 +24,28 @@ html, body {
   height: 100%;
   width: 100%;
 }
+
+h5 {
+  font-weight: normal;
+}
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-seriff;
 }
 .main{
   height: 100vh;
-  width: 100%; /* These definitions are gonna override the landing page main class*/
+  width: 100%;  
   background-color: white;
 }
+/*  -------------------------------------------------------------------- 
+        SECTIONS CONTAINERS
+
+------------------------------------------------------------------------*/
+.body-container {
+  width: 100%;
+}
+
 .nav-bar {
   height: 8vh; /*Need to be replaced */
   background-color: #fcde67;
@@ -40,14 +53,39 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
+.main-products-search-container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.products-search {
+  border: none;
+  border-radius: 0.4rem;
+  width: 70%;
+  height: 40%;
+}
+
+.products-search:focus {
+  outline: 2px solid #83DBEC;
+}
+
+.products-search::placeholder {
+  padding-left: 0.4rem;
+}
+
 .navbar-icon {
   padding: 0.5rem;
-  max-height: 70%;
+  cursor: pointer;
+  width: 70%;
 }
 .dropdown-menu-container {
   display: flex; 
-  height: 100%;
-  width: 25%;
+  max-width: 15%;
   align-items: center;
   margin-left: 0.3rem;
 }
@@ -105,8 +143,7 @@ body {
 .cart-icon-container {
   display: flex;
   position: relative;
-  height: 100%;
-  margin-right: 0.3rem;
+  max-width: 15%;
 }
 .cart-navbar-btn, .main-menu-btn, .filter-btn {
   background-color: transparent;
@@ -114,9 +151,211 @@ body {
 }
 .main-menu-btn {
   width: 100%;
-  height: 100%;
 }
 .cart-counter{
   position: absolute;
   font-size: 1.1rem;
+}
+/*  ---------------------------------------------------------------
+
+INPUTS & LABELS COMMON STYLES       -------------------------------
+
+-------------------------------------------------------------------
+*/
+
+
+.animated-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 0;
+  transition: 0.5s;
+  font-size: 0.6rem;
+}
+
+.filled-input-label {
+  position: absolute;
+  z-index: 0;
+  top: -1.5rem;
+  left: -0.5rem;
+  font-size: 1rem;
+}
+
+.styled-input {
+  background-color: transparent;
+  z-index: 1;
+  border: none;
+  outline: none;
+  position: relative;
+  margin-top: 0.4rem;
+}
+
+
+
+.styled-input:focus ~ .input-border {
+  width: 100%;
+}
+
+.styled-input:focus ~ .animated-label {
+  top: -1rem;
+  left: -0.5rem;
+  font-size: 0.8rem;
+}
+
+
+
+.input-border {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #83DBEC;
+  transition: 0.5s;
+}
+
+/* -----------------------------------------------------------------------------
+
+              FORM - SIGNUP - LOGIN COMMON HEADERS
+
+---------------------------------------------------------------------------------*/
+
+.header.title {
+  font-size: 1.5rem;
+}
+
+.login-signup-header, .cart-header, .address-header, .order-header {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.login-signup-fields, .address-fields {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  row-gap: 1.8rem;
+  width: 50%;
+  margin: auto;
+  text-align: left;
+}
+
+.login-signup-field, .address-field {
+  position: relative;
+}
+
+.submit-row {
+  width: 50%;
+  margin: auto;
+  margin-top: 0.3rem;
+  text-align: center;
+}
+
+.submit-btn {
+  background-color: #fcde67;
+  box-sizing: border-box;
+  color: black;
+  font-size: 1.2rem;
+  border-radius: 0.6rem;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.submit-btn:hover {
+  background-color: white;
+  border: 1px solid #fcde67;
+}
+
+.password-field {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+}
+
+.pswd-input-wrapper {
+  position: relative;
+}
+
+.show-pswd-icon {
+  height: 70%;
+}
+
+.password-input {
+  flex-grow: 1;
+}
+
+.required-field {
+  opacity: 1;
+  transition: 0.2s;
+  width: 3%;
+}
+
+/* -----------------------------------------------------------------------------------------
+
+                          SEARCH PRODUCTS, CART & ADMIN VIEW COMMON CLASSES
+
+    ---------------------------------------------------------------------------------------- */
+
+.order-container, .addresses-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 85%;
+  text-align: left; 
+  margin: auto;
+}
+
+.products-results, .cart-products {
+  overflow-y: scroll;
+  max-height: 85vh;
+  position: relative;
+  padding: 1rem 0.4rem 1rem 0.4rem;
+  margin-top: 0;
+}
+
+.product {
+  list-style: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  column-gap: 0.4rem;
+  width: 100%;
+  padding: 0.7rem 0 0.7rem 0;
+}
+
+.product::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  width: 80%;
+  margin: auto;
+  border-bottom: 1px solid grey;
+}
+
+.product-image {
+  max-width: 25%;
+}
+
+.product-info {
+  max-width: 50%;
+  overflow: auto;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.2rem;
+  padding: 0.4rem 0 0.4rem 0;
+}
+
+.product-title {
+  font-size: 0.8rem;
+}
+
+.product-price {
+  font-size: 1.3rem;
 }

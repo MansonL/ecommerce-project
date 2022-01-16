@@ -1,0 +1,35 @@
+.add-remove-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.8rem;
+    max-width: 20%;
+    align-items: center;
+}
+
+.add-remove-btn {
+  width: 50%;  
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  z-index: 1;
+}
+
+.add-remove-icon {
+  width: 100%;
+}
+
+.qty-underline {
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  background-color: salmon;
+  left: 0;
+  border-radius: 1rem;
+}
+
+.cart-confirmation {
+  width: 80%;
+  margin: auto;
+  
+}

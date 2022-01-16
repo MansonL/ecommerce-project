@@ -40,6 +40,7 @@ const usersSchema = new Schema({
                 floor: { type: String },
                 department: { type: String },
                 city: { type: String },
+                string: { type: String },
             }
         ],
         isAdmin: { type: Boolean, required: true }

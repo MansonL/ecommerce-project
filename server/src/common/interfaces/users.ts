@@ -25,6 +25,7 @@ export type UserAddresses = {
     floor?: string;
     department?: string;
     city: string;
+    extra_info: string;
 }
 
 export type UserInfo = {
