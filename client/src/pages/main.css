@@ -1,117 +1,364 @@
-body {
-  background-color: #ebebeb;
-  font-family: "Open Sans", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
+@media (max-width: 500px){
+  .main{
+    background-position: 90%;
+  }
+  .nav-bar {
+    height: 8vh;
+  }
+  .cart-counter{
+    left: 40%;
+    top: 30%;
+  }
+  .welcome-products-btn {
+    left: 28%;
+    bottom: 9%;
+  }
+  .main-menu {
+    width: 60vw;
+  }
+}
+
+html, body {
   height: 100%;
   width: 100%;
 }
 
-.container {
-  width: 90%;
-  background-color: white;
-  margin: auto;
-  padding: 0.3rem;
-  border-radius: 1rem;
-  margin-top: 1rem;
-}
-.top-bar {
-  display: flex;
-  justify-content: space-around;
-  background-color: #faf0dc;
-  padding: 0.4rem;
-  border-radius: 1rem;
-}
-.products-menu {
-  position: relative;
-  display: inline-block;
-}
-.products-dropdown {
-  position: absolute;
-  z-index: 1;
-  background-color: white;
-  text-align: center;
-  display: none;
-  white-space: nowrap;
-}
-.showMenu {
-  display: block !important;
-}
-.hr-menu {
-  color: grey;
-  border: 1px solid grey;
-  margin: 0;
-}
-.menu-btn, .top-buttons {
-  border: none;
-  background-color: white;
-  border-radius: 0.4rem;
-  cursor: pointer;
-}
-.menu-btn {
+h5 {
+  font-weight: normal;
   font-size: 0.8rem;
 }
-.title, h6, h5, .submit-btn, .body-header{
-  text-align: center;
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-seriff;
 }
-.content-body {
-  position: relative;
+.main{
+  height: 100vh;
+  width: 100%;  
+  background-color: white;
 }
-.title {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+/*  -------------------------------------------------------------------- 
+        SECTIONS CONTAINERS
+
+------------------------------------------------------------------------*/
+.body-container {
   width: 100%;
 }
-.label-styled-input {
+
+.nav-bar {
+  height: 8vh; /*Need to be replaced */
+  background-color: #fcde67;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-products-search-container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.products-search {
+  border: none;
+  border-radius: 0.4rem;
+  width: 70%;
+  height: 40%;
+}
+
+.products-search:focus {
+  outline: 2px solid #83DBEC;
+}
+
+.products-search::placeholder {
+  padding-left: 0.4rem;
+}
+
+.navbar-icon {
+  
+  cursor: pointer;
+  width: 70%;
+}
+.dropdown-menu-container {
+  display: flex; 
+  max-width: 15%;
+  align-items: center;
+  margin-left: 0.3rem;
+}
+.main-menu {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  background-color: #fcde67;
+  height: 92vh;
+  bottom: 0;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  transition: opacity 0.5s ease-in 0s;
+}
+.main-menu-active {
+  opacity: 1;
+  z-index: 1;
+}
+.avatar-row {
+  background-color: #fcde67;
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Montserrat', sans-serif;
+  align-items: center;
+}
+.avatar-img {
+  margin-left: 1rem;
+  max-width: 20%;
+}
+.login-logout-avatar {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+.menu-rows {
+  height: 100%;
+  background-color: white; 
+}
+.menu-row, .first-menu-row {
   position: relative;
-  z-index:1;
-  width:100%;
-  border:none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.menu-row::after {
+  content: "";
+  position: absolute;
+  border-top: 1px solid grey;
+  width: 80%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+.cart-icon-container {
+  display: flex;
+  position: relative;
+  max-width: 15%;
+}
+.cart-navbar-btn, .main-menu-btn, .filter-btn {
   background-color: transparent;
+  border: none;
+}
+.main-menu-btn {
+  width: 100%;
+}
+.cart-counter{
+  position: absolute;
+  font-size: 1.1rem;
+}
+/*  ---------------------------------------------------------------
+
+INPUTS & LABELS COMMON STYLES       -------------------------------
+
+-------------------------------------------------------------------
+*/
+
+
+.animated-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 0;
+  transition: 0.5s;
+  font-size: 0.6rem;
+}
+
+.filled-input-label {
+  position: absolute;
+  z-index: 0;
+  top: -1.5rem;
+  left: -0.5rem;
+  font-size: 0.8rem;
+}
+
+.styled-input {
+  background-color: transparent;
+  z-index: 1;
+  border: none;
+  outline: none;
+  position: relative;
+  margin-top: 0.4rem;
+  width: 100%;
+}
+
+
+
+.styled-input:focus ~ .input-border {
+  width: 100%;
+}
+
+.styled-input:focus ~ .animated-label {
+  top: -1rem;
+  left: -0.5rem;
+  font-size: 0.8rem;
+}
+
+
+
+.input-border {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #83DBEC;
+  transition: 0.5s;
+}
+
+/* -----------------------------------------------------------------------------
+
+              FORM - SIGNUP - LOGIN COMMON HEADERS
+
+---------------------------------------------------------------------------------*/
+
+.header.title {
+  font-size: 1.5rem;
+}
+
+.login-signup-header, .cart-header, .address-header, .order-header {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.login-signup-fields, .address-fields, .product-form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  row-gap: 1.8rem;
+  width: 65%;
+  margin: auto;
+  text-align: left;
+}
+
+.login-signup-field, .address-field, .product-field {
+  position: relative;
+}
+
+.submit-row {
+  width: 50%;
+  margin: auto;
+  margin-top: 0.3rem;
+  text-align: center;
+}
+
+.submit-btn {
+  background-color: #fcde67;
+  box-sizing: border-box;
+  color: black;
+  font-size: 1.2rem;
+  border-radius: 0.6rem;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.submit-btn:hover {
+  background-color: white;
+  border: 1px solid #fcde67;
+}
+
+.password-field {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+}
+
+.pswd-input-wrapper {
+  position: relative;
+}
+
+.show-pswd-icon {
+  height: 70%;
+}
+
+.password-input {
+  flex-grow: 1;
+}
+
+.required-field {
+  opacity: 1;
+  transition: 0.2s;
+  width: 3%;
+}
+
+/* -----------------------------------------------------------------------------------------
+
+                          SEARCH PRODUCTS, CART & ADMIN VIEW COMMON CLASSES
+
+    ---------------------------------------------------------------------------------------- */
+
+.order-container, .addresses-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 85%;
+  text-align: left; 
+  margin: auto;
+}
+
+.products-results, .cart-products {
+  overflow-y: scroll;
+  max-height: 85vh;
+  position: relative;
+  padding: 1rem 0.4rem 1rem 0.4rem;
+  margin-top: 0;
+}
+
+.product {
+  list-style: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  column-gap: 0.4rem;
+  width: 100%;
+  padding: 0.7rem 0 0.7rem 0;
+}
+
+.product::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  width: 80%;
+  margin: auto;
   border-bottom: 1px solid grey;
 }
-.label-styled-input:focus {
-  outline: none;
+
+.product-image {
+  max-width: 25%;
 }
-.label-styled {
-  font-size: 0.9rem;
-  position: absolute;
-  left:0;
-  top: 0;
-  width: 100%;
-  transition: 0.3s;
-  z-index:0;
-}
-.label-styled-input:focus ~ .label-styled {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: -1rem;
-  font-size: 0.8rem;
-  font-weight:700;
-  transition: 0.3s;
-}
-.label-styled-input:focus {
-  border-bottom: none;
-}
-.hasContent{
-  position: absolute;
-    left: 0;
-    bottom: 0;
-    top: -1rem;
-    font-size: 0.8rem;
-    font-weight:700;
-    transition: 0.3s;
-}
-.submit-form {
-  border: 0.1rem solid #faf0dc;
-  background-color: transparent;
-  border-radius: 0.8rem;
-  font-size: 1.3rem;
-}
-.submit-form:hover, .random-submit:hover {
-  background-color: #faf0dc;
-}
-#submit {
+
+.product-info {
+  max-width: 50%;
+  overflow: auto;
+  z-index: 1;
   display: flex;
-  justify-content: center;
-  width: 100%;
+  flex-direction: column;
+  row-gap: 0.2rem;
+  padding: 0.4rem 0 0.4rem 0;
+}
+
+.product-title {
+  font-size: 0.8rem;
+}
+
+.product-price {
+  font-size: 1.3rem;
 }

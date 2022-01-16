@@ -8,10 +8,34 @@ import { CUDResponse } from "./others";
  * 
  * This interface is just for Class22 Assignment.
  * 
- */
+ *
  export interface IMessagesNormalized {
     _id: string;
     messages: IMongoMessage[];
+}
+*/
+
+export interface IMongoPopulatedMessages {
+    timestamp: string;
+    from: {
+        data: {
+            username: string;
+            name: string;
+            surname: string;
+            avatar: string;
+        },
+        _id: string;
+    }
+    to: {
+        data: {
+            username: string;
+            name: string;
+            surname: string;
+            avatar: string;
+        },
+        _id: string;
+    }
+    message: string;
 }
 
 /**
@@ -26,6 +50,7 @@ export interface IMessageSentPopulated {
         }
     }
     message: string;
+    type: string;
 }
 
 /**
@@ -47,6 +72,7 @@ export interface INew_Message {
     from: ObjectId;
     to: ObjectId;
     message: string;
+    type: string;
 }
 
 /**

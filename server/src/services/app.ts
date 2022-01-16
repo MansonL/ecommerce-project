@@ -10,6 +10,9 @@ import cookieParser from 'cookie-parser'
 import passport from '../passport/facebook'
 import fileUpload from 'express-fileupload';
 import { Config } from '../config/config';
+import { serve, setup } from 'swagger-ui-express';
+
+const outputFile = require('../doc/doc.json');
 
 export const app: express.Application = express();
 app.use(cors({
@@ -45,7 +48,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use('/doc', serve, setup(outputFile));
 app.use('/api', router);
 app.use(errorHandler);
 app.use(unknownRoute);

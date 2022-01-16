@@ -53,15 +53,15 @@ export class MongoMessages implements DBMessagesClass {
                 let messages: (Document<any, any, INew_Message> & INew_Message & {
                     _id: Types.ObjectId;
                      })[] = [];
-                await docs.forEach(async document => {
+                for await (const document of docs) {
                     if(String(document.from) == user_id){
-                        const populatedDoc = await document.populate({ path: 'to', select: 'data.username data.name data.surname' });
+                        const populatedDoc = await document.populate({ path: 'to', select: 'data.username data.name data.surname _id data.avatar' });
                         messages.push(populatedDoc);
                     }else if(String(document.to) == user_id){
-                        const populatedDoc = await document.populate({ path: 'from', select: 'data.username data.name data.surname' });
+                        const populatedDoc = await document.populate({ path: 'from', select: 'data.username data.name data.surname _id data.avatar' });
                         messages.push(populatedDoc)
                     }
-                });
+                }
                 return messages as IMongoMessage[]
 
             }else{
@@ -84,10 +84,10 @@ export class MongoMessages implements DBMessagesClass {
     }
     async add(msg: INew_Message): Promise<CUDResponse | ApiError> {
         try {
-            const doc = await (await this.messages.create(msg)).populate({ path: 'to', select: 'data.username' }) as IMessageSentPopulated;
+            const doc = await (await this.messages.create(msg)).populate({path: 'to', select: 'data.username'})
         return {
             message: `Message successfully added.`,
-            data: doc,
+            data: doc as IMongoMessage,
         };
         } catch (error) {
             return ApiError.internalError(`An error occured.`)

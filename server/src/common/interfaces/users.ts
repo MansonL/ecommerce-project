@@ -14,7 +14,7 @@ import { CUDResponse } from "./others"
 
 export type UserAddresses = {
     _id: string;
-    alias?: string;
+    alias: string;
     street1: {
         name: string;
         number: number;

@@ -3,11 +3,13 @@ import './home.css'
 export function Home () {
     return(
         <React.Fragment>
-        <header>
-      <div className="title">
-        <h4>Welcome Everyone to my first App!</h4>
-      </div>
-    </header>
+       <section className="body-container">
+<div className="welcome-text">
+    <p className="first-text">Welcome to my first</p>
+    <p className="second-text">Ecommerce Project </p>
+  </div>
+   <button className="welcome-products-btn">Start looking</button>
+</section>
     </React.Fragment>
     )
 }

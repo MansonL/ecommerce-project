@@ -1,0 +1,20 @@
+.code-field {
+    display: flex;
+    column-gap: 0.4rem;
+    align-items: center;
+  }
+  
+  .code-btn {
+    background-color: #A2D2FF;
+    border: 2px solid #85C4FF;
+    padding: 0.3rem;
+    transition: 0.4s;
+    font-size: 0.7rem;
+    border-radius: 0.5rem;
+  }
+  .coder-btn:hover {
+     background-color: white;
+  }
+  .code-btn:focus {
+     background-color: white;
+  }

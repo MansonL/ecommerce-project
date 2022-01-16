@@ -25,7 +25,7 @@ class MessagesController {
     }
 
     async getUserMessages(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const { user_id } = req.user as Express.User
+        const user_id: string = req.params.id
         if(ObjectId.isValid(user_id)){
             const result : IMongoMessage[] | ApiError = await messagesApi.getMsg(user_id);
             if(result instanceof ApiError) 

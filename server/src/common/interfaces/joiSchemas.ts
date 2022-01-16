@@ -200,7 +200,7 @@ class Validations {
         }).required();
 
         this.address = Joi.object<UserAddresses>({
-            alias: Joi.string().min(1).max(15).optional().messages({
+            alias: Joi.string().min(1).max(15).required().messages({
                 'string.min': `Alias should be at least 1 character long.`,
                 'string.max': `Alias must be shorter than 16 characters.`
             }),

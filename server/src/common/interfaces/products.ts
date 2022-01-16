@@ -10,6 +10,7 @@ import { CUDResponse, } from "./others";
 export interface IMongoCart extends Document {
     _id: ObjectId;
     createdAt: string;
+    modifiedAt: string;
     user: ObjectId;
     products: {
         product: {

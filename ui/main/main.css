@@ -179,7 +179,7 @@ INPUTS & LABELS COMMON STYLES       -------------------------------
   z-index: 0;
   top: -1.5rem;
   left: -0.5rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .styled-input {
@@ -189,6 +189,7 @@ INPUTS & LABELS COMMON STYLES       -------------------------------
   outline: none;
   position: relative;
   margin-top: 0.4rem;
+  width: 100%;
 }
 
 
@@ -231,7 +232,7 @@ INPUTS & LABELS COMMON STYLES       -------------------------------
   text-align: center;
 }
 
-.login-signup-fields, .address-fields {
+.login-signup-fields, .address-fields, .product-form {
   display: flex;
   flex-direction: column;
   padding-top: 1rem;
@@ -241,7 +242,7 @@ INPUTS & LABELS COMMON STYLES       -------------------------------
   text-align: left;
 }
 
-.login-signup-field, .address-field {
+.login-signup-field, .address-field, .product-field {
   position: relative;
 }
 

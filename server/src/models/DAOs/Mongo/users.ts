@@ -40,7 +40,8 @@ const usersSchema = new Schema({
                 floor: { type: String },
                 department: { type: String },
                 city: { type: String },
-                string: { type: String },
+                extra_info: { type: String },
+                _id: false,
             }
         ],
         isAdmin: { type: Boolean, required: true }
@@ -84,7 +85,7 @@ const botData: INew_User = {
     createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     data: {
-        username: `test@gmail.com`,
+        username: Config.GOOGLE_EMAIL,
         password: 'test123',
         repeatedPassword: 'test123',
         name: `Manson`,
@@ -101,7 +102,7 @@ const customerTest: INew_User = {
     createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     data: {
-        username: `mansonlautaro@gmail.com`,
+        username: `lautaromanson@outlook.es`,
         password: 'test123',
         repeatedPassword: 'test123',
         name: `Manson`,
@@ -127,15 +128,15 @@ export class MongoUsers {
     async init() {
         if(Config.MODE === 'CLUSTER'){
             if(cluster.isMaster){
-                //await this.users.deleteMany({});
-                //await WelcomeBot.save();
-                //await CustomerTest.save();
+                await this.users.deleteMany({});
+                await WelcomeBot.save();
+                await CustomerTest.save();
                 logger.info(`Users initialized`);
             }
         }else{
-            //await this.users.deleteMany({});
-            //await WelcomeBot.save();
-            //await CustomerTest.save()
+            await this.users.deleteMany({});
+            await WelcomeBot.save();
+            await CustomerTest.save()
             logger.info(`Users initialized`);
         } 
     }

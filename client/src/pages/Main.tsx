@@ -1,79 +1,112 @@
 import { UserContext, UserProvider } from './components/UserProvider'
-import { Routes, Link, Route, Router, BrowserRouter } from 'react-router-dom';
-import { Messages } from './Messages';
+import { Routes, Link, Route, BrowserRouter } from 'react-router-dom';
 import { ProductsForm } from './ProductsForm';
 import { Home } from './Home';
 import './main.css';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { RandomProducts } from './randomProducts';
-import { DBProducts } from './DBProducts';
 import { Cart } from './Cart';
 import { LogIn } from './LogIn';
+import { Chat } from './Chat';
+import { Products } from './Products';
 import { SignUp } from './SignUp';
-import { Profile } from './Profile';
+import { AddressForm } from './AddressForm';
+import { AddressesList } from './AddressList';
+import { Order } from './Order';
 
 
 
 
 export function Main () {
-  const dropdownMenu = useRef(null);
+  
+  
   const dropdownBtn = useRef(null);
+  const filterBtn = useRef(null);
+  const [showFilter, setShowFilter] = useState(false);
   const [showMenu, setShowMenu] = useState(false)
 
-  const { loggedIn } = useContext(UserContext)
+  const showFilterMenu = () => {
+    setShowMenu(!showMenu)
+  }
 
-  useEffect(() => {
-    document.addEventListener('click', (ev: MouseEvent) => {
-      if(dropdownMenu && dropdownBtn && ev.target){
-          if(ev.target !== dropdownBtn.current && ev.target !== dropdownMenu.current){
-            if(showMenu) setShowMenu(false)
-          }
+
+  const { loggedIn, user, cart } = useContext(UserContext)
+
+  let cartAmount = 0;
+  cart.products.forEach(product => cartAmount+=product.quantity);
+
+  const clickEvent = (ev: MouseEvent) => {
+    if(dropdownBtn && filterBtn && ev.target){
+        if(ev.currentTarget !== dropdownBtn.current){
+          console.log(ev.target);
+          console.log(dropdownBtn.current)
+          if(showMenu) setShowMenu(false)
+        }else if(ev.currentTarget !== filterBtn.current){
+          if(showFilter) setShowFilter(false);
         }
-    })
-  })
+      }
+    }
+  useEffect(() => {
+  document.addEventListener('click', clickEvent)
+    return () => document.removeEventListener('click', clickEvent)
+}, [showMenu, showFilter])
   
   
-  const menuBtnHandleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const menuBtnHandleClick = (e: React.MouseEvent<HTMLDivElement>) => {
       e.preventDefault();
       setShowMenu(true)
   }
 
-  const menuClass = `products-dropdown ${showMenu ? 'showMenu' : ''}`;
   return (
     <UserProvider>
         <BrowserRouter>
-        <div className="container">
-          
-  <div className="top-bar">
-  <div className="products-menu"><button className="top-buttons" ref={dropdownBtn} id="product-menu-button" onClick={menuBtnHandleClick}>Products</button>
-      <div className={menuClass} ref={dropdownMenu}><Link to="/randomProducts"><button className="top-buttons">Random Generated</button></Link>
-        <hr className="hr-menu"/><Link to="/form" ><button className="top-buttons">Form</button></Link>
-        <hr className="hr-menu"/><Link to="/DBProducts"><button className="top-buttons">DB Products</button></Link>
-        <hr className="hr-menu"/><Link to="/cart"><button className="top-buttons">DB Cart</button></Link>
-      </div>
+        <div className="main">
+  <div className={`main-menu ${showMenu ? "main-menu-active" : ""}`}>
+    <div className="avatar-row">
+      <img src={user.avatar ? user.avatar : "https://cdn4.iconfinder.com/data/icons/light-ui-icon-set-1/130/avatar_2-512.png"} alt="" className="avatar-img" />
+      <span className="login-logout-avatar"><Link to={loggedIn ? "/profile" : "/login"}>{loggedIn ? "Profile" : "Login/Signup"}</Link></span>
     </div>
-    <Link to="/messages"><button className="top-buttons">Messages</button></Link>
-    <Link to="/login"><button className="top-buttons">{loggedIn ? "Log out" : "Log In"}</button></Link>
-  </div><hr/>
-  <div className="content-body">
+    <div className="menu-rows">
+      <div className="first-menu-row"><Link to="/">Home</Link></div>
+      <div className="menu-row"><Link to="/products">Products</Link></div>
+      {loggedIn && <div className="menu-row"><Link to ="/chat">Chat</Link></div>}
+      {user.isAdmin && <div className="menu-row"><Link to ="/new-product">Products form</Link></div>}
+    </div>
+  </div>
+  <div className="nav-bar">
+    <div className="dropdown-menu-container" onClick={menuBtnHandleClick} ref={dropdownBtn}>
+      <button className="main-menu-btn">
+        <img src="https://www.pngkey.com/png/full/332-3321462_mobile-menu-for-barefoot-resort-vacations-hamburger-menu.png" alt="" className="navbar-icon" style={{width: "70%"}} />
+      </button>
+    </div>
+    <div className="main-products-search-container">
+      <input type="text" className="products-search" placeholder="Search products now..." />
+    </div>
+    <div className="cart-icon-container">
+      <Link to="/cart"><button className="cart-navbar-btn" style={{position:"relative"}}> <img className="navbar-icon" src="https://icon-library.com/images/white-shopping-bag-icon/white-shopping-bag-icon-4.jpg" alt="" />
+        <span className="cart-counter">{cartAmount}</span>
+      </button></Link>
+    </div>
+  </div>
   
     <Routes>
       
-    <Route path="/" element={<Home/>} />
-      <Route path="/messages" element={<Messages/>}/>
-      <Route path="/randomProducts" element={<RandomProducts/>} />
-      <Route path="/DBProducts" element={<DBProducts/>} />
+      <Route path="/" element={<Home/>} />
+      <Route path="/products" element={<Products filterBtn={filterBtn} showFilterMenu={showFilterMenu} showFilter={showFilter}/>} />
       <Route path="/cart" element={<Cart/>} />
-      <Route path="/form" element={<ProductsForm/>} />
+      <Route path="/new-product" element={<ProductsForm/>} />
       <Route path="/login" element={<LogIn/>}/>
-      <Route path="/signup" element={<SignUp/>}/>
-      <Route path="/profile" element={ <Profile />} />
-    
+      <Route path="/chat" element={ <Chat />} />
+      <Route path="/signup" element={<SignUp/>} />
+      <Route path="/new-address" element={<AddressForm/>} />
+      <Route path="/addresses" element={<AddressesList/>} />
+      <Route path="/order" element={<Order/>} />
     </Routes>
     
-</div>
 </div>
 </BrowserRouter>
 </UserProvider>
     )
 }
+
+   
+  

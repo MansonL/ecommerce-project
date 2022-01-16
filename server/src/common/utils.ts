@@ -14,7 +14,12 @@ import Mail from 'nodemailer/lib/mailer';
 import { createTransporter } from '../services/email';
 import { ordersApi } from '../api/order';
 import { cartApi } from '../api/cart'
-import { JwtPayload } from 'jsonwebtoken';
+import { IMessageSentPopulated, IMongoMessage } from './interfaces/messages';
+import { messagesApi } from '../api/messages';
+import { CUDResponse } from './interfaces/others';
+import moment from 'moment';
+
+const BOTID = new Types.ObjectId();
 
 export const htmlGeneral = `<!doctype html>
                     <html>
@@ -80,15 +85,65 @@ export class Utils {
         switch(message.toLowerCase()){
             case 'stock' : {
                         const result : IMongoProduct[] | ApiError = await productsApi.getStock();
-                        return result instanceof ApiError ? result.message : JSON.stringify(result, null, '\t')
+                        if(result instanceof ApiError)
+                            return result.message
+                        else{
+                            const result2 : CUDResponse| ApiError = await messagesApi.addMsg({
+                                timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+                                from: BOTID,
+                                to: new Types.ObjectId(user_id),
+                                type: 'system',
+                                message: JSON.stringify(result, null, '\t')
+                            });
+                            if(result2 instanceof ApiError)
+                                return result2.message
+                            else{
+                                const message = JSON.stringify(result2.data, null, '\n'); 
+                                return message
+                            }
+                        }
+                        
                         }
             case 'order': {
-                        const result : IOrderPopulated[] | IMongoOrderPopulated[] | ApiError = await ordersApi.get('user', user_id)
-                        return result instanceof ApiError ? result.message : JSON.stringify(result, null, '\t')
+                        const result : IOrderPopulated[] | IMongoOrderPopulated[] | ApiError = await ordersApi.get('user', user_id);
+                        if(result instanceof ApiError)
+                            return result.message
+                        else{
+                            const result2 : CUDResponse | ApiError = await messagesApi.addMsg({
+                                timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+                                from: BOTID,
+                                to: new Types.ObjectId(user_id),
+                                type: 'system',
+                                message: JSON.stringify(result, null, '\t')
+                            });
+                            if(result2 instanceof ApiError)
+                                return result2.message
+                            else{
+                                const message = JSON.stringify(result2.data, null, '\t');
+                                return message
+                            }
+                        }
+                        
                         }
             case 'cart': {
                         const result : IMongoCart[] | ApiError = await cartApi.get(username);
-                        return result instanceof ApiError ? result.message : JSON.stringify(result, null, '\t')
+                        if(result instanceof ApiError)
+                            return result.message
+                        else{
+                            const result2 : CUDResponse | ApiError = await messagesApi.addMsg({
+                                timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+                                from: BOTID,
+                                to: new Types.ObjectId(user_id),
+                                type: 'system',
+                                message: JSON.stringify(result, null, '\t')
+                            });
+                            if(result2 instanceof ApiError)
+                                return result2.message
+                            else{
+                                const message = JSON.stringify(result2.data, null, '\t');
+                                return message
+                            }
+                        }
                     }
             default: 
                     return `Please, type a valid option among the followings: order, stock or cart.`
@@ -173,10 +228,15 @@ export class Utils {
                 orderProducts.forEach(product => {
                     order[String(product.product_id)] = product.quantity;
                 });
+                const invalidProductAmount : string[] = [];
                 const valid = DBProducts.every(DBproduct => {
-                   return order[DBproduct._id] <= DBproduct.stock
+                    if(order[DBproduct._id] > DBproduct.stock) orderProducts.forEach(product => {
+                        if(String(product.product_id) == DBproduct._id) invalidProductAmount.push(product.product_title)
+                    })
+                    return order[DBproduct._id] <= DBproduct.stock
                 });
-                return valid ? valid : EOrdersErrors.GreaterQuantity
+                return valid ? valid : `${EOrdersErrors.GreaterQuantity}
+                ${invalidProductAmount.concat(', ')}`
             }else{
                 return EOrdersErrors.DeletedProduct
             }

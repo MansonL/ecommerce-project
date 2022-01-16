@@ -7,6 +7,7 @@ import { logger } from './logger';
 
 export const socketConnection = (server: Server) => {
     const io = new socket.Server(server);
+    io.attach(server)
     io.on('connection', (socket) => {
         logger.info('New client connected!');
         socket.on('messages', () => {

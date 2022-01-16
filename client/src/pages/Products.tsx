@@ -1,22 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react'
-import './products.css'
-import { CUDResponse, IMongoCartProduct, IMongoProduct, IQuery } from '../utils/interfaces'
-import { socket } from '../lib/socket'
-import axios from 'axios'
-import { hasProductOrEmpty } from '../utils/utilities'
+import axios, { AxiosResponse } from 'axios';
+import React, { useContext, useState } from 'react';
+import { IMongoProduct, IQuery } from '../../../server/src/common/interfaces/products';
+import { UserContext } from './components/UserProvider';
+import {defaultProductFromDB, ProductCUDResponse } from '../utils/interfaces';
+import './products.css';
+import { Modal } from './components/Modal/Modal';
+import { OperationResult } from './components/Result/OperationResult';
+import { ModalContainer } from './components/Modal/ModalContainer';
+import { LoadingSpinner } from './components/Spinner/Spinner';
 
-interface ProductsProp {
-    products: IMongoProduct[] | IMongoCartProduct[];
-    updateProducts: ((products: IMongoProduct[] | IMongoCartProduct[] | [], msg: string | undefined) => void) | undefined
-    type: string;
-    noProducts: boolean;
-    noProductsMsg: string | undefined;
+export interface IProductsProps {
+  filterBtn: React.MutableRefObject<null>,
+  showFilter: boolean;
+  showFilterMenu: () => void;
 }
 
-export function Products(props: ProductsProp) {
+
+export function Products(props: IProductsProps) {
+  
   const [filters, setFilters] = useState<IQuery>({
       title: '',
       code: '',
+      category: '',
       price: {
         minPrice: 0,
         maxPrice: 0,
@@ -27,7 +32,7 @@ export function Products(props: ProductsProp) {
       }
     })
 
-    const handleFiltersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const filterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         const property = e.target.name
         if(/Price/g.test(property)){
@@ -54,226 +59,186 @@ export function Products(props: ProductsProp) {
         }
     }
 
-    const handleFilterApply = async (ev: React.MouseEvent<HTMLButtonElement>) => {
-      console.log(filters);
+    const [products, setProducts] = useState<IMongoProduct[]>([defaultProductFromDB])
+
+
+    const AxiosThenCallback =  (response: AxiosResponse<ProductCUDResponse, any>) => {
+      const data = response.data;
+        setShowResult(true);
+        setOperationResult(true);
+        setResultMsg(data.message);
+        setProducts(data.data)
+        updateLoading();
+        document.body.style.overflow = "scroll";
+        setTimeout(async () => {
+             setShowResult(false);
+             setOperationResult(false);
+             setResultMsg('');
+        },2000)
+    }
+  
+    const AxiosCatchCallback = (error: any) => {
+      updateLoading();
+          document.body.style.overflow = "scroll";
+          console.log(JSON.stringify(error, null, '\t'));
+          setShowResult(true);
+          setOperationResult(false);
+          if(error.response){
+            if(error.response.status === 500){
+              setResultMsg(error.response.data.message)
+            }else{
+              setResultMsg(error.response.data.message)
+            }
+          }else if(error.request){
+              setResultMsg(`No response received from server.`)
+          }else{
+              setResultMsg(`Request error.`)
+          }
+          setTimeout(() => {
+            setOperationResult(false);
+            setShowResult(false);
+            setResultMsg('')
+          }, 3000)
+    }
+
+
+
+    const FilterApply = async (ev: React.MouseEvent<HTMLButtonElement>) => {
+      ev.preventDefault();
       const url = `http://localhost:8080/api/products/query?${filters.title ? `title=${filters.title}&` : ""}${filters.code ? `code=${filters.code}&` : ""}${filters.stock.minStock ? `minStock=${filters.stock.minStock}&` : ""}${filters.stock.maxStock ? `maxStock=${filters.stock.maxStock}&` : ""}${filters.price.minPrice ? `minPrice=${filters.price.minPrice}&` : ""}${filters.price.maxPrice ? `maxPrice=${filters.price.maxPrice}` : ""}`
-      console.log(url)
-        axios.get<IMongoProduct[]>(url, { withCredentials: true } ).then(response => {
-          const filteredProducts = response.data;
-          if(props.updateProducts){
-            props.updateProducts(filteredProducts,undefined);
-          }
-        }).catch(error => {
-          if(props.updateProducts){
-            props.updateProducts([], error.response.data.message)
-          }
-        })
-        
+      updateLoading();
+      document.body.style.overflow = "hidden";
+      axios.get<IMongoProduct[]>(url).then(response => {
+        const products = response.data;
+        setProducts(products);
+        updateLoading();
+        document.body.style.overflow = "scroll";
+      }).catch(AxiosCatchCallback)
+      
         
     }
 
-    const [showFilters, setShowFilters] = useState(false);
-    const filterDropdown = useRef<HTMLDivElement>(null);
-    const filterBtn = useRef<HTMLButtonElement>(null);
-    const filterDropdownClassName = showFilters ? 'filter-dropdown showMenu' : 'filter-dropdown';
-
-    const handleFilterClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
-      if(showFilters){
-        setShowFilters(false);
-      }else{
-        setShowFilters(true)
-      }
+    const filterClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
+      ev.preventDefault();
+      props.showFilterMenu();
     }
 
-    const [showConfirmation, setShowConfirmation] = useState(false);
-    const [showOperationResult, setShowOperationResult] = useState(false);
-    const [resultMessage, setResultMessage] = useState('');
-    const [operationType, setOperationType] = useState('');
-    const [saveCode, setCode] = useState('');
+    const filterDropdownClassName = props.showFilter ? 'filter-menu filter-menu-active' : 'filter-menu';
 
-    const resultOperationStyle = operationType === 'failure' ? 'result-error' : 'result-success';
+   
 
-    const handleAddProduct = async (code: string) => {
-      const result : CUDResponse = await (await axios.post<CUDResponse>(`http://localhost:8080/api/cart/add/${code}`)).data;
-      setShowOperationResult(true);
-      if(hasProductOrEmpty(result.data as IMongoProduct | [])){
-          setOperationType('success');
-          setResultMessage(result.message)
-         socket.emit('cart')
-      }else{
-          setOperationType('failure');
-          setResultMessage(result.message)
-      }
+    const [showModal, setShowModal] = useState(false);
+    const [showResult, setShowResult] = useState(false);
+    const [operationResult, setOperationResult] = useState(false);
+    const [resultMsg, setResultMsg] = useState('');
+    const [savedCode, setCode] = useState('');
+
+    const { user, loading, updateLoading, updateCart, token } = useContext(UserContext);
+    const [adminView, setAdminView] = useState(false);
+
+    const changeToAdmingView = () => {
+      setAdminView(!adminView)
     }
 
-    const handleRemoveProduct = (code: string) => {
+    
+
+    const handleAdd = async (code: string) => {
+      updateLoading();
+      document.body.style.overflow = "hidden";
+      axios.delete<ProductCUDResponse>(`http://localhost:/api/cart/add/${savedCode}`, { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
+      .then(AxiosThenCallback)
+      .catch(AxiosCatchCallback)
+    }
+
+    const removeProductAttempt = (code: string) => {
       setCode(code);
-      setShowConfirmation(true);
+      setShowModal(true);
     }
 
     const handleCancel = () => {
-      setShowConfirmation(false);
+      setShowModal(false);
     }
 
-    const handleDelete = () => {
-      /**
-       * 
-       * Here we check if we are showing the cart products or the products on the DB,
-       * and based on that condition we are going to delete products from the cart or from the DB
-       * 
-       */
-      const url = props.type === 'cart' ? `http://localhost:8080/api/cart/delete/${saveCode}` : `http://localhost:8080/api/products/delete/${saveCode}`
-      axios.delete<CUDResponse>(url, { withCredentials: true }).then(response => {
-        const data = response.data
-        setShowOperationResult(true);
-        setOperationType('success');
-        setResultMessage(data.message);
-        if(props.type === 'cart'){
-          socket.emit('cart');
-        }else{
-          socket.emit('products')
-        }
-      }).catch(error => {
-        setOperationType('failure');
-        setResultMessage(error.response.data.message)
-      })  
+    const deleteProduct = () => {
+      updateLoading();
+      document.body.style.overflow = "hidden";  
+      axios.delete<ProductCUDResponse>(`http://localhost:/api/cart/delete/${savedCode}`, { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
+      .then(AxiosThenCallback)
+      .catch(AxiosCatchCallback)
     }
 
-    const handleAlertEnd = (ev: React.AnimationEvent<HTMLDivElement>) => {
-      setShowOperationResult(false);
-      setResultMessage('');
-      setShowConfirmation(false);
-    }
-
-    useEffect(() => {
-      document.addEventListener('click', (ev: MouseEvent) => {
-        if(filterDropdown.current && filterBtn.current && ev.target){
-            if(ev.target !== filterBtn.current && !filterDropdown.current.contains(ev.target as Node)){
-              if(showFilters) setShowFilters(false)
-            }
-          }
-      })
-      
-      
-
-    })
-    
-    /**
-     * 
-     * This code is just in Random Products case.
-     * 
-     */
-    const [generateRandom, setGenerateRandom] = useState('');
-    
-    const handleRandom = (ev: React.ChangeEvent<HTMLInputElement>) => {
-      setGenerateRandom(ev.target.value);
-    } 
-    
-    const handleRandomSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      socket.emit('randomProducts', generateRandom)
-    }
 
     return (
-        
         <>
-        {showConfirmation && <div className="alert-container">
-  <div className="alert">
-    <div className="alert-header">
-      <h3 className="alert-title">Warning!</h3>
-      <button className="result-btn" onClick={handleCancel}><i className="fas fa-times"></i>
-      </button>
-    </div>
-    <div className="alert-body">
-      <span>Are you sure you want to delete the selected item?</span>
-    </div>
-    <div className="alert-bottom">
-      <button className="alert-btn" onClick={handleCancel}>Cancel</button>
-      <button className="alert-btn" onClick={handleDelete}>Delete</button>
-    </div>
-  </div>
-  </div>
-}
-{
-  showOperationResult && <div className="alert-container">
-  <div className={resultOperationStyle} onAnimationEnd={handleAlertEnd}>
-  <span className="result-message">{operationType === 'failure' ?  'A problem occured!' : 'Successfully!'}</span>
-    <p className="result-code">{resultMessage}</p>
-</div>
-</div>
-}
-        <header>
-      <div className="body-header">
-        <h4>{props.type === 'cart' ? 'Cart' : 'Products'} List</h4>
-        {props.type !== 'random' ? '' : <div className="random-generate">
-  <form className='random-form' onSubmit={handleRandomSubmit}>
-      <div className="random-row">
-      <input className="label-styled-input" type="number" min="1" step="1" id="random-product" value={generateRandom} onChange={handleRandom}/>
-    <label className={generateRandom  ? 'hasContent' : 'label-styled'} htmlFor="random-product">Amount of Random Products</label>
-    <span className="form-border"/>
-    
-      </div>
-      <button className="random-submit" type="submit">Generate</button>
-  
-  </form>
-  </div>}
-      </div>
-    </header>
-    <div className="upper-body">
-      <h6>{`Showing ${props.products.length} results.`}</h6>
-      <div className="filters">
-        <button className="filter-btn" onClick={handleFilterClick} ref={filterBtn}>Filters</button>
-        <div className={filterDropdownClassName} ref={filterDropdown}>
+        {showResult && <OperationResult resultMessage={resultMsg} success={operationResult}/>}
 
-          <label htmlFor="title" className="filter-label">Title</label><br/>
-          <input type="text" name="title" className="filter-input" onChange={handleFiltersChange} />
-          <br/>
-          <label htmlFor="code" className="filter-label">Code</label><br/>
-          <input type="text" name="code" className="filter-input" onChange={handleFiltersChange} />
-          <br />
-          <label className=".filter-label">Price</label>
-          <div className="price">
-            <input type="number" min="0.1" step="0.05" name="minPrice" className="number-input" onChange={handleFiltersChange} placeholder="Min" />
-            <input type="number" min="0.1" step="0.05" name="maxPrice" className="number-input" onChange={handleFiltersChange} placeholder="Max" />
+        {showModal  && <Modal cancelClick={handleCancel} confirmClick={deleteProduct} msg='Are you sure you want to delete the product?'/>}
+
+        { loading && <ModalContainer>
+          <LoadingSpinner/>
+        </ModalContainer> }
+
+        <section className="body-container">
+    <div className="products-filter-bar"><span className="total-results">Showing 20 results of 20.</span>
+      <div className="filter-container">
+      <button className="filter-btn" onClick={filterClick} ref={props.filterBtn}><img src="https://static.thenounproject.com/png/1701541-200.png" alt="" className="filter-icon"/></button>
+        <div className={filterDropdownClassName}>
+          <div className="filter-row">
+            <label htmlFor="name" className="filter-label">Product name</label>
+            <input type="text" name="title" value={filters.title} onChange={filterChange} className="filter-input"/>
           </div>
-          <label className="filter-label">Stock</label>
-          <div className="stock">
-            <input type="number" min="0" name="minStock" className="number-input" onChange={handleFiltersChange} placeholder="Min" /><input type="number" min="0" name="maxStock" className="number-input" onChange={handleFiltersChange} placeholder="Max" />
+          <div className="filter-row">
+            <label htmlFor="code" className="filter-label">Code</label>
+            <input type="text" name="code" value={filters.code} onChange={filterChange} className="filter-input"/>
           </div>
-          <div className="apply">
-      <button className="apply-filter" onClick={handleFilterApply}> Apply</button>
-    </div>
-        </div>
-    </div>
-  </div>
-    <div className="products-body">
-      {!props.noProducts ? props.products.map((product, idx) => {
-          return (
-            <div key={idx}>
-            <div className="product">
-              <img className='product-img' src={product.img}/>
-              <div className="product-description">
-                <span className="product-title">{product.title}</span>
-                <span className="product-price">{product.price}</span>
-              </div>
-              <div className="add-remove-btns">
-        {props.type !== 'cart' && <button className="add-remove-icon" onClick={(e) => handleAddProduct(product._id)}><img className='add-icon' src="https://cdn1.iconfinder.com/data/icons/user-interface-44/48/Add-512.png" alt="add-icon" /></button>}
-<button className="add-remove-icon" onClick={(e) => handleRemoveProduct(props.type !== 'cart' ? product._id : product.product_id as string)}><img className='remove-icon' src="https://icons-for-free.com/iconfiles/png/512/cercle+close+delete+dismiss+remove+icon-1320196712448219692.png" alt="remove-icon" /></button>
-        </div>
-            </div><hr className="products-hr" />
+          <div className="filter-row">
+            <label htmlFor="category" className="filter-label">Category</label>
+            <input type="text" name="category" value={filters.category} onChange={filterChange} className="filter-input"/>
+          </div>
+          <div className="filter-row">
+            <label htmlFor="stock" className="filter-label">Stock</label>
+            <div className="flex-filter">
+            <input type="number" className="filter-input" value={filters.stock.minStock} onChange={filterChange} min="1" name="minStock"/>
+              <input type="number" className="filter-input" value={filters.stock.maxStock} onChange={filterChange} min="1" name="maxStock"/>
             </div>
-          )
-      })
-      : <div className="form-error">
-      <div className="result-top">
-        <span className="result-header">Oops!</span>
-        <button className="result-btn"><i className="fas fa-times"></i></button>
-      </div>
-      <div className="result-message">
-        <span>{props.noProductsMsg ? props.noProductsMsg : "There's no products stored..."}</span>
-      </div>
-    </div>}
+          </div>
+          <div className="filter-row">
+            <label htmlFor="price" className="filter-label">Price</label>
+            <div className="flex-filter">
+            <input type="number" className="filter-input" value={filters.price.minPrice} onChange={filterChange} name="minPrice" min="0.01" step="0.1"/>
+              <input type="number" className="filter-input"  value={filters.price.maxPrice} onChange={filterChange} name="maxPrice"  min="0.01" step="0.1"/>
+            </div>
+          </div>
+          <div className="filter-row" style={{textAlign: "center"}}>
+            <button className="filter-submit-btn" onClick={FilterApply}>Apply</button>
+          </div>
+        </div>
+   </div>
     </div>
+    {user.isAdmin && <div className="see-as-admin" onClick={changeToAdmingView}>
+    <span>See as an admin here</span>
+  </div>}
+    <ul className="products-results">
+     {products.length > 0 ? 
+      products.map((product, idx) => {
+        return (
+          <li className="product" id={String(idx)}>
+          <img className="product-image" src={product.product.images[0].url} alt="" />
+          <div className="product-info">
+            <span className="product-title">{product.product.title}</span>
+            <span className="product-price">{product.product.price}</span>
+          </div>
+          <div className="add-remove-container">
+            {!user.isAdmin && <button className="add-remove-btn" onClick={() => handleAdd(String(product.product._id))}><img src="https://cdn-icons-png.flaticon.com/512/216/216685.png" alt="remove-icon" className="add-remove-icon"/></button>}
+            {(user.isAdmin && adminView) && <button className="add-remove-btn" onClick={() => removeProductAttempt(String(product.product._id))}><img src="https://cdn3.iconfinder.com/data/icons/basic-flat-svg/512/svg01-512.png" alt="add-icon" className="add-remove-icon"/></button>}
+         </div>
+        </li>
+        )
+      }) :
+      <OperationResult resultMessage="There are no products stored at DB." success={false}/>}
+       
+    </ul>
+  </section>
   </>
   )
 }

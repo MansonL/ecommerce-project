@@ -1,36 +1,37 @@
-import axios from "axios";
-import moment from "moment";
-import React from "react";
-import { useContext, useState } from "react";
-import { INew_User } from "../../../server/src/common/interfaces/users";
-import { validator } from "../../../server/src/common/interfaces/joiSchemas";
-import { SignUpForm } from "./components/SignUpForm";
-import { authResponse } from "./Main";
-import { UserContext } from './components/UserProvider'
-import './SignUp.css'
-import { Profile } from "./Profile";
-import { LogSignHeaderWrapper } from "./components/LogSignHeaderWrapper";
-import { newUserDefault } from "../utils/interfaces";
-import { cleanEmptyProperties } from "../utils/utilities";
+import axios, { AxiosResponse } from 'axios';
+import moment from 'moment';
+import { useContext, useState } from 'react';
+import { INew_User, UserInfo } from '../../../server/src/common/interfaces/users';
+import {  newUserDefault, UserCUDResponse } from '../utils/interfaces';
+import { validation } from '../utils/joiSchemas';
+import { cleanEmptyProperties } from '../utils/utilities';
+import { ModalContainer } from './components/Modal/ModalContainer';
+import { OperationResult } from './components/Result/OperationResult';
+import { LoadingSpinner } from './components/Spinner/Spinner';
+import { UserContext } from './components/UserProvider';
+import './signup.css'
 
 export function SignUp () {
     
     const [showResult, setShowResult] = useState(false);
-    const [loginSignResult, setLoginSignResult] = useState(false);
-    const [msgResult, setMsgResult] = useState('');
+    const [signUpResult, setSignUpResult] = useState(false);
+    const [resultMsg, setResultMsg] = useState('');
 
-    const { loggedIn } = useContext(UserContext)
+    const [showHide, setShowHide] = useState(false);
+
+    const { loading, updateLoading } = useContext(UserContext)
+
+    const [newUser, setNewUser] = useState<UserInfo>(newUserDefault)
+
 
     /**
-     * Simple function for deleting the result message of the form submission attempt.
-     */
-    const deleteResultMsg = () => {
-      setShowResult(false);
+     * Simple function for changing the Hide/Show button at password input.
+     *
+    */
+     const showHideClick = () => {
+      setShowHide(!showHide);
     }
 
-    const [newUser, setNewUser] = useState<INew_User>(newUserDefault)
-    const [repeatedPassword, setRepeatedPassword] = useState('')
-    //const [showPassRequirements, setShowPassRequirements] = useState([false, false]);
     
     /**
      * 
@@ -48,6 +49,21 @@ export function SignUp () {
         })
     }
     
+    const signAxiosCallback =  (response: AxiosResponse<UserCUDResponse, any>) => {
+      const data = response.data;
+        setShowResult(true);
+        setSignUpResult(true);
+        setResultMsg(data.message);
+        updateLoading();
+        document.body.style.overflow = "scroll";
+        setTimeout(async () => {
+             setShowResult(false);
+             setSignUpResult(false);
+             setResultMsg('');
+        },2000)
+    }
+
+
 
     /**
      * 
@@ -59,50 +75,118 @@ export function SignUp () {
      * it was successful or there was an error.
      * 
      */
-    const signupSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    const signupSubmit = (ev: React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault();
-        let user : INew_User= {
-               ...newUser,
-            createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-            modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss')
-        };
+        let user = newUser;
         user =  cleanEmptyProperties(user);
-        const { error } = validator.user.validate(user);
+        const { error } = validation.user.validate(user);
         if(error){
           setShowResult(true);
-          setLoginSignResult(false);
-          setMsgResult(error.message);
+          setSignUpResult(false)
+          setResultMsg(error.message);
         }else{
-          axios.post<authResponse>('http://localhost:8080/api/auth/signup', user, { withCredentials: true }).then(response => {
-            const data = response.data;
-            if(data.data){
+          const userData : INew_User = {
+            createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+            modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+            data: user,
+          }
+          console.log(JSON.stringify(userData, null, '\t'))
+          updateLoading();
+          document.body.style.overflow = "hidden";
+          axios.post<UserCUDResponse>('http://localhost:8080/api/auth/signup', userData, { withCredentials: true }).then(signAxiosCallback)
+          .catch(error => {
+              updateLoading();
+              document.body.style.overflow = "scroll";
+              console.log(JSON.stringify(error, null, '\t'));
               setShowResult(true);
-              setLoginSignResult(true);
-              setMsgResult(data.message);  
-            }else{
-              setShowResult(true);
-              setLoginSignResult(false);
-              setMsgResult(data.message)
-            }
-          }).catch(error => {
-            setShowResult(true);
-            setLoginSignResult(false);
-            setMsgResult(error.response.data.message)
-          })
-          
-        }
-        
+              setSignUpResult(false);
+              if(error.response){
+                if(error.response.status === 500){
+                  setResultMsg(error.response.data.message)
+                }else{
+                  setResultMsg(error.response.data.message)
+                }
+              }else if(error.request){
+                setResultMsg(`No response received from server.`)
+              }else{
+                setResultMsg(`Request error.`)
+              }
+              setTimeout(async () => {
+                setShowResult(false);
+                setSignUpResult(false);
+                setResultMsg('');
+           },3000)
+            })
+        }    
     }
+
 
     return (
         <>
-        {!loggedIn ?  <>
-        <LogSignHeaderWrapper showResult={showResult} msgResult={msgResult} type="signup" deleteResultMsg={deleteResultMsg} logSignResult={loginSignResult}/>
-    <section>
-      <SignUpForm signupSubmit={signupSubmit} onChange={onChange} newUser={newUser} repeatedPassword={repeatedPassword} setRepeatedPassword={setRepeatedPassword}/>
+        {loading && <ModalContainer>
+          <LoadingSpinner/>
+          </ModalContainer>}
+        <section className="body-container">
+    <div className="login-signup-header">
+      <h3 className="header-title">Sign Up</h3>
+      <h5>You already have an account? Log in here.</h5>
+    </div>
+    {showResult && <OperationResult resultMessage={resultMsg} success={signUpResult}/>}
+    <div className="login-signup-fields">
+      <div className="login-signup-field">
+        <input type="text" onChange={onChange} value={newUser.name} className="styled-input" id="name" name="name"/>
+        <label htmlFor="name" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Name </label>
+        <span className="input-border"></span>
+      </div>
+      <div className="login-signup-field">
+        <input type="text" onChange={onChange} value={newUser.surname} className="styled-input" id="surname" name="surname"/>
+        <label htmlFor="surname" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Surname </label>
+        <span className="input-border"></span>
+      </div>
+      <div className="login-signup-field">
+        <label htmlFor="age" style={{fontSize:"0.8rem"}}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Age:</label><br/>
+        <input type="date" onChange={onChange} value={newUser.age} className="age-input" id="age" name="age"/>
+        <span className="input-border"></span>
+      </div>
+      <div className="login-signup-field">
+      <input type="url" onChange={onChange} value={newUser.avatar} id="avatar" name="avatar" className="styled-input"/>
+        <label htmlFor="avatar" className='animated-label'>Avatar URL<span style={{fontSize:"0.4rem"}}>(optional)</span>:</label><br/>
+        <span className="input-border"></span>
+      </div>
+      <div className="login-signup-field">
+        <input type="text" onChange={onChange} value={newUser.phoneNumber} id="phoneNumber" name="phoneNumber" className="styled-input"/>
+        <label htmlFor="phoneNumber" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Phone number:</label>
+        <span className="input-border"></span>
+      </div>
+      <div className="login-signup-field">
+        <input type="text" onChange={onChange} value={newUser.username} id="username" name="username" className="styled-input"/>
+        <label htmlFor="username" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Username </label>
+        <span className="input-border"></span>
+      </div>
+      <div className="password-field">
+        <div className="pswd-input-wrapper">
+          <input type={showHide ? "text" : "password"} onChange={onChange} value={newUser.password} id="password" name="password" className="styled-input password-input"/>
+          <label htmlFor="password" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field" style={{width:"4%"}}/> Password </label>
+          <span className="input-border"></span>
+        </div>
 
-    </section>
-    </> : <Profile/>}
-    </>
+        <img src="https://cdn3.iconfinder.com/data/icons/show-and-hide-password/100/show_hide_password-07-512.png" alt="" className="show-pswd-icon" onClick={showHideClick}/>
+
+      </div>
+      <div className="password-field">
+        <div className="pswd-input-wrapper">
+          <input type={showHide ? "text" : "password"} onChange={onChange} value={newUser.repeatedPassword} id="repeatedPassword" name="repeteadPassword" className="styled-input password-input"/>
+          <label htmlFor="repeteadPassword" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field" style={{width:"4%"}}/> Repeat your password </label>
+          <span className="input-border"></span>
+        </div>
+     <img src="https://cdn3.iconfinder.com/data/icons/show-and-hide-password/100/show_hide_password-07-512.png" alt="" className="show-pswd-icon" onClick={showHideClick}/>
+
+      </div>
+      <div className="submit-row">
+        <button className="submit-btn" onClick={signupSubmit}>Submit</button>
+      </div>
+    </div>
+  </section>
+  </>
     ) 
 }

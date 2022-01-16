@@ -883,3 +883,208 @@ Jan-13-2022 17:05:53 | [31merror[39m : Error: 400. Message: You lack of permis
     at Generator.next (<anonymous>)
     at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\auth.ts:8:71
     at new Promise (<anonymous>)
+Jan-16-2022 15:06:42 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:124:35
+    at D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:152:16
+    at getSecret (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:90:14)
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:94:10)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:122:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+Jan-16-2022 17:48:23 | [31merror[39m : Error: 404. Message: User not found.. Stack: Error: User not found.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:169:33)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-16-2022 17:52:15 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:46:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:44:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+Jan-16-2022 17:53:11 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:46:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:44:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+Jan-16-2022 17:54:30 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:46:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:44:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+Jan-16-2022 18:14:44 | [31merror[39m : Error: 400. Message: You lack of permission for performing this operation.... Stack: Error: You lack of permission for performing this operation...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:140:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:138:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAdmin (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:119:16)
+Jan-16-2022 18:14:44 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:46:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:44:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+Jan-16-2022 18:21:42 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:46:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:44:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+Jan-16-2022 18:21:42 | [31merror[39m : Error: 400. Message: You lack of permission for performing this operation.... Stack: Error: You lack of permission for performing this operation...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:140:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:138:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAdmin (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:119:16)
+Jan-16-2022 18:32:52 | [31merror[39m : Error: 400. Message: You lack of permission for performing this operation.... Stack: Error: You lack of permission for performing this operation...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:140:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:138:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAdmin (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:119:16)
+Jan-16-2022 18:32:52 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:46:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:44:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+Jan-16-2022 18:33:03 | [31merror[39m : Error: 404. Message: Cart is empty.. Stack: Error: Cart is empty.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoCart.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:67:37)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-16-2022 18:33:03 | [31merror[39m : Error: 404. Message: Cart is empty.. Stack: Error: Cart is empty.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoCart.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:67:37)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-16-2022 18:34:06 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:46:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:63:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:44:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+Jan-16-2022 18:34:06 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:124:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:63:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:122:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:101:16)
+Jan-16-2022 18:34:10 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:46:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:44:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+Jan-16-2022 18:34:10 | [31merror[39m : Error: 400. Message: You lack of permission for performing this operation.... Stack: Error: You lack of permission for performing this operation...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:140:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:138:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAdmin (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:119:16)
+Jan-16-2022 18:39:25 | [31merror[39m : Error: 404. Message: Cart is empty.. Stack: Error: Cart is empty.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:16)
+    at MongoCart.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:67:37)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\cart.ts:5:58)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Jan-16-2022 19:14:00 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:46:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:44:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:20:16)
+Jan-16-2022 19:14:00 | [31merror[39m : Error: 400. Message: You lack of permission for performing this operation.... Stack: Error: You lack of permission for performing this operation...
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:15)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:16)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:140:35
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:138:19
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAdmin (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:119:16)

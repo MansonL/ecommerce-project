@@ -1,0 +1,30 @@
+.spinner-container {
+    position: absolute;
+    top: 50vh;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 10rem;
+    height: 10rem;
+    z-index: 3;
+  }
+  
+  .spinner-awaiter {
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #fcde67;
+    animation: spin 1s ease infinite;
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

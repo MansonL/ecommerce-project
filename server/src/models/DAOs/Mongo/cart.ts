@@ -16,6 +16,7 @@ import { ObjectId } from 'mongodb';
 
 const cartSchema = new Schema({
     createdAt: { type: String, required: true },
+    modifiedAt: { type: String, required: true },
     user: { type: Schema.Types.ObjectId, ref: 'users' },
     products: [{
         product: { type: Schema.Types.ObjectId, ref: 'products'},
@@ -135,7 +136,9 @@ export class MongoCart implements DBCartClass {
                         cartDoc.products.map(product => {
                             if(product.product.toString() === product_id)
                                 product.quantity = quantity
-                            return product
+                            if(product.quantity !== 0){
+                                return product
+                            }
                         });
                     await cartDoc.set('products', newProducts)
                     logger.info(cartDoc)

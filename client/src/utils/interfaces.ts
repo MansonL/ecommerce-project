@@ -1,5 +1,8 @@
-import { IMongoCart } from "../../../server/src/common/interfaces/products";
-import { INew_User, UserAddresses } from "../../../server/src/common/interfaces/users";
+import { IMongoCart, IMongoProduct, INew_Product } from "../../../server/src/common/interfaces/products";
+import { IMongoUser, UserAddresses, UserInfo } from "../../../server/src/common/interfaces/users";
+import { Types } from "mongoose";
+import { IOrderPopulated } from "../../../server/src/common/interfaces/orders";
+import { IMessageSentPopulated, IMongoPopulatedMessages } from "../../../server/src/common/interfaces/messages";
 
 export interface IUserInfo {
     username: string;
@@ -40,15 +43,13 @@ addresses: [{
     floor: '',
     department: '',
     city: '',
+    extra_info: '',
 }],
 isAdmin: false,
 }
 
-export const newUserDefault : INew_User = { 
-    createdAt: '',
-    modifiedAt: '',
-    data: {
-        username: '',
+export const newUserDefault : UserInfo = { 
+    username: '',
     password: '',
     repeatedPassword: '',
     name: '',
@@ -57,8 +58,19 @@ export const newUserDefault : INew_User = {
     avatar: '',
     phoneNumber: '',
     facebookID: '',
-    addresses: [{
-    _id: '',
+    isAdmin: false,
+    }
+
+export const cartDefault : IMongoCart = {
+    user: new Types.ObjectId(),
+    createdAt: '',
+    modifiedAt: '',
+    _id: new Types.ObjectId(),
+    products: [],
+}
+
+export const defaultAddress : UserAddresses = {
+    _id: new Types.ObjectId().toString(),
     alias: '',
     street1: {
         name: '',
@@ -70,21 +82,55 @@ export const newUserDefault : INew_User = {
     floor: '',
     department: '',
     city: '',
-    }],
-    isAdmin: false,
-    }
+    extra_info: '',
+}
+
+export const defaultProduct : INew_Product = {
+    createdAt: '',
+    modifiedAt: '',
+    title: '',
+    description: '',
+    images: [],
+    price: 0,
+    stock: 0,
+    code: '',
+    category: '',
+}
+
+export const defaultProductFromDB : IMongoProduct = {
+    ...defaultProduct,
+    _id: '',
 }
 
 export interface authResponse {
     message: string;
-    data: {} | string; 
+    data:  string; 
 }
 
-export interface cartGetResponse {
+export interface UserCUDResponse {
     message: string;
+    data: IMongoUser;
+}
+
+export interface cartResponse {
     data: IMongoCart[];
 }
-export interface cartModificationResponse {
+export interface orderResponse {
+    message: string;
+    data: IOrderPopulated
+}
+export interface CartCUDResponse {
     message: string;
     data: IMongoCart
+}
+export interface ProductCUDResponse {
+    message: string;
+    data: IMongoProduct[];
+}
+export interface messagesGetResponse {
+    data: IMongoPopulatedMessages[]
+}
+export interface messageSentResponse {
+    message: string;
+    data: IMessageSentPopulated
 }

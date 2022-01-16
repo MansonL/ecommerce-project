@@ -1,130 +1,169 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import moment from 'moment';
-import React, { useState } from 'react';
-import { CUDResponse, IMongoProduct, INew_Product } from '../utils/interfaces';
-import { socket } from '../lib/socket';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { INew_Product } from '../../../server/src/common/interfaces/products';
+import { defaultProduct, ProductCUDResponse } from '../utils/interfaces';
 import { validation } from '../utils/joiSchemas';
-import { hasProductOrEmpty } from '../utils/utilities';
-import './productsForm.css';
+import { ModalContainer } from './components/Modal/ModalContainer';
+import { OperationResult } from './components/Result/OperationResult';
+import { LoadingSpinner } from './components/Spinner/Spinner';
+import { UserContext } from './components/UserProvider';
+import './productsForm.css'
+
 
 export function ProductsForm() {
   
   /**
    * 
-   * State of the future new products & error at submitting the form with an invalid value.
+   * State of the future new products & error at submitting the Form with an invalid value.
    * 
+   *
    */
-  const [errorForm, setErrorForm] = useState(false);
-  const [successForm, setSuccessForm] = useState(false);
-  const [resultMessage, setResultMessage] = useState('');
-  const [newProduct, setNewProduct] = useState<INew_Product>({
-    timestamp: '',
-    title: '',
-    description: '',
-    code: '',
-    img: '',
-    price: 0,
-    stock: 0,
-  });
+  const [showResult, setShowResult] = useState(false);
+  const [submitResult, setSubmitResult] = useState(false);
+  const [resultMsg, setResultMsg] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { 
-    e.preventDefault();
-    const product = {
-      ...newProduct,
-      timestamp: moment().format('YYYY-MM-DD HH:mm:ss')
-    }
-    console.log(product)
-    const { error } = validation.newProduct.validate(product);
-    console.log(error)
-    if(error){
-      if(!errorForm){
-        setErrorForm(true);
-        setSuccessForm(false);
-        setResultMessage(error.message)
-      }
-    }else{
-      const result = await (await axios.post<CUDResponse>('http://localhost:8080/products/save', product)).data;
-      if(hasProductOrEmpty(result.data as IMongoProduct | [])){ // Here need to check if there's an instance of MongoProduct or an empty array (error);
-        setErrorForm(false);
-        setSuccessForm(true)
-        setResultMessage(result.message);
-        socket.emit('products')
-      }else{
-        setErrorForm(true);
-        setSuccessForm(false);
-        setResultMessage(result.message)
-      }
-    }
-    
-  }
+  const { user, loading, token, updateLoading } = useContext(UserContext); 
+  const navigate = useNavigate();
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  if(!user.isAdmin)
+    navigate('../login');
+  
+
+  const [newProduct, setNewProduct] = useState<INew_Product>(defaultProduct)
+
+  
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    console.log(JSON.stringify(e.target.value, null, '\t'));
     const property : string = e.target.name;
     const value : string | number = e.target.value 
     setNewProduct({
       ...newProduct,
-      [property]: value
+      [property]: property === 'price' ? Number(value) : property === 'stock' ? Number(value) : value 
     })
   }
 
+
+
+  const AxiosThenCallback =  (response: AxiosResponse<ProductCUDResponse, any>) => {
+    const data = response.data;
+      setShowResult(true);
+      setSubmitResult(true);
+      setResultMsg(data.message);
+      updateLoading();
+      document.body.style.overflow = "scroll";
+      setTimeout(async () => {
+           setShowResult(false);
+           setSubmitResult(false);
+           setResultMsg('');
+      },2000)
+  }
+
+  const AxiosCatchCallback = (error: any) => {
+    updateLoading();
+        document.body.style.overflow = "scroll";
+        console.log(JSON.stringify(error, null, '\t'));
+        setShowResult(true);
+        setSubmitResult(false);
+        if(error.response){
+          if(error.response.status === 500){
+            setResultMsg(error.response.data.message)
+          }else{
+            setResultMsg(error.response.data.message)
+          }
+        }else if(error.request){
+            setResultMsg(`No response received from server.`)
+        }else{
+            setResultMsg(`Request error.`)
+        }
+        setTimeout(() => {
+          setSubmitResult(false);
+          setShowResult(false);
+          setResultMsg('')
+        }, 3000)
+  }
+
+
+
+
+  const submitProduct = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const product : INew_Product = {
+      ...newProduct,
+      createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+      modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+    }
+    const { error } = validation.newProduct.validate(product);
+    if(error){
+
+    }else{
+      updateLoading();
+      document.body.style.overflow = "hidden";
+      axios.post<ProductCUDResponse>('http://localhost:8080/api/products/save', product, { withCredentials: true, headers: {  Authorization: `Bearer ${token}`  } })
+      .then(AxiosThenCallback)
+      .catch(AxiosCatchCallback)
+    }
+  }
+
+
   return (
         <>
-        <header>
-    <div className="title">
-      <h4>Products Form</h4>
+        <section className="body-container">
+    <div className="login-signup-header">
+     <h3 className="header-title">Upload product</h3>
+     <h5>Here you have all the basic fields to fill htmlFor creating a product in your website and database. <span style={{fontSize:"0.6rem"}}>(for changes ask to administrator.)</span></h5>
+   </div>
+   {loading && <ModalContainer>
+     <LoadingSpinner/>
+     </ModalContainer>}
+     { showResult && <OperationResult  success={submitResult} resultMessage={resultMsg}/> }
+   <div className="product-form">
+    <div className="product-field">
+      <input type="text" onChange={onChange} className="styled-input" id="title" name="title"/>
+       <label htmlFor="title" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Product title </label>
+       <span className="input-border"></span>
     </div>
-  </header>
-  <form className="form" onSubmit={handleSubmit}>
-    <div className="row-form">
-      <input type="text" name='title' className="label-styled-input"  onChange={handleFormChange} id="title" />
-      <label className={newProduct.title != '' ? 'hasContent ' : 'label-styled'} htmlFor="title">Title</label>
-      <span className="form-border"/>
+    <div className="product-field">
+      <input type="text" onChange={onChange} className="styled-input" id="description" name="description"/>
+       <label htmlFor="description" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt=""  className="required-field"/> Description</label>
+       <span className="input-border"></span>
     </div>
-    <div className="row-form">
-      <input type="text" name='description' className="label-styled-input"  onChange={handleFormChange} id="description"/>
-      <label className={newProduct.description != '' ? 'hasContent ' : 'label-styled'} htmlFor="description">Description</label>
-      <span className="form-border"/>
-    </div>
-    <div className="row-form"><input type="text" name='img' className="label-styled-input"  onChange={handleFormChange} id="image"/>
-      <label className={newProduct.img != '' ? 'hasContent ' : 'label-styled'} htmlFor="img">Image link</label>
-      <span className="form-border"/>
-    </div>
-    <div className="row-form"><input type="text" name='code' className="label-styled-input"  onChange={handleFormChange}   id="code"/>
-      <label className={newProduct.code != '' ? 'hasContent ' : 'label-styled'} htmlFor="code">Code</label>
-      <span className="form-border"/>
-    </div>
-    <div className="row-form">
-      <input type="number" name='stock' className="label-styled-input"  onChange={handleFormChange} id="stock"/>
-      <label className={newProduct.stock ? 'hasContent ' : 'label-styled'} htmlFor="stock">Stock</label>
-      <span className="form-border"/>
-    </div>
-    <div className="row-form"><input type="number"  name='price' className="label-styled-input"  onChange={handleFormChange} id="price"/>
-      <label className={newProduct.price ? 'hasContent ' : 'label-styled'} htmlFor="price">Price</label>
-      <span className="form-border"/>
-    </div>
-    <div className="row-form submit-row">
-      <button className="submit-form" type="submit">Save</button>
-    </div>
-  </form>
-  {successForm && <div className="form-success">
-      <div className="result-top">
-        <span className="result-header">Successful!</span>
-        <button className="result-btn"><i className="fas fa-times"></i></button>
+    <div className="code-field">
+      <div className="product-field">
+        <input type="text" onChange={onChange} className="styled-input" id="code" name="code"/>
+       <label htmlFor="code" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field" style={{width:"5%"}}/> Code</label>
+       <span className="input-border"></span>
       </div>
-      <div className="result-message">
-        <span>{resultMessage}</span>
-      </div>
-    </div>}
-  {errorForm && <div className="form-error">
-      <div className="result-top">
-        <span className="result-header">Oops!</span>
-        <button className="result-btn"><i className="fas fa-times"></i></button>
-      </div>
-      <div className="result-message">
-        <span>{resultMessage}</span>
-      </div>
-    </div>}
+      <button className="code-btn">Generate code</button>
+    </div>
+    <div className="product-field">
+      <input type="file" multiple onChange={onChange} className="styled-input" id="images" name="images"/>
+       <label htmlFor="images" className="filled-input-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Images</label>
+       <span className="input-border"></span>
+    </div>
+    <div className="product-field">
+      <input type="number" className="styled-input" onChange={onChange} id="stock" name="stock" min="1" step="1"/>
+       <label htmlFor="stock" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Stock</label>
+       <span className="input-border"></span>
+    </div>
+    <div className="product-field">
+      <input type="number" className="styled-input" id="price" onChange={onChange} name="price" min="0.01" step="0.25"/>
+       <label htmlFor="price" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Price</label>
+       <span className="input-border"></span>
+    </div>
+    <div className="product-field">
+      <input type="text" onChange={onChange} className="styled-input" id="category" name="category"/>
+       <label htmlFor="category" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Category</label>
+       <span className="input-border"></span>
+    </div>
+     <div className="submit-row">
+       <button className="submit-btn" onClick={submitProduct}>Submit</button>
+     </div>
+   </div>
+ </section>
 </>
     )
 }

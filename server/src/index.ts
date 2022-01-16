@@ -21,7 +21,6 @@ export const CPUs = cpus().length
 if(Config.MODE === "FORK"){
     server.listen(PORT, () => {
         console.log(`Server hosted at PORT: ${PORT}`);
-        socketConnection(server);
     });
 }else{
     if(cluster.isMaster){
