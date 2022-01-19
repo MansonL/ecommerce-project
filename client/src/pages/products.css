@@ -37,6 +37,8 @@
     padding: 0.3rem 0.6rem 0.3rem 0.6rem;
     font-size: 0.7rem;
     text-align: center;
+    top: 7vh;
+    right: 0;
   }
   
   .filter-menu-active {

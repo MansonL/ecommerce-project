@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
 
-@media (max-width: 500px){
+/* ------- FOR THE NARROWEST DEVICES ---------------- */
+
+@media (max-width: 480px){
   .main{
     background-position: 90%;
   }
@@ -8,8 +10,8 @@
     height: 8vh;
   }
   .cart-counter{
-    left: 40%;
-    top: 30%;
+    left: 43%;
+    top: 42%;
   }
   .welcome-products-btn {
     left: 28%;
@@ -18,6 +20,98 @@
   .main-menu {
     width: 60vw;
   }
+}
+
+@media (max-width: 350px){
+   .cart-counter {
+      left: 46%;
+      top: 37%;
+      font-size: 1rem !important;
+   }
+}
+
+/* -------- COVERINGMOST OF NORMAL AND WIDEST CELLPHONES ----------- */
+
+@media (min-width: 480px){
+   .main-menu-btn {
+      max-width: 12% !important;
+   }
+   .cart-icon-container {
+      max-width: 9% !important;
+   }
+   .cart-counter {
+    left: 0;
+    font-size: 1.6rem !important;
+    right: 0;
+    margin: auto;
+    top: 40%;
+   }
+   .main-menu {
+      max-width: 37% !important;
+   }
+   .login-logout-avatar {
+      font-size: 1.2rem !important;
+   }
+}
+
+/* --------------- FOR TABLETS AND NOTEBOOKS ------------------ */
+
+@media (min-width:1024px){
+   .main-menu{
+      max-width: 25% !important;
+   }
+   .main-menu-btn {
+      max-width: 6% !important;
+   }
+   .nav-bar {
+      justify-content: center !important;
+   }
+   .cart-icon-container {
+      max-width: 5% !important;
+   }
+   .main-products-search-container {
+      flex-grow: unset !important;
+      width: 75% !important;
+   }
+   .filter-menu {
+      max-width: 70% !important;
+   }
+   .products-results {
+      display: flex;
+      flex-wrap: wrap;
+   }
+   .product {
+      max-width: 50%;
+      width: unset !important;
+   }
+}
+
+/* --- FOR DEVICES WITH THE WIDTH OF A TABLET/NOTEBOOK AND VERY NARROW --- */
+
+@media (min-width:1024px) and (min-height: 480px) {
+   .cart-icon-container {
+      max-width: 5% !important;
+   }
+   .cart-counter {
+      font-size: 1.2rem !important;
+      left: unset !important;
+      right: 36% !important;
+   }
+   
+}
+
+/* ------- FOR DEVICES (MOST CELLPHONES) WITH THE WIDTH SHORTER THAN A NOTEBOOK/TABLET AND THE HEIGHT OF A MEDIUM SIZE CELLPHONE ----------- */
+
+@media (min-width: 480px) and (max-height: 720px) and (max-width:1023px){
+   .cart-icon-container {
+      max-width: 11% !important;
+   }
+   .cart-counter {
+      font-size: 1.3rem !important;
+      left: unset !important;
+      top: 39% !important;
+      right: 37% !important;
+   }
 }
 
 html, body {
@@ -38,6 +132,10 @@ body {
   height: 100vh;
   width: 100%;  
   background-color: white;
+}
+.main-background {
+  background-image: url("https://media.istockphoto.com/photos/abstract-design-element-annual-sale-shopping-season-concept-mini-picture-id1178795713?k=20&m=1178795713&s=612x612&w=0&h=NLA9JoyezoOubPwy38luYZB1rwUwQAYY_JAk2JBvcsg=");
+    background-size: cover;
 }
 /*  -------------------------------------------------------------------- 
         SECTIONS CONTAINERS
@@ -103,7 +201,7 @@ body {
 }
 .main-menu-active {
   opacity: 1;
-  z-index: 1;
+  z-index: 2;
 }
 .avatar-row {
   background-color: #fcde67;
@@ -120,6 +218,7 @@ body {
   text-align: center;
   font-size: 0.8rem;
   margin-left: 0.5rem;
+  flex-grow: 1;
 }
 .menu-rows {
   height: 100%;
@@ -129,6 +228,8 @@ body {
   position: relative;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  background-color: transparent;
+  z-index: 0;
 }
 .menu-row::after {
   content: "";
@@ -140,6 +241,7 @@ body {
   right: 0;
   left: 0;
   margin: auto;
+  z-index: -1;
 }
 .cart-icon-container {
   display: flex;
@@ -319,7 +421,7 @@ INPUTS & LABELS COMMON STYLES       -------------------------------
   margin-top: 0;
 }
 
-.product {
+.product, .cart-product {
   list-style: none;
   position: relative;
   display: flex;
@@ -349,6 +451,7 @@ INPUTS & LABELS COMMON STYLES       -------------------------------
   max-width: 50%;
   overflow: auto;
   z-index: 1;
+  flex-grow:1;
   display: flex;
   flex-direction: column;
   row-gap: 0.2rem;
