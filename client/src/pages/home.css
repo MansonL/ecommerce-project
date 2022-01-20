@@ -30,4 +30,8 @@
     font-family: 'Montserrat', sans-serif;
     position: absolute;
     padding: 1rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 10%;
   }

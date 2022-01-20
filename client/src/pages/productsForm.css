@@ -1,3 +1,7 @@
+.ask-admin {
+   font-size: 0.6rem;
+}
+
 .code-field {
     display: flex;
     column-gap: 0.4rem;

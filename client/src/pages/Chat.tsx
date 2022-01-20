@@ -1,14 +1,12 @@
 import React, {  useContext, useEffect, useState } from 'react';
-import { NormalizedSchema } from 'normalizr'
 import { socket } from '../lib/socket';
 import axios from 'axios';
 import moment from 'moment'
-import './chat.css';
 import { UserContext } from './components/UserProvider';
 import { IMongoPopulatedMessages, INew_Message } from '../../../server/src/common/interfaces/messages';
 import { takeChats } from '../utils/utilities';
 import { Types } from 'mongoose';
-import { validation } from '../utils/joiSchemas';
+import './chat.css';
 
 export function Chat(){
   

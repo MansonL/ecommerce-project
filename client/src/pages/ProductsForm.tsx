@@ -9,8 +9,7 @@ import { ModalContainer } from './components/Modal/ModalContainer';
 import { OperationResult } from './components/Result/OperationResult';
 import { LoadingSpinner } from './components/Spinner/Spinner';
 import { UserContext } from './components/UserProvider';
-import './productsForm.css'
-
+import './productsForm.css';
 
 export function ProductsForm() {
   
@@ -24,7 +23,10 @@ export function ProductsForm() {
   const [submitResult, setSubmitResult] = useState(false);
   const [resultMsg, setResultMsg] = useState('');
 
-  const { user, loading, token, updateLoading } = useContext(UserContext); 
+  
+  const { user, token } = useContext(UserContext);
+  const { loading, setLoading } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   if(!user.isAdmin)
@@ -37,7 +39,7 @@ export function ProductsForm() {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(JSON.stringify(e.target.value, null, '\t'));
+    console.log(JSON.stringify(e.target.value, null, 2))
     const property : string = e.target.name;
     const value : string | number = e.target.value 
     setNewProduct({
@@ -46,14 +48,19 @@ export function ProductsForm() {
     })
   }
 
-
+  const generateCode = () => {
+    setNewProduct({
+      ...newProduct,
+      code: `${Math.random().toString(36).substr(2, 9)}`
+    })
+  }
 
   const AxiosThenCallback =  (response: AxiosResponse<ProductCUDResponse, any>) => {
     const data = response.data;
       setShowResult(true);
       setSubmitResult(true);
       setResultMsg(data.message);
-      updateLoading();
+      setLoading(false);
       document.body.style.overflow = "scroll";
       setTimeout(async () => {
            setShowResult(false);
@@ -63,9 +70,9 @@ export function ProductsForm() {
   }
 
   const AxiosCatchCallback = (error: any) => {
-    updateLoading();
+    setLoading(false);
         document.body.style.overflow = "scroll";
-        console.log(JSON.stringify(error, null, '\t'));
+        console.log(JSON.stringify(error.response, null, 2))
         setShowResult(true);
         setSubmitResult(false);
         if(error.response){
@@ -100,7 +107,7 @@ export function ProductsForm() {
     if(error){
 
     }else{
-      updateLoading();
+      setLoading(true);
       document.body.style.overflow = "hidden";
       axios.post<ProductCUDResponse>('http://localhost:8080/api/products/save', product, { withCredentials: true, headers: {  Authorization: `Bearer ${token}`  } })
       .then(AxiosThenCallback)
@@ -114,7 +121,7 @@ export function ProductsForm() {
         <section className="body-container">
     <div className="login-signup-header">
      <h3 className="header-title">Upload product</h3>
-     <h5>Here you have all the basic fields to fill htmlFor creating a product in your website and database. <span style={{fontSize:"0.6rem"}}>(for changes ask to administrator.)</span></h5>
+     <h5>Here you have all the basic fields to fill for creating a product in your website and database. <span className="ask-admin">(for changes ask to administrator.)</span></h5>
    </div>
    {loading && <ModalContainer>
      <LoadingSpinner/>
@@ -122,22 +129,22 @@ export function ProductsForm() {
      { showResult && <OperationResult  success={submitResult} resultMessage={resultMsg}/> }
    <div className="product-form">
     <div className="product-field">
-      <input type="text" onChange={onChange} className="styled-input" id="title" name="title"/>
-       <label htmlFor="title" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Product title </label>
+      <input type="text" onChange={onChange} className="styled-input" id="title" name="title" value={newProduct.title}/>
+       <label htmlFor="title" className={newProduct.title !== '' ? "filled-input-label" : "animated-label"}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Product title </label>
        <span className="input-border"></span>
     </div>
     <div className="product-field">
-      <input type="text" onChange={onChange} className="styled-input" id="description" name="description"/>
-       <label htmlFor="description" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt=""  className="required-field"/> Description</label>
+      <input type="text" onChange={onChange} className="styled-input" id="description" name="description" value={newProduct.description}/>
+       <label htmlFor="description" className={newProduct.description !== '' ? "filled-input-label" : "animated-label"}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt=""  className="required-field"/> Description</label>
        <span className="input-border"></span>
     </div>
     <div className="code-field">
       <div className="product-field">
-        <input type="text" onChange={onChange} className="styled-input" id="code" name="code"/>
-       <label htmlFor="code" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field" style={{width:"5%"}}/> Code</label>
+        <input type="text" onChange={onChange} className="styled-input" id="code" name="code" value={newProduct.code}/>
+       <label htmlFor="code" className={newProduct.code !== '' ? "filled-input-label" : "animated-label"}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field" style={{width:"5%"}}/> Code</label>
        <span className="input-border"></span>
       </div>
-      <button className="code-btn">Generate code</button>
+      <button className="code-btn" onClick={generateCode}>Generate code</button>
     </div>
     <div className="product-field">
       <input type="file" multiple onChange={onChange} className="styled-input" id="images" name="images"/>
@@ -145,18 +152,18 @@ export function ProductsForm() {
        <span className="input-border"></span>
     </div>
     <div className="product-field">
-      <input type="number" className="styled-input" onChange={onChange} id="stock" name="stock" min="1" step="1"/>
-       <label htmlFor="stock" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Stock</label>
+      <input type="number" className="styled-input" onChange={onChange} id="stock" name="stock" min="1" step="1" value={newProduct.stock}/>
+       <label htmlFor="stock" className={newProduct.stock != null ? "filled-input-label" : "animated-label"}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Stock</label>
        <span className="input-border"></span>
     </div>
     <div className="product-field">
-      <input type="number" className="styled-input" id="price" onChange={onChange} name="price" min="0.01" step="0.25"/>
-       <label htmlFor="price" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Price</label>
+      <input type="number" className="styled-input" id="price" onChange={onChange} name="price" min="0.01" step="0.25" value={newProduct.price}/>
+       <label htmlFor="price" className={newProduct.price != null ? "filled-input-label" : "animated-label"}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Price</label>
        <span className="input-border"></span>
     </div>
     <div className="product-field">
-      <input type="text" onChange={onChange} className="styled-input" id="category" name="category"/>
-       <label htmlFor="category" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Category</label>
+      <input type="text" onChange={onChange} className="styled-input" id="category" name="category" value={newProduct.category}/>
+       <label htmlFor="category" className={newProduct.category !== '' ? "filled-input-label" : "animated-label"}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Category</label>
        <span className="input-border"></span>
     </div>
      <div className="submit-row">

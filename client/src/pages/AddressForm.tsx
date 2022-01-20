@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { UserAddresses } from '../../../server/src/common/interfaces/users';
 import { defaultAddress, UserCUDResponse } from '../utils/interfaces';
 import { validation } from '../utils/joiSchemas';
-import './addressForm.css';
 import { ModalContainer } from './components/Modal/ModalContainer';
 import { OperationResult } from './components/Result/OperationResult';
 import { LoadingSpinner } from './components/Spinner/Spinner';
 import { UserContext } from './components/UserProvider';
+import './addressForm.css';
 
 export function AddressForm(){
 
@@ -18,9 +18,13 @@ export function AddressForm(){
     const [showResultMsg, setShowResult] = useState(false);
     const [addressResult, setAddressResult] = useState(false);
 
-    const { loading, token, updateLoading, cartConfirmated } = useContext(UserContext);
-
     const [newAddress, setNewAddress] = useState<UserAddresses>(defaultAddress);
+
+    const { loading, setLoading } = useContext(UserContext);
+    const { cartConfirmated } = useContext(UserContext);
+    const { token } = useContext(UserContext)
+
+    
 
     const navigate = useNavigate();
     
@@ -60,7 +64,7 @@ export function AddressForm(){
       setAddressResult(true);
       setResultMsg(data.message);
       setShowResult(true);
-        updateLoading();
+        setLoading(false);
         document.body.style.overflow = "scroll";
         setTimeout(() => {
           setShowResult(false);
@@ -72,9 +76,9 @@ export function AddressForm(){
 
 
     const AxiosCatchCallback = (error: any) => {
-      updateLoading();
+      setLoading(false);
           document.body.style.overflow = "scroll";
-          console.log(JSON.stringify(error, null, '\t'));
+          console.log(JSON.stringify(error.response, null, 2))
           setAddressResult(false);
           setShowResult(true);
           if(error.response){
@@ -104,7 +108,7 @@ export function AddressForm(){
         setAddressResult(false);
         setResultMsg(error.message)
       }else{
-        updateLoading();
+        setLoading(true);
         document.body.style.overflow = "hidden";
         const address : UserAddresses = {
           ...newAddress,

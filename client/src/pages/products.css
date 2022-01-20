@@ -20,7 +20,7 @@
   }
   
   .filter-icon, .product-image {
-    height: 80%;
+    width: 27%;
   }
   
   .filter-menu {
@@ -39,6 +39,7 @@
     text-align: center;
     top: 7vh;
     right: 0;
+    cursor: pointer;
   }
   
   .filter-menu-active {

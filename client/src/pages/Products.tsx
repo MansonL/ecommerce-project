@@ -1,16 +1,18 @@
-import axios, { AxiosResponse } from 'axios';
-import React, { useContext, useState } from 'react';
+import axios, { Axios, AxiosResponse } from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
 import { IMongoProduct, IQuery } from '../../../server/src/common/interfaces/products';
 import { UserContext } from './components/UserProvider';
 import {defaultProductFromDB, ProductCUDResponse } from '../utils/interfaces';
-import './products.css';
 import { Modal } from './components/Modal/Modal';
 import { OperationResult } from './components/Result/OperationResult';
 import { ModalContainer } from './components/Modal/ModalContainer';
 import { LoadingSpinner } from './components/Spinner/Spinner';
+import './products.css';
+
 
 export interface IProductsProps {
-  filterBtn: React.MutableRefObject<null>,
+  filterBtn: React.RefObject<HTMLButtonElement>,
+  filterMenu: React.RefObject<HTMLDivElement>,
   showFilter: boolean;
   showFilterMenu: () => void;
 }
@@ -59,35 +61,42 @@ export function Products(props: IProductsProps) {
         }
     }
 
-    const [products, setProducts] = useState<IMongoProduct[]>([defaultProductFromDB])
+    const [products, setProducts] = useState<IMongoProduct[]>([])
 
 
-    const AxiosThenCallback =  (response: AxiosResponse<ProductCUDResponse, any>) => {
+    const GETAxiosThenCallback = (response: AxiosResponse<IMongoProduct[]>) => {
+      const data = response.data;
+        setProducts(data)
+        setLoading(false);
+        document.body.style.overflow = "scroll";
+    }
+
+    const CUDAxiosThenCallback =  (response: AxiosResponse<ProductCUDResponse, any>) => {
       const data = response.data;
         setShowResult(true);
         setOperationResult(true);
         setResultMsg(data.message);
-        setProducts(data.data)
-        updateLoading();
+        fetchProducts()
+        setLoading(false);
         document.body.style.overflow = "scroll";
         setTimeout(async () => {
              setShowResult(false);
              setOperationResult(false);
              setResultMsg('');
-        },2000)
+        }, 2000)
     }
   
     const AxiosCatchCallback = (error: any) => {
-      updateLoading();
+      setLoading(false);
           document.body.style.overflow = "scroll";
-          console.log(JSON.stringify(error, null, '\t'));
+          console.log(JSON.stringify(error.response, null, 2))
           setShowResult(true);
           setOperationResult(false);
           if(error.response){
             if(error.response.status === 500){
-              setResultMsg(error.response.data.message)
+              setResultMsg(error.response.data.message ? error.response.data.message : error.response.data)
             }else{
-              setResultMsg(error.response.data.message)
+              setResultMsg(error.response.data.message ? error.response.data.message : error.response.data)
             }
           }else if(error.request){
               setResultMsg(`No response received from server.`)
@@ -98,7 +107,7 @@ export function Products(props: IProductsProps) {
             setOperationResult(false);
             setShowResult(false);
             setResultMsg('')
-          }, 3000)
+          }, 2000)
     }
 
 
@@ -106,12 +115,12 @@ export function Products(props: IProductsProps) {
     const FilterApply = async (ev: React.MouseEvent<HTMLButtonElement>) => {
       ev.preventDefault();
       const url = `http://localhost:8080/api/products/query?${filters.title ? `title=${filters.title}&` : ""}${filters.code ? `code=${filters.code}&` : ""}${filters.stock.minStock ? `minStock=${filters.stock.minStock}&` : ""}${filters.stock.maxStock ? `maxStock=${filters.stock.maxStock}&` : ""}${filters.price.minPrice ? `minPrice=${filters.price.minPrice}&` : ""}${filters.price.maxPrice ? `maxPrice=${filters.price.maxPrice}` : ""}`
-      updateLoading();
+      setLoading(true);
       document.body.style.overflow = "hidden";
       axios.get<IMongoProduct[]>(url).then(response => {
         const products = response.data;
         setProducts(products);
-        updateLoading();
+        setLoading(false);
         document.body.style.overflow = "scroll";
       }).catch(AxiosCatchCallback)
       
@@ -132,9 +141,11 @@ export function Products(props: IProductsProps) {
     const [operationResult, setOperationResult] = useState(false);
     const [resultMsg, setResultMsg] = useState('');
     const [savedCode, setCode] = useState('');
-
-    const { user, loading, updateLoading, updateCart, token } = useContext(UserContext);
     const [adminView, setAdminView] = useState(false);
+
+    const { user, token } = useContext(UserContext);
+    const { loading, setLoading } = useContext(UserContext);
+    const { loggedIn } = useContext(UserContext);
 
     const changeToAdmingView = () => {
       setAdminView(!adminView)
@@ -143,10 +154,14 @@ export function Products(props: IProductsProps) {
     
 
     const handleAdd = async (code: string) => {
-      updateLoading();
+      const cartData = {
+        product_id: code,
+        quantity: 1,
+      }
+      setLoading(true);
       document.body.style.overflow = "hidden";
-      axios.delete<ProductCUDResponse>(`http://localhost:/api/cart/add/${savedCode}`, { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
-      .then(AxiosThenCallback)
+      axios.post<ProductCUDResponse>(`http://localhost:8080/api/cart/add/`, cartData , { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
+      .then(CUDAxiosThenCallback)
       .catch(AxiosCatchCallback)
     }
 
@@ -160,14 +175,24 @@ export function Products(props: IProductsProps) {
     }
 
     const deleteProduct = () => {
-      updateLoading();
+      setLoading(true);
       document.body.style.overflow = "hidden";  
-      axios.delete<ProductCUDResponse>(`http://localhost:/api/cart/delete/${savedCode}`, { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
-      .then(AxiosThenCallback)
+      axios.delete<ProductCUDResponse>(`http://localhost:8080/api/products/delete/${savedCode}`, { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
+      .then(CUDAxiosThenCallback)
+      .catch(AxiosCatchCallback)
+    }
+    console.log(savedCode)
+    const fetchProducts = () => {
+      axios.get<IMongoProduct[]>('http://localhost:8080/api/products/list')
+      .then(GETAxiosThenCallback)
       .catch(AxiosCatchCallback)
     }
 
 
+    useEffect(() => {
+      fetchProducts()
+    }, [])
+    
     return (
         <>
         {showResult && <OperationResult resultMessage={resultMsg} success={operationResult}/>}
@@ -182,7 +207,7 @@ export function Products(props: IProductsProps) {
     <div className="products-filter-bar"><span className="total-results">Showing 20 results of 20.</span>
       <div className="filter-container">
       <button className="filter-btn" onClick={filterClick} ref={props.filterBtn}><img src="https://static.thenounproject.com/png/1701541-200.png" alt="" className="filter-icon"/></button>
-        <div className={filterDropdownClassName}>
+        <div className={filterDropdownClassName} ref={props.filterMenu}>
           <div className="filter-row">
             <label htmlFor="name" className="filter-label">Product name</label>
             <input type="text" name="title" value={filters.title} onChange={filterChange} className="filter-input"/>
@@ -215,22 +240,24 @@ export function Products(props: IProductsProps) {
         </div>
    </div>
     </div>
-    {user.isAdmin && <div className="see-as-admin" onClick={changeToAdmingView}>
-    <span>See as an admin here</span>
+    {user.isAdmin && <div className="see-as-admin" >
+    <span onClick={changeToAdmingView}>See as an admin here</span>
   </div>}
     <ul className="products-results">
-     {products.length > 0 ? 
+     
+     { 
+     products.length > 0 ? 
       products.map((product, idx) => {
         return (
           <li className="product" id={String(idx)}>
-          <img className="product-image" src={product.product.images[0].url} alt="" />
+          <img className="product-image" src={product.images[0].url} alt="" />
           <div className="product-info">
-            <span className="product-title">{product.product.title}</span>
-            <span className="product-price">{product.product.price}</span>
+            <span className="product-title">{product.title}</span>
+            <span className="product-price">{product.price}</span>
           </div>
           <div className="add-remove-container">
-            {!user.isAdmin && <button className="add-remove-btn" onClick={() => handleAdd(String(product.product._id))}><img src="https://cdn-icons-png.flaticon.com/512/216/216685.png" alt="remove-icon" className="add-remove-icon"/></button>}
-            {(user.isAdmin && adminView) && <button className="add-remove-btn" onClick={() => removeProductAttempt(String(product.product._id))}><img src="https://cdn3.iconfinder.com/data/icons/basic-flat-svg/512/svg01-512.png" alt="add-icon" className="add-remove-icon"/></button>}
+            {(!user.isAdmin && loggedIn) && <button className="add-remove-btn" onClick={() => handleAdd(String(product._id))}><img src="https://cdn3.iconfinder.com/data/icons/basic-flat-svg/512/svg01-512.png" alt="remove-icon" className="add-remove-icon"/></button>}
+            {(user.isAdmin && adminView) && <button className="add-remove-btn" onClick={() => removeProductAttempt(String(product._id))}><img src="https://cdn-icons-png.flaticon.com/512/216/216685.png" alt="add-icon" className="add-remove-icon"/></button>}
          </div>
         </li>
         )

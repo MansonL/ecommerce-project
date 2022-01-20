@@ -1,14 +1,13 @@
 import axios, { AxiosResponse } from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import React from "react";
-import { CartCUDResponse } from "../utils/interfaces";
-import './cart.css';
+import { CartCUDResponse, cartDefault } from "../utils/interfaces";
 import { UserContext } from "./components/UserProvider";
 import { OperationResult } from "./components/Result/OperationResult";
 import { useNavigate } from "react-router-dom";
 import { ModalContainer } from "./components/Modal/ModalContainer";
 import { LoadingSpinner } from "./components/Spinner/Spinner";
-
+import './cart.css';
 
 export function Cart () {
     
@@ -16,8 +15,12 @@ export function Cart () {
   const [modificationResult, setModificationResult] = useState(false);
   const [resultMsg, setResultMsg] = useState('');
 
-  const { user ,cart, token, updateLoading, updateCart, confirmateCart, loading } = useContext(UserContext);
+  const {cart, setCart} = useContext(UserContext);
+  const {loading, setLoading} = useContext(UserContext);
+  const { cartConfirmated, setCartConfirmated } = useContext(UserContext);
+  const { user, token } = useContext(UserContext);
   
+
   const navigate = useNavigate();
 
     const AxiosThenCallback =  (response: AxiosResponse<CartCUDResponse, any>) => {
@@ -25,8 +28,8 @@ export function Cart () {
       setModificationResult(true);
       setResultMsg(data.message);
       setShowModificationResult(true);
-        updateCart(data.data)
-        updateLoading();
+        setCart(data.data)
+        setLoading(false);
         document.body.style.overflow = "scroll";
         setTimeout(() => {
           setModificationResult(false);
@@ -36,9 +39,9 @@ export function Cart () {
     }
 
     const AxiosCatchCallback = (error: any) => {
-      updateLoading();
+      setLoading(false);
           document.body.style.overflow = "scroll";
-          console.log(JSON.stringify(error, null, '\t'));
+          console.log(JSON.stringify(error.response, null, 2))
           setShowModificationResult(true);
           setModificationResult(false);
           if(error.response){
@@ -65,7 +68,7 @@ export function Cart () {
         product_id: id,
         quantity: 1,
       }
-      updateLoading();
+      setLoading(true);
       document.body.style.overflow = "hidden";
       axios.delete<CartCUDResponse>('http://localhost:8080/api/cart/delete', { data: cartData,       withCredentials: true, headers: { Authorization: `Bearer ${token}` }})
       .then(AxiosThenCallback)
@@ -78,21 +81,37 @@ export function Cart () {
         product_id: id,
         quantity: 1,
       }
-      updateLoading();
+      setLoading(true);
       document.body.style.overflow = "hidden";
-      axios.post<CartCUDResponse>('http://localhost:8080/api/cart/add', cartData,{ withCredentials: true, headers: { Authorization: `Bearer ${token}` }})
+      axios.post<CartCUDResponse>('http://localhost:8080/api/cart/add', cartData , { withCredentials: true, headers: { Authorization: `Bearer ${token}` }})
       .then(AxiosThenCallback)
       .catch(AxiosCatchCallback)
     }
 
     const cartConfirmation = () => {
-      confirmateCart();
+      setCartConfirmated(true);
       if(user.addresses && user.addresses.length > 0) 
         navigate('../addresses')
       else 
         navigate('../new-address')
     }
+    
+    const fetchUserCart = () => {
+      axios.get<CartCUDResponse>(`http://localhost:8080/api/cart/list/${user.user_id}`, { withCredentials: true, headers: { Authorization: `Bearer ${token}` }}).then(async response => {
+          if(response.status >= 200){
+              const data = response.data;
+              setCart(data.data[0]);
+           }
+       }).catch(error => {
+           if(error.response){
+               setCart(cartDefault);
+           }
+       })
+  }
 
+    useEffect(() => {
+      fetchUserCart();
+    }, []);
 
     return (
       <React.Fragment>
@@ -111,7 +130,7 @@ export function Cart () {
       <ul className="cart-products">
      {cart.products.length > 0 ? cart.products.map((product, idx) => {
        return (
-        <li className="product" id={String(idx)}>
+        <li className="cart-product" id={String(idx)}>
           <img className="product-image" src={product.product.images[0].url} alt="" />
           <div className="product-info">
             <span className="product-title">{product.product.title}</span>
@@ -126,15 +145,16 @@ export function Cart () {
          </div>
         </li>
        )
-     }) : <OperationResult resultMessage="Your cart is empty! Let's buy." success={false}/>}
-    </ul>
+     }) : ""}
+     </ul>
+    {cart.products.length > 0 ? <>
     <div className="cart-confirmation">
      <p>Everything right? Let's confirm and finish your order!</p>
       <p><b>After clicking the button you're going to be asked to select your desired address where the package will be delivered.</b></p> <br/>
         <div style={{paddingBottom:"3rem", textAlign:"center"}} className="submit-row">
         <button className="submit-btn"onClick={cartConfirmation}>Confirm cart</button>
           </div>
-    </div>
+    </div></> : <OperationResult resultMessage="Your cart is empty! Let's buy." success={false}/>}
   </section>
         </React.Fragment>
     )

@@ -16,7 +16,10 @@ export function Order(){
     const [orderResult, setOrderResult] = useState(false);
     const [resultMsg, setResultMsg] = useState('');
 
-    const { selectedAddress, loading, cart, user, token, updateLoading } = useContext(UserContext);
+   const { cart } = useContext(UserContext);
+   const { user, token } = useContext(UserContext);
+   const { loading, setLoading } = useContext(UserContext);
+   const { selectedAddress } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -39,7 +42,7 @@ export function Order(){
         setShowResult(true);
         setOrderResult(true);
         setResultMsg(data.message);
-        updateLoading();
+        setLoading(false);
         document.body.style.overflow = "scroll";
         setTimeout(async () => {
              setShowResult(false);
@@ -49,9 +52,9 @@ export function Order(){
     }
 
     const AxiosCatchCallback = (error: any) => {
-      updateLoading();
+      setLoading(false);
           document.body.style.overflow = "scroll";
-          console.log(JSON.stringify(error, null, '\t'));
+          console.log(JSON.stringify(error.response, null, 2))
           setShowResult(true);
           setOrderResult(false);
           if(error.response){
@@ -87,7 +90,7 @@ export function Order(){
         total: totalOrder[0],
         address: new Types.ObjectId(fullAddress._id),
         }
-        updateLoading();
+        setLoading(true);
         document.body.style.overflow = "hidden";
       axios.post<orderResponse>('http://localhost:8080/api/orders/create', data, { withCredentials: true, headers: { Authorization: `Bearer ${token}` }})
       .then(AxiosThenCallback)

@@ -1,5 +1,5 @@
-import React from 'react';
 import './result.css';
+
 
 interface IOperationResult {
   resultMessage: string,

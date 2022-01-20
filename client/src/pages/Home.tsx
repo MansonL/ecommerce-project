@@ -1,5 +1,7 @@
-import React from 'react'
-import './home.css'
+import React from 'react';
+import './home.css';
+
+
 export function Home () {
     return(
         <React.Fragment>

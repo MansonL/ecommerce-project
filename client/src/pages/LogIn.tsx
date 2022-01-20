@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 import { useContext, useEffect, useState } from "react";
-
-import { authResponse } from "../utils/interfaces";
+import { useNavigate } from "react-router-dom";
+import { authResponse, userDefaultValue } from "../utils/interfaces";
 import { validation } from "../utils/joiSchemas";
+import { verifyToken } from "../utils/utilities";
 import { ModalContainer } from "./components/Modal/ModalContainer";
 import { OperationResult } from "./components/Result/OperationResult";
 import { LoadingSpinner } from "./components/Spinner/Spinner";
@@ -14,15 +15,18 @@ export function LogIn (){
     const [showResult, setShowResult] = useState(false);
     const [loginResult, setLoginResult] = useState(false);
     const [resultMsg, setResultMsg] = useState('');
-
-    const { updateLoginStatus, updateLoading, loading } = useContext(UserContext);
-
     const [showHide, setShowHide] = useState(false);
-    
     const [credentials, setCredentials] = useState({
         username: '',
         password: '',
     });
+
+    const { user, updateLoginStatus } = useContext(UserContext);
+    const { token } = useContext(UserContext);
+    const { loading, setLoading } = useContext(UserContext);
+    const { loggedIn, setLoggedIn } = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     /**
      * Simple function for changing the Hide/Show button at password input.
@@ -51,13 +55,14 @@ export function LogIn (){
         setShowResult(true);
         setLoginResult(true);
         setResultMsg(data.message);
-        updateLoginStatus(data.data)
-        updateLoading();
+        setLoading(false);
         document.body.style.overflow = "scroll";
         setTimeout(async () => {
              setShowResult(false);
              setLoginResult(false);
              setResultMsg('');
+             updateLoginStatus(data.data)
+             setLoggedIn(true);
         },2000)
     }
 
@@ -73,20 +78,20 @@ export function LogIn (){
         setLoginResult(false);
         setResultMsg(error.message);
       }else{
-        updateLoading();
+        setLoading(true);
         document.body.style.overflow = "hidden";
         axios.post<authResponse>(`http://localhost:8080/api/auth/login`, credentials,{withCredentials: true}).then(loginAxiosCallback)
         .catch(error => {
-          updateLoading();
+          setLoading(false);
           document.body.style.overflow = "scroll";
-          console.log(JSON.stringify(error, null, '\t'));
+          console.log(JSON.stringify(error.response, null, 2))
           setShowResult(true);
           setLoginResult(false);
           if(error.response){
             if(error.response.status === 500){
-              setResultMsg(error.response.data.message)
+              setResultMsg(error.response.data)
             }else{
-              setResultMsg(error.response.data.message)
+              setResultMsg(error.response.data)
             }
           }else if(error.request){
               setResultMsg(`No response received from server.`)
@@ -102,12 +107,19 @@ export function LogIn (){
       }
     }
 
+
+    
+
+
     useEffect(() => {
       setCredentials({
         username: '',
         password: '',
       })
       setShowResult(false);
+      if(loggedIn){
+        navigate('../cart')
+      }
     }, [])
     
     return (
@@ -123,14 +135,14 @@ export function LogIn (){
     {showResult && <OperationResult success={loginResult} resultMessage={resultMsg} />}
     <div className="login-signup-fields">
       <div className="login-signup-field">
-        <input type="text" id="username" name="username" className="styled-input" onChange={onChange}/>
-        <label htmlFor="username" className="animated-label">Username</label>
+        <input type="text" id="username" name="username" className="styled-input" onChange={onChange} value={credentials.username}/>
+        <label htmlFor="username" className={credentials.username !== '' ? "filled-input-label" : "animated-label"}>Username</label>
         <span className="input-border"></span>
       </div>
       <div className="password-field">
         <div className="pswd-input-wrapper">
           <input type={showHide ? "text" : "password"} id="password" name="password" className="styled-input password-input" onChange={onChange}/>
-          <label htmlFor="password" className="animated-label">Password</label>
+          <label htmlFor="password" className={credentials.password !== '' ? "filled-input-label" : "animated-label"}>Password</label>
           <span className="input-border"></span>
         </div>
 

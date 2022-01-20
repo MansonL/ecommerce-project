@@ -1,12 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserAddresses } from '../../../server/src/common/interfaces/users';
-import './addressesList.css';
 import { UserContext } from './components/UserProvider';
+import './addressesList.css';
 
 export function AddressesList (){
 
-    const { user, cartConfirmated, selectAddress, selectedAddress } = useContext(UserContext);
+    const { cartConfirmated } = useContext(UserContext);
+    const { user } = useContext(UserContext);
+    const { selectedAddress, setSelectedAddress } = useContext(UserContext);
+
     const navigate = useNavigate();
     
     if(!cartConfirmated)
@@ -19,13 +21,13 @@ export function AddressesList (){
     }
 
     const onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-      selectAddress(ev.target.value)
+      setSelectedAddress(ev.target.value)
     }
 
     const addressConfirmation = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       if(selectedAddress === '' && user.addresses)
-        selectAddress((user.addresses[0]).alias)
+        setSelectedAddress((user.addresses[0]).alias)
       navigate('../order')
     }
 

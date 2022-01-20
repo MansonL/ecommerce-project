@@ -11,7 +11,7 @@
 
 .modal {
     position: absolute;
-    top: 50vh;
+    top: 25vh;
     left: 0;
     right: 0;
     opacity: 1;
@@ -19,6 +19,7 @@
     flex-direction: column;
     max-width: 70%;
     max-height: 40%;
+    height: unset;
     margin: auto;
     border-radius: 0.5rem;
     background-color: #fcde67;
@@ -32,13 +33,21 @@
     width: 100%;
     align-items: center;
     display: flex;
+    justify-content: flex-end;
   }
   
+  .modal-header-title {
+    font-size: 1.2rem;
+    margin: 0.7rem 0.5rem 0.7rem 0.5rem;
+    flex-grow: 1;
+    position: absolute;
+    left: 28%;
+  }
+
   .close-modal {
     float: right;
-    max-width: 10%;
+    width: 15%;
     padding: 0.5rem;
-    margin: auto;
   }
   
   .modal-body {
@@ -47,6 +56,7 @@
     background-color: white;
     width: 100%;
     padding: 1rem 0 1rem 0;
+    overflow-y: auto;
   }
   
   .modal-footer {

@@ -16,12 +16,10 @@ export function SignUp () {
     const [showResult, setShowResult] = useState(false);
     const [signUpResult, setSignUpResult] = useState(false);
     const [resultMsg, setResultMsg] = useState('');
-
     const [showHide, setShowHide] = useState(false);
-
-    const { loading, updateLoading } = useContext(UserContext)
-
     const [newUser, setNewUser] = useState<UserInfo>(newUserDefault)
+
+    const { loading, setLoading } = useContext(UserContext);
 
 
     /**
@@ -54,7 +52,7 @@ export function SignUp () {
         setShowResult(true);
         setSignUpResult(true);
         setResultMsg(data.message);
-        updateLoading();
+        setLoading(false);
         document.body.style.overflow = "scroll";
         setTimeout(async () => {
              setShowResult(false);
@@ -90,14 +88,14 @@ export function SignUp () {
             modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
             data: user,
           }
-          console.log(JSON.stringify(userData, null, '\t'))
-          updateLoading();
+          
+          setLoading(true);
           document.body.style.overflow = "hidden";
           axios.post<UserCUDResponse>('http://localhost:8080/api/auth/signup', userData, { withCredentials: true }).then(signAxiosCallback)
           .catch(error => {
-              updateLoading();
+            console.log(JSON.stringify(error.response, null, 2)) 
+            setLoading(false);
               document.body.style.overflow = "scroll";
-              console.log(JSON.stringify(error, null, '\t'));
               setShowResult(true);
               setSignUpResult(false);
               if(error.response){

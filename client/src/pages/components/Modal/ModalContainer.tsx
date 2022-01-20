@@ -1,5 +1,6 @@
 import './modal.css'
 
+
 interface IModalContainerProps {
     children: JSX.Element
 }

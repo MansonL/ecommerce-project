@@ -10,8 +10,8 @@ export function Modal (props: IModalProps) {
     return (
         <div className="modal">
     <div className="modal-header">
-        <span style={{fontSize:"1.2rem", margin:"0.7rem 0.5rem 0.7rem 0.5rem"}}>Warning!</span>
-      <img className="close-modal" src="https://icons.iconarchive.com/icons/iconsmind/outline/512/Close-Window-icon.png" alt=""/>
+        <span className='modal-header-title'>Warning!</span>
+      <img className="close-modal" src="https://icons.iconarchive.com/icons/iconsmind/outline/512/Close-Window-icon.png" onClick={props.cancelClick} alt=""/>
     </div>
     <div className="modal-body">
       <span>{props.msg}</span>
