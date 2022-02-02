@@ -1,9 +1,9 @@
 import { model, Model, Schema } from 'mongoose';
 import { ApiError } from '../../../api/errorApi';
-import { EUsersErrors } from '../../../common/EErrors';
+import { EUsersErrors } from '../../../interfaces/EErrors';
 import moment from 'moment';
-import { IMongoUser, INew_User, UserAddresses } from '../../../common/interfaces/users';
-import { CUDResponse } from '../../../common/interfaces/others';
+import { IMongoUser, INew_User, UserAddresses } from '../../../interfaces/users';
+import { CUDResponse } from '../../../interfaces/others';
 import bcrypt from 'bcrypt';
 import { logger } from '../../../services/logger';
 import { Config } from '../../../config/config';
@@ -41,7 +41,6 @@ const usersSchema = new Schema({
                 department: { type: String },
                 city: { type: String },
                 extra_info: { type: String },
-                _id: false,
             }
         ],
         isAdmin: { type: Boolean, required: true }
@@ -60,9 +59,11 @@ usersSchema.set('toJSON', {
     }
 });
 
-usersSchema.methods.isValidPassword = async function(password: string)  {
-    const valid = await bcrypt.compare(password, this.data.password)
-    return valid
+usersSchema.methods.isValidPassword = async function(password: string): Promise<boolean>  {
+    return new Promise(async (resolve, reject) => {
+        const response = await bcrypt.compareSync(password, this.data.password);
+        response ? resolve(response) : reject(response);
+    })
 }
 
 usersSchema.pre('save', async function(next){
@@ -111,7 +112,7 @@ const customerTest: INew_User = {
         phoneNumber: '+5492612345678',
         avatar: '',
         facebookID: '',
-        isAdmin: true,
+        isAdmin: false,
     },
 };
 
@@ -213,10 +214,10 @@ export class MongoUsers {
 }
     async addAddress(user_id: string, address: UserAddresses): Promise<CUDResponse | ApiError> {
         try {
-            const doc = await this.users.findOne({ _id: user_id });
+            const doc = await this.users.findOne({ _id: user_id }).lean();
             if(doc){
                 doc.data.addresses ? doc.data.addresses.push(address) : doc.data.addresses = [address];
-                await doc.save();
+                await this.users.findByIdAndUpdate(user_id, doc);
                 return {
                     message: `Address added succesfully`,
                     data: doc as unknown as IMongoUser

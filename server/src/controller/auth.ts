@@ -1,11 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import { JwtPayload, sign, verify, VerifyErrors } from "jsonwebtoken";
+import moment from "moment";
+import { Types } from "mongoose";
+import { cartApi } from "../api/cart";
 import { ApiError } from "../api/errorApi";
 import { usersApi } from "../api/users";
-import { EAuthErrors, EUsersErrors } from "../common/EErrors";
-import { IMongoUser, INew_User, UserAddresses, UserInfo } from "../common/interfaces/users";
+import { EAuthErrors, EUsersErrors } from "../interfaces/EErrors";
+import { IMongoCart } from "../interfaces/products";
+import { IMongoUser, INew_User, UserAddresses, UserInfo } from "../interfaces/users";
 import { Config } from "../config/config";
 import { logger } from "../services/logger";
+import { Utils } from "../utils/utils";
 
 declare global {
     namespace Express {
@@ -30,6 +35,7 @@ declare module "jsonwebtoken" {
             addresses?: UserAddresses[] | undefined;
             isAdmin: boolean;
             user_id: string;
+            user_cart: IMongoCart;
         };
     }
 }
@@ -61,22 +67,25 @@ class AuthController {
             next(result)
         else{
             result.isValidPassword(password)
-                .then(() => {
-                    const userData = { user: {
-                        user_id: result._id,
-                        ...result.data
-                    } }
-                    sign(Object.assign({}, userData), Config.JWT_SECRET, { expiresIn: Config.JWT_EXPIRATION_TIME }, (err, token) => {
-                        if(err)
-                            next(ApiError.internalError(err.message));
-                        else 
-                            res.send({
-                                 message: 'Successfully logged in.',
-                                 data: token
-                            })
+                .then((response) => {
+                    Utils.getUserCartOrDefault(result._id).then(userCart => {
+                        const userData = { user: {
+                            user_cart: userCart,
+                            user_id: result._id,
+                            ...result.data
+                        }}
+                        sign(Object.assign({}, userData), Config.JWT_SECRET, { expiresIn: Config.JWT_EXPIRATION_TIME }, (err, token) => {
+                            if(err)
+                                next(ApiError.internalError(err.message));
+                            else 
+                                res.send({
+                                     message: 'Successfully logged in.',
+                                     data: token
+                                })
+                        })
                     });
                 })
-                .catch(() => {
+                .catch((error) => {
                     next(ApiError.badRequest(EUsersErrors.WrongCredentials))
                 })
             }
