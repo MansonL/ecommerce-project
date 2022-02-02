@@ -1,9 +1,11 @@
-
+  ul {
+    padding: 0.4rem;
+  }
   
   .products-container {
     background-color: #CFCFC4;
     border-radius: 0.4rem;
-    padding: 1rem 0.4rem 0.3rem 0.4rem;
+    padding: 1rem 0.5rem 0.3rem 0.5rem;
     margin-top: 0.5rem;
   }
   

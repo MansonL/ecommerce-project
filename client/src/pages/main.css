@@ -11,7 +11,7 @@ html, body {
 
 h5 {
   font-weight: normal;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 body {
@@ -26,9 +26,10 @@ body {
   width: 100%;  
   background-color: white;
 }
-.main-background {
+.home-background {
   background-image: url("https://media.istockphoto.com/photos/abstract-design-element-annual-sale-shopping-season-concept-mini-picture-id1178795713?k=20&m=1178795713&s=612x612&w=0&h=NLA9JoyezoOubPwy38luYZB1rwUwQAYY_JAk2JBvcsg=");
-    background-size: cover;
+  background-size: cover;
+  background-position: -8rem -3rem;
 }
 
 
@@ -36,6 +37,7 @@ body {
 
 .body-container {
   width: 100%;
+  height: 100%;
 }
 
 
@@ -170,6 +172,11 @@ a {
 
 /* ---- INPUTS, LABELS & CUSTOM BORDERS ------ */
 
+.street1-label {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
 .animated-label {
   position: absolute;
   bottom: 0;
@@ -177,7 +184,7 @@ a {
   margin: auto;
   z-index: 0;
   transition: 0.5s;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
 }
 
 .filled-input-label {
@@ -185,7 +192,11 @@ a {
   z-index: 0;
   top: -1.5rem;
   left: -0.5rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
+}
+
+.optional-label {
+  font-size: 0.75rem;
 }
 
 .styled-input {
@@ -196,6 +207,7 @@ a {
   position: relative;
   margin-top: 0.4rem;
   width: 100%;
+  font-size: 1.2rem;
 }
 
 .styled-input:focus ~ .input-border {
@@ -205,7 +217,7 @@ a {
 .styled-input:focus ~ .animated-label {
   top: -1rem;
   left: -0.5rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .input-border {
@@ -238,9 +250,10 @@ a {
   flex-direction: column;
   padding-top: 1rem;
   row-gap: 1.8rem;
-  width: 65%;
+  width: 75%;
   margin: auto;
   text-align: left;
+  margin-top: 3rem;
 }
 
 .login-signup-field, .address-field, .product-field {
@@ -314,6 +327,8 @@ a {
   position: relative;
   padding: 1rem 0.4rem 1rem 0.4rem;
   margin-top: 0;
+  max-width: 85%;
+  margin: auto;
 }
 
 .product, .cart-product {
@@ -356,9 +371,22 @@ a {
 .product-title {
   font-size: 0.8rem;
 }
-
 .product-price {
   font-size: 1.3rem;
+}
+.product-qty-text {
+  position: relative;
+  font-size: 1.2rem;
+}
+.product-qty-amount {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+.product-subtotal-text {
+  font-size: 0.8rem;
+}
+.product-subtotal-value {
+  font-size: 1.2rem;
 }
 
 
@@ -381,14 +409,20 @@ a {
   .main-menu {
     width: 60vw;
   }
+  .login-signup-fields, .address-fields, .product-form {
+    width: 80%;
+  }
   
 }
 
 @media (max-width: 350px){
    .cart-counter {
       font-size: 1rem;
+      top: 25%;
    }
-
+   .welcome-text {
+      padding-top: 8rem;;
+   }
    .modal-header-title {
     left: 22%;
  }
@@ -396,7 +430,19 @@ a {
    .header-title-message {
     margin: unset;
    }
+   .login-signup-fields, .address-fields, .product-form {
+     width: 90%;
+   }
 
+}
+
+@media (max-width: 380px) and (max-height: 700px){
+  .home-background {
+    background-position: -4rem -3rem;
+  }
+  .login-signup-fields, .address-fields, .product-form {
+    width: 90%;
+  }
 }
 
 /* -------- COVERING MOST OF NORMAL AND WIDEST CELLPHONES ----------- */
@@ -409,13 +455,25 @@ a {
     max-width: 9%;
  }
  .cart-counter {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
  }
  .main-menu {
     max-width: 37%;
  }
  .login-logout-avatar {
     font-size: 1.2rem;
+ }
+ .home-background {
+   background-position: 0rem -9rem;
+ }
+ .first-text {
+   font-size: 2.3rem;
+ }
+ .second-text {
+   font-size: 3rem;
+ }
+ .welcome-products-btn {
+   font-size: 2.5rem;
  }
  .modal {
     max-width: 45%;
@@ -427,6 +485,182 @@ a {
     width: 10%;
  }
 }
+
+
+
+
+/* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
+
+@media (min-width: 480px) and (max-height: 1200px) {
+  h3 {
+    font-size: 2.5rem;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+  }
+  p {
+    font-size: 1.3rem;
+  }
+
+  /* MAIN MENU */
+  .main-menu {
+    font-size: 1.4rem;
+  }
+
+  .home-background {
+    background-position: -1rem -13rem;
+  }
+  /* ------------------ */
+
+  /* LANDING PAGE */
+  .first-text {
+    font-size: 2rem;
+  }
+
+  .second-text {
+    font-size: 3rem;
+  }
+
+  .welcome-products-btn {
+    font-size: 1.5rem;
+  }
+  /* ------------------ */
+
+  /* INPUTS FIELDS */
+  .street1-label {
+    font-size: 1.4rem;
+  }
+  
+  .styled-input {
+    font-size: 1.3rem;
+  }
+
+  .animated-label {
+    font-size: 1.2rem;
+  }
+
+  .optional-label {
+    font-size: 1rem;
+  }
+
+  .filled-input-label {
+    position: absolute;
+    z-index: 0;
+  }
+
+  .styled-input:focus ~ .animated-label, .filled-input-label {
+    font-size: 1.4rem;
+    top: -1.5rem;
+    left: -1rem;
+  }
+
+  .submit-btn {
+    font-size: 1.8rem;
+  }
+  
+  /* PRODUCTS LIST */
+  .product-qty-text {
+    font-size: 1.5rem;
+  }
+
+  .product-qty-amount {
+    font-size: 2rem;
+  }
+
+  .see-as-admin {
+    font-size: 1.2rem;
+  }
+
+  .total-results {
+    font-size: 1rem;
+  }
+
+  .product-price {
+    font-size: 1.6rem;
+  }
+
+  .product-title {
+    font-size: 1.4rem;
+  }
+
+  .filter-menu {
+    font-size: 1.2rem;
+  }
+  .add-remove-container {
+    max-width: 20%;
+  }
+  .operation-result-icon {
+    max-width: 20%;
+  }
+  /* ------------------ */
+
+  /* ADMIN PRODUCTS FORM */ 
+
+  .ask-admin {
+    font-size: 1rem;
+  }
+
+  .product-form {
+    row-gap: 2.5rem;
+  }
+
+  .code-btn {
+    font-size: 1.2rem;
+  }
+
+  input[type="file"] {
+    padding: 1rem;
+  }
+  /* ------------------ */
+
+  /* ADDRESSES LIST */
+  input[type="radio"] {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  .create-new-address {
+    font-size: 1.2rem;
+  }
+  .address {
+    column-gap: 1.5rem;
+  }
+  .address-label {
+    font-size: 1.5rem;
+  }
+  .address-info {
+    font-size: 1.3rem;
+  }
+  /* ------------------ */
+
+}
+
+
+
+/* ------- FOR DEVICES (MOST CELLPHONES) WITH THE WIDTH SHORTER THAN A NOTEBOOK/TABLET AND THE HEIGHT OF A MEDIUM SIZE CELLPHONE ----------- */
+
+@media (min-width: 480px) and (max-width:1023px) and (max-height: 720px) {
+   
+  .cart-icon-container {
+    max-width: 11%;
+ }
+
+ .cart-counter {
+    font-size: 1.3rem;
+ }
+ .first-text {
+  font-size: 1.5rem;
+ }
+ .second-text {
+  font-size: 2rem;
+ }
+ .home-background {
+   background-position: 0 -9rem;
+ }
+}
+
+
+
 
 /* --------------- FOR TABLETS AND NOTEBOOKS ------------------ */
 
@@ -456,116 +690,39 @@ a {
     padding: 3rem;
     display: flex;
     flex-wrap: wrap;
+    max-width: unset;
  }
  .product {
     max-width: 50%;
     width: unset;
  }
+ .product-info {
+   flex-grow: 1;
+ }
+ .operation-result-icon {
+   max-width: 10%;
+ }
+ .product-image {
+   max-width: 20%;
+ }
+ .cart-product {
+   column-gap: 1.5rem;
+ }
+ .order-product-price {
+   font-size: 1.5rem;
+ }
+ .order-product-qty {
+   font-size: 1.2rem;
+ }
+ .product-subtotal-text{
+  font-size: 1.2rem;
+ }
+ .product-subtotal-value {
+  font-size: 1.5rem;
+ }
 }
 
-/* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
 
-@media (min-width: 480px) and (max-height: 1024px) {
-  h3 {
-    font-size: 2.5rem;
-  }
-
-  h5 {
-    font-size: 1.2rem;
-  }
-
-  /* MAIN MENU */
-  .main-menu {
-    font-size: 1.4rem;
-  }
-
-  .main-background {
-    background-position: 0rem -6rem;
-  }
-  /* ------------------ */
-
-  /* LANDING PAGE */
-  .first-text {
-    font-size: 2rem;
-  }
-
-  .second-text {
-    font-size: 3rem;
-  }
-
-  .welcome-products-btn {
-    font-size: 1.5rem;
-  }
-  /* ------------------ */
-
-  /* INPUTS FIELDS */
-  .styled-input {
-    font-size: 1.3rem;
-  }
-
-  .animated-label {
-    font-size: 1.2rem;
-  }
-
-  .filled-input-label {
-    position: absolute;
-    z-index: 0;
-  }
-
-  .styled-input:focus ~ .animated-label, .filled-input-label {
-    font-size: 1.4rem;
-    top: -1.5rem;
-    left: -1rem;
-  }
-
-  .submit-btn {
-    font-size: 1.8rem;
-  }
-  
-  /* PRODUCTS LIST */
-  .see-as-admin {
-    font-size: 1.2rem;
-  }
-
-  .total-results {
-    font-size: 1rem;
-  }
-
-  .product-price {
-    font-size: 1.6rem;
-  }
-
-  .product-title {
-    font-size: 1.4rem;
-  }
-
-  .filter-menu {
-    font-size: 1.2rem;
-  }
-  .add-remove-container {
-    max-width: 20%;
-  }
-  /* ------------------ */
-
-  /* ADMIN PRODUCTS FORM */ 
-
-  .ask-admin {
-    font-size: 1rem;
-  }
-
-  .product-form {
-    row-gap: 2.5rem;
-  }
-
-  .code-btn {
-    font-size: 1.2rem;
-  }
-
-  input[type="file"] {
-    padding: 1rem;
-  }
-  /* ------------------ */
-}
 
 /* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
 
@@ -579,13 +736,17 @@ a {
     font-size: 1.2rem;
   }
 
+  p{
+    font-size: 1.5rem;
+  }
+
   /* MAIN MENU & NAVBAR */
   .main-menu {
     font-size: 1.6rem;
   }
 
-  .main-background {
-    background-position: 0rem -6rem;
+  .home-background {
+    background-position: -1rem -15rem;
   }
 
   .avatar-img {
@@ -647,6 +808,20 @@ a {
   .add-remove-container {
     max-width: 25%;
   }
+  .cart-product > .add-remove-container {
+    max-width: 20%;
+  }
+  .cart-products {
+    max-width: 75%;
+    margin: auto;
+  }
+  .product-qty-amount {
+    font-size: 2.5rem;
+    margin-left: 1rem;
+  }
+  .product-qty-text {
+    font-size: 2rem;
+  }
   /* ------------------ */
 
   /* MODAL */
@@ -660,6 +835,9 @@ a {
 
   .modal-btn, .see-as-admin {
     font-size: 1.2rem;
+  }
+  .operation-result-icon {
+    max-width: 20%;
   }
  /* ------------------ */
 
@@ -683,6 +861,9 @@ a {
   .animated-label {
     font-size: 1.2rem;
   }
+  .optional-label {
+    font-size: 1rem;
+  }
   .filled-input-label {
     position: absolute;
     z-index: 0;
@@ -697,11 +878,30 @@ a {
   }
   /* ------------------ */
 
+  /* ADDRESSES LIST */
+  input[type="radio"] {
+    height: 2rem;
+    width: 2rem;
+  }
+  .create-new-address {
+    font-size: 1.5rem;
+  }
+  .address {
+    column-gap: 1.5rem;
+  }
+  .address-label {
+    font-size: 1.8rem;
+  }
+  .address-info {
+    font-size: 1.6rem;
+  }
+  /* ------------------ */
+
 }
 
-/* --- FOR DEVICES WITH THE WIDTH OF A TABLET/NOTEBOOK AND VERY NARROW --- */
+/* --- FOR DEVICES WITH THE WIDTH OF A TABLET/NOTEBOOK AND VERY SHORT --- */
 
-@media (min-width:1024px) and (max-height: 1024px) {
+@media (min-width:1024px) and (max-height: 800px) {
    .cart-icon-container {
       max-width: 5%;
    }
@@ -711,18 +911,20 @@ a {
    .filter-icon {
      width: 21%;
    }
+   .home-background {
+     background-image: url("https://image.freepik.com/free-photo/hand-holding-shopping-bag-plain-background_23-2148286214.jpg");
+     background-size: cover;
+     background-position: 0rem -58rem;
+   }
    
 }
 
-/* ------- FOR DEVICES (MOST CELLPHONES) WITH THE WIDTH SHORTER THAN A NOTEBOOK/TABLET AND THE HEIGHT OF A MEDIUM SIZE CELLPHONE ----------- */
-
-@media (min-width: 480px) and (max-width:1023px) and (max-height: 720px) {
-   
-    .cart-icon-container {
-      max-width: 11%;
-   }
-
-   .cart-counter {
-      font-size: 1.3rem;
-   }
+@media (min-width: 1024px) and (max-height: 799px) {
+  .home-background {
+    background-image: url("https://image.freepik.com/free-photo/hand-holding-shopping-bag-plain-background_23-2148286214.jpg");
+     background-size: cover;
+     background-position: 0rem -46rem;
+  }
 }
+
+

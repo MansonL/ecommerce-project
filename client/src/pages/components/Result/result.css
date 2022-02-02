@@ -9,6 +9,11 @@
     border-radius: 0.4rem;
   }
 
+.operation-result-icon {
+  max-width: 30%;
+  padding: 1rem;
+}
+
 .success {
   background-color: #A3F5C2;
   border: 2px solid #46EC86;

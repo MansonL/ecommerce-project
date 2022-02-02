@@ -1,12 +1,12 @@
 .addresses-list {
     max-height: 40vh;
     overflow: auto;
-    margin: 2rem 0 2rem 0;
+    margin: 2rem auto 2rem auto !important;
 }
 
 .address {
     display: flex;
-    column-gap: 0.5rem;
+    column-gap: 0.8rem;
     align-items: center;
   }
   
@@ -15,4 +15,6 @@
     flex-direction: column;
     row-gap: 0.3rem;
     text-align: left;
+    flex-grow: 1;
+    font-size: 0.8rem;
   }
