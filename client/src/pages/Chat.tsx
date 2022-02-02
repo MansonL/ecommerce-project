@@ -3,7 +3,7 @@ import { socket } from '../lib/socket';
 import axios from 'axios';
 import moment from 'moment'
 import { UserContext } from './components/UserProvider';
-import { IMongoPopulatedMessages, INew_Message } from '../../../server/src/common/interfaces/messages';
+import { IMongoPopulatedMessages, INew_Message } from '../../../server/src/interfaces/messages';
 import { takeChats } from '../utils/utilities';
 import { Types } from 'mongoose';
 import './chat.css';

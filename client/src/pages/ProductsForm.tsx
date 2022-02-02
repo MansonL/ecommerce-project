@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import moment from 'moment';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { INew_Product } from '../../../server/src/common/interfaces/products';
+import { INew_Product } from '../../../server/src/interfaces/products';
 import { defaultProduct, ProductCUDResponse } from '../utils/interfaces';
 import { validation } from '../utils/joiSchemas';
 import { ModalContainer } from './components/Modal/ModalContainer';
@@ -153,12 +153,12 @@ export function ProductsForm() {
     </div>
     <div className="product-field">
       <input type="number" className="styled-input" onChange={onChange} id="stock" name="stock" min="1" step="1" value={newProduct.stock}/>
-       <label htmlFor="stock" className={newProduct.stock != null ? "filled-input-label" : "animated-label"}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Stock</label>
+       <label htmlFor="stock" className="filled-input-label" ><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Stock</label>
        <span className="input-border"></span>
     </div>
     <div className="product-field">
       <input type="number" className="styled-input" id="price" onChange={onChange} name="price" min="0.01" step="0.25" value={newProduct.price}/>
-       <label htmlFor="price" className={newProduct.price != null ? "filled-input-label" : "animated-label"}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Price</label>
+       <label htmlFor="price" className="filled-input-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Price</label>
        <span className="input-border"></span>
     </div>
     <div className="product-field">

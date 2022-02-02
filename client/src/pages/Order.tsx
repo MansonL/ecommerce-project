@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { Types } from 'mongoose';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserAddresses } from '../../../server/src/common/interfaces/users';
+import { UserAddresses } from '../../../server/src/interfaces/users';
 import { orderResponse } from '../utils/interfaces';
 import { ModalContainer } from './components/Modal/ModalContainer';
 import { OperationResult } from './components/Result/OperationResult';
@@ -27,13 +27,18 @@ export function Order(){
       navigate('../addresses');
     }
 
-    let totalOrder = [0]
+    const modifyCart = () => {
+      navigate('../cart');
+    }
+
+    let totalOrder = 0;
+
     cart.products.forEach(product => {
-      totalOrder[0] += product.quantity * product.product.price;
+      totalOrder += product.quantity * product.product.price;
     })
 
     const fullAddress = (user.addresses as UserAddresses[]).filter(address => address.alias === selectedAddress)[0];
-    const formattedAddres = `${fullAddress.street1.name} ${fullAddress.street1.number},${fullAddress.department && fullAddress.floor ? ` ${fullAddress.department} ${fullAddress.floor}, ` : ''}${fullAddress.city} ${fullAddress.zipcode}`
+    const formattedAddres = `${fullAddress.street1.name} ${fullAddress.street1.number},${fullAddress.department && fullAddress.floor ? ` ${fullAddress.department} ${fullAddress.floor}, ` : ' '}${fullAddress.city} ${fullAddress.zipcode}`
 
 
 
@@ -87,7 +92,7 @@ export function Order(){
           price: product.product.price
           }
         }),
-        total: totalOrder[0],
+        total: totalOrder,
         address: new Types.ObjectId(fullAddress._id),
         }
         setLoading(true);
@@ -109,14 +114,14 @@ export function Order(){
     { showResult && <OperationResult success={orderResult} resultMessage={resultMsg}/> }
     <div className="order-container">
       <div className="order-products">
-        <span>Products:</span> <span style={{float:"right", fontSize:"0.8rem"}}>Modify</span>
+        <span>Products:</span> <span style={{float:"right", fontSize:"0.8rem"}} onClick={modifyCart}>Modify</span>
         <div className="products-container">
           <ul className="products">
             {cart.products.map((product, idx) => {
               return (
-                <li className="product" id={String(idx)}><img src={product.product.images[0].url} alt="" className="product-image"/><div className="product-info"><span className="product-title">{product.product.title}</span>
-       <span className="product-price">{product.product.price} <span style={{fontSize:"0.8rem"}}>{product.quantity}</span></span></div><div style={{textAlign:"center", maxWidth:"25%"}}>
-              <span style={{fontSize:"0.8rem"}}>Subtotal:</span><br/><span style={{fontSize:"1.5rem"}}>{product.quantity*product.product.price}</span>
+                <li className="cart-product" key={String(idx)}><img src={product.product.images[0].url} alt="" className="product-image"/><div className="product-info"><span className="product-title">{product.product.title}</span>
+       <span className="order-product-price">{product.product.price} <span className='order-product-qty'>x {product.quantity}</span></span></div><div style={{textAlign:"center", maxWidth:"25%"}}>
+              <span className='product-subtotal-text'>Subtotal:</span><br/><span className='product-subtotal-value'>{product.quantity*product.product.price}</span>
               </div>
               </li>
               )

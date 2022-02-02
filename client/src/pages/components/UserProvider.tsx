@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import axios from 'axios'
 import { verifyToken } from "../../utils/utilities";
-import { authResponse, cartDefault, IUserInfo, userDefaultValue } from "../../utils/interfaces";
-import { IMongoCart } from "../../../../server/src/common/interfaces/products";
+import { authResponse, cartDefault, IUserInfo, userDefault } from "../../utils/interfaces";
+import { IMongoCart } from "../../../../server/src/interfaces/products";
 interface ClickableProps {
     children: JSX.Element[] | JSX.Element;
   }
@@ -10,7 +10,8 @@ interface ClickableProps {
 
 
 export const UserContext = createContext({
-    user: userDefaultValue,
+    user: userDefault,
+    setUser: (user: IUserInfo): void => {},
     loggedIn: false,
     setLoggedIn: (boolean: boolean): void => {},
     loading: false,
@@ -27,7 +28,7 @@ export const UserContext = createContext({
 
 export function UserProvider (props: ClickableProps) {
 
-    const [user, setUser] = useState<IUserInfo>(userDefaultValue);
+    const [user, setUser] = useState<IUserInfo>(userDefault);
 
     const [cart, setCart] = useState<IMongoCart>(cartDefault)
 
@@ -39,23 +40,23 @@ export function UserProvider (props: ClickableProps) {
 
     const [selectedAddress, setSelectedAddress] = useState('');
 
-
     const [loading, setLoading] = useState(false);
-    
 
-    
+
     const updateLoginStatus = async (tokenParam: string | undefined) => {
         if(tokenParam){
-            const user = await verifyToken(tokenParam);
+            const { user_cart, ...user } = await verifyToken(tokenParam);
         if(token !== tokenParam)
             setToken(tokenParam)
+        console.log(user_cart)
+        setCart(user_cart);
         setUser(user)
-        console.log(user.isAdmin)
         setLoggedIn(true);
         }else{
             setLoggedIn(false);
             if(loggedIn){
-                setUser(userDefaultValue)
+                setUser(userDefault)
+                setCart(cartDefault)
             }
         }
     }
@@ -80,7 +81,7 @@ export function UserProvider (props: ClickableProps) {
     }, [])
 
     return (
-        <UserContext.Provider value={{user, updateLoginStatus, cart, setCart, cartConfirmated, setCartConfirmated, token, loading, setLoading, loggedIn, setLoggedIn, selectedAddress, setSelectedAddress}}>
+        <UserContext.Provider value={{user, setUser, updateLoginStatus, cart, setCart, cartConfirmated, setCartConfirmated, token, loading, setLoading, loggedIn, setLoggedIn, selectedAddress, setSelectedAddress}}>
             {props.children}
         </UserContext.Provider>
     )

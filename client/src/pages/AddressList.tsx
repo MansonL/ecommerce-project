@@ -31,26 +31,28 @@ export function AddressesList (){
       navigate('../order')
     }
 
+    console.log(selectedAddress)
+
     return (
         <section className="body-container">
     <div className="address-header">
-     <h2 className="header-title">Address</h2>
+     <h3 className="header-title">Address</h3>
      <h5>Please, select the address where you want us to deliver your package:</h5>
    </div>
-     <div style={{width:"85%", fontSize:"0.8rem", margin:"auto"}} onClick={goToCreateAddress}>Create a new address</div>
+     <div className='create-new-address' style={{width:"85%", margin:"auto", marginTop:"3rem"}} onClick={goToCreateAddress}>Create a new address</div>
      <ul className="addresses-list">
        
        {user.addresses?.map((address, idx)=> {
          return (
-          <li className="address" id={String(idx)}>
-            <input type="radio" onChange={onChange} checked={idx === 0} id={address.alias} name="address" value={address.alias}/>
-            <label htmlFor={address.alias}><b>Home1</b></label>
+          <li className="address" key={String(idx)}>
+            <input type="radio" onChange={onChange} checked={selectedAddress === address.alias} id={address.alias} name="address" value={address.alias}/>
+            <label htmlFor={address.alias} className='address-label'><b>{address.alias}</b></label>
             <div className="address-info">
-              <span style={{fontSize:"0.8rem"}}>{`${address.street1.name} ${address.street1.number},${!address.street2 ? '' : address.street3 ? ` ${address.street2} and ${address.street3}` : ` ${address.street2}` }`}</span>
-              {address.department && <span style={{fontSize:"0.8rem"}}>{`Department: ${address.department}`}</span>}
-              {address.floor && <span style={{fontSize:"0.8rem"}}>{`Floor: ${address.floor}`}</span>}
-              <span style={{fontSize:"0.8rem"}}>{`${address.city}, ${address.zipcode}`}</span>
-              <span style={{fontSize:"0.8rem"}}>{address.extra_info}</span>
+              <span>{`${address.street1.name} ${address.street1.number},${!address.street2 ? '' : address.street3 ? ` ${address.street2} and ${address.street3}` : ` ${address.street2}` }`}</span>
+              {address.department && <span>{`Department: ${address.department}`}</span>}
+              {address.floor && <span>{`Floor: ${address.floor}`}</span>}
+              <span>{`${address.city}, ${address.zipcode}`}</span>
+              <span>{address.extra_info}</span>
             </div>
           </li>
          )

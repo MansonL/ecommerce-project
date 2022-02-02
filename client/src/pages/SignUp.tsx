@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import moment from 'moment';
 import { useContext, useState } from 'react';
-import { INew_User, UserInfo } from '../../../server/src/common/interfaces/users';
+import { INew_User, UserInfo } from '../../../server/src/interfaces/users';
 import {  newUserDefault, UserCUDResponse } from '../utils/interfaces';
 import { validation } from '../utils/joiSchemas';
 import { cleanEmptyProperties } from '../utils/utilities';
@@ -142,13 +142,13 @@ export function SignUp () {
         <span className="input-border"></span>
       </div>
       <div className="login-signup-field">
-        <label htmlFor="age" style={{fontSize:"0.8rem"}}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Age:</label><br/>
+        <label htmlFor="age" className='filled-input-label' style={{top: "-1.2rem"}}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Age:</label><br/>
         <input type="date" onChange={onChange} value={newUser.age} className="age-input" id="age" name="age"/>
         <span className="input-border"></span>
       </div>
       <div className="login-signup-field">
       <input type="url" onChange={onChange} value={newUser.avatar} id="avatar" name="avatar" className="styled-input"/>
-        <label htmlFor="avatar" className='animated-label'>Avatar URL<span style={{fontSize:"0.4rem"}}>(optional)</span>:</label><br/>
+        <label htmlFor="avatar" className='animated-label'>Avatar URL<span className='optional-label'>(optional)</span>:</label><br/>
         <span className="input-border"></span>
       </div>
       <div className="login-signup-field">

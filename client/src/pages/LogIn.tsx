@@ -1,9 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authResponse, userDefaultValue } from "../utils/interfaces";
+import { authResponse } from "../utils/interfaces";
 import { validation } from "../utils/joiSchemas";
-import { verifyToken } from "../utils/utilities";
 import { ModalContainer } from "./components/Modal/ModalContainer";
 import { OperationResult } from "./components/Result/OperationResult";
 import { LoadingSpinner } from "./components/Spinner/Spinner";
@@ -21,8 +20,7 @@ export function LogIn (){
         password: '',
     });
 
-    const { user, updateLoginStatus } = useContext(UserContext);
-    const { token } = useContext(UserContext);
+    const {  updateLoginStatus } = useContext(UserContext);
     const { loading, setLoading } = useContext(UserContext);
     const { loggedIn, setLoggedIn } = useContext(UserContext);
 
@@ -63,6 +61,7 @@ export function LogIn (){
              setResultMsg('');
              updateLoginStatus(data.data)
              setLoggedIn(true);
+             navigate('../products')
         },2000)
     }
 
@@ -115,7 +114,8 @@ export function LogIn (){
       setCredentials({
         username: '',
         password: '',
-      })
+      });
+      
       setShowResult(false);
       if(loggedIn){
         navigate('../cart')

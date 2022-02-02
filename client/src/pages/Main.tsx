@@ -1,5 +1,5 @@
 import { UserContext } from './components/UserProvider'
-import { Routes, Link, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Link, Route, BrowserRouter, useNavigate } from 'react-router-dom';
 import { ProductsForm } from './ProductsForm';
 import { Home } from './Home';
 import React, { useContext, useEffect, useRef, useState } from 'react';
@@ -12,6 +12,8 @@ import { AddressForm } from './AddressForm';
 import { AddressesList } from './AddressList';
 import { Order } from './Order';
 import './main.css';
+
+
 
 
 
@@ -30,10 +32,12 @@ export function Main () {
   }
 
 
-  const { loggedIn, user, cart } = useContext(UserContext)
+  const { loggedIn, user, cart, updateLoginStatus } = useContext(UserContext)
+
 
   let cartAmount = 0;
   cart.products.forEach(product => cartAmount+=product.quantity);
+
 
   const clickEvent = (ev: MouseEvent) => {
     if(dropdownBtn && filterBtn && filterMenu && sideMenu && ev.target && ev.target instanceof Element){
@@ -43,27 +47,47 @@ export function Main () {
           setShowFilter(false)
       }
     }
-  useEffect(() => {
-  document.addEventListener('click', clickEvent)
-    return () => document.removeEventListener('click', clickEvent)
-}, [showSideMenu, showFilter])
-  
-  const currentRoute = window.location.pathname === '/'
 
   const sideMenuHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       setShowSideMenu(true)
   }
 
+  const handleLogout = () => updateLoginStatus(undefined);
+  
+
+  useEffect(() => {
+  document.addEventListener('click', clickEvent);
+    return () => document.removeEventListener('click', clickEvent)
+}, [showSideMenu, showFilter, cart])
+  
+
   return (
     
         <BrowserRouter>
-        <div className={`main ${currentRoute ? "main-background" : ""}`}>
+        <div className={`main ${window.location.pathname === '/' ? "main-background" : ""}`}>
   <div className={`main-menu ${showSideMenu ? "main-menu-active" : ""}`} ref={sideMenu}>
     <div className="avatar-row">
       <img src={user.avatar ? user.avatar : "https://cdn4.iconfinder.com/data/icons/light-ui-icon-set-1/130/avatar_2-512.png"} alt="" className="avatar-img" />
-      {!loggedIn ? <><span className="login-logout-avatar"><Link to="/login">Login</Link></span>
-      <span className="login-logout-avatar"><Link to="/signup">SignUp</Link></span></> : <span className="login-logout-avatar" style={{flexGrow: "1", textAlign:"left"}}><Link to="/profile">Profile</Link></span>}
+      {!loggedIn ? 
+      <>
+        <span className="login-logout-avatar">
+          <Link to="/login">Login</Link>
+        </span>
+        <span className="login-logout-avatar">
+          <Link to="/signup">SignUp</Link>
+        </span>
+      </> 
+          :
+      <>   
+        <span className="login-logout-avatar">
+          <Link to="/profile">Profile</Link>
+          </span>
+        <span className="login-logout-avatar" onClick={handleLogout}>
+          <Link to="/login">Logout</Link>
+        </span>
+      </>
+      }
     </div>
     <div className="menu-rows">
       <div className="first-menu-row"><Link to="/">Home</Link></div>

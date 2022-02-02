@@ -8,17 +8,17 @@ import { useNavigate } from "react-router-dom";
 import { ModalContainer } from "./components/Modal/ModalContainer";
 import { LoadingSpinner } from "./components/Spinner/Spinner";
 import './cart.css';
+import { IMongoCart } from "../../../server/src/interfaces/products";
 
 export function Cart () {
     
   const [showModificationResult, setShowModificationResult] = useState(false);
   const [modificationResult, setModificationResult] = useState(false);
   const [resultMsg, setResultMsg] = useState('');
-
-  const {cart, setCart} = useContext(UserContext);
+  const {cart, setCart } = useContext(UserContext);
   const {loading, setLoading} = useContext(UserContext);
   const { cartConfirmated, setCartConfirmated } = useContext(UserContext);
-  const { user, token } = useContext(UserContext);
+  const { user, token, updateLoginStatus } = useContext(UserContext);
   
 
   const navigate = useNavigate();
@@ -46,9 +46,13 @@ export function Cart () {
           setModificationResult(false);
           if(error.response){
             if(error.response.status === 500){
-              setResultMsg(error.response.data.message)
+              setResultMsg(error.response.data);
             }else{
-              setResultMsg(error.response.data.message)
+              setResultMsg(error.response.data)
+              if(/must be logged in/g.test(error.response.data)){
+                updateLoginStatus(undefined)
+                navigate('../login')
+              }
             }
           }else if(error.request){
               setResultMsg(`No response received from server.`)
@@ -95,23 +99,7 @@ export function Cart () {
       else 
         navigate('../new-address')
     }
-    
-    const fetchUserCart = () => {
-      axios.get<CartCUDResponse>(`http://localhost:8080/api/cart/list/${user.user_id}`, { withCredentials: true, headers: { Authorization: `Bearer ${token}` }}).then(async response => {
-          if(response.status >= 200){
-              const data = response.data;
-              setCart(data.data[0]);
-           }
-       }).catch(error => {
-           if(error.response){
-               setCart(cartDefault);
-           }
-       })
-  }
 
-    useEffect(() => {
-      fetchUserCart();
-    }, []);
 
     return (
       <React.Fragment>
@@ -130,18 +118,18 @@ export function Cart () {
       <ul className="cart-products">
      {cart.products.length > 0 ? cart.products.map((product, idx) => {
        return (
-        <li className="cart-product" id={String(idx)}>
+        <li className="cart-product" key={String(idx)}>
           <img className="product-image" src={product.product.images[0].url} alt="" />
           <div className="product-info">
             <span className="product-title">{product.product.title}</span>
             <span className="product-price">{product.product.price}</span>
             <div className="qty-container">
-              <span style={{fontSize:"0.8rem", position:"relative", width:"30%"}}>Quantity:<span className="qty-underline"></span></span><span style={{fontSize:"1.1rem"}}>{product.quantity}</span>
+              <span className="product-qty-text">Quantity:<span className="qty-underline"></span></span><span className="product-qty-amount">{product.quantity}</span>
             </div>
           </div>
           <div className="add-remove-container">
-            <button className="add-remove-btn" onClick={() => handleRemove(String(product.product._id))}><img src="https://cdn3.iconfinder.com/data/icons/basic-flat-svg/512/svg01-512.png" alt="add-icon" className="add-remove-icon"/></button> 
-            <button className="add-remove-btn" onClick={() => handleAdd(String(product.product._id))}><img src="https://cdn-icons-png.flaticon.com/512/216/216685.png" alt="remove-icon" className="add-remove-icon"/></button> 
+            <button className="add-remove-btn" onClick={() => handleAdd(String(product.product._id))}><img src="https://cdn3.iconfinder.com/data/icons/basic-flat-svg/512/svg01-512.png" alt="add-icon" className="add-remove-icon"/></button> 
+            <button className="add-remove-btn" onClick={() => handleRemove(String(product.product._id))}><img src="https://cdn-icons-png.flaticon.com/512/216/216685.png" alt="remove-icon" className="add-remove-icon"/></button> 
          </div>
         </li>
        )

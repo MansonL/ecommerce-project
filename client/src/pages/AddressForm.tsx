@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { Types } from 'mongoose';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserAddresses } from '../../../server/src/common/interfaces/users';
+import { UserAddresses } from '../../../server/src/interfaces/users';
 import { defaultAddress, UserCUDResponse } from '../utils/interfaces';
 import { validation } from '../utils/joiSchemas';
 import { ModalContainer } from './components/Modal/ModalContainer';
@@ -22,8 +22,7 @@ export function AddressForm(){
 
     const { loading, setLoading } = useContext(UserContext);
     const { cartConfirmated } = useContext(UserContext);
-    const { token } = useContext(UserContext)
-
+    const { token, user, setUser, updateLoginStatus } = useContext(UserContext);
     
 
     const navigate = useNavigate();
@@ -33,7 +32,7 @@ export function AddressForm(){
 
     const onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
       const name = ev.target.name;
-      const value = ev.target.value;
+      let value = ev.target.value;
       if(name === 'name'){
         setNewAddress({
           ...newAddress,
@@ -50,19 +49,22 @@ export function AddressForm(){
             [name]: Number(value),
           }
         })
+      }else{
+        setNewAddress({
+          ...newAddress,
+          [name]: value,
+        })
       }
-      setNewAddress({
-        ...newAddress,
-        [name]: value,
-      })
     }
-
-    
 
     const AxiosThenCallback =  (response: AxiosResponse<UserCUDResponse, any>) => {
       const data = response.data;
       setAddressResult(true);
       setResultMsg(data.message);
+      setUser({
+        ...user,
+        addresses: data.data.data.addresses
+      })
       setShowResult(true);
         setLoading(false);
         document.body.style.overflow = "scroll";
@@ -83,9 +85,13 @@ export function AddressForm(){
           setShowResult(true);
           if(error.response){
             if(error.response.status === 500){
-              setResultMsg(error.response.data.message)
+              setResultMsg(error.response.data)
             }else{
-              setResultMsg(error.response.data.message)
+              setResultMsg(error.response.data)
+              if(/must be logged in/g.test(error.response.data)){
+                updateLoginStatus(undefined)
+                navigate('../login')
+              }
             }
           }else if(error.request){
               setResultMsg(`No response received from server.`)
@@ -102,7 +108,15 @@ export function AddressForm(){
 
     const saveAddress = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      const { error } = validation.address.validate(newAddress);
+      const cleanAddress = JSON.parse(JSON.stringify(newAddress));
+      if(newAddress.street2 === '') delete cleanAddress.street2
+      if(newAddress.street3 === '') delete cleanAddress.street3
+      if(newAddress.floor === '') delete cleanAddress.floor
+      if(newAddress.department === '') delete cleanAddress.department
+      if(newAddress.extra_info === '') delete cleanAddress.extra_info
+      delete cleanAddress._id
+      console.log(cleanAddress)
+      const { error } = validation.address.validate(cleanAddress);
       if(error){
         setShowResult(true);
         setAddressResult(false);
@@ -111,9 +125,10 @@ export function AddressForm(){
         setLoading(true);
         document.body.style.overflow = "hidden";
         const address : UserAddresses = {
-          ...newAddress,
+          ...cleanAddress,
           _id: new Types.ObjectId().toString()
         }
+        console.log(address)
         axios.post('http://localhost:8080/api/users/address', address, { withCredentials: true, headers: { Authorization: `Bearer ${token}`}})
         .then(AxiosThenCallback)
         .catch(AxiosCatchCallback)
@@ -124,9 +139,9 @@ export function AddressForm(){
         <section className="body-container">
     <div className="address-header">
      <h2 className="header-title">Address</h2>
-     <h5>We have noticed that you don't have any address saved...<br/
-     >Before you confirm your order you need to choose one, so here you can save an address to select it after.</h5>
    </div>
+   <h5 style={{width:"80%", margin:"auto", marginTop:"3rem"}}>We have noticed that you <b>don't</b> have any address saved...<br/
+     >Before you confirm your order you need to choose one, so here you can save an address to select it after.</h5>
    {loading && <ModalContainer>
       <LoadingSpinner/>
      </ModalContainer>}
@@ -134,20 +149,20 @@ export function AddressForm(){
     <div className="address-fields">
         <div className="address-field">
             <input type="text" onChange={onChange} value={newAddress.alias} className="styled-input" name="alias" id="alias"/>
-              <label htmlFor="alias" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Alias <span style={{fontSize:"0.4rem"}}>(optional)</span></label>
+              <label htmlFor="alias" className={newAddress.alias !== '' ? 'filled-input-label' : 'animated-label'}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Alias</label>
               <span className="input-border"></span>
           </div>
       <div className="street1">
-        <label htmlFor="street1" style={{marginBottom:"1rem"}}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Street 1</label>
+        <label htmlFor="street1" className='street1-label'>Street 1</label>
         <div className="street1-container">
         <div className="address-field">
           <input type="text" onChange={onChange} value={newAddress.street1.name} className="styled-input" name="name" id="stree1name"/>
-          <label htmlFor="street1name" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Name</label>
+          <label htmlFor="street1name" className={newAddress.street1.name !== '' ? 'filled-input-label' : 'animated-label'}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Name</label>
           <span className="input-border"></span>
         </div>
         <div className="address-field">
            <input type="number" onChange={onChange} value={newAddress.street1.number} className="styled-input" name="number" id="stree1number" min="0" max="99999" step="10"/>
-          <label htmlFor="street1number" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field" style={{width:"6%"}}/> Number</label>
+          <label htmlFor="street1number" className='filled-input-label'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field" style={{width:"6%"}}/> Number</label>
           <span className="input-border"></span>
         </div>
           </div>
@@ -155,38 +170,41 @@ export function AddressForm(){
       <div className="dpt-floor">
         <div className="address-field">
           <input type="text" onChange={onChange} value={newAddress.department} className="styled-input" name="department" id="department"/>
-          <label htmlFor="department" className="animated-label">Department <span style={{fontSize:"0.4rem"}}>(optional)</span></label>
+          <label htmlFor="department" className={newAddress.department !== '' ? 'filled-input-label' : 'animated-label'}>Department {
+            window.innerWidth > 400 ? <span className='optional-label'>(optional)</span> : 
+            newAddress.department === '' ? <span className='optional-label'>(optional)</span> : '' 
+          }</label>
           <span className="input-border"></span>
         </div>
         <div className="address-field">
           <input type="text" onChange={onChange} value={newAddress.floor} className="styled-input" name="floor" id="floor"/>
-          <label htmlFor="floor" className="animated-label">Floor <span style={{fontSize:"0.4rem"}}>(optional)</span></label>
+          <label htmlFor="floor" className={newAddress.floor !== '' ? 'filled-input-label' : 'animated-label'}>Floor <span className='optional-label'>(optional)</span></label>
           <span className="input-border"></span>
         </div>
       </div>
       <div className="address-field">
         <input type="text" onChange={onChange} value={newAddress.street2} className="styled-input" name="street2" id="stree2"/>
-          <label htmlFor="street2" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Street 2 <span style={{fontSize:"0.4rem"}}>(optional)</span></label>
+          <label htmlFor="street2" className={newAddress.street2 !== '' ? 'filled-input-label' : 'animated-label'}> Street 2 <span className='optional-label'>(optional)</span></label>
           <span className="input-border"></span>
       </div>
       <div className="address-field">
         <input type="text" onChange={onChange} value={newAddress.street3} className="styled-input" name="street3" id="stree3"/>
-          <label htmlFor="street3" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Street 3 <span style={{fontSize:"0.4rem"}}>(optional)</span></label>
+          <label htmlFor="street3" className={newAddress.street3 !== '' ? 'filled-input-label' : 'animated-label'}> Street 3 <span className='optional-label'>(optional)</span></label>
           <span className="input-border"></span>
       </div>
       <div className="address-field">
         <input type="text" onChange={onChange} value={newAddress.city} className="styled-input" name="city" id="city"/>
-          <label htmlFor="city" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> City</label>
+          <label htmlFor="city" className={newAddress.city !== '' ? 'filled-input-label' : 'animated-label'}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> City</label>
           <span className="input-border"></span>
       </div>
       <div className="address-field">
         <input type="text" onChange={onChange} value={newAddress.zipcode} className="styled-input" name="zipcode" id="zipcode"/>
-          <label htmlFor="zipcode" className="animated-label"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Zipcode</label>
+          <label htmlFor="zipcode" className={newAddress.zipcode !== '' ? 'filled-input-label' : 'animated-label'}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png" alt="" className="required-field"/> Zipcode</label>
           <span className="input-border"></span>
       </div>
       <div className="address-field">
          <input type="text" onChange={onChange} value={newAddress.extra_info} className="styled-input" name="extra_info" id="extra_info"/>
-          <label htmlFor="extra_info" className="animated-label">Additional instructions <span style={{fontSize:"0.4rem"}}>(optional)</span></label>
+          <label htmlFor="extra_info" className={newAddress.extra_info !== '' ? 'filled-input-label' : 'animated-label'}>Additional instructions <span className='optional-label'>(optional)</span></label>
           <span className="input-border"></span>
       </div>
       <div className="submit-row" style={{textAlign:"center"}}>

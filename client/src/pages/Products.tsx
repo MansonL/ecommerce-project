@@ -1,13 +1,14 @@
-import axios, { Axios, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { IMongoProduct, IQuery } from '../../../server/src/common/interfaces/products';
+import { IMongoCart, IMongoProduct, IQuery } from '../../../server/src/interfaces/products';
 import { UserContext } from './components/UserProvider';
-import {defaultProductFromDB, ProductCUDResponse } from '../utils/interfaces';
+import { CartCUDResponse, ProductCUDResponse } from '../utils/interfaces';
 import { Modal } from './components/Modal/Modal';
 import { OperationResult } from './components/Result/OperationResult';
 import { ModalContainer } from './components/Modal/ModalContainer';
 import { LoadingSpinner } from './components/Spinner/Spinner';
 import './products.css';
+import { useNavigate } from 'react-router-dom';
 
 
 export interface IProductsProps {
@@ -62,7 +63,10 @@ export function Products(props: IProductsProps) {
     }
 
     const [products, setProducts] = useState<IMongoProduct[]>([])
+    const { setCart } = useContext(UserContext);
+    const { updateLoginStatus } = useContext(UserContext)
 
+    const navigate = useNavigate();
 
     const GETAxiosThenCallback = (response: AxiosResponse<IMongoProduct[]>) => {
       const data = response.data;
@@ -71,11 +75,12 @@ export function Products(props: IProductsProps) {
         document.body.style.overflow = "scroll";
     }
 
-    const CUDAxiosThenCallback =  (response: AxiosResponse<ProductCUDResponse, any>) => {
+    const CUDAxiosThenCallback =  (response: AxiosResponse<ProductCUDResponse | CartCUDResponse, any>) => {
       const data = response.data;
         setShowResult(true);
         setOperationResult(true);
         setResultMsg(data.message);
+        if(!user.isAdmin) setCart(data.data as IMongoCart);
         fetchProducts()
         setLoading(false);
         document.body.style.overflow = "scroll";
@@ -97,6 +102,10 @@ export function Products(props: IProductsProps) {
               setResultMsg(error.response.data.message ? error.response.data.message : error.response.data)
             }else{
               setResultMsg(error.response.data.message ? error.response.data.message : error.response.data)
+              if(/must be logged in/g.test(error.response.data)){
+                updateLoginStatus(undefined)
+                navigate('../login')
+              }
             }
           }else if(error.request){
               setResultMsg(`No response received from server.`)
@@ -181,7 +190,7 @@ export function Products(props: IProductsProps) {
       .then(CUDAxiosThenCallback)
       .catch(AxiosCatchCallback)
     }
-    console.log(savedCode)
+    
     const fetchProducts = () => {
       axios.get<IMongoProduct[]>('http://localhost:8080/api/products/list')
       .then(GETAxiosThenCallback)
@@ -249,7 +258,7 @@ export function Products(props: IProductsProps) {
      products.length > 0 ? 
       products.map((product, idx) => {
         return (
-          <li className="product" id={String(idx)}>
+          <li className="product" key={String(idx)}>
           <img className="product-image" src={product.images[0].url} alt="" />
           <div className="product-info">
             <span className="product-title">{product.title}</span>
