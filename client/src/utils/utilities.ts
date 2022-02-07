@@ -1,7 +1,7 @@
 import {  verify } from "jsonwebtoken"
-import { IMongoPopulatedMessages } from "../../../server/src/common/interfaces/messages";
-import { UserInfo, UserAddresses } from "../../../server/src/common/interfaces/users";
-import { IUserInfo } from "./interfaces";
+import { IMongoPopulatedMessages } from "../../../server/src/interfaces/messages";
+import { IMongoCart } from "../../../server/src/interfaces/products";
+import { UserInfo, UserAddresses } from "../../../server/src/interfaces/users";
 
 declare module "jsonwebtoken" {
     export interface JwtPayload {
@@ -18,6 +18,7 @@ declare module "jsonwebtoken" {
             addresses?: UserAddresses[] | undefined;
             isAdmin: boolean;
             user_id: string;
+            user_cart: IMongoCart;
         };
     }
 }
