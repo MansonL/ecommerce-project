@@ -4,9 +4,7 @@ import { cpus } from "os";
 import path from 'path';
 import { Config } from "./config/config";
 import { commandData } from "./passport/facebook";
-import { app } from "./services/app";
 import { server } from "./services/server";
-import { socketConnection } from "./services/socket";
 
 const envPath = path.resolve(__dirname, '../.env');
 
@@ -33,7 +31,7 @@ if(Config.MODE === "FORK"){
             cluster.fork();
         });
     }else{
-        app.listen(PORT, () => {
+        server.listen(PORT, () => {
             console.log(`Worker ${process.pid} server hosted at port ${PORT}`)
         })                 // Express server
     }
