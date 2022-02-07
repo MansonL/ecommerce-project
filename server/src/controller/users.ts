@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { EProductsErrors, EUsersErrors } from '../common/EErrors';
+import { EProductsErrors, EUsersErrors } from '../interfaces/EErrors';
 import { ApiError } from '../api/errorApi';
-import { validator } from '../common/interfaces/joiSchemas';
+import { validator } from '../interfaces/joiSchemas';
 import { usersApi } from '../api/users';
-import { IMongoUser, INew_User, UserAddresses } from '../common/interfaces/users';
-import { CUDResponse } from '../common/interfaces/others';
+import { IMongoUser, INew_User, UserAddresses } from '../interfaces/users';
+import { CUDResponse } from '../interfaces/others';
 import { logger } from '../services/logger';
 import { isValidObjectId } from 'mongoose';
 import { ObjectId } from 'mongodb';
@@ -62,16 +62,16 @@ class UsersController {
             const result: CUDResponse | ApiError = await usersApi.addUser(userInfo);
             if(result instanceof ApiError)
                 next(result)
-            else
+            else{
+
                 res.status(201).send(result)
+            }
         }
     }
 
     async addAddress(req: Request, res: Response, next: NextFunction): Promise<void> {
         const { user_id } = req.user as Express.User;
-        const { address } = req.body as {
-            address: UserAddresses
-        };
+        const address  = req.body as UserAddresses
         const { error } =  validator.address.validate(address);
         if(error)
             next(ApiError.badRequest(error.message));
