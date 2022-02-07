@@ -1,10 +1,10 @@
 import e, { NextFunction, Request, Response } from 'express';
 import { cartApi } from '../api/cart';
 import { productsApi } from '../api/products';
-import { EProductsErrors } from '../common/EErrors';
+import { EProductsErrors } from '../interfaces/EErrors';
 import { ApiError } from '../api/errorApi';
-import { IMongoCart, IMongoProduct } from '../common/interfaces/products';
-import { CUDResponse } from '../common/interfaces/others';
+import { IMongoCart, IMongoProduct } from '../interfaces/products';
+import { CUDResponse } from '../interfaces/others';
 import { logger } from '../services/logger';
 import { ObjectId } from 'mongodb';
 import { isValidObjectId } from 'mongoose';

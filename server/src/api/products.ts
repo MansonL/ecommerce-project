@@ -2,8 +2,8 @@ import { ProductsFactory } from '../models/productsFactory';
 import { MongoProducts } from '../models/DAOs/Mongo/products';
 import { ApiError } from './errorApi';
 import { storage } from '../models/usersFactory';
-import { IMongoProduct, INew_Product, IQuery, IUpdate } from '../common/interfaces/products';
-import { CUDResponse } from '../common/interfaces/others';
+import { IMongoProduct, INew_Product, IQuery, IUpdate } from '../interfaces/products';
+import { CUDResponse } from '../interfaces/others';
 
 /**
  *

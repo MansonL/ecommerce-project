@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { INew_Product } from '../common/interfaces/products';
+import { INew_Product } from '../interfaces/products';
 
 export const randomNumber = (type: string): number => {
     if (type === 'price') {
@@ -12,7 +12,7 @@ export const randomNumber = (type: string): number => {
 };
 
 const generateCode = (): string => {
-    return `_${Math.random().toString(36).substr(2, 9)}`;
+    return `${Math.random().toString(36).substr(2, 9)}`;
 };
 
 export const mockProducts  = [

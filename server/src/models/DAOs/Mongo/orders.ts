@@ -1,10 +1,10 @@
 import cluster from "cluster";
 import { Model, model, Schema, Types } from "mongoose";
 import { ApiError } from "../../../api/errorApi";
-import { EOrdersErrors } from "../../../common/EErrors";
-import { DBOrdersClass, IUserOrder, IOrder, IMongoOrderPopulated, IOrderPopulated } from "../../../common/interfaces/orders";
-import { CUDResponse } from "../../../common/interfaces/others";
-import { Utils } from "../../../common/utils";
+import { EOrdersErrors } from "../../../interfaces/EErrors";
+import { DBOrdersClass, IUserOrder, IOrder, IMongoOrderPopulated, IOrderPopulated } from "../../../interfaces/orders";
+import { CUDResponse } from "../../../interfaces/others";
+import { Utils } from "../../../utils/utils";
 import { Config } from "../../../config/config";
 import { logger } from "../../../services/logger";
 

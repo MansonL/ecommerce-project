@@ -1,5 +1,5 @@
 import { Document, ObjectId } from "mongodb";
-import { ApiError } from "../../api/errorApi";
+import { ApiError } from "../api/errorApi";
 import { CUDResponse, } from "./others";
 
 /**
@@ -33,6 +33,7 @@ export interface IMongoCart extends Document {
  */
 export interface ICart {
     createdAt: string;
+    modifiedAt: string;
     user: ObjectId;
     products: {
         product: ObjectId;

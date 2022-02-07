@@ -1,9 +1,9 @@
 
 import { Model, Schema, model, Document, Types } from 'mongoose';
-import { Utils } from '../../../common/utils';
+import { Utils } from '../../../utils/utils';
 import { ApiError } from '../../../api/errorApi';
-import { DBMessagesClass, IMessageSentPopulated, IMongoMessage, INew_Message } from '../../../common/interfaces/messages';
-import { CUDResponse } from '../../../common/interfaces/others';
+import { DBMessagesClass, IMessageSentPopulated, IMongoMessage, INew_Message } from '../../../interfaces/messages';
+import { CUDResponse } from '../../../interfaces/others';
 import { Config } from '../../../config/config';
 import cluster from 'cluster';
 import { logger } from '../../../services/logger';

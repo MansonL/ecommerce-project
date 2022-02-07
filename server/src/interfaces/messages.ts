@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { Document } from "mongoose";
-import { ApiError } from "../../api/errorApi";
+import { ApiError } from "../api/errorApi";
 import { CUDResponse } from "./others";
 
 

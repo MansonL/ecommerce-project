@@ -1,9 +1,9 @@
 import { Document, model, Model, Schema, Types } from 'mongoose';
 import moment from 'moment';
 import { ApiError } from '../../../api/errorApi';
-import { EProductsErrors } from '../../../common/EErrors';
-import { DBProductsClass, IMongoProduct, INew_Product, IQuery, IUpdate } from '../../../common/interfaces/products';
-import { CUDResponse } from '../../../common/interfaces/others';
+import { EProductsErrors } from '../../../interfaces/EErrors';
+import { DBProductsClass, IMongoProduct, INew_Product, IQuery, IUpdate } from '../../../interfaces/products';
+import { CUDResponse } from '../../../interfaces/others';
 import { logger } from '../../../services/logger';
 import { Config } from '../../../config/config';
 import cluster from 'cluster';

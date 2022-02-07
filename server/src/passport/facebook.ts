@@ -1,6 +1,6 @@
 import { Request } from "express";
 import passportFacebook, { Profile, VerifyFunctionWithRequest } from 'passport-facebook'
-import {  IMongoUser, INew_User, isUser } from '../common/interfaces/users';
+import {  IMongoUser, INew_User, isUser } from '../interfaces/users';
 import { ApiError } from "../api/errorApi";
 import * as dotenv from 'dotenv'
 import moment from "moment";

@@ -5,11 +5,12 @@ import { isValidObjectId } from "mongoose";
 import { ApiError } from "../api/errorApi";
 import { ordersApi } from "../api/order";
 import { usersApi } from "../api/users";
-import { EProductsErrors } from "../common/EErrors";
-import { IMongoOrderPopulated, IOrder, IOrderPopulated, OrderProducts } from "../common/interfaces/orders";
-import { CUDResponse } from "../common/interfaces/others";
-import { IMongoUser } from "../common/interfaces/users";
-import { Utils } from "../common/utils";
+import { EProductsErrors } from "../interfaces/EErrors";
+import { IMongoOrderPopulated, IOrder, IOrderPopulated, OrderProducts } from "../interfaces/orders";
+import { CUDResponse } from "../interfaces/others";
+import { IMongoUser } from "../interfaces/users";
+import { EmailUtilities } from "../utils/emails";
+import { Utils } from "../utils/utils";
 
 
 
@@ -118,10 +119,10 @@ import { Utils } from "../common/utils";
                 else{
                     const adminsSubject = `[NEW ORDER]: ${user.data.name} ${user.data.surname} has made an order.`;
                     const adminsTo = adminsResult.join(', ');
-                    const customerMail = Utils.createHTMLOrderEmail((result.data as IOrderPopulated).products, Utils.addressHTMLFormat(selectedAddress), total, ['You have made an order!', 'Your order will be delivered to']);
-                    const adminsMail = Utils.createHTMLOrderEmail((result.data as IOrderPopulated).products, Utils.addressHTMLFormat(selectedAddress), total, ['A new order was made!', 'Address'])
-                    await Utils.sendEmail(customerTo, customerSubject, customerMail);
-                    await Utils.sendEmail(adminsTo, adminsSubject, adminsMail)
+                    const customerMail = EmailUtilities.createHTMLOrderEmail((result.data as IOrderPopulated).products, EmailUtilities.addressHTMLFormat(selectedAddress), total, ['You have made an order!', 'Your order will be delivered to']);
+                    const adminsMail = EmailUtilities.createHTMLOrderEmail((result.data as IOrderPopulated).products, EmailUtilities.addressHTMLFormat(selectedAddress), total, ['A new order was made!', 'Address'])
+                    await EmailUtilities.sendEmail(customerTo, customerSubject, customerMail);
+                    await EmailUtilities.sendEmail(adminsTo, adminsSubject, adminsMail)
                     res.status(201).send(result)
                 }
             }

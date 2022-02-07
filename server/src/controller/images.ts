@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import { isValidObjectId } from "mongoose";
 import { ApiError } from "../api/errorApi";
 import { productsApi } from "../api/products";
-import { EProductsErrors } from "../common/EErrors";
-import { CUDResponse } from "../common/interfaces/others";
-import { Utils } from "../common/utils";
+import { EProductsErrors } from "../interfaces/EErrors";
+import { CUDResponse } from "../interfaces/others";
+import { Utils } from "../utils/utils";
 
 class ImagesController {
 

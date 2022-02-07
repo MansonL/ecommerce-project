@@ -3,8 +3,8 @@ import { storage } from '../models/usersFactory';
 import { UsersFactory } from '../models/usersFactory';
 import { MongoUsers } from '../models/DAOs/Mongo/users';
 import { ApiError } from './errorApi';
-import { IMongoUser, INew_User, UserAddresses } from '../common/interfaces/users';
-import { CUDResponse } from '../common/interfaces/others';
+import { IMongoUser, INew_User, UserAddresses } from '../interfaces/users';
+import { CUDResponse } from '../interfaces/others';
 
 export class UsersApi {
     private users: MongoUsers;

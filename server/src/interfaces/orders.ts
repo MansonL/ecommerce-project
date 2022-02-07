@@ -1,5 +1,5 @@
 import { ObjectId, Document } from "mongodb";
-import { ApiError } from "../../api/errorApi";
+import { ApiError } from "../api/errorApi";
 import { CUDResponse } from "./others";
 import { UserAddresses } from "./users";
 

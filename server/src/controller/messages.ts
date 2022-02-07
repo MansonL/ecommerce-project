@@ -1,12 +1,10 @@
 import { Request, NextFunction, Response } from 'express';
 import { messagesApi } from '../api/messages';
-import { normalizeData } from '../common/compression';
 import { ApiError } from '../api/errorApi';
 import { ObjectId } from 'mongodb';
-import { EUsersErrors } from '../common/EErrors';
-import { IMessageSentPopulated, IMongoMessage, INew_Message } from '../common/interfaces/messages';
-import { CUDResponse } from '../common/interfaces/others';
-import { htmlFooter, htmlGeneral, Utils } from '../common/utils';
+import { IMessageSentPopulated, IMongoMessage, INew_Message } from '../interfaces/messages';
+import { CUDResponse } from '../interfaces/others';
+import { EmailUtilities, htmlFooter, htmlGeneral } from '../utils/emails';
 
 /**
  *
@@ -45,7 +43,7 @@ class MessagesController {
             
             const htmlEmail = htmlGeneral.concat(`<h2>You have received a new message!</h2><h4>Here are the details:</h4>`.concat(`<p ="products-list" style="text-align: left; margin-left: 2.5rem;">${message.timestamp} | ${name} ${surname}: ${message.message}</p>`)).concat(htmlFooter)
             const toEmail = (result.data as IMessageSentPopulated).to.data.username;
-            await Utils.sendEmail(toEmail, `[NEW MESSAGE]: You have received a new message from ${name} ${surname}`, htmlEmail);
+            await EmailUtilities.sendEmail(toEmail, `[NEW MESSAGE]: You have received a new message from ${name} ${surname}`, htmlEmail);
 
             res.status(201).send(result);
         }

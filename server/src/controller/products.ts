@@ -1,11 +1,11 @@
 import { Request, NextFunction, Response } from 'express';
 import { ApiError } from '../api/errorApi';
-import { EProductsErrors } from '../common/EErrors';
+import { EProductsErrors } from '../interfaces/EErrors';
 import { productsApi } from '../api/products';
-import { validator } from '../common/interfaces/joiSchemas';
-import { Utils } from '../common/utils';
-import { IMongoProduct, INew_Product, IQuery, IUpdate } from '../common/interfaces/products';
-import { CUDResponse } from '../common/interfaces/others';
+import { validator } from '../interfaces/joiSchemas';
+import { Utils } from '../utils/utils';
+import { IMongoProduct, INew_Product, IQuery, IUpdate } from '../interfaces/products';
+import { CUDResponse } from '../interfaces/others';
 import { logger } from '../services/logger';
 import { isValidObjectId } from 'mongoose';
 
@@ -34,8 +34,6 @@ class ProductController {
         next: NextFunction
     ): Promise<void> {
         logger.info(`[PATH]: Inside Products Controller.`)
-        const test = await productsApi.getStock();
-        logger.info(JSON.stringify(test,null,'\t'));
         const result: IMongoProduct[] | ApiError = await productsApi.getProduct();
         if(result instanceof ApiError)
             next(result)

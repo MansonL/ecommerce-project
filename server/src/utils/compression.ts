@@ -1,5 +1,5 @@
 import { schema, normalize } from 'normalizr';
-import { IMongoMessage } from './interfaces/messages';
+import { IMongoMessage } from '../interfaces/messages';
 
 const authorsSchema = new schema.Entity('authors', {}, { idAttribute: '_id' });
 const messagesSchema = new schema.Entity(

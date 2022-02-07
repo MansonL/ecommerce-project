@@ -1,5 +1,5 @@
 import { Document, ObjectId } from "mongodb"
-import { ApiError } from "../../api/errorApi"
+import { ApiError } from "../api/errorApi"
 import { CUDResponse } from "./others"
 
 /**

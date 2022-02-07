@@ -1,5 +1,5 @@
-import { IMongoOrderPopulated, IOrder, IOrderPopulated } from "../common/interfaces/orders";
-import { CUDResponse } from "../common/interfaces/others";
+import { IMongoOrderPopulated, IOrder, IOrderPopulated } from "../interfaces/orders";
+import { CUDResponse } from "../interfaces/others";
 import { MongoOrders } from "../models/DAOs/Mongo/orders";
 import { OrdersFactory } from "../models/orderFactory";
 import { storage } from "../models/usersFactory";
