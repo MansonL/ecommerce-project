@@ -1,13 +1,13 @@
 import { Document, model, Model, Schema, Types } from 'mongoose';
-import { ECartErrors } from '../../../common/EErrors';
+import { ECartErrors } from '../../../interfaces/EErrors';
 import { ApiError } from '../../../api/errorApi';
-import { DBCartClass, ICart, IMongoCart } from '../../../common/interfaces/products';
-import { CUDResponse } from '../../../common/interfaces/others';
+import { DBCartClass, ICart, IMongoCart } from '../../../interfaces/products';
+import { CUDResponse } from '../../../interfaces/others';
 import moment from 'moment';
 import { Config } from '../../../config/config';
 import { logger } from '../../../services/logger';
 import cluster from 'cluster';
-import { Utils } from '../../../common/utils';
+import { Utils } from '../../../utils/utils';
 import { ObjectId } from 'mongodb';
 
 
@@ -79,29 +79,65 @@ export class MongoCart implements DBCartClass {
         }
         
     }
+
+    async createEmpty(user_id: string): Promise<CUDResponse | ApiError> {
+        try {
+            const newCart = await (await this.cart.create({
+                createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+                modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+                user: user_id,
+                products: [],
+            })).populate({ path: 'user' , select: 'data.username' }) as IMongoCart
+            return {
+                data: newCart,
+                message: `New cart successfully created.`
+            }
+        } catch (error) {
+            return ApiError.internalError(`An error occured.`)
+        }
+    }
+
     async add(user_id: string, product_id: string, quantity: number): Promise<CUDResponse | ApiError> {
         try {
-            const cartDoc = await this.cart.findOne({ user: user_id })
-            const canAdd = await Utils.validateCartModification(product_id, quantity)
-            if(canAdd){
-                if(cartDoc){
-                    const product = cartDoc.products.find(product => product.product.toString() === product_id
+            const cartDoc = await this.cart.findOne({ user: user_id });
+            if(cartDoc){
+                const product = cartDoc.products.find(product => product.product.toString() === product_id
                     );
-                        product ? product.quantity = quantity 
-                        : cartDoc.products.push({
-                                product: new ObjectId(product_id),
-                                quantity: quantity,
+                if(product){
+                    const canAddExistingOne = await Utils.validateCartModification(product_id, quantity + product.quantity);
+                    if(canAddExistingOne){
+                        cartDoc.products = cartDoc.products.map(product => {
+                            if(String(product.product) == product_id){
+                                product.quantity += quantity;
+                                return product
+                            }else
+                                return product
                         });
-                    await cartDoc.save();
-                    const cart = await (await cartDoc.populate({ path: 'products.product', select: '_id title price images'})).populate({ path: 'user', select: 'data.username' }) as IMongoCart
-                    logger.info(cart)
-                    return {
-                        message: `Product successfully added.`,
-                        data: cart,
-                    };
+                    }else
+                        return ApiError.badRequest(`Not enough stock of the desired product.`);
                 }else{
+                    const canAddNewOne = await Utils.validateCartModification(product_id, quantity);
+                    if(canAddNewOne){
+                        cartDoc.products.push({
+                            product: new Types.ObjectId(product_id),
+                            quantity: quantity,
+                        });
+                    }else
+                        return ApiError.badRequest(`Not enough stock of the desired product.`)
+                }
+                cartDoc.modifiedAt = moment().format('YYYY-MM-DD HH:mm:ss');
+                await cartDoc.save();
+                const cart = await (await cartDoc.populate({ path: 'products.product', select: '_id title price images'})).populate({ path: 'user', select: 'data.username' }) as IMongoCart
+                return {
+                    message: `Product successfully added.`,
+                    data: cart,
+                };
+            }else{
+                const canAdd = await Utils.validateCartModification(product_id, quantity);
+                if(canAdd){
                     const newCart : ICart = {
                         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+                        modifiedAt:  moment().format('YYYY-MM-DD HH:mm:ss'),
                         user: new ObjectId(user_id),
                         products: [{
                             product: new ObjectId(product_id),
@@ -110,15 +146,13 @@ export class MongoCart implements DBCartClass {
                     }
                     const cartDoc = await this.cart.create(newCart);
                     const cart = (await (await cartDoc.populate({ path: 'products.product', select: '_id title price images'})).populate({ path: 'user', select: 'data.username' })) as IMongoCart
-                    logger.info(cart)
                     return {
                         message: `Product successfully added.`,
                         data: cart
                     }
-                }
-            }else{
-                return ApiError.badRequest(`Not enough stock of the desired product.`)
-            }
+                }else
+                    return ApiError.badRequest(`Not enough stock of the desired product.`)
+            }   
         } catch (error) {
             return ApiError.internalError(`An error occured.`)
         }
@@ -129,19 +163,16 @@ export class MongoCart implements DBCartClass {
             const cartDoc = await this.cart.findOne({ user: user_id });
             if(cartDoc){
                 let deleted = cartDoc.products.filter(product => product.product.toString() === product_id);
-                logger.info(deleted)
                 if(deleted.length > 0 && (deleted[0].quantity >= quantity)){
                     const newProducts = deleted[0].quantity === quantity ?
                         cartDoc.products.filter(product => product.product.toString() !== product_id) :
                         cartDoc.products.map(product => {
                             if(product.product.toString() === product_id)
-                                product.quantity = quantity
-                            if(product.quantity !== 0){
-                                return product
-                            }
+                                product.quantity -= quantity
+                            return product
                         });
+                    cartDoc.modifiedAt = moment().format('YYYY-MM-DD HH:mm:ss');
                     await cartDoc.set('products', newProducts)
-                    logger.info(cartDoc)
                     await cartDoc.save()
                     const newCart = await (await cartDoc.populate({ path: 'products.product', select: '_id title price images' })).populate({ path: 'user', select: 'data.username' }) as IMongoCart
                     return {
