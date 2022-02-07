@@ -1,8 +1,8 @@
-import { IMongoCart, IMongoProduct, INew_Product } from "../../../server/src/common/interfaces/products";
-import { IMongoUser, UserAddresses, UserInfo } from "../../../server/src/common/interfaces/users";
+import { IMongoCart, IMongoProduct, INew_Product } from "../../../server/src/interfaces/products";
+import { IMongoUser, UserAddresses, UserInfo } from "../../../server/src/interfaces/users";
 import { Types } from "mongoose";
-import { IOrderPopulated } from "../../../server/src/common/interfaces/orders";
-import { IMessageSentPopulated, IMongoPopulatedMessages } from "../../../server/src/common/interfaces/messages";
+import { IOrderPopulated } from "../../../server/src/interfaces/orders";
+import { IMessageSentPopulated, IMongoPopulatedMessages } from "../../../server/src/interfaces/messages";
 
 export interface IUserInfo {
     username: string;
@@ -19,7 +19,7 @@ export interface IUserInfo {
     user_id: string;
 }
 
-export const userDefaultValue : IUserInfo = {
+export const userDefault : IUserInfo = {
     user_id: '',
 username: '',
 password: '',
@@ -70,7 +70,7 @@ export const cartDefault : IMongoCart = {
 }
 
 export const defaultAddress : UserAddresses = {
-    _id: new Types.ObjectId().toString(),
+    _id: '',
     alias: '',
     street1: {
         name: '',
