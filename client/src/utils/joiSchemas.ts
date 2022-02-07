@@ -1,7 +1,7 @@
 import Joi from "joi";
 import moment from "moment";
-import { INew_Product } from "../../../server/src/common/interfaces/products";
-import { INew_User, UserAddresses } from "../../../server/src/common/interfaces/users";
+import { INew_Product } from "../../../server/src/interfaces/products";
+import { INew_User, UserAddresses } from "../../../server/src/interfaces/users";
 import { IUserInfo } from "./interfaces";
 
 const maxDate = moment().subtract(10, 'y').format('MM/DD/YYYY');
