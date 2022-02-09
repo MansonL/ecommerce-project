@@ -33,7 +33,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --respawn ./src/index.ts",
     "dev:doc": "tsnd --respawn --ignore-watch doc.json ./src/doc/swagger.ts",
-    "build":"npx tsc",
+    "build": "npx tsc",
     "run": "node ./dist/src/index.js",
     "doc": "node  ./dist/doc/swagger.js"
   },
