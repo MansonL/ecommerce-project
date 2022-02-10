@@ -1,4 +1,4 @@
-import {  verify } from "jsonwebtoken"
+import {  JwtPayload, verify } from "jsonwebtoken"
 import { IMongoPopulatedMessages } from "../../../server/src/interfaces/messages";
 import { IMongoCart } from "../../../server/src/interfaces/products";
 import { UserInfo, UserAddresses } from "../../../server/src/interfaces/users";
@@ -24,7 +24,7 @@ declare module "jsonwebtoken" {
 }
 
 export const verifyToken = async (token: string) => {
-    const userData = await verify(token, 'secret').user;
+    const userData = (await verify(token, 'secret') as JwtPayload).user
     return userData
 }
 
