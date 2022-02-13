@@ -1,8 +1,8 @@
-import { MemoryType } from './usersFactory';
-import { MongoMessages } from './DAOs/Mongo/messages';
-import { logger } from '../services/logger';
-import { Config } from '../config/config';
-import cluster from 'cluster';
+import { MemoryType } from "./usersFactory";
+import { MongoMessages } from "./DAOs/Mongo/messages";
+import { logger } from "../services/logger";
+import { Config } from "../config/config";
+import cluster from "cluster";
 
 /**
  *
@@ -15,43 +15,43 @@ import cluster from 'cluster';
  */
 
 export class MessagesFactory {
-    static get(type: string): MongoMessages {
-        switch (type) {
-            case MemoryType.MongoAtlas:
-            if(Config.MODE === 'CLUSTER'){
-                if(cluster.isMaster){
-                    logger.info(`Using MongoAtlas`);
-                    return new MongoMessages();
-                }
-                return new MongoMessages();
-            }else{
-                logger.info(`Using MongoAtlas`);
-                return new MongoMessages();
-            }
-            
-            case MemoryType.LocalMongo:
-            if(Config.MODE === 'CLUSTER'){
-                if(cluster.isMaster){
-                    logger.info(`Using Local Mongo`);
-                    return new MongoMessages();
-                }
-                return new MongoMessages();
-            }else{
-                logger.info(`Using Local Mongo`);
-                return new MongoMessages();
-            }
-            
-            default:
-            if(Config.MODE === 'CLUSTER'){
-                if(cluster.isMaster){
-                    logger.info(`DEFAULT: MongoAtlas`);
-                    return new MongoMessages();
-                }
-                return new MongoMessages();
-            }else{
-                logger.info(`DEFAULT: MongoAtlas`);
-                return new MongoMessages();
-            }
+  static get(type: string): MongoMessages {
+    switch (type) {
+      case MemoryType.MongoAtlas:
+        if (Config.MODE === "CLUSTER") {
+          if (cluster.isMaster) {
+            logger.info(`Using MongoAtlas`);
+            return new MongoMessages();
+          }
+          return new MongoMessages();
+        } else {
+          logger.info(`Using MongoAtlas`);
+          return new MongoMessages();
+        }
+
+      case MemoryType.LocalMongo:
+        if (Config.MODE === "CLUSTER") {
+          if (cluster.isMaster) {
+            logger.info(`Using Local Mongo`);
+            return new MongoMessages();
+          }
+          return new MongoMessages();
+        } else {
+          logger.info(`Using Local Mongo`);
+          return new MongoMessages();
+        }
+
+      default:
+        if (Config.MODE === "CLUSTER") {
+          if (cluster.isMaster) {
+            logger.info(`DEFAULT: MongoAtlas`);
+            return new MongoMessages();
+          }
+          return new MongoMessages();
+        } else {
+          logger.info(`DEFAULT: MongoAtlas`);
+          return new MongoMessages();
         }
     }
+  }
 }
