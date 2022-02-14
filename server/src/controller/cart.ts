@@ -19,9 +19,9 @@ class CartController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const { user_id } = req.user as Express.User;
+    const { _id } = req.user as Express.User;
     logger.info(`[PATH]: Inside Cart Controller`);
-    const result: IMongoCart[] | ApiError = await cartApi.get(user_id);
+    const result: IMongoCart[] | ApiError = await cartApi.get(_id.toString());
     if (result instanceof ApiError) next(result);
     else res.status(200).send(result[0]);
   }
@@ -32,6 +32,7 @@ class CartController {
   ): Promise<void> {
     logger.info(`[PATH]: Inside Cart Controller`);
     const result: IMongoCart[] | ApiError = await cartApi.get();
+    logger.info(JSON.stringify(result));
     if (result instanceof ApiError) next(result);
     else res.status(200).send(result);
   }
@@ -42,7 +43,7 @@ class CartController {
     next: NextFunction
   ): Promise<void> {
     const { product_id, quantity } = req.body;
-    const { user_id } = req.user as Express.User;
+    const { _id } = req.user as Express.User;
     logger.info(`[PATH]: Inside Cart Controller`);
     if (isValidObjectId(product_id)) {
       if (quantity) {
@@ -51,7 +52,7 @@ class CartController {
         if (firstResult instanceof ApiError) next(firstResult);
         else {
           const result: CUDResponse | ApiError = await cartApi.addProduct(
-            user_id,
+            _id.toString(),
             product_id,
             quantity
           );
@@ -69,9 +70,9 @@ class CartController {
     next: NextFunction
   ): Promise<void> {
     const { product_id, quantity } = req.body;
-    const { user_id } = req.user as Express.User;
+    const { _id } = req.user as Express.User;
     logger.info(`[PATH]: Inside Cart Controller`);
-    if (isValidObjectId(product_id) && isValidObjectId(user_id)) {
+    if (isValidObjectId(product_id) && isValidObjectId(_id)) {
       if (Number(quantity)) {
         const firstResult: IMongoProduct[] | ApiError =
           await productsApi.getProduct(product_id);
@@ -79,7 +80,7 @@ class CartController {
           next(firstResult);
         } else {
           const result: CUDResponse | ApiError = await cartApi.deleteProduct(
-            user_id,
+            _id.toString(),
             product_id,
             Number(quantity)
           );

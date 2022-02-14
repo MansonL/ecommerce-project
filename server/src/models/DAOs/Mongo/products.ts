@@ -14,6 +14,7 @@ import { logger } from "../../../services/logger";
 import { Config } from "../../../config/config";
 import cluster from "cluster";
 import { mockProducts } from "../../mockProducts";
+import { ObjectId } from "mongodb";
 
 const productSchema = new Schema({
   createdAt: { type: String, required: true },
@@ -119,7 +120,7 @@ export class MongoProducts implements DBProductsClass {
         await this.products.replaceOne({ _id: id }, newProduct);
         return {
           message: `Product successfully updated.`,
-          data: { _id: id, ...newProduct },
+          data: { _id: new ObjectId(id), ...newProduct },
         };
       } else {
         return ApiError.notFound(EProductsErrors.ProductNotFound);
