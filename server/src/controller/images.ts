@@ -6,6 +6,18 @@ import { EProductsErrors } from "../interfaces/EErrors";
 import { CUDResponse } from "../interfaces/others";
 import { Utils } from "../utils/utils";
 
+declare global {
+  namespace Express {
+    interface Request  {
+      product_data: {
+        product_id: string;
+        category: string;
+      }
+    }
+  }
+}
+
+
 class ImagesController {
   async save(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { product_id, category } = req.product_data
