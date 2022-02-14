@@ -223,7 +223,7 @@ export class Utils {
       ordersDocs.forEach((orderDoc) => {
         orderDoc.orders.forEach((order) => {
           const orderCreator = users.find(
-            (user) => user._id == String(orderDoc.user)
+            (user) => user._id === orderDoc.user
           ) as IMongoUser;
           populatedOrders.push({
             createdAt: order.createdAt,
@@ -233,7 +233,7 @@ export class Utils {
                 quantity: orderProduct.quantity,
                 price: orderProduct.price,
                 product_title: products.filter(
-                  (product) => product._id == String(orderProduct.product_id)
+                  (product) => product._id === orderProduct.product_id
                 )[0].title,
               };
             }),
@@ -247,7 +247,7 @@ export class Utils {
         });
         populatedAddressDocs.push({
           user: {
-            username: users.find((user) => user._id == String(orderDoc.user))
+            username: users.find((user) => user._id === orderDoc.user)
               ?.username as string,
           },
           orders: [...populatedOrders],

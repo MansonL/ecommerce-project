@@ -18,6 +18,5 @@ export interface CUDResponse {
     | IMongoCart
     | IOrderPopulated
     | IOrder
-    | IMessageSentPopulated
-    | [];
+    | IMessageSentPopulated;
 }

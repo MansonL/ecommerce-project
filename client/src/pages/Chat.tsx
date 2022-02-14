@@ -43,7 +43,7 @@ export function Chat() {
     if (message.length > 0) {
       const msg: INew_Message = {
         timestamp: moment().format("YYYY-MM-DD HH:mm:ss"),
-        from: new Types.ObjectId(user.user_id),
+        from: new Types.ObjectId(user._id),
         to: new Types.ObjectId(selectedChat),
         message: message,
         type: "user",
@@ -71,7 +71,7 @@ export function Chat() {
       .then((response) => {
         const newMessages = response.data;
         const { receivedMessages, sentMessages } = takeChats(
-          user.user_id,
+          user._id,
           newMessages
         );
         setReceivedMessages(receivedMessages);
@@ -140,7 +140,7 @@ export function Chat() {
                 return (
                   <p
                     className={
-                      message.from._id === user.user_id
+                      message.from._id === user._id
                         ? `from-me`
                         : `from-other`
                     }

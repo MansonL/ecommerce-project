@@ -1,4 +1,4 @@
-import { Document } from "mongodb";
+import { Document, ObjectId } from "mongodb";
 import { ApiError } from "../api/errorApi";
 import { CUDResponse } from "./others";
 
@@ -8,7 +8,7 @@ import { CUDResponse } from "./others";
  *
  */
 export interface IMongoUser extends Document, INew_User {
-  _id: string;
+  _id: ObjectId;
   // eslint-disable-next-line no-unused-vars
   isValidPassword: (password: string) => Promise<boolean>;
 }

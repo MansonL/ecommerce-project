@@ -79,7 +79,7 @@ class ProductController {
       else {
         const product = result.data as IMongoProduct;
         req.product_data = {
-          product_id: product._id,
+          product_id: product._id.toString(),
           category: product.category,
         };
         next(); // To image upload controller function to upload the images to cloudinary and

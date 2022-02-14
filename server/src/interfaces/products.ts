@@ -47,7 +47,7 @@ export interface ICart {
  *
  */
 export interface IMongoProduct extends INew_Product, Document {
-  _id: string;
+  _id: ObjectId;
 }
 
 /**
