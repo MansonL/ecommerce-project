@@ -9,6 +9,7 @@ import {
 } from "../interfaces/messages";
 import { CUDResponse } from "../interfaces/others";
 import { EmailUtilities, htmlFooter, htmlGeneral } from "../utils/emails";
+import { logger } from "../services/logger";
 
 /**
  *
@@ -39,6 +40,7 @@ class MessagesController {
       const result: IMongoMessage[] | ApiError = await messagesApi.getMsg(
         user_id
       );
+      logger.info(result);
       if (result instanceof ApiError) next(result);
       else res.status(200).send(result);
     }

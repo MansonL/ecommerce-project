@@ -1,8 +1,7 @@
 import cluster from "cluster";
-import { Config } from "../config/config";
+import { Config, MemoryType } from "../config/config";
 import { logger } from "../services/logger";
 import { MongoCart } from "./DAOs/Mongo/cart";
-import { MemoryType } from "./usersFactory";
 
 export class CartFactory {
   static get(type: string): MongoCart {

@@ -74,6 +74,7 @@ export class MongoCart implements DBCartClass {
             select: "_id title price images",
           })
           .populate({ path: "user", select: "username" })) as IMongoCart[];
+        logger.info(docs);
         if (docs.length > 0) {
           return docs;
         } else {

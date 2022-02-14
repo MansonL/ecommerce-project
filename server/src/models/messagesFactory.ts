@@ -1,7 +1,6 @@
-import { MemoryType } from "./usersFactory";
 import { MongoMessages } from "./DAOs/Mongo/messages";
 import { logger } from "../services/logger";
-import { Config } from "../config/config";
+import { Config, MemoryType } from "../config/config";
 import cluster from "cluster";
 
 /**

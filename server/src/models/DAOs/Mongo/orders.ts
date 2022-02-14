@@ -91,6 +91,7 @@ export class MongoOrders implements DBOrdersClass {
         }
       } else {
         const docs = await this.orders.find({});
+        logger.info(docs);
         if (docs.length > 0) {
           // Querying all the orders from all the users.
           const populatedAddressDocs = await Utils.populatedAddressDeep(docs);

@@ -1,7 +1,6 @@
 import { ProductsFactory } from "../models/productsFactory";
 import { MongoProducts } from "../models/DAOs/Mongo/products";
 import { ApiError } from "./errorApi";
-import { storage } from "../models/usersFactory";
 import {
   IMongoProduct,
   INew_Product,
@@ -9,6 +8,7 @@ import {
   IUpdate,
 } from "../interfaces/products";
 import { CUDResponse } from "../interfaces/others";
+import { storage } from "../config/config";
 
 /**
  *

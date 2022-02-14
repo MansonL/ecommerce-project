@@ -1,3 +1,4 @@
+import { storage } from "../config/config";
 import {
   IMongoOrderPopulated,
   IOrder,
@@ -6,7 +7,6 @@ import {
 import { CUDResponse } from "../interfaces/others";
 import { MongoOrders } from "../models/DAOs/Mongo/orders";
 import { OrdersFactory } from "../models/orderFactory";
-import { storage } from "../models/usersFactory";
 import { ApiError } from "./errorApi";
 
 export class OrdersApi {

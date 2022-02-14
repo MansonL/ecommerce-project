@@ -1,9 +1,9 @@
-import { storage } from "../models/usersFactory";
 import { UsersFactory } from "../models/usersFactory";
 import { MongoUsers } from "../models/DAOs/Mongo/users";
 import { ApiError } from "./errorApi";
 import { IMongoUser, INew_User, UserAddresses } from "../interfaces/users";
 import { CUDResponse } from "../interfaces/others";
+import { storage } from "../config/config";
 
 export class UsersApi {
   private users: MongoUsers;

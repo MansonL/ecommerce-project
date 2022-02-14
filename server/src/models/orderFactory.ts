@@ -1,8 +1,7 @@
 import cluster from "cluster";
-import { Config } from "../config/config";
+import { Config, MemoryType } from "../config/config";
 import { logger } from "../services/logger";
 import { MongoOrders } from "./DAOs/Mongo/orders";
-import { MemoryType } from "./usersFactory";
 
 export class OrdersFactory {
   static get(type: string): MongoOrders {

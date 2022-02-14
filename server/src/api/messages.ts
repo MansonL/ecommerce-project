@@ -1,9 +1,9 @@
 import { CUDResponse } from "../interfaces/others";
-import { storage } from "../models/usersFactory";
 import { MongoMessages } from "../models/DAOs/Mongo/messages";
 import { MessagesFactory } from "../models/messagesFactory";
 import { ApiError } from "./errorApi";
 import { IMongoMessage, INew_Message } from "../interfaces/messages";
+import { storage } from "../config/config";
 
 export class MessagesApi {
   private messages: MongoMessages;
