@@ -17,7 +17,7 @@ declare module "jsonwebtoken" {
       facebookID?: string | undefined;
       addresses?: UserAddresses[] | undefined;
       isAdmin: boolean;
-      user_id: string;
+      _id: string;
       user_cart: IMongoCart;
     };
   }

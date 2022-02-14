@@ -71,13 +71,14 @@ class AuthController {
       result
         .isValidPassword(password)
         .then(() => {
-          Utils.getUserCartOrDefault(result._id).then((userCart) => {
+          Utils.getUserCartOrDefault(result._id.toString()).then((userCart) => {
             const userData = {
-              user: {
-                user_cart: userCart,
-                user_id: result._id,
-                ...result,
-              },
+              user: Object.assign(
+                {
+                  user_cart: userCart,
+                },
+                result
+              ),
             };
             sign(
               Object.assign({}, userData),
@@ -164,6 +165,7 @@ class AuthController {
         bearerJWToken,
         Config.JWT_SECRET,
         (err: VerifyErrors | null, token: JwtPayload | undefined) => {
+          console.log(token?.user);
           if (err) next(ApiError.badRequest(EAuthErrors.NotAuthorizedUser));
           else if (token && token.user.isAdmin) {
             req.user = token.user;
