@@ -8,6 +8,7 @@ import { CUDResponse } from "../interfaces/others";
 import { logger } from "../services/logger";
 import { isValidObjectId } from "mongoose";
 import { ObjectId } from "mongodb";
+import { cartApi } from "../api/cart";
 
 /**
  *
@@ -46,6 +47,7 @@ class UsersController {
       const result: CUDResponse | ApiError = await usersApi.addUser(userInfo);
       if (result instanceof ApiError) next(result);
       else {
+        await cartApi.createEmptyCart(result.data._id.toString());
         res.status(201).send(result);
       }
     }
