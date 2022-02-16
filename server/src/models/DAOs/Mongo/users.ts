@@ -102,18 +102,22 @@ export class MongoUsers {
   async init() {
     if (Config.MODE === "CLUSTER") {
       if (cluster.isMaster) {
+        if (Config.NODE_ENV !== "test") {
+          await this.users.deleteMany({});
+          await WelcomeBot.save();
+          const customerTestId = String((await CustomerTest.save())._id);
+          await cartApi.createEmptyCart(customerTestId);
+          logger.info(`Users initialized`);
+        } else await this.users.deleteMany({});
+      }
+    } else {
+      if (Config.NODE_ENV !== "test") {
         await this.users.deleteMany({});
         await WelcomeBot.save();
         const customerTestId = String((await CustomerTest.save())._id);
         await cartApi.createEmptyCart(customerTestId);
         logger.info(`Users initialized`);
-      }
-    } else {
-      await this.users.deleteMany({});
-      await WelcomeBot.save();
-      const customerTestId = String((await CustomerTest.save())._id);
-      await cartApi.createEmptyCart(customerTestId);
-      logger.info(`Users initialized`);
+      } else await this.users.deleteMany({});
     }
   }
   async get(id?: string | undefined): Promise<IMongoUser[] | ApiError> {
