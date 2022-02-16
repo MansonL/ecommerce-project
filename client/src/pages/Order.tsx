@@ -37,6 +37,8 @@ export function Order(){
       totalOrder += product.quantity * product.product.price;
     })
 
+    totalOrder = Math.floor(totalOrder*100) / 100;
+
     const fullAddress = (user.addresses as UserAddresses[]).filter(address => address.alias === selectedAddress)[0];
     const formattedAddres = `${fullAddress.street1.name} ${fullAddress.street1.number},${fullAddress.department && fullAddress.floor ? ` ${fullAddress.department} ${fullAddress.floor}, ` : ' '}${fullAddress.city} ${fullAddress.zipcode}`
 
