@@ -70,26 +70,20 @@ export function SignUp() {
    */
   const signupSubmit = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
-    let user = newUser;
-    user = cleanEmptyProperties(user);
+    let user = {...newUser}
+    cleanEmptyProperties(user);
     const { error } = validation.user.validate(user);
     if (error) {
       setShowResult(true);
       setSignUpResult(false);
       setResultMsg(error.message);
     } else {
-      const userData: INew_User = {
-        createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
-        modifiedAt: moment().format("YYYY-MM-DD HH:mm:ss"),
-        ...user,
-      };
-
       setLoading(true);
       document.body.style.overflow = "hidden";
       axios
         .post<UserCUDResponse>(
           "http://localhost:8080/api/auth/signup",
-          userData,
+          user,
           { withCredentials: true }
         )
         .then(signAxiosCallback)
