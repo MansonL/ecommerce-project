@@ -162,7 +162,7 @@ class Validations {
       }),
       phoneNumber: Joi.string()
         .pattern(
-          /^(\+\d{1,2}\s?)?1?-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/m
+          /\+\d{1,4}\d{1,4}\d{7}/
         )
         .required()
         .messages({
@@ -220,7 +220,8 @@ class Validations {
           })
         )
         .optional(),
-      facebookID: Joi.string(),
+      facebookID: Joi.string().allow(''),
+      avatar: Joi.string().uri().allow(''),
       isAdmin: Joi.boolean().required(),
     }).required();
 

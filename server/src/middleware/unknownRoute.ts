@@ -9,6 +9,7 @@ const availableRoutes = `
 
 export const unknownRoute = (req: Request, res: Response) => {
   res.status(404).json({
+    error: 404,
     message: `The route doesn't exist, please try the followings: ${availableRoutes} `,
   });
 };

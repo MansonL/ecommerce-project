@@ -91,19 +91,19 @@ class AuthController {
         Config.JWT_SECRET,
         (err: VerifyErrors | null, token: JwtPayload | undefined) => {
           if (err)
-            res.send({
+            res.json({
               message: "You can sign up.",
               data: {},
             });
           else
-            res.send({
+            res.json({
               message: "Already logged in.",
               data: token,
             });
         }
       );
     } else
-      res.send({
+      res.json({
         message: "You can sign up.",
         data: {},
       });
@@ -116,7 +116,10 @@ class AuthController {
     );
     if (result instanceof ApiError) {
       next();
-    } else res.status(400).send(`Username has been already taken.`);
+    } else res.status(400).json({
+        error: 404,
+        message: `Username already taken.`
+    });
   }
 
   async isAuthorized(req: Request, res: Response, next: NextFunction) {
