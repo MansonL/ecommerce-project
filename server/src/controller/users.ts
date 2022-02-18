@@ -3,12 +3,13 @@ import { EProductsErrors } from "../interfaces/EErrors";
 import { ApiError } from "../api/errorApi";
 import { validator } from "../interfaces/joiSchemas";
 import { usersApi } from "../api/users";
-import { IMongoUser, INew_User, UserAddresses } from "../interfaces/users";
+import { IMongoUser, INew_User, UserAddresses, UserInfo } from "../interfaces/users";
 import { CUDResponse } from "../interfaces/others";
 import { logger } from "../services/logger";
 import { isValidObjectId } from "mongoose";
 import { ObjectId } from "mongodb";
 import { cartApi } from "../api/cart";
+import moment from 'moment';
 
 /**
  *
@@ -37,14 +38,19 @@ class UsersController {
   }
 
   async save(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const userInfo: INew_User = req.body;
+    const userInfo: UserInfo = req.body;
     logger.info(`[PATH]: Inside User Controller`);
     const { error } = await validator.user.validate(userInfo);
     if (error) next(ApiError.badRequest(error.message));
     else {
       if (userInfo.addresses)
         userInfo.addresses[0]._id = String(new ObjectId());
-      const result: CUDResponse | ApiError = await usersApi.addUser(userInfo);
+      const newUser : INew_User = {
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        ...userInfo
+      }
+      const result: CUDResponse | ApiError = await usersApi.addUser(newUser);
       if (result instanceof ApiError) next(result);
       else {
         await cartApi.createEmptyCart(result.data._id.toString());
