@@ -86,3 +86,28 @@ Feb-13-2022 15:25:22 | [31merror[39m : Error: 400. Message: You must be logged
     at new Promise (<anonymous>)
     at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
     at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Feb-21-2022 23:13:01 | [33mwarn[39m : request to http://localhost:8080/api/users/save failed, reason: connect ECONNREFUSED 127.0.0.1:8080
+Feb-21-2022 23:14:43 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:44:30
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Feb-21-2022 23:15:07 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:44:30
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Feb-21-2022 23:15:59 | [31merror[39m : Error: 400. Message: "username" is required. Stack: Error: "username" is required
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:44:30
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Feb-22-2022 08:58:57 | [33mwarn[39m : mockedFetch.mockImplementationOnce is not a function
+Feb-22-2022 08:59:47 | [33mwarn[39m : mockedFetch.mockImplementationOnce is not a function
+Feb-22-2022 09:00:09 | [33mwarn[39m : mockedFetch.mockImplementationOnce is not a function
