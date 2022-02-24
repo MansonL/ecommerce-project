@@ -2,11 +2,11 @@
 
 import moment from "moment";
 import { Types } from "mongoose";
-import { hostURL } from "../config/config";
-import { UserInfo } from "../interfaces/users";
-import { logger } from "../services/logger";
+import { hostURL } from "../../config/config";
+import { UserInfo } from "../../interfaces/users";
+import { logger } from "../../services/logger";
 import axios, { AxiosResponse } from "axios";
-
+import { mockAxiosFunction, post } from "../api";
 
 const testUserData: UserInfo = {
   username: "test@gmail.com",
@@ -28,16 +28,14 @@ const testStoredUserData = {
 };
 
 const defaultUserURL = `${hostURL}/users`;
-/*
+
 jest.mock("axios");
-*/
-const mockedAxios = axios.post as jest.MockedFunction<typeof axios.post>;
 
 describe("Users API Tests", () => {
   describe("POST save user", () => {
+    /*
     it("user succesfully saved", async () => {
       try {
-        /*
         const mockedResponse = {
           message: "User successfully created.",
           data: {
@@ -58,8 +56,8 @@ describe("Users API Tests", () => {
                   vary: "Origin",
                   "access-control-allow-credentials": "true",
                   "content-type": "application/json; charset=utf-8",
-                  "content-length": "470",
-                  etag: 'W/"1d6-fGnP9DO8NIs0f7u52pumcLJsC/g"',
+                  "content-length": "response lenght",
+                  etag: "request etag",
                   date: "response date",
                   connection: "close",
                 },
@@ -76,20 +74,39 @@ describe("Users API Tests", () => {
         expect(response.status).toBe(201);
         expect(response.statusText).toBe("Created");
         expect(response.data).toEqual(mockedResponse);
-        */
       } catch (error) {
         logger.warn(error);
       }
     });
-
+    */
     it("user saving failed, invalid fields", async () => {
       try {
-        axios
-          .post(`${defaultUserURL}/save`, {
-            ...testUserData,
-            age: "",
-          })
-          .catch((error) => console.log(error));
+        const mockedResponse = {
+          status: 400,
+          statusText: "Bad Request",
+          headers: {
+            "x-powered-by": "Express",
+            "access-control-allow-origin": "http://localhost:3000",
+            vary: "Origin",
+            "access-control-allow-credentials": "true",
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "response length",
+            etag: "request etag",
+            date: "response server date",
+            connection: "close",
+          },
+          data: {
+            error: 400,
+            message: "You must provide a valid date.",
+          },
+        };
+
+        mockAxiosFunction(mockedResponse, "POST");
+        const response = await post(`${defaultUserURL}/save`, {
+          ...testUserData,
+          age: "",
+        });
+        expect(response.status).toBe(400)
       } catch (error) {
         logger.warn(error);
       }

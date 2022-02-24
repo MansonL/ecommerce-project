@@ -136,3 +136,10 @@ Feb-23-2022 22:19:43 | [31merror[39m : Error: 400. Message: You must provide a
     at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
     at runMicrotasks (<anonymous>)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Feb-24-2022 16:51:52 | [31merror[39m : Error: 400. Message: You must provide a valid date.. Stack: Error: You must provide a valid date.
+    at new ApiError (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\api\errorApi.ts:23:12)
+    at C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\users.ts:44:30
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\DEPOSITO\Desktop\LAUTARO\Coder\ecommerce-project\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
