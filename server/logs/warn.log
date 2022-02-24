@@ -111,3 +111,38 @@ Feb-21-2022 23:15:59 | [31merror[39m : Error: 400. Message: "username" is requ
 Feb-22-2022 08:58:57 | [33mwarn[39m : mockedFetch.mockImplementationOnce is not a function
 Feb-22-2022 08:59:47 | [33mwarn[39m : mockedFetch.mockImplementationOnce is not a function
 Feb-22-2022 09:00:09 | [33mwarn[39m : mockedFetch.mockImplementationOnce is not a function
+Feb-22-2022 22:07:32 | [33mwarn[39m : mockedFetch.mockImplementationOnce is not a function
+Feb-22-2022 22:56:20 | [33mwarn[39m : Cannot read property 'json' of undefined
+Feb-22-2022 23:00:58 | [33mwarn[39m : Cannot read property 'json' of undefined
+Feb-23-2022 22:14:04 | [33mwarn[39m : mockedAxios.mockImplementationOnce is not a function
+Feb-23-2022 22:14:05 | [31merror[39m : Error: 400. Message: You must provide a valid date.. Stack: Error: You must provide a valid date.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:44:30
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Feb-23-2022 22:15:18 | [33mwarn[39m : mockedAxios.mockImplementationOnce is not a function
+Feb-23-2022 22:15:18 | [31merror[39m : Error: 400. Message: You must provide a valid date.. Stack: Error: You must provide a valid date.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:44:30
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Feb-23-2022 22:15:18 | [33mwarn[39m : Request failed with status code 400
+Feb-23-2022 22:17:37 | [31merror[39m : Error: 400. Message: You must provide a valid date.. Stack: Error: You must provide a valid date.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:44:30
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Feb-23-2022 22:19:43 | [31merror[39m : Error: 400. Message: You must provide a valid date.. Stack: Error: You must provide a valid date.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\users.ts:44:30
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\controller\users.ts:5:58)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)

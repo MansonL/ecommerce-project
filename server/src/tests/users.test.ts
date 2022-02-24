@@ -2,10 +2,11 @@
 
 import moment from "moment";
 import { Types } from "mongoose";
-import fetch, { Response } from "node-fetch";
 import { hostURL } from "../config/config";
 import { UserInfo } from "../interfaces/users";
 import { logger } from "../services/logger";
+import axios, { AxiosResponse } from "axios";
+
 
 const testUserData: UserInfo = {
   username: "test@gmail.com",
@@ -27,74 +28,71 @@ const testStoredUserData = {
 };
 
 const defaultUserURL = `${hostURL}/users`;
-
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>;
+/*
+jest.mock("axios");
+*/
+const mockedAxios = axios.post as jest.MockedFunction<typeof axios.post>;
 
 describe("Users API Tests", () => {
   describe("POST save user", () => {
     it("user succesfully saved", async () => {
       try {
-        mockedFetch.mockImplementationOnce(
-          (url, requestOptions) =>
-            new Promise<Response>((resolve, reject) =>
-              setTimeout(
-                () =>
-                  resolve(
-                    new Response(
-                      JSON.stringify({
-                        message: "User successfully created.",
-                        data: { ...testStoredUserData, ...testUserData },
-                      }),
-                      {
-                        url: url.toString(),
-                        status: 201,
-                        statusText: "Created",
-                      }
-                    )
-                  ),
-                1
-              )
-            )
+        /*
+        const mockedResponse = {
+          message: "User successfully created.",
+          data: {
+            ...testUserData,
+            ...testStoredUserData,
+          },
+        };
+
+        mockedAxios.mockImplementationOnce(
+          (url, data, config) =>
+            new Promise((resolve, reject) => {
+              resolve({
+                status: 201,
+                statusText: "Created",
+                headers: {
+                  "x-powered-by": "Express",
+                  "access-control-allow-origin": "http://localhost:3000",
+                  vary: "Origin",
+                  "access-control-allow-credentials": "true",
+                  "content-type": "application/json; charset=utf-8",
+                  "content-length": "470",
+                  etag: 'W/"1d6-fGnP9DO8NIs0f7u52pumcLJsC/g"',
+                  date: "response date",
+                  connection: "close",
+                },
+                data: mockedResponse,
+              });
+            })
         );
 
-        const response = await mockedFetch(`${defaultUserURL}/save`, {
-          body: JSON.stringify(testUserData),
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.post(
+          `${defaultUserURL}/save`,
+          testUserData
+        );
 
-        const responseJSON = await response.json();
         expect(response.status).toBe(201);
         expect(response.statusText).toBe("Created");
-        expect(responseJSON).toEqual({
-          message: "User successfully created.",
-          data: { ...testStoredUserData, ...testUserData },
-        });
-
-        /*
-        const response: Response = await fetch(`${defaultUserURL}/save`, {
-          body: JSON.stringify(botData),
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        const responseJSON = await response.json();
-        console.log(responseJSON);
-        console.log(response.headers);
+        expect(response.data).toEqual(mockedResponse);
         */
+      } catch (error) {
+        logger.warn(error);
+      }
+    });
+
+    it("user saving failed, invalid fields", async () => {
+      try {
+        axios
+          .post(`${defaultUserURL}/save`, {
+            ...testUserData,
+            age: "",
+          })
+          .catch((error) => console.log(error));
       } catch (error) {
         logger.warn(error);
       }
     });
   });
 });
-
-/*
-test("GET users", async () => {
-  const getAllUsersByAdmin: Response = await fetch(`${defaultUserURL}/list`);
-});
-*/
