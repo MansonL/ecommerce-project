@@ -4,40 +4,21 @@ import { ApiError } from "../api/errorApi";
 import { usersApi } from "../api/users";
 import { EAuthErrors, EUsersErrors } from "../interfaces/EErrors";
 import { IMongoCart } from "../interfaces/products";
-import {
-  IMongoUser,
-  INew_User,
-  UserAddresses,
-  UserInfo,
-} from "../interfaces/users";
+import { IMongoUser, INew_User } from "../interfaces/users";
 import { Config } from "../config/config";
 import { Utils } from "../utils/utils";
 
 declare global {
   namespace Express {
-    interface User extends UserInfo {
-      user_id: string;
+    interface User extends IMongoUser {
+      user_cart: IMongoCart;
     }
   }
 }
 
 declare module "jsonwebtoken" {
-  export interface JwtPayload {
-    user: {
-      username: string;
-      password: string;
-      repeatedPassword: string;
-      name: string;
-      surname: string;
-      age: string;
-      avatar?: string | undefined;
-      phoneNumber: string;
-      facebookID?: string | undefined;
-      addresses?: UserAddresses[] | undefined;
-      isAdmin: boolean;
-      user_id: string;
-      user_cart: IMongoCart;
-    };
+  export interface JwtPayload extends IMongoUser {
+    user_cart: IMongoCart;
   }
 }
 
@@ -77,7 +58,7 @@ class AuthController {
                 {
                   user_cart: userCart,
                 },
-                result
+                JSON.parse(JSON.stringify(result))
               ),
             };
             sign(
@@ -110,19 +91,19 @@ class AuthController {
         Config.JWT_SECRET,
         (err: VerifyErrors | null, token: JwtPayload | undefined) => {
           if (err)
-            res.send({
+            res.json({
               message: "You can sign up.",
               data: {},
             });
           else
-            res.send({
+            res.json({
               message: "Already logged in.",
               data: token,
             });
         }
       );
     } else
-      res.send({
+      res.json({
         message: "You can sign up.",
         data: {},
       });
@@ -135,7 +116,10 @@ class AuthController {
     );
     if (result instanceof ApiError) {
       next();
-    } else res.status(400).send(`Username has been already taken.`);
+    } else res.status(400).json({
+        error: 404,
+        message: `Username already taken.`
+    });
   }
 
   async isAuthorized(req: Request, res: Response, next: NextFunction) {

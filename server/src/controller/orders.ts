@@ -14,6 +14,7 @@ import {
 } from "../interfaces/orders";
 import { CUDResponse } from "../interfaces/others";
 import { IMongoUser } from "../interfaces/users";
+import { logger } from "../services/logger";
 import { EmailUtilities } from "../utils/emails";
 import { Utils } from "../utils/utils";
 
@@ -68,7 +69,7 @@ class OrdersController {
           await ordersApi.get("order", order_id);
 
         // At frontend user must only have a view of his orders and theirs id's.
-
+        logger.info(result);
         if (result instanceof ApiError) next(result);
         else res.status(200).send(result);
       } else next(ApiError.badRequest(EProductsErrors.IdIncorrect));

@@ -39,6 +39,7 @@ export interface IMongoPopulatedMessages {
  * Type of Message Object after being popualted
  */
 export interface IMessageSentPopulated {
+  _id: ObjectId;
   timestamp: string;
   from: ObjectId;
   to: {
@@ -54,7 +55,7 @@ export interface IMessageSentPopulated {
  *
  */
 export interface IMongoMessage extends INew_Message, Document {
-  _id: string;
+  _id: ObjectId;
 }
 
 /**

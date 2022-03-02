@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
-import { Config } from "../../../config/config";
-import { storage } from "../../usersFactory";
-import { MemoryType } from "../../usersFactory";
+import { Config, MemoryType, storage } from "../../../config/config";
 import { logger } from "../../../services/logger";
 import cluster from "cluster";
 

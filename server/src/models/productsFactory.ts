@@ -1,8 +1,7 @@
 import cluster from "cluster";
-import { Config } from "../config/config";
+import { Config, MemoryType } from "../config/config";
 import { logger } from "../services/logger";
 import { MongoProducts } from "./DAOs/Mongo/products";
-import { MemoryType } from "./usersFactory";
 
 /**
  *

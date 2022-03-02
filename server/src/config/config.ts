@@ -35,3 +35,20 @@ export const Config = {
   CLOUDINARY_API_SECRET:
     process.env.CLOUDINARY_API_SECRET || "admin cloudinary api_secret",
 };
+
+export const storage = Config.PERSISTANCE;
+
+/**
+ *
+ * Different types of memory storage
+ *
+ */
+
+export enum MemoryType {
+  // eslint-disable-next-line no-unused-vars
+  MongoAtlas = "Mongo-Atlas",
+  // eslint-disable-next-line no-unused-vars
+  LocalMongo = "Local-Mongo",
+}
+
+export const hostURL = 'http://localhost:8080/api';

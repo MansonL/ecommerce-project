@@ -1,9 +1,9 @@
 import { CartFactory } from "../models/cartFactory";
 import { MongoCart } from "../models/DAOs/Mongo/cart";
 import { ApiError } from "./errorApi";
-import { storage } from "../models/usersFactory";
 import { IMongoCart } from "../interfaces/products";
 import { CUDResponse } from "../interfaces/others";
+import { storage } from "../config/config";
 
 /**
  *

@@ -1,7 +1,6 @@
 import { model, Model, Schema } from "mongoose";
 import { ApiError } from "../../../api/errorApi";
 import { EUsersErrors } from "../../../interfaces/EErrors";
-import moment from "moment";
 import {
   IMongoUser,
   INew_User,
@@ -12,6 +11,8 @@ import bcrypt from "bcrypt";
 import { logger } from "../../../services/logger";
 import { Config } from "../../../config/config";
 import cluster from "cluster";
+import { cartApi } from "../../../api/cart";
+import moment from "moment";
 
 const usersSchema = new Schema({
   createdAt: { type: String, required: true },
@@ -89,31 +90,30 @@ usersSchema.pre("save", async function (next) {
 
 const usersModel = model<INew_User, Model<INew_User>>("users", usersSchema);
 
-const botData: INew_User = {
+export const botData: INew_User = {
   createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
   modifiedAt: moment().format("YYYY-MM-DD HH:mm:ss"),
   username: Config.GOOGLE_EMAIL,
   password: "test123",
   repeatedPassword: "test123",
-  name: `Manson`,
-  surname: `Bot`,
-  age: "27/12/2000",
+  name: `Ecommerce`,
+  surname: `BOT`,
+  age: "12-27-2000",
   phoneNumber: "+5492612345678",
   avatar: "",
   facebookID: "",
   isAdmin: true,
 };
 
-const customerTest: INew_User = {
+export const customerTest: INew_User = {
   createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
   modifiedAt: moment().format("YYYY-MM-DD HH:mm:ss"),
-
   username: `lautaromanson@outlook.es`,
   password: "test123",
   repeatedPassword: "test123",
-  name: `Manson`,
-  surname: `Lautaro`,
-  age: "27/12/2000",
+  name: `Lautaro`,
+  surname: `Manson`,
+  age: "12-27-2000",
   phoneNumber: "+5492612345678",
   avatar: "",
   facebookID: "",
@@ -132,16 +132,22 @@ export class MongoUsers {
   async init() {
     if (Config.MODE === "CLUSTER") {
       if (cluster.isMaster) {
-        await this.users.deleteMany({});
-        await WelcomeBot.save();
-        await CustomerTest.save();
-        logger.info(`Users initialized`);
+        if (Config.NODE_ENV !== "test") {
+          await this.users.deleteMany({});
+          await WelcomeBot.save();
+          const customerTestId = String((await CustomerTest.save())._id);
+          await cartApi.createEmptyCart(customerTestId);
+          logger.info(`Users initialized`);
+        } else await this.users.deleteMany({});
       }
     } else {
-      await this.users.deleteMany({});
-      await WelcomeBot.save();
-      await CustomerTest.save();
-      logger.info(`Users initialized`);
+      if (Config.NODE_ENV !== "test") {
+        await this.users.deleteMany({});
+        await WelcomeBot.save();
+        const customerTestId = String((await CustomerTest.save())._id);
+        await cartApi.createEmptyCart(customerTestId);
+        logger.info(`Users initialized`);
+      } else await this.users.deleteMany({});
     }
   }
   async get(id?: string | undefined): Promise<IMongoUser[] | ApiError> {

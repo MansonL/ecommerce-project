@@ -1,22 +1,7 @@
 import cluster from "cluster";
-import { Config } from "../config/config";
+import { Config, MemoryType } from "../config/config";
 import { logger } from "../services/logger";
 import { MongoUsers } from "./DAOs/Mongo/users";
-
-/**
- *
- * Different types of memory storage
- *
- */
-
-export enum MemoryType {
-  // eslint-disable-next-line no-unused-vars
-  MongoAtlas = "Mongo-Atlas",
-  // eslint-disable-next-line no-unused-vars
-  LocalMongo = "Local-Mongo",
-}
-
-export const storage = Config.PERSISTANCE;
 
 export class UsersFactory {
   static get(type: string): MongoUsers {
