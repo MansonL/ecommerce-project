@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+// This is because eslint will throw the upper error at the mockAxiosFunction
+
 import axios from "axios";
 
 /**
@@ -67,13 +70,10 @@ export const mockAxiosFunction = (
  * @param data the data to be sent with the post request to create a new resource.
  */
 
-export const post = async (
-  url: string,
-  data: any
-): Promise<MockedResponse> => {
-    try {
-        return await axios.post(url, data);
-    } catch (error) {
-        return error as MockedResponse
-    }
+export const post = async (url: string, data: any): Promise<MockedResponse> => {
+  try {
+    return await axios.post(url, data);
+  } catch (error) {
+    return error as MockedResponse;
+  }
 };
