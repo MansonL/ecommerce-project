@@ -560,6 +560,7 @@ a {
   }
   
   /* PRODUCTS LIST */
+  
   .product-qty-text {
     font-size: 1.5rem;
   }
@@ -591,8 +592,12 @@ a {
     max-width: 20%;
   }
   .operation-result-icon {
-    max-width: 20%;
+    max-width: 15%;
   }
+  .operation-result {
+    font-size: 1.2rem;
+  }
+
   /* ------------------ */
 
   /* ADMIN PRODUCTS FORM */ 
@@ -683,6 +688,9 @@ a {
     flex-grow: unset;
     width: 75%;
  }
+ .welcome-text {
+   padding-top: 13rem;
+ }
  .filter-menu {
     max-width: 70%;
  }
@@ -691,6 +699,9 @@ a {
     display: flex;
     flex-wrap: wrap;
     max-width: unset;
+ }
+ .products-result, .cart-products {
+   max-width: 65%;
  }
  .product {
     max-width: 50%;
@@ -720,6 +731,10 @@ a {
  .product-subtotal-value {
   font-size: 1.5rem;
  }
+ .operation-result {
+   font-size: 1.5rem;
+ }
+
 }
 
 
@@ -743,6 +758,7 @@ a {
   /* MAIN MENU & NAVBAR */
   .main-menu {
     font-size: 1.6rem;
+    max-width: 30%;
   }
 
   .home-background {
@@ -837,7 +853,7 @@ a {
     font-size: 1.2rem;
   }
   .operation-result-icon {
-    max-width: 20%;
+    max-width: 15%;
   }
  /* ------------------ */
 

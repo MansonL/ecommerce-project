@@ -80,10 +80,10 @@ export function AddressForm() {
     setShowResult(true);
     if (error.response) {
       if (error.response.status === 500) {
-        setResultMsg(error.response.data);
+        setResultMsg(error.response.data.message);
       } else {
-        setResultMsg(error.response.data);
-        if (/must be logged in/g.test(error.response.data)) {
+        setResultMsg(error.response.data.message);
+        if (/must be logged in/g.test(error.response.data.message)) {
           updateLoginStatus(undefined);
           navigate("../login");
         }

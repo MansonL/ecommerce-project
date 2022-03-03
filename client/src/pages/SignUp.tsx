@@ -70,7 +70,7 @@ export function SignUp() {
    */
   const signupSubmit = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
-    let user = {...newUser}
+    let user = { ...newUser };
     cleanEmptyProperties(user);
     const { error } = validation.user.validate(user);
     if (error) {
@@ -81,11 +81,9 @@ export function SignUp() {
       setLoading(true);
       document.body.style.overflow = "hidden";
       axios
-        .post<UserCUDResponse>(
-          "http://localhost:8080/api/auth/signup",
-          user,
-          { withCredentials: true }
-        )
+        .post<UserCUDResponse>("http://localhost:8080/api/auth/signup", user, {
+          withCredentials: true,
+        })
         .then(signAxiosCallback)
         .catch((error) => {
           console.log(JSON.stringify(error.response, null, 2));
@@ -95,9 +93,9 @@ export function SignUp() {
           setSignUpResult(false);
           if (error.response) {
             if (error.response.status === 500) {
-              setResultMsg(error.response.data.message);
+              setResultMsg(error.response.data.message.message);
             } else {
-              setResultMsg(error.response.data.message);
+              setResultMsg(error.response.data.message.message);
             }
           } else if (error.request) {
             setResultMsg(`No response received from server.`);
@@ -138,7 +136,12 @@ export function SignUp() {
               id="name"
               name="name"
             />
-            <label htmlFor="name" className="animated-label">
+            <label
+              htmlFor="name"
+              className={
+                newUser.name !== "" ? "filled-input-label" : "animated-label"
+              }
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png"
                 alt=""
@@ -157,7 +160,12 @@ export function SignUp() {
               id="surname"
               name="surname"
             />
-            <label htmlFor="surname" className="animated-label">
+            <label
+              htmlFor="surname"
+              className={
+                newUser.surname !== "" ? "filled-input-label" : "animated-label"
+              }
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png"
                 alt=""
@@ -200,7 +208,12 @@ export function SignUp() {
               name="avatar"
               className="styled-input"
             />
-            <label htmlFor="avatar" className="animated-label">
+            <label
+              htmlFor="avatar"
+              className={
+                newUser.avatar !== "" ? "filled-input-label" : "animated-label"
+              }
+            >
               Avatar URL<span className="optional-label">(optional)</span>:
             </label>
             <br />
@@ -215,7 +228,14 @@ export function SignUp() {
               name="phoneNumber"
               className="styled-input"
             />
-            <label htmlFor="phoneNumber" className="animated-label">
+            <label
+              htmlFor="phoneNumber"
+              className={
+                newUser.phoneNumber !== ""
+                  ? "filled-input-label"
+                  : "animated-label"
+              }
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png"
                 alt=""
@@ -234,7 +254,14 @@ export function SignUp() {
               name="username"
               className="styled-input"
             />
-            <label htmlFor="username" className="animated-label">
+            <label
+              htmlFor="username"
+              className={
+                newUser.username !== ""
+                  ? "filled-input-label"
+                  : "animated-label"
+              }
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png"
                 alt=""
@@ -254,7 +281,14 @@ export function SignUp() {
                 name="password"
                 className="styled-input password-input"
               />
-              <label htmlFor="password" className="animated-label">
+              <label
+                htmlFor="password"
+                className={
+                  newUser.password !== ""
+                    ? "filled-input-label"
+                    : "animated-label"
+                }
+              >
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png"
                   alt=""
@@ -280,10 +314,17 @@ export function SignUp() {
                 onChange={onChange}
                 value={newUser.repeatedPassword}
                 id="repeatedPassword"
-                name="repeteadPassword"
+                name="repeatedPassword"
                 className="styled-input password-input"
               />
-              <label htmlFor="repeteadPassword" className="animated-label">
+              <label
+                htmlFor="repeteadPassword"
+                className={
+                  newUser.repeatedPassword !== ""
+                    ? "filled-input-label"
+                    : "animated-label"
+                }
+              >
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png"
                   alt=""
