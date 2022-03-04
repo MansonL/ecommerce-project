@@ -97,7 +97,7 @@ describe("Users API Tests", () => {
 
         mockAxiosFunction(mockedResponse, "POST");
 
-        const response = await post(`${defaultUserURL}/save`, {
+        const response = await axios.post(`${defaultUserURL}/save`, {
           ...testUserData,
           age: "",
         });
