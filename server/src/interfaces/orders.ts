@@ -48,7 +48,7 @@ export interface DBOrdersClass {
     type: "user" | "order" | undefined,
     _id: string | undefined
   ): Promise<IMongoOrderPopulated[] | IOrderPopulated[] | ApiError>;
-  create(order: IOrder, user_id: string): Promise<CUDResponse | ApiError>;
+  createUpdate(order: IOrder, user_id: string): Promise<CUDResponse | ApiError>;
   modifyStatus(
     order_id: string,
     user_id: string,

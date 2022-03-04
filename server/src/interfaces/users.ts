@@ -14,7 +14,7 @@ export interface IMongoUser extends Document, INew_User {
 }
 
 export type UserAddresses = {
-  _id: string;
+  _id: ObjectId;
   alias: string;
   street1: {
     name: string;

@@ -24,11 +24,11 @@ export class OrdersApi {
     return result;
   }
 
-  async create(
+  async createUpdate(
     order: IOrder,
     user_id: string
   ): Promise<CUDResponse | ApiError> {
-    const result: CUDResponse | ApiError = await this.orders.create(
+    const result: CUDResponse | ApiError = await this.orders.createUpdate(
       order,
       user_id
     );

@@ -222,8 +222,8 @@ export class Utils {
       const populatedOrders: IOrderPopulated[] = [];
       ordersDocs.forEach((orderDoc) => {
         orderDoc.orders.forEach((order) => {
-          const orderCreator = users.find(
-            (user) => user._id === orderDoc.user
+          const orderCreator = users.find((user) =>
+            user._id.equals(orderDoc.user)
           ) as IMongoUser;
           populatedOrders.push({
             createdAt: order.createdAt,
@@ -232,16 +232,16 @@ export class Utils {
                 product_id: orderProduct.product_id,
                 quantity: orderProduct.quantity,
                 price: orderProduct.price,
-                product_title: products.filter(
-                  (product) => product._id === orderProduct.product_id
+                product_title: products.filter((product) =>
+                  product._id.equals(orderProduct.product_id)
                 )[0].title,
               };
             }),
             status: order.status,
             _id: order._id,
             total: order.total,
-            address: orderCreator.addresses?.find(
-              (address) => address._id == String(order.address)
+            address: orderCreator.addresses?.find((address) =>
+              address._id.equals(order.address)
             ) as UserAddresses,
           });
         });

@@ -105,7 +105,7 @@ export class MongoOrders implements DBOrdersClass {
     }
   }
 
-  async create(
+  async createUpdate(
     order: IOrder,
     user_id: string
   ): Promise<CUDResponse | ApiError> {
@@ -140,6 +140,7 @@ export class MongoOrders implements DBOrdersClass {
           };
       }
     } catch (error) {
+      console.log(error);
       return ApiError.internalError(`An error occured.`);
     }
   }

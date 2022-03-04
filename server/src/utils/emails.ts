@@ -49,10 +49,13 @@ export class EmailUtilities {
       html: content,
       replyTo: "mansonlautaro@gmail.com",
     };
-    const transporter = await createTransporter();
-    if (transporter instanceof ApiError) logger.warn(transporter.message);
-    else {
-      await transporter.sendMail(mailOptions);
+    try {
+      const transporterResult = await createTransporter();
+      if (transporterResult instanceof ApiError) {
+        logger.error(`Error: ${transporterResult.error}. Message: ${transporterResult.message}. Stack: ${transporterResult.stack}`);
+      } else await transporterResult.sendMail(mailOptions);
+    } catch (error) {
+      logger.error(`Error: ${(error as any).error}. Message: ${(error as any).message}. Stack: ${(error as any).stack}`);
     }
   };
 

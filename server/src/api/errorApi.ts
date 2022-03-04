@@ -5,9 +5,9 @@
  */
 
 export class ApiError extends Error {
-  error: number;
+  error: number | string;
   message: string;
-  constructor(error: number, message: string) {
+  constructor(error: number | string, message: string) {
     super();
     this.error = error;
     this.message = message;
@@ -25,7 +25,7 @@ export class ApiError extends Error {
   static notFound = (msg: string) => {
     return new ApiError(404, msg);
   };
-  static internalError = (msg: string) => {
-    return new ApiError(500, msg);
+  static internalError = (msg: string, error?: string) => {
+    return new ApiError(error ? error : 500, msg);
   };
 }

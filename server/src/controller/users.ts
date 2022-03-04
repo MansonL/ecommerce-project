@@ -51,7 +51,7 @@ class UsersController {
     if (error) next(ApiError.badRequest(error.message));
     else {
       if (userInfo.addresses)
-        userInfo.addresses[0]._id = String(new ObjectId());
+        userInfo.addresses[0]._id = new ObjectId();
       const newUser: INew_User = {
         createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
         modifiedAt: moment().format("YYYY-MM-DD HH:mm:ss"),

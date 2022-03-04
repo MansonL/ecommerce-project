@@ -62,7 +62,7 @@ class OrdersController {
     next: NextFunction
   ): Promise<void> {
     const order_id = req.params.id;
-    const { user_id } = req.user as Express.User;
+    const user_id = (req.user as Express.User)._id;
     if (order_id) {
       if (isValidObjectId(order_id)) {
         const result: IMongoOrderPopulated[] | IOrderPopulated[] | ApiError =
@@ -75,7 +75,7 @@ class OrdersController {
       } else next(ApiError.badRequest(EProductsErrors.IdIncorrect));
     } else {
       const result: IMongoOrderPopulated[] | IOrderPopulated[] | ApiError =
-        await ordersApi.get("user", user_id);
+        await ordersApi.get("user", user_id.toString());
 
       // Retrieving all orders of the user
 
@@ -89,7 +89,7 @@ class OrdersController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const { user_id } = req.user as Express.User;
+    const user_id = (req.user as Express.User)._id;
     const { products, total, address } = req.body as {
       products: OrderProducts[];
       total: number;
@@ -108,13 +108,15 @@ class OrdersController {
         total: total,
         address: address,
       };
-      const result: CUDResponse | ApiError = await ordersApi.create(
+      const result: CUDResponse | ApiError = await ordersApi.createUpdate(
         order,
-        user_id
+        user_id.toString()
       );
       if (result instanceof ApiError) next(result);
       else {
-        const user = ((await usersApi.getUser(user_id)) as IMongoUser[])[0];
+        const user = (
+          (await usersApi.getUser(user_id.toString())) as IMongoUser[]
+        )[0];
         const customerTo = user.username;
         const customerSubject = `[NEW ORDER]: You have created a new order at Ecommerce.`;
         const selectedAddress = (result.data as IOrderPopulated).address;
