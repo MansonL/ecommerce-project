@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 const availableRoutes = `
 '/products/list': show available products.
 '/products/list/id': show the product you want by typing the product id.
@@ -8,7 +8,8 @@ const availableRoutes = `
 `;
 
 export const unknownRoute = (req: Request, res: Response) => {
-    res.status(404).json({
-        message: `The route doesn't exist, please try the followings: ${availableRoutes} `,
-    });
+  res.status(404).json({
+    error: 404,
+    message: `The route doesn't exist, please try the followings: ${availableRoutes} `,
+  });
 };

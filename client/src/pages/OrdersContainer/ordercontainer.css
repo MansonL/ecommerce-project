@@ -1,0 +1,10 @@
+.orders-list {
+  margin-top: 2rem;
+  max-height: 50vh;
+  overflow: auto;
+  max-width: 85%;
+  margin: 2rem auto;
+  padding-bottom: 2rem;
+}
+
+
