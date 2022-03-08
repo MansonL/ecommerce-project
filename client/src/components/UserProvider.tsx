@@ -1,13 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { verifyToken } from "../../utils/utilities";
+import { verifyToken } from "../utils/utilities";
 import {
   authResponse,
   cartDefault,
   IUserInfo,
   userDefault,
-} from "../../utils/interfaces";
-import { IMongoCart } from "../../../../server/src/interfaces/products";
+} from "../utils/interfaces";
+import { IMongoCart } from "../../../server/src/interfaces/products";
 import { JwtPayload } from "jsonwebtoken";
 interface ClickableProps {
   children: JSX.Element[] | JSX.Element;

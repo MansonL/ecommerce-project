@@ -1,16 +1,13 @@
-import React from 'react';
-import { Main } from './pages/Main';
-import { UserProvider } from './pages/components/UserProvider'
+import React from "react";
+import { Main } from "./pages/Main/Main";
+import { UserProvider } from "./components/UserProvider";
 
 function App() {
   return (
     <UserProvider>
-    <Main />
+      <Main />
     </UserProvider>
   );
 }
 
 export default App;
-
-
-

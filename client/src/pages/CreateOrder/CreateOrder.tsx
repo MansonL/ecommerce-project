@@ -2,15 +2,16 @@ import axios, { AxiosResponse } from "axios";
 import { Types } from "mongoose";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserAddresses } from "../../../server/src/interfaces/users";
-import { orderResponse } from "../utils/interfaces";
-import { ModalContainer } from "./components/Modal/ModalContainer";
-import { OperationResult } from "./components/Result/OperationResult";
-import { LoadingSpinner } from "./components/Spinner/Spinner";
-import { UserContext } from "./components/UserProvider";
-import "./order.css";
+import { UserAddresses } from "../../../../server/src/interfaces/users";
+import { orderResponse } from "../../utils/interfaces";
+import { ModalContainer } from "../../components/Modal/ModalContainer";
+import { OperationResult } from "../../components/Result/OperationResult";
+import { LoadingSpinner } from "../../components/Spinner/Spinner";
+import { UserContext } from "../../components/UserProvider";
+import "./createorder.css";
+import { formatAddress } from "../../utils/utilities";
 
-export function Order() {
+export function CreateOrder() {
   const [showResult, setShowResult] = useState(false);
   const [orderResult, setOrderResult] = useState(false);
   const [resultMsg, setResultMsg] = useState("");
@@ -41,13 +42,8 @@ export function Order() {
   const fullAddress = (user.addresses as UserAddresses[]).filter(
     (address) => address.alias === selectedAddress
   )[0];
-  const formattedAddres = `${fullAddress.street1.name} ${
-    fullAddress.street1.number
-  },${
-    fullAddress.department && fullAddress.floor
-      ? ` ${fullAddress.department} ${fullAddress.floor}, `
-      : " "
-  }${fullAddress.city} ${fullAddress.zipcode}`;
+
+  const formattedAddress = formatAddress(fullAddress)
 
   const AxiosThenCallback = (response: AxiosResponse<orderResponse, any>) => {
     const data = response.data;
@@ -114,7 +110,7 @@ export function Order() {
 
   return (
     <section className="body-container">
-      <div className="order-header">
+      <div className="header">
         <h2 className="header-title">Order Confirmation</h2>
         <h5>
           Here's the resume of your order, please check the details before
@@ -188,7 +184,7 @@ export function Order() {
             Modify
           </span>
           <br />
-          <span>{formattedAddres}</span>
+          <span>{formattedAddress}</span>
         </div>
         <div
           className="submit-row"

@@ -60,3 +60,11 @@ export const takeChats = (
   });
   return { receivedMessages, sentMessages };
 };
+
+export const formatAddress = (address: UserAddresses): string => {
+  return `${address.street1.name} ${address.street1.number},${
+    address.department && address.floor
+      ? ` ${address.department} ${address.floor}, `
+      : " "
+  }${address.city} ${address.zipcode}`;
+};

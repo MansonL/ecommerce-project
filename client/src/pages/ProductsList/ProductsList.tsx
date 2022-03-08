@@ -4,14 +4,14 @@ import {
   IMongoCart,
   IMongoProduct,
   IQuery,
-} from "../../../server/src/interfaces/products";
-import { UserContext } from "./components/UserProvider";
-import { CartCUDResponse, ProductCUDResponse } from "../utils/interfaces";
-import { Modal } from "./components/Modal/Modal";
-import { OperationResult } from "./components/Result/OperationResult";
-import { ModalContainer } from "./components/Modal/ModalContainer";
-import { LoadingSpinner } from "./components/Spinner/Spinner";
-import "./products.css";
+} from "../../../../server/src/interfaces/products";
+import { UserContext } from "../../components/UserProvider";
+import { CartCUDResponse, ProductCUDResponse } from "../../utils/interfaces";
+import { Modal } from "../../components/Modal/Modal";
+import { OperationResult } from "../../components/Result/OperationResult";
+import { ModalContainer } from "../../components/Modal/ModalContainer";
+import { LoadingSpinner } from "../../components/Spinner/Spinner";
+import "./productsList.css";
 import { useNavigate } from "react-router-dom";
 
 export interface IProductsProps {
@@ -21,7 +21,7 @@ export interface IProductsProps {
   showFilterMenu: () => void;
 }
 
-export function Products(props: IProductsProps) {
+export function ProductsList(props: IProductsProps) {
   const [filters, setFilters] = useState<IQuery>({
     title: "",
     code: "",
@@ -247,7 +247,7 @@ export function Products(props: IProductsProps) {
 
       <section className="body-container">
         <div className="products-filter-bar">
-          <span className="total-results">Showing 20 results of 20.</span>
+          <span className="total-results">{`Showing ${products.length} products of ${products.length}`}</span>
           <div className="filter-container">
             <button
               className="filter-btn"

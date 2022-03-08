@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { socket } from "../lib/socket";
+import { socket } from "../../lib/socket";
 import axios from "axios";
 import moment from "moment";
-import { UserContext } from "./components/UserProvider";
+import { UserContext } from "../../components/UserProvider";
 import {
   IMongoPopulatedMessages,
   INew_Message,
-} from "../../../server/src/interfaces/messages";
-import { takeChats } from "../utils/utilities";
+} from "../../../../server/src/interfaces/messages";
+import { takeChats } from "../../utils/utilities";
 import { Types } from "mongoose";
 import "./chat.css";
 
@@ -140,9 +140,7 @@ export function Chat() {
                 return (
                   <p
                     className={
-                      message.from._id === user._id
-                        ? `from-me`
-                        : `from-other`
+                      message.from._id === user._id ? `from-me` : `from-other`
                     }
                   >
                     {message.timestamp}
