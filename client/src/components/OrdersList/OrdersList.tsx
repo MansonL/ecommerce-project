@@ -46,7 +46,8 @@ export function OrdersList(props: IOrdersListProps) {
               }`}
             >
               <span style={{ display: "block", margin: ".5rem 0 0 .4rem" }}>
-                Status:{` ${order.status}`}
+                Status:{` ${order.status}`} <br />
+                Created at: {` ${order.createdAt}`}
               </span>
               <table className="order-detail-table">
                 <tr>
