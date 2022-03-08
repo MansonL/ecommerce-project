@@ -76,9 +76,7 @@ export function Main() {
   return (
     <BrowserRouter>
       <div
-        className={`main ${
-          window.location.pathname === "/" ? "main-background" : ""
-        }`}
+        className='main'
       >
         <div
           className={`main-menu ${showSideMenu ? "main-menu-active" : ""}`}

@@ -1,38 +1,149 @@
-.landing-container {
+.home-background {
   background-image: url("https://media.istockphoto.com/photos/abstract-design-element-annual-sale-shopping-season-concept-mini-picture-id1178795713?k=20&m=1178795713&s=612x612&w=0&h=NLA9JoyezoOubPwy38luYZB1rwUwQAYY_JAk2JBvcsg=");
-  width: 100%;
-  height: 93vh;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-position: -8rem -3rem;
 }
 
 .welcome-text {
   padding-top: 9rem;
   text-align: center;
   color: white;
+}
+.first-text {
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin: 0;
+}
+.second-text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+}
+.welcome-products-btn {
+  background-color: #fcde67;
+  border-radius: 1rem;
+  border: none;
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: "Montserrat", sans-serif;
+  position: absolute;
+  padding: 1rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: fit-content;
+  bottom: 10%;
+}
+
+/* ------- FOR THE NARROWEST DEVICES ---------------- */
+
+@media (max-width: 350px) {
+  .welcome-text {
+    padding-top: 8rem;
   }
+}
+
+@media (max-width: 380px) and (max-height: 700px) {
+  .home-background {
+    background-position: -4rem -3rem;
+  }
+}
+
+/* -------- COVERING MOST OF NORMAL AND WIDEST CELLPHONES ----------- */
+
+@media (min-width: 480px) {
   .first-text {
-        font-size: 1.3rem;
-        font-weight: 300;
-        margin: 0;
+    font-size: 2.3rem;
   }
   .second-text {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 2rem;
+    font-size: 3rem;
   }
   .welcome-products-btn {
-    background-color: #fcde67;
-    border-radius: 1rem;
-    border: none;
-    text-align: center;
-    font-size: 1.5rem;
-    font-family: 'Montserrat', sans-serif;
-    position: absolute;
-    padding: 1rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width:fit-content;
-    bottom: 10%;
+    font-size: 2.5rem;
   }
+  .home-background {
+    background-position: 0rem -9rem;
+  }
+}
+
+/* ------- FOR DEVICES (MOST CELLPHONES) WITH THE WIDTH SHORTER THAN A NOTEBOOK/TABLET AND THE HEIGHT OF A MEDIUM SIZE CELLPHONE ----------- */
+
+@media (min-width: 480px) and (max-width: 1023px) and (max-height: 720px) {
+  .first-text {
+    font-size: 1.5rem;
+  }
+  .second-text {
+    font-size: 2rem;
+  }
+  .home-background {
+    background-position: 0 -9rem;
+  }
+}
+
+/* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
+
+@media (min-width: 480px) and (max-height: 1200px) {
+  .first-text {
+    font-size: 2rem;
+  }
+
+  .second-text {
+    font-size: 3rem;
+  }
+
+  .welcome-products-btn {
+    font-size: 1.5rem;
+  }
+
+  .home-background {
+    background-position: -1rem -13rem;
+  }
+}
+
+/* --------------- FOR TABLETS AND NOTEBOOKS ------------------ */
+
+/* ----- MAINLY NOTEBOOKS ----- */
+
+@media (min-width: 1024px) {
+  .welcome-text {
+    padding-top: 13rem;
+  }
+}
+
+/* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
+
+@media (min-width: 1024px) and (min-height: 1024px) {
+  .first-text {
+    font-size: 3rem;
+  }
+
+  .second-text {
+    font-size: 4rem;
+  }
+
+  .welcome-products-btn {
+    font-size: 2.5rem;
+  }
+
+  .home-background {
+    background-position: -1rem -15rem;
+  }
+}
+
+/* --- FOR DEVICES WITH THE WIDTH OF A TABLET/NOTEBOOK BUT SHORTER THAN A NOTEBOOK OR A MONITOR --- */
+
+@media (min-width: 1024px) and (max-height: 800px) {
+  .home-background {
+    background-image: url("https://image.freepik.com/free-photo/hand-holding-shopping-bag-plain-background_23-2148286214.jpg");
+    background-size: cover;
+    background-position: 0rem -58rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 600px) {
+  .home-background {
+    background-image: url("https://image.freepik.com/free-photo/hand-holding-shopping-bag-plain-background_23-2148286214.jpg");
+    background-size: cover;
+    background-position: 0rem -46rem;
+  }
+}

@@ -1,12 +1,12 @@
 .operation-result {
-    max-width: 70%;
-    margin: 1.5rem auto 1.5rem auto;
-    display: flex;
-    align-items: center;
-    text-align: left;
-    column-gap: 0.5rem;
-    border-radius: 0.4rem;
-  }
+  max-width: 70%;
+  margin: 1.5rem auto 1.5rem auto;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  column-gap: 0.5rem;
+  border-radius: 0.4rem;
+}
 
 .operation-result-icon {
   max-width: 30%;
@@ -14,11 +14,42 @@
 }
 
 .success {
-  background-color: #A3F5C2;
-  border: 2px solid #46EC86;
+  background-color: #a3f5c2;
+  border: 2px solid #46ec86;
 }
 .failure {
-  background-color: #FFC2D9;
-  border: 2px solid #FFAFCC;
+  background-color: #ffc2d9;
+  border: 2px solid #ffafcc;
 }
-  
+
+/* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
+
+@media (min-width: 480px) and (max-height: 1200px) {
+  .operation-result-icon {
+    max-width: 15%;
+  }
+  .operation-result {
+    font-size: 1.2rem;
+  }
+}
+
+/* --------------- FOR TABLETS AND NOTEBOOKS ------------------ */
+
+/* ----- MAINLY NOTEBOOKS ----- */
+
+@media (min-width: 1024px) {
+  .operation-result-icon {
+    max-width: 10%;
+  }
+  .operation-result {
+    font-size: 1.5rem;
+  }
+}
+
+/* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
+
+@media (min-width: 1024px) and (min-height: 1024px) {
+  .operation-result-icon {
+    max-width: 15%;
+  }
+}

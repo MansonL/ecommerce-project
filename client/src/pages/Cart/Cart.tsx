@@ -122,7 +122,7 @@ export function Cart() {
           />
         )}
 
-        <ul className="cart-products">
+        <ul className="products-list cart-products">
           {cart.products.length > 0
             ? cart.products.map((product, idx) => {
                 return (
