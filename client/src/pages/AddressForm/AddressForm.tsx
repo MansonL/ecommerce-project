@@ -135,8 +135,8 @@ export function AddressForm() {
 
   return (
     <section className="body-container">
-      <div className="address-header">
-        <h2 className="header-title">Address</h2>
+      <div className="header">
+        <h3 className="header-title">Address</h3>
       </div>
       <h5 style={{ width: "80%", margin: "auto", marginTop: "3rem" }}>
         We have noticed that you <b>don't</b> have any address saved...
