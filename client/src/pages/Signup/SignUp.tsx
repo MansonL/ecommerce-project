@@ -1,14 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import moment from "moment";
 import { useContext, useState } from "react";
-import { INew_User, UserInfo } from "../../../server/src/interfaces/users";
-import { newUserDefault, UserCUDResponse } from "../utils/interfaces";
-import { validation } from "../utils/joiSchemas";
-import { cleanEmptyProperties } from "../utils/utilities";
-import { ModalContainer } from "./components/Modal/ModalContainer";
-import { OperationResult } from "./components/Result/OperationResult";
-import { LoadingSpinner } from "./components/Spinner/Spinner";
-import { UserContext } from "./components/UserProvider";
+import { INew_User, UserInfo } from "../../../../server/src/interfaces/users";
+import { newUserDefault, UserCUDResponse } from "../../utils/interfaces";
+import { validation } from "../../utils/joiSchemas";
+import { cleanEmptyProperties } from "../../utils/utilities";
+import { ModalContainer } from "../../components/Modal/ModalContainer";
+import { OperationResult } from "../../components/Result/OperationResult";
+import { LoadingSpinner } from "../../components/Spinner/Spinner";
+import { UserContext } from "../../components/UserProvider";
 import "./signup.css";
 
 export function SignUp() {
@@ -44,7 +44,7 @@ export function SignUp() {
     });
   };
 
-  const signAxiosCallback = (response: AxiosResponse<UserCUDResponse, any>) => {
+  const thenAxiosCallback = (response: AxiosResponse<UserCUDResponse, any>) => {
     const data = response.data;
     setShowResult(true);
     setSignUpResult(true);
@@ -84,7 +84,7 @@ export function SignUp() {
         .post<UserCUDResponse>("http://localhost:8080/api/auth/signup", user, {
           withCredentials: true,
         })
-        .then(signAxiosCallback)
+        .then(thenAxiosCallback)
         .catch((error) => {
           console.log(JSON.stringify(error.response, null, 2));
           setLoading(false);
@@ -119,7 +119,7 @@ export function SignUp() {
         </ModalContainer>
       )}
       <section className="body-container">
-        <div className="login-signup-header">
+        <div className="header">
           <h3 className="header-title">Sign Up</h3>
           <h5>You already have an account? Log in here.</h5>
         </div>

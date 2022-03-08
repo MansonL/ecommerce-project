@@ -2,13 +2,13 @@ import axios, { AxiosResponse } from "axios";
 import { Types } from "mongoose";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserAddresses } from "../../../server/src/interfaces/users";
-import { defaultAddress, UserCUDResponse } from "../utils/interfaces";
-import { validation } from "../utils/joiSchemas";
-import { ModalContainer } from "./components/Modal/ModalContainer";
-import { OperationResult } from "./components/Result/OperationResult";
-import { LoadingSpinner } from "./components/Spinner/Spinner";
-import { UserContext } from "./components/UserProvider";
+import { UserAddresses } from "../../../../server/src/interfaces/users";
+import { defaultAddress, UserCUDResponse } from "../../utils/interfaces";
+import { validation } from "../../utils/joiSchemas";
+import { ModalContainer } from "../../components/Modal/ModalContainer";
+import { OperationResult } from "../../components/Result/OperationResult";
+import { LoadingSpinner } from "../../components/Spinner/Spinner";
+import { UserContext } from "../../components/UserProvider";
 import "./addressForm.css";
 
 export function AddressForm() {

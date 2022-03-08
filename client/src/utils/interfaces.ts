@@ -44,7 +44,7 @@ export const userDefault: IUserInfo = {
   facebookID: "",
   addresses: [
     {
-      _id: "",
+      _id: new ObjectId(),
       alias: "",
       street1: {
         name: "",
@@ -84,7 +84,7 @@ export const cartDefault: IMongoCart = {
 };
 
 export const defaultAddress: UserAddresses = {
-  _id: "",
+  _id: new ObjectId(),
   alias: "",
   street1: {
     name: "",

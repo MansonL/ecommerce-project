@@ -1,14 +1,13 @@
 import axios, { AxiosResponse } from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import React from "react";
-import { CartCUDResponse, cartDefault } from "../utils/interfaces";
-import { UserContext } from "./components/UserProvider";
-import { OperationResult } from "./components/Result/OperationResult";
+import { CartCUDResponse } from "../../utils/interfaces";
+import { UserContext } from "../../components/UserProvider";
+import { OperationResult } from "../../components/Result/OperationResult";
 import { useNavigate } from "react-router-dom";
-import { ModalContainer } from "./components/Modal/ModalContainer";
-import { LoadingSpinner } from "./components/Spinner/Spinner";
+import { ModalContainer } from "../../components/Modal/ModalContainer";
+import { LoadingSpinner } from "../../components/Spinner/Spinner";
 import "./cart.css";
-import { IMongoCart } from "../../../server/src/interfaces/products";
 
 export function Cart() {
   const [showModificationResult, setShowModificationResult] = useState(false);
@@ -106,7 +105,7 @@ export function Cart() {
   return (
     <React.Fragment>
       <section className="body-container">
-        <div className="cart-header">
+        <div className="header">
           <h3 className="header-title">Cart</h3>
         </div>
 

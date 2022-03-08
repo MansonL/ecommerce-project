@@ -1,12 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authResponse } from "../utils/interfaces";
-import { validation } from "../utils/joiSchemas";
-import { ModalContainer } from "./components/Modal/ModalContainer";
-import { OperationResult } from "./components/Result/OperationResult";
-import { LoadingSpinner } from "./components/Spinner/Spinner";
-import { UserContext } from "./components/UserProvider";
+import { authResponse } from "../../utils/interfaces";
+import { validation } from "../../utils/joiSchemas";
+import { ModalContainer } from "../../components/Modal/ModalContainer";
+import { OperationResult } from "../../components/Result/OperationResult";
+import { LoadingSpinner } from "../../components/Spinner/Spinner";
+import { UserContext } from "../../components/UserProvider";
 
 export function LogIn() {
   const [showResult, setShowResult] = useState(false);
@@ -46,7 +46,7 @@ export function LogIn() {
     });
   };
 
-  const loginAxiosCallback = (response: AxiosResponse<authResponse, any>) => {
+  const thenAxiosCallback = (response: AxiosResponse<authResponse, any>) => {
     const data = response.data;
     setShowResult(true);
     setLoginResult(true);
@@ -83,7 +83,7 @@ export function LogIn() {
           credentials,
           { withCredentials: true }
         )
-        .then(loginAxiosCallback)
+        .then(thenAxiosCallback)
         .catch((error) => {
           setLoading(false);
           document.body.style.overflow = "scroll";
@@ -130,7 +130,7 @@ export function LogIn() {
         </ModalContainer>
       )}
       <section className="body-container">
-        <div className="login-signup-header">
+        <div className="header">
           <h3 className="header-title">Log in</h3>
           <h5>Don't you have an account? Sign up here</h5>
         </div>

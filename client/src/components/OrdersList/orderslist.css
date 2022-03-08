@@ -1,0 +1,114 @@
+.order {
+  display: block;
+  margin: 1rem 0.5rem 0rem 0.5rem;
+}
+
+.order-header {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  border: 1px rgba(222, 222, 222, 0.23) solid;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  align-items: center;
+  transition: linear 0.1s;
+  background-color: rgba(222, 222, 222, 0.23);
+  box-shadow: 0.2rem 0.2rem 0.3rem grey;
+}
+
+.order-header:hover,
+.order-header:focus {
+  box-shadow: 0.4rem 0.4rem 0.3rem grey;
+}
+
+.order-icon-container {
+  width: 10%;
+  transition: 0.2s linear;
+}
+
+.order-icon-container-rotated {
+  transform: rotate(180deg);
+}
+
+.dropdown-icon {
+  width: 100%;
+}
+
+.order-id {
+  font-size: 0.6rem;
+  margin-left: 0.2rem;
+}
+
+.order-list-total {
+  color: #65c18c;
+  font-weight: 550;
+  font-size: 0.9rem;
+}
+
+.order-detail {
+  width: calc(100% - 0.5rem);
+  margin: auto;
+  border-radius: 0rem 0rem 0.5rem 0.5rem;
+  background-color: rgba(116, 116, 116, 0.23);
+  overflow-x: scroll;
+  transition: height, opacity 1s linear;
+  font-size: 0.8rem;
+  opacity: 1;
+}
+
+.order-detail-hidden {
+  height: 0;
+  opacity: 0;
+}
+
+.order-detail-table {
+  width: 100%;
+  margin: 0.4rem;
+}
+
+th,
+td {
+  border-width: 0 1rem 0 1rem;
+  border-style: none;
+  text-align: center;
+}
+
+.order-table-end {
+  display: block;
+  width: 90%;
+  margin: 0.6rem auto 0.6rem auto;
+  height: 0.5px;
+  background-color: black;
+}
+
+.order-table-total {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-table-total,
+.order-detail-address {
+  padding: 0.4rem;
+}
+
+.order-detail-footer {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.5rem;
+}
+
+.order-btn {
+  background-color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.2rem;
+  cursor: pointer;
+  transition: all linear 0.3s;
+}
+
+.order-btn:hover,
+.order-btn:focus {
+  font-weight: 600;
+  font-size: 1rem;
+}

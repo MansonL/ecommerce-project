@@ -2,13 +2,13 @@ import axios, { AxiosResponse } from "axios";
 import moment from "moment";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { INew_Product } from "../../../server/src/interfaces/products";
-import { defaultProduct, ProductCUDResponse } from "../utils/interfaces";
-import { validation } from "../utils/joiSchemas";
-import { ModalContainer } from "./components/Modal/ModalContainer";
-import { OperationResult } from "./components/Result/OperationResult";
-import { LoadingSpinner } from "./components/Spinner/Spinner";
-import { UserContext } from "./components/UserProvider";
+import { INew_Product } from "../../../../server/src/interfaces/products";
+import { defaultProduct, ProductCUDResponse } from "../../utils/interfaces";
+import { validation } from "../../utils/joiSchemas";
+import { ModalContainer } from "../../components/Modal/ModalContainer";
+import { OperationResult } from "../../components/Result/OperationResult";
+import { LoadingSpinner } from "../../components/Spinner/Spinner";
+import { UserContext } from "../../components/UserProvider";
 import "./productsForm.css";
 
 export function ProductsForm() {
