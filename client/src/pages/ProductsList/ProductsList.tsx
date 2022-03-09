@@ -358,7 +358,7 @@ export function ProductsList(props: IProductsProps) {
             <span onClick={changeToAdmingView}>See as an admin here</span>
           </div>
         )}
-        <ul className="products-results">
+        <ul className="products-list">
           {products.length > 0 ? (
             products.map((product, idx) => {
               return (

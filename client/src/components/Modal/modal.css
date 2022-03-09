@@ -1,76 +1,113 @@
 .modal-container {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    background-color: #3A3B3C;
-    z-index: 2;
-    opacity: 0.4;
-  }
-  
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  background-color: #3a3b3c;
+  z-index: 2;
+  opacity: 0.4;
+}
 
 .modal {
-    position: absolute;
-    top: 25vh;
-    left: 0;
-    right: 0;
-    opacity: 1;
-    display: flex;
-    flex-direction: column;
-    max-width: 70%;
-    max-height: 40%;
-    height: unset;
-    margin: auto;
-    border-radius: 0.5rem;
-    background-color: #fcde67;
-    color: black;
-    z-index: 3;
-    font-family: 'Montserrat', sans-seriff;
-  }
-  
-  .modal-header {
-    text-align: center;
-    width: 100%;
-    align-items: center;
-    display: flex;
-    justify-content: flex-end;
-  }
-  
+  position: absolute;
+  top: 25vh;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  max-height: 40%;
+  height: unset;
+  margin: auto;
+  border-radius: 0.5rem;
+  background-color: #fcde67;
+  color: black;
+  z-index: 3;
+  font-family: "Montserrat", sans-seriff;
+}
+
+.modal-header {
+  text-align: center;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-header-title {
+  font-size: 1.2rem;
+  margin: 0.7rem 0.5rem 0.7rem 0.5rem;
+  flex-grow: 1;
+  position: absolute;
+  left: 28%;
+}
+
+.close-modal {
+  float: right;
+  width: 15%;
+  padding: 0.5rem;
+}
+
+.modal-body {
+  text-align: center;
+  color: black;
+  background-color: white;
+  width: 100%;
+  padding: 1rem 0 1rem 0;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal-btn {
+  background-color: transparent;
+  color: black;
+  border: 2px solid white;
+  border-radius: 0.6rem;
+  margin: 0.5rem;
+  padding: 0.3rem;
+}
+
+/* ------- FOR THE NARROWEST DEVICES ---------------- */
+
+@media (max-width: 350px) {
   .modal-header-title {
-    font-size: 1.2rem;
-    margin: 0.7rem 0.5rem 0.7rem 0.5rem;
-    flex-grow: 1;
-    position: absolute;
-    left: 28%;
+    left: 22%;
+  }
+}
+
+/* -------- COVERING MOST OF NORMAL AND WIDEST CELLPHONES ----------- */
+
+@media (min-width: 480px) {
+  .modal {
+    max-width: 45%;
+  }
+  .modal-header-title {
+    left: 35%;
+  }
+  .close-modal {
+    width: 10%;
+  }
+}
+
+/* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
+
+@media (min-width: 1024px) and (min-height: 1024px) {
+  .modal-header-title {
+    font-size: 1.6rem;
   }
 
-  .close-modal {
-    float: right;
-    width: 15%;
-    padding: 0.5rem;
-  }
-  
   .modal-body {
-    text-align: center; 
-    color: black; 
-    background-color: white;
-    width: 100%;
-    padding: 1rem 0 1rem 0;
-    overflow-y: auto;
+    font-size: 1.4rem;
   }
-  
-  .modal-footer {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  
+
   .modal-btn {
-    background-color: transparent;
-    color: black;
-    border: 2px solid white;
-    border-radius: 0.6rem;
-    margin: 0.5rem;
-    padding: 0.3rem;
+    font-size: 1.2rem;
   }
+}

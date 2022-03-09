@@ -126,7 +126,7 @@ export function CreateOrder() {
         <OperationResult success={orderResult} resultMessage={resultMsg} />
       )}
       <div className="order-container">
-        <div className="order-products">
+        <div>
           <span>Products:</span>{" "}
           <span
             style={{ float: "right", fontSize: "0.8rem" }}
@@ -134,7 +134,7 @@ export function CreateOrder() {
           >
             Modify
           </span>
-          <div className="products-container">
+          <div className="order-products-container">
             <ul className="products">
               {cart.products.map((product, idx) => {
                 return (
