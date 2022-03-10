@@ -97,6 +97,9 @@
   .filter-menu {
     font-size: 1.2rem;
   }
+  .see-as-admin {
+    font-size: 1.2rem;
+  }
 }
 /* --- FOR DEVICES WITH THE WIDTH OF A TABLET/NOTEBOOK BUT SHORTER THAN A NOTEBOOK OR A MONITOR --- */
 
@@ -108,10 +111,24 @@
 
 /* --------------- FOR TABLETS AND NOTEBOOKS ------------------ */
 
+/* ----- MAINLY NOTEBOOKS ----- */
+
+@media (min-width: 1024px) {
+  .filter-menu {
+    max-width: 70%;
+  }
+}
+
 /* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
 
 @media (min-width: 1024px) and (min-height: 1024px) {
   .total-results {
     font-size: 1.5rem;
+  }
+  .see-as-admin {
+    font-size: 1.2rem;
+  }
+  .filter-menu {
+    font-size: 1.4rem;
   }
 }

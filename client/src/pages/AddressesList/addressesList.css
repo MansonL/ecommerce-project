@@ -19,6 +19,27 @@
   font-size: 0.8rem;
 }
 
+/* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
+
+@media (min-width: 480px) and (max-height: 1200px) {
+  input[type="radio"] {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  .create-new-address {
+    font-size: 1.2rem;
+  }
+  .address {
+    column-gap: 1.5rem;
+  }
+  .address-label {
+    font-size: 1.5rem;
+  }
+  .address-info {
+    font-size: 1.3rem;
+  }
+}
+
 /* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
 
 @media (min-width: 1024px) and (min-height: 1024px) {

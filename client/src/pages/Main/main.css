@@ -1,25 +1,3 @@
-/* ----- IMPORTS ----- */
-
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap");
-
-/* ------ BASE HTML ELEMENTS MODIFICATIONS ------- */
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-}
-
-h5 {
-  font-weight: normal;
-  font-size: 0.9rem;
-}
-
-body {
-  margin: 0;
-  font-family: "Montserrat", sans-seriff;
-}
-
 .main {
   height: 100vh;
   width: 100%;
@@ -373,20 +351,6 @@ a {
 .product-price {
   font-size: 1.3rem;
 }
-.product-qty-text {
-  position: relative;
-  font-size: 1.2rem;
-}
-.product-qty-amount {
-  font-size: 1.5rem;
-  margin-left: 0.5rem;
-}
-.product-subtotal-text {
-  font-size: 0.8rem;
-}
-.product-subtotal-value {
-  font-size: 1.2rem;
-}
 
 /* ------- FOR THE NARROWEST DEVICES ---------------- */
 
@@ -401,8 +365,7 @@ a {
     max-width: 60vw;
   }
   .login-signup-fields,
-  .address-fields,
-  .product-form {
+  .address-fields {
     width: 80%;
   }
 }
@@ -412,30 +375,19 @@ a {
     font-size: 1rem;
     top: 25%;
   }
-  .welcome-text {
-    padding-top: 8rem;
-  }
-  .modal-header-title {
-    left: 22%;
-  }
 
   .header-title-message {
     margin: unset;
   }
   .login-signup-fields,
-  .address-fields,
-  .product-form {
+  .address-fields {
     width: 90%;
   }
 }
 
 @media (max-width: 380px) and (max-height: 700px) {
-  .home-background {
-    background-position: -4rem -3rem;
-  }
   .login-signup-fields,
-  .address-fields,
-  .product-form {
+  .address-fields {
     width: 90%;
   }
 }
@@ -458,27 +410,6 @@ a {
   .login-logout-avatar {
     font-size: 1.2rem;
   }
-  .home-background {
-    background-position: 0rem -9rem;
-  }
-  .first-text {
-    font-size: 2.3rem;
-  }
-  .second-text {
-    font-size: 3rem;
-  }
-  .welcome-products-btn {
-    font-size: 2.5rem;
-  }
-  .modal {
-    max-width: 45%;
-  }
-  .modal-header-title {
-    left: 35%;
-  }
-  .close-modal {
-    width: 10%;
-  }
 }
 
 /* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
@@ -499,30 +430,11 @@ a {
   .main-menu {
     font-size: 1.4rem;
   }
-
-  .home-background {
-    background-position: -1rem -13rem;
-  }
   /* ------------------ */
 
-  /* LANDING PAGE */
-  .first-text {
-    font-size: 2rem;
-  }
-
-  .second-text {
-    font-size: 3rem;
-  }
-
-  .welcome-products-btn {
-    font-size: 1.5rem;
-  }
   /* ------------------ */
 
   /* INPUTS FIELDS */
-  .street1-label {
-    font-size: 1.4rem;
-  }
 
   .styled-input {
     font-size: 1.3rem;
@@ -554,18 +466,6 @@ a {
 
   /* PRODUCTS LIST */
 
-  .product-qty-text {
-    font-size: 1.5rem;
-  }
-
-  .product-qty-amount {
-    font-size: 2rem;
-  }
-
-  .see-as-admin {
-    font-size: 1.2rem;
-  }
-
   .total-results {
     font-size: 1rem;
   }
@@ -578,63 +478,11 @@ a {
     font-size: 1.4rem;
   }
 
-  .filter-menu {
-    font-size: 1.2rem;
-  }
   .add-remove-container {
     max-width: 20%;
   }
-  .operation-result-icon {
-    max-width: 15%;
-  }
-  .operation-result {
-    font-size: 1.2rem;
-  }
 
   /* ------------------ */
-
-  /* ADMIN PRODUCTS FORM */
-
-  .ask-admin {
-    font-size: 1rem;
-  }
-
-  .product-form {
-    row-gap: 2.5rem;
-  }
-
-  .code-btn {
-    font-size: 1.2rem;
-  }
-
-  input[type="file"] {
-    padding: 1rem;
-  }
-  /* ------------------ */
-
-  /* ADDRESSES LIST */
-  input[type="radio"] {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
-  .create-new-address {
-    font-size: 1.2rem;
-  }
-  .address {
-    column-gap: 1.5rem;
-  }
-  .address-label {
-    font-size: 1.5rem;
-  }
-  .address-info {
-    font-size: 1.3rem;
-  }
-  /* ------------------ */
-
-  /* ORDERS LIST */
-  .orders-list {
-    max-width: 60%;
-  }
 }
 
 /* ------- FOR DEVICES (MOST CELLPHONES) WITH THE WIDTH SHORTER THAN A NOTEBOOK/TABLET AND THE HEIGHT OF A MEDIUM SIZE CELLPHONE ----------- */
@@ -646,15 +494,6 @@ a {
 
   .cart-counter {
     font-size: 1.3rem;
-  }
-  .first-text {
-    font-size: 1.5rem;
-  }
-  .second-text {
-    font-size: 2rem;
-  }
-  .home-background {
-    background-position: 0 -9rem;
   }
 }
 
@@ -681,15 +520,9 @@ a {
     flex-grow: unset;
     width: 75%;
   }
-  .welcome-text {
-    padding-top: 13rem;
-  }
 
   /* PRODUCTS LIST */
 
-  .filter-menu {
-    max-width: 70%;
-  }
   .products-list {
     padding: 3rem;
     display: flex;
@@ -706,32 +539,8 @@ a {
   .product-info {
     flex-grow: 1;
   }
-  .operation-result-icon {
-    max-width: 10%;
-  }
   .product-image {
     max-width: 20%;
-  }
-  .cart-product {
-    column-gap: 1.5rem;
-  }
-  .order-product-price {
-    font-size: 1.5rem;
-  }
-  .order-product-qty {
-    font-size: 1.2rem;
-  }
-  .product-subtotal-text {
-    font-size: 1.2rem;
-  }
-  .product-subtotal-value {
-    font-size: 1.5rem;
-  }
-
-  /* MISC */
-
-  .operation-result {
-    font-size: 1.5rem;
   }
 
   /* ORDERS LIST */
@@ -761,10 +570,6 @@ a {
     max-width: 30%;
   }
 
-  .home-background {
-    background-position: -1rem -15rem;
-  }
-
   .avatar-img {
     max-width: 25%;
   }
@@ -791,24 +596,9 @@ a {
   }
   /* ------------------ */
 
-  /* LANDING PAGE */
-  .first-text {
-    font-size: 3rem;
-  }
-
-  .second-text {
-    font-size: 4rem;
-  }
-
-  .welcome-products-btn {
-    font-size: 2.5rem;
-  }
   /* ------------------ */
 
   /* PRODUCT LIST */
-  .total-results {
-    font-size: 1.5rem;
-  }
 
   .product-price {
     font-size: 1.6rem;
@@ -818,59 +608,18 @@ a {
     font-size: 1.4rem;
   }
 
-  .filter-menu {
-    font-size: 1.4rem;
-  }
   .add-remove-container {
     max-width: 25%;
   }
-  .cart-product > .add-remove-container {
-    max-width: 20%;
-  }
-  .cart-products {
-    max-width: 75%;
+
+  .products-list {
     margin: auto;
   }
-  .product-qty-amount {
-    font-size: 2.5rem;
-    margin-left: 1rem;
-  }
-  .product-qty-text {
-    font-size: 2rem;
-  }
+
   /* ------------------ */
 
-  /* MODAL */
-  .modal-header-title {
-    font-size: 1.6rem;
-  }
+  /* PRODUCT FORM */
 
-  .modal-body {
-    font-size: 1.4rem;
-  }
-
-  .modal-btn,
-  .see-as-admin {
-    font-size: 1.2rem;
-  }
-  .operation-result-icon {
-    max-width: 15%;
-  }
-  /* ------------------ */
-
-  /* ADMIN PRODUCT FORM */
-  .ask-admin {
-    font-size: 1rem;
-  }
-  .product-form {
-    row-gap: 2.5rem;
-  }
-  .code-btn {
-    font-size: 1.2rem;
-  }
-  input[type="file"] {
-    padding: 1rem;
-  }
   .styled-input {
     font-size: 1.3rem;
   }
@@ -894,28 +643,9 @@ a {
     font-size: 2rem;
   }
   /* ------------------ */
-
-  /* ADDRESSES LIST */
-  input[type="radio"] {
-    height: 2rem;
-    width: 2rem;
-  }
-  .create-new-address {
-    font-size: 1.5rem;
-  }
-  .address {
-    column-gap: 1.5rem;
-  }
-  .address-label {
-    font-size: 1.8rem;
-  }
-  .address-info {
-    font-size: 1.6rem;
-  }
-  /* ------------------ */
 }
 
-/* --- FOR DEVICES WITH THE WIDTH OF A TABLET/NOTEBOOK AND VERY SHORT --- */
+/* --- FOR DEVICES WITH THE WIDTH OF A TABLET/NOTEBOOK BUT SHORTER THAN A NOTEBOOK OR A MONITOR --- */
 
 @media (min-width: 1024px) and (max-height: 800px) {
   .cart-icon-container {
@@ -923,21 +653,5 @@ a {
   }
   .cart-counter {
     font-size: 1.2rem;
-  }
-  .filter-icon {
-    width: 21%;
-  }
-  .home-background {
-    background-image: url("https://image.freepik.com/free-photo/hand-holding-shopping-bag-plain-background_23-2148286214.jpg");
-    background-size: cover;
-    background-position: 0rem -58rem;
-  }
-}
-
-@media (min-width: 1024px) and (max-height: 600px) {
-  .home-background {
-    background-image: url("https://image.freepik.com/free-photo/hand-holding-shopping-bag-plain-background_23-2148286214.jpg");
-    background-size: cover;
-    background-position: 0rem -46rem;
   }
 }

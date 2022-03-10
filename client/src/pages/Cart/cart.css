@@ -18,6 +18,15 @@
   width: 100%;
 }
 
+.product-qty-text {
+  position: relative;
+  font-size: 1.2rem;
+}
+.product-qty-amount {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
 .qty-underline {
   position: absolute;
   bottom: -1px;
