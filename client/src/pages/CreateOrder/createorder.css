@@ -1,23 +1,49 @@
-  ul {
-    padding: 0.4rem;
+ul {
+  padding: 0.4rem;
+}
+
+.order-products-container {
+  background-color: #cfcfc4;
+  border-radius: 0.4rem;
+  padding: 1rem 0.5rem 0.3rem 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.product-subtotal-text {
+  font-size: 0.8rem;
+}
+.product-subtotal-value {
+  font-size: 1.2rem;
+}
+
+.order-total {
+  max-width: 60%;
+  margin: auto;
+  margin-top: 0.5rem;
+  text-align: center;
+  border-radius: 0.6rem;
+  background-color: white;
+}
+
+.order-address {
+  margin: 1rem 0 1.3rem 0;
+}
+
+/* --------------- FOR TABLETS AND NOTEBOOKS ------------------ */
+
+/* ----- MAINLY NOTEBOOKS ----- */
+
+@media (min-width: 1024px) {
+  .order-product-price {
+    font-size: 1.5rem;
   }
-  
-  .order-products-container {
-    background-color: #CFCFC4;
-    border-radius: 0.4rem;
-    padding: 1rem 0.5rem 0.3rem 0.5rem;
-    margin-top: 0.5rem;
+  .order-product-qty {
+    font-size: 1.2rem;
   }
-  
-  .order-total {
-    max-width: 60%;
-    margin: auto;
-    margin-top: 0.5rem;
-    text-align: center;
-    border-radius: 0.6rem;
-    background-color: white;
+  .product-subtotal-text {
+    font-size: 1.2rem;
   }
-  
-  .order-address {
-    margin: 1rem 0 1.3rem 0;
+  .product-subtotal-value {
+    font-size: 1.5rem;
   }
+}

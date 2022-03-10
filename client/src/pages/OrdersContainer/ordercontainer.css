@@ -7,4 +7,10 @@
   padding-bottom: 2rem;
 }
 
+/* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
 
+@media (min-width: 480px) and (max-height: 1200px) {
+  .orders-list {
+    max-width: 60%;
+  }
+}

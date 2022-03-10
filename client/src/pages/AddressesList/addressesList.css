@@ -1,20 +1,41 @@
 .addresses-list {
-    max-height: 40vh;
-    overflow: auto;
-    margin: 2rem auto 2rem auto !important;
+  max-height: 40vh;
+  overflow: auto;
+  margin: 2rem auto 2rem auto !important;
 }
 
 .address {
-    display: flex;
-    column-gap: 0.8rem;
-    align-items: center;
+  display: flex;
+  column-gap: 0.8rem;
+  align-items: center;
+}
+
+.address-info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
+  text-align: left;
+  flex-grow: 1;
+  font-size: 0.8rem;
+}
+
+/* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
+
+@media (min-width: 1024px) and (min-height: 1024px) {
+  input[type="radio"] {
+    height: 2rem;
+    width: 2rem;
   }
-  
+  .create-new-address {
+    font-size: 1.5rem;
+  }
+  .address {
+    column-gap: 1.5rem;
+  }
+  .address-label {
+    font-size: 1.8rem;
+  }
   .address-info {
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.3rem;
-    text-align: left;
-    flex-grow: 1;
-    font-size: 0.8rem;
+    font-size: 1.6rem;
   }
+}

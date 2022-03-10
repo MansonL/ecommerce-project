@@ -1,19 +1,44 @@
 .address-fields {
-    width: 80%;
+  width: 80%;
 }
 .street1 {
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.street1-container,
+.dpt-floor {
+  display: flex;
+  column-gap: 0.7rem;
+  position: relative;
+  align-items: center;
+}
+
+.street1-container {
+  justify-content: center;
+}
+
+/* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
+
+@media (min-width: 480px) and (max-height: 1200px) {
+  input[type="radio"] {
+    height: 1.5rem;
+    width: 1.5rem;
   }
-  
-  .street1-container, .dpt-floor {
-    display: flex;
-    column-gap: 0.7rem;
-    position: relative;
-    align-items: center;
+  .create-new-address {
+    font-size: 1.2rem;
   }
-  
-  .street1-container {
-    justify-content: center;
+  .address {
+    column-gap: 1.5rem;
   }
+  .address-label {
+    font-size: 1.5rem;
+  }
+  .address-info {
+    font-size: 1.3rem;
+  }
+  .street1-label {
+    font-size: 1.4rem;
+  }
+}

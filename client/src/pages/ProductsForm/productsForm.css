@@ -1,24 +1,79 @@
 .ask-admin {
-   font-size: 0.6rem;
+  font-size: 0.6rem;
 }
 
 .code-field {
-    display: flex;
-    column-gap: 0.4rem;
-    align-items: center;
+  display: flex;
+  column-gap: 0.4rem;
+  align-items: center;
+}
+
+.code-btn {
+  background-color: #a2d2ff;
+  border: 2px solid #85c4ff;
+  padding: 0.3rem;
+  transition: 0.4s;
+  font-size: 0.7rem;
+  border-radius: 0.5rem;
+}
+.coder-btn:hover {
+  background-color: white;
+}
+.code-btn:focus {
+  background-color: white;
+}
+
+/* ------- FOR THE NARROWEST DEVICES ---------------- */
+
+@media (max-width: 480px) {
+  .product-form {
+    width: 80%;
   }
-  
+}
+
+@media (max-width: 350px) {
+  .product-form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 380px) and (max-height: 700px) {
+  .product-form {
+    width: 90%;
+  }
+}
+
+/* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
+
+@media (min-width: 480px) and (max-height: 1200px) {
+  .ask-admin {
+    font-size: 1rem;
+  }
+  .product-form {
+    row-gap: 2.5rem;
+  }
   .code-btn {
-    background-color: #A2D2FF;
-    border: 2px solid #85C4FF;
-    padding: 0.3rem;
-    transition: 0.4s;
-    font-size: 0.7rem;
-    border-radius: 0.5rem;
+    font-size: 1.2rem;
   }
-  .coder-btn:hover {
-     background-color: white;
+
+  input[type="file"] {
+    padding: 1rem;
   }
-  .code-btn:focus {
-     background-color: white;
+}
+
+/* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
+
+@media (min-width: 1024px) and (min-height: 1024px) {
+  .ask-admin {
+    font-size: 1rem;
   }
+  .product-form {
+    row-gap: 2.5rem;
+  }
+  .code-btn {
+    font-size: 1.2rem;
+  }
+  input[type="file"] {
+    padding: 1rem;
+  }
+}

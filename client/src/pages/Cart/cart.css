@@ -1,13 +1,13 @@
 .add-remove-container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.8rem;
-    max-width: 30%;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.8rem;
+  max-width: 30%;
+  align-items: center;
 }
 
 .add-remove-btn {
-  width: 50%;  
+  width: 50%;
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -31,5 +31,29 @@
 .cart-confirmation {
   width: 80%;
   margin: auto;
-  
+}
+
+/* --------------- FOR TABLETS AND NOTEBOOKS ------------------ */
+
+/* ----- MAINLY NOTEBOOKS ----- */
+
+@media (min-width: 1024px) {
+  .cart-product {
+    column-gap: 1.5rem;
+  }
+}
+
+/* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
+
+@media (min-width: 1024px) and (min-height: 1024px) {
+  .cart-product > .add-remove-container {
+    max-width: 20%;
+  }
+  .product-qty-amount {
+    font-size: 2.5rem;
+    margin-left: 1rem;
+  }
+  .product-qty-text {
+    font-size: 2rem;
+  }
 }

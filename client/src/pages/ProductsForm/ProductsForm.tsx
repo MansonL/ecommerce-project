@@ -123,7 +123,7 @@ export function ProductsForm() {
   return (
     <>
       <section className="body-container">
-        <div className="login-signup-header">
+        <header className="header">
           <h3 className="header-title">Upload product</h3>
           <h5>
             Here you have all the basic fields to fill for creating a product in
@@ -132,7 +132,7 @@ export function ProductsForm() {
               (for changes ask to administrator.)
             </span>
           </h5>
-        </div>
+        </header>
         {loading && (
           <ModalContainer>
             <LoadingSpinner />

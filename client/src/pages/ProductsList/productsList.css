@@ -1,90 +1,117 @@
-  .products-filter-bar {
-    display: flex; 
-    align-items: center;
-    height: 7vh;
-    justify-content: space-between;
-    background-color: #83DBEC;
-  }
-  
-  .filter-btn, .filter-container {
-    height: 100%;
-  }
-  
-  .filter-btn {
-    float: right;
-  }
-  
-  .filter-container {
-    position: relative;
-    width: 35%;
-  }
-  
-  .filter-icon, .product-image {
-    width: 27%;
-  }
-  
-  .filter-menu {
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.3rem;
-    border-radius: 0.8rem;
-    background-color: #fae1dd;
-    transition: opacity 0.5s ease-in 0s;
-    padding: 0.3rem 0.6rem 0.3rem 0.6rem;
-    font-size: 0.7rem;
-    text-align: center;
-    top: 7vh;
-    right: 0;
-    cursor: pointer;
-  }
-  
-  .filter-menu-active {
-    opacity: 1;
-    z-index: 2;
-  }
-  
-  .filter-row {
-    width: 100%;
-  }
-  
-  .flex-filter {
-    display: flex;
-    column-gap: 0.2rem;
-  }
-  
-  .filter-input {
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 0.6rem;
-  }
+.products-filter-bar {
+  display: flex;
+  align-items: center;
+  height: 7vh;
+  justify-content: space-between;
+  background-color: #83dbec;
+}
 
-  .filter-submit-btn {
-    background-color: transparent;
-    border: 2px solid #F2B0A6;
-    border-radius: 0.4rem;
-    padding: 0.2rem;
-    transition: 0.3s;
+.filter-btn,
+.filter-container {
+  height: 100%;
+}
+
+.filter-btn {
+  float: right;
+}
+
+.filter-container {
+  position: relative;
+  width: 35%;
+}
+
+.filter-icon,
+.product-image {
+  width: 27%;
+}
+
+.filter-menu {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
+  border-radius: 0.8rem;
+  background-color: #fae1dd;
+  transition: opacity 0.5s ease-in 0s;
+  padding: 0.3rem 0.6rem 0.3rem 0.6rem;
+  font-size: 0.7rem;
+  text-align: center;
+  top: 7vh;
+  right: 0;
+  cursor: pointer;
+}
+
+.filter-menu-active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.filter-row {
+  width: 100%;
+}
+
+.flex-filter {
+  display: flex;
+  column-gap: 0.2rem;
+}
+
+.filter-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0.6rem;
+}
+
+.filter-submit-btn {
+  background-color: transparent;
+  border: 2px solid #f2b0a6;
+  border-radius: 0.4rem;
+  padding: 0.2rem;
+  transition: 0.3s;
+}
+.filter-submit-btn:focus {
+  background-color: white;
+}
+
+.total-results {
+  max-width: 30%;
+  margin-left: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.see-as-admin {
+  width: 90%;
+  margin: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.7rem;
+  text-align: left;
+}
+
+/* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
+
+@media (min-width: 480px) and (max-height: 1200px) {
+  .filter-menu {
+    font-size: 1.2rem;
   }
-  .filter-submit-btn:focus {
-    background-color: white;
+}
+/* --- FOR DEVICES WITH THE WIDTH OF A TABLET/NOTEBOOK BUT SHORTER THAN A NOTEBOOK OR A MONITOR --- */
+
+@media (min-width: 1024px) and (max-height: 800px) {
+  .filter-icon {
+    width: 21%;
   }
-  
+}
+
+/* --------------- FOR TABLETS AND NOTEBOOKS ------------------ */
+
+/* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
+
+@media (min-width: 1024px) and (min-height: 1024px) {
   .total-results {
-    max-width: 30%;
-    margin-left: 0.5rem;
-    font-size: 0.7rem;
+    font-size: 1.5rem;
   }
-  
-  .see-as-admin {
-    width: 90%;
-    margin: auto;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-    font-size: 0.7rem;
-    text-align: left;
-  }
+}
