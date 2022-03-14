@@ -136,3 +136,21 @@ td {
     font-size: unset;
   }
 }
+
+/* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
+
+@media (min-width: 1024px) and (min-height: 1024px) {
+  .order-header,
+  .order-list-total {
+    font-size: 1.8rem;
+  }
+  .order-id {
+    font-size: 1.5rem;
+  }
+  .order-detail {
+    font-size: 1.2rem;
+  }
+  .order-detail-modify {
+    font-size: 1rem;
+  }
+}

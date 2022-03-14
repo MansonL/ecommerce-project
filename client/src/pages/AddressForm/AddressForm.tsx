@@ -203,6 +203,7 @@ export function AddressForm() {
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png"
                   alt=""
                   className="required-field"
+                  style={{ width: "4%" }}
                 />{" "}
                 Name
               </label>

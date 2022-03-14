@@ -129,7 +129,7 @@ export function CreateOrder() {
         <div>
           <span>Products:</span>{" "}
           <span
-            style={{ float: "right", fontSize: "0.8rem" }}
+            style={{ float: "right", fontSize: "0.8rem", cursor: 'pointer' }}
             onClick={modifyCart}
           >
             Modify
@@ -178,7 +178,7 @@ export function CreateOrder() {
             The <b>address</b> you selected:
           </span>
           <span
-            style={{ fontSize: "0.8rem", float: "right" }}
+            style={{ fontSize: "0.8rem", float: "right", cursor: 'pointer' }}
             onClick={modifyAddress}
           >
             Modify

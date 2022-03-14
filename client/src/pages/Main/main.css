@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
 .main {
   height: 100vh;
   width: 100%;
   background-color: white;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* ------ CONTAINERS -------- */
@@ -87,7 +90,6 @@
   height: 92vh;
   bottom: 0;
   text-align: center;
-  font-family: "Montserrat", sans-serif;
   transition: opacity 0.5s ease-in 0s;
 }
 .main-menu-active {
@@ -98,7 +100,6 @@
   background-color: #fcde67;
   display: flex;
   justify-content: flex-start;
-  font-family: "Montserrat", sans-serif;
   align-items: center;
 }
 .avatar-img {
@@ -273,6 +274,7 @@ a {
 
 .show-pswd-icon {
   height: 70%;
+  cursor: pointer;
 }
 
 .password-input {
@@ -508,7 +510,7 @@ a {
     max-width: 25%;
   }
   .main-menu-btn {
-    max-width: 6%;
+    max-width: 5%;
   }
   .nav-bar {
     justify-content: center;
@@ -519,6 +521,9 @@ a {
   .main-products-search-container {
     flex-grow: unset;
     width: 75%;
+  }
+  .products-search {
+    height: 55%;
   }
 
   /* PRODUCTS LIST */
@@ -589,6 +594,7 @@ a {
   .products-search {
     width: 80%;
     font-size: 1.2rem;
+    height: 45%;
   }
 
   .cart-counter {
@@ -649,9 +655,13 @@ a {
 
 @media (min-width: 1024px) and (max-height: 800px) {
   .cart-icon-container {
-    max-width: 5%;
+    max-width: 3.5rem;
   }
   .cart-counter {
     font-size: 1.2rem;
+    top: 25%;
+  }
+  .required-field {
+    width: 2%;
   }
 }
