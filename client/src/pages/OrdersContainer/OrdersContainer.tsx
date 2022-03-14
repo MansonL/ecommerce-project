@@ -1,16 +1,17 @@
 import axios, { AxiosResponse } from "axios";
 import { useContext, useEffect, useState } from "react";
 import {
-  IMongoOrderPopulated,
   IOrderPopulated,
 } from "../../../../server/src/interfaces/orders";
 import { OrdersList } from "../../components/OrdersList/OrdersList";
 import { OperationResult } from "../../components/Result/OperationResult";
 import { UserContext } from "../../components/UserProvider";
-import "./ordercontainer.css";
+import "./orderscontainer.css";
 
 export function OrdersContainer() {
-  const { loggedIn, token } = useContext(UserContext);
+ 
+  const { loggedIn, token, user } = useContext(UserContext);
+  
   const [operationResult, setOperationResult] = useState(false);
 
   const [showResult, setShowResult] = useState(false);
@@ -45,7 +46,7 @@ export function OrdersContainer() {
   };
 
   useEffect(() => {
-    fetchOrders();
+    if(!user.isAdmin) fetchOrders();
   }, [loggedIn]);
 
   return (

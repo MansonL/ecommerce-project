@@ -18,7 +18,7 @@ import { AddressForm } from "../AddressForm/AddressForm";
 import { AddressesList } from "../AddressesList/AddressesList";
 import { CreateOrder } from "../CreateOrder/CreateOrder";
 import "./main.css";
-import { OrdersContainer } from "../OrdersContainer/OrderContainer";
+import { OrdersContainer } from "../OrdersContainer/OrdersContainer";
 
 export function Main() {
   const dropdownBtn = useRef<HTMLButtonElement>(null);

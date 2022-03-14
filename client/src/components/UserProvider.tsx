@@ -4,7 +4,7 @@ import { verifyToken } from "../utils/utilities";
 import {
   authResponse,
   cartDefault,
-  IUserInfo,
+  IUser,
   userDefault,
 } from "../utils/interfaces";
 import { IMongoCart } from "../../../server/src/interfaces/products";
@@ -15,7 +15,7 @@ interface ClickableProps {
 
 export const UserContext = createContext({
   user: userDefault,
-  setUser: (user: IUserInfo): void => {},
+  setUser: (user: IUser): void => {},
   loggedIn: false,
   setLoggedIn: (boolean: boolean): void => {},
   loading: false,
@@ -31,7 +31,7 @@ export const UserContext = createContext({
 });
 
 export function UserProvider(props: ClickableProps) {
-  const [user, setUser] = useState<IUserInfo>(userDefault);
+  const [user, setUser] = useState<IUser>(userDefault);
 
   const [cart, setCart] = useState<IMongoCart>(cartDefault);
 

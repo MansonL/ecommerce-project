@@ -5,6 +5,7 @@ import {
 } from "../../../server/src/interfaces/products";
 import {
   IMongoUser,
+  INew_User,
   UserAddresses,
   UserInfo,
 } from "../../../server/src/interfaces/users";
@@ -16,26 +17,15 @@ import {
 } from "../../../server/src/interfaces/messages";
 import { ObjectId } from "mongodb";
 
-export interface IUserInfo {
-  username: string;
-  password: string;
-  repeatedPassword: string;
-  name: string;
-  surname: string;
-  age: string;
-  avatar?: string | undefined;
-  phoneNumber: string;
-  facebookID?: string | undefined;
-  addresses?: UserAddresses[] | undefined;
-  isAdmin: boolean;
+export type IUser = Omit<INew_User, "password" | "repeatedPassword"> & {
   _id: string;
-}
+};
 
-export const userDefault: IUserInfo = {
+export const userDefault: IUser = {
   _id: "",
+  createdAt: "",
+  modifiedAt: "",
   username: "",
-  password: "",
-  repeatedPassword: "",
   name: "",
   surname: "",
   age: "",

@@ -2,22 +2,11 @@ import { verify } from "jsonwebtoken";
 import { IMongoPopulatedMessages } from "../../../server/src/interfaces/messages";
 import { IMongoCart } from "../../../server/src/interfaces/products";
 import { UserInfo, UserAddresses } from "../../../server/src/interfaces/users";
+import { IUser } from "./interfaces";
 
 declare module "jsonwebtoken" {
   export interface JwtPayload {
-    user: {
-      username: string;
-      password: string;
-      repeatedPassword: string;
-      name: string;
-      surname: string;
-      age: string;
-      avatar?: string | undefined;
-      phoneNumber: string;
-      facebookID?: string | undefined;
-      addresses?: UserAddresses[] | undefined;
-      isAdmin: boolean;
-      _id: string;
+    user: IUser & {
       user_cart: IMongoCart;
     };
   }
