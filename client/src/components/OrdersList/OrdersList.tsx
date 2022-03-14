@@ -76,7 +76,7 @@ export function OrdersList(props: IOrdersListProps) {
                 <span>{order.total}</span>
               </div>
               <div className="order-detail-address">
-                <b style={{ fontSize: "0.6rem", cursor: "pointer" }}>Modify</b>
+                <b className="order-detail-modify">Modify</b>
                 <br />
                 <b>Address selected:</b> {formatAddress(order.address)}
               </div>
