@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { IOrderPopulated } from "../../../../server/src/interfaces/orders";
 import { OrdersList } from "../../components/OrdersList/OrdersList";
 import { OperationResult } from "../../components/Result/OperationResult";
+import { ModalContainer } from "../../components/Modal/ModalContainer";
+import { LoadingSpinner } from "../../components/Spinner/Spinner";
 import { UserContext } from "../../components/UserProvider";
 import { UsersList } from "../../components/UsersLIst/UsersList";
 import { IUser } from "../../utils/interfaces";
 import "./orderscontainer.css";
 
 export function OrdersContainer() {
-  const { loggedIn, token, user } = useContext(UserContext);
+  const { loggedIn, token, user, loading, setLoading } = useContext(UserContext);
 
   const [operationResult, setOperationResult] = useState(
     "error" || "success" || "warning"
@@ -33,17 +35,24 @@ export function OrdersContainer() {
   const thenAxiosCallbackOrders = (
     response: AxiosResponse<IOrderPopulated[], any>
   ) => {
+    setLoading(false);
+          document.body.style.overflow = "scroll";
     const data = response.data;
     setOrders(data);
   };
 
   const thenAxiosCallbackUsers = (response: AxiosResponse<IUser[], any>) => {
+    setLoading(false);
+    document.body.style.overflow = "scroll";
+    console.log(response)
     const data = response.data;
     setUsers(data);
   };
 
   const fetchOrders = async (user_id?: string) => {
-    if (user_id)
+    if (user_id){
+    setLoading(true);
+    document.body.style.overflow = "hidden";
       axios
         .get(`http://localhost:8080/api/orders/list`, {
           withCredentials: true,
@@ -56,11 +65,16 @@ export function OrdersContainer() {
         })
         .then(thenAxiosCallbackOrders)
         .catch((error) => {
+          setLoading(false);
+          document.body.style.overflow = "scroll";
           setShowResult(true);
           setOperationResult("error");
           setResultMessage(error.response.data.message);
         });
-    else
+      }
+    else{
+      setLoading(true);
+      document.body.style.overflow = "hidden";
       axios
         .get(`http://localhost:8080/api/orders/list`, {
           withCredentials: true,
@@ -70,10 +84,13 @@ export function OrdersContainer() {
         })
         .then(thenAxiosCallbackOrders)
         .catch((error) => {
+          setLoading(false);
+          document.body.style.overflow = "scroll";
           setShowResult(true);
           setOperationResult("error");
           setResultMessage(error.response.data.message);
         });
+      }
   };
 
   const handleEmailChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,6 +98,8 @@ export function OrdersContainer() {
   };
 
   const handleUserSearch = () => {
+    setLoading(true);
+    document.body.style.overflow = "hidden";
     axios
       .get(`http://localhost:8080/api/users/list/${email}`, {
         withCredentials: true,
@@ -90,9 +109,11 @@ export function OrdersContainer() {
       })
       .then(thenAxiosCallbackUsers)
       .catch((error) => {
-        setShowResult(true);
-        setOperationResult("error");
-        setResultMessage(error.response.data.message);
+        setLoading(false);
+          document.body.style.overflow = "scroll";
+          setShowResult(true);
+          setOperationResult("error");
+          setResultMessage(error.response.data.message);
       });
   };
 
@@ -103,7 +124,7 @@ export function OrdersContainer() {
 
   useEffect(() => {
     if (!user.isAdmin) fetchOrders();
-    if (loggedIn) {
+    if (!loggedIn) {
       setOperationResult("error");
       setShowResult(true);
       setResultMessage("You need to be logged in.");
@@ -114,6 +135,12 @@ export function OrdersContainer() {
   }, [loggedIn]);
 
   return (
+    <>
+    {loading && (
+        <ModalContainer>
+          <LoadingSpinner />
+        </ModalContainer>
+      )}
     <div className="body-container">
       {showResult ? (
         <OperationResult
@@ -135,12 +162,11 @@ export function OrdersContainer() {
               <input
                 type="email"
                 className="styled-input"
-                placeholder="Input your user email to check his orders."
                 value={email}
                 onChange={handleEmailChange}
               />
-              <label htmlFor="email" className={"animated-label"}>
-                User email:
+              <label htmlFor="email" className={email !== '' ? "filled-input-label" : "animated-label"}>
+                User email
               </label>
               <span className="input-border" />
             </div>
@@ -178,5 +204,6 @@ export function OrdersContainer() {
         </>
       )}
     </div>
+    </>
   );
 }

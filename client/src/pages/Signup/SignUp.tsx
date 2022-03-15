@@ -3,7 +3,7 @@ import moment from "moment";
 import { useContext, useState } from "react";
 import { INew_User, UserInfo } from "../../../../server/src/interfaces/users";
 import { newUserDefault, UserCUDResponse } from "../../utils/interfaces";
-import { validation } from "../../utils/joiSchemas";
+import { maxDate, minDate, validation } from "../../utils/joiSchemas";
 import { cleanEmptyProperties } from "../../utils/utilities";
 import { ModalContainer } from "../../components/Modal/ModalContainer";
 import { OperationResult } from "../../components/Result/OperationResult";
@@ -72,6 +72,7 @@ export function SignUp() {
     ev.preventDefault();
     let user = { ...newUser };
     cleanEmptyProperties(user);
+    console.log(user)
     const { error } = validation.user.validate(user);
     if (error) {
       setShowResult(true);
@@ -93,9 +94,9 @@ export function SignUp() {
           setSignUpResult("error");
           if (error.response) {
             if (error.response.status === 500) {
-              setResultMsg(error.response.data.message.message);
+              setResultMsg(error.response.data.message);
             } else {
-              setResultMsg(error.response.data.message.message);
+              setResultMsg(error.response.data.message);
             }
           } else if (error.request) {
             setResultMsg(`No response received from server.`);
@@ -195,6 +196,8 @@ export function SignUp() {
               className="age-input"
               id="age"
               name="age"
+              max={maxDate}
+              min={minDate}
             />
             <span className="input-border"></span>
           </div>

@@ -161,9 +161,7 @@ class Validations {
         "date.min": `10 years old is the min age allowed.`,
       }),
       phoneNumber: Joi.string()
-        .pattern(
-          /\+\d{1,4}\d{1,4}\d{7}/
-        )
+        .pattern(/\+\d{1,4}\d{1,4}\d{7}/)
         .required()
         .messages({
           "string.empty": `You must provide your phone number.`,
@@ -220,8 +218,8 @@ class Validations {
           })
         )
         .optional(),
-      facebookID: Joi.string().allow(''),
-      avatar: Joi.string().uri().allow(''),
+      facebookID: Joi.string().allow("").optional(),
+      avatar: Joi.string().uri().allow("").optional(),
       isAdmin: Joi.boolean().required(),
     }).required();
 

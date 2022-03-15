@@ -7,8 +7,8 @@ import {
   UserInfo,
 } from "../../../server/src/interfaces/users";
 
-const maxDate = moment().subtract(10, "y").format("MM/DD/YYYY");
-const minDate = moment().subtract(99, "y").format("MM/DD/YYYY");
+export const maxDate = moment().subtract(10, "y").format("MM/DD/YYYY");
+export const minDate = moment().subtract(99, "y").format("MM/DD/YYYY");
 
 const streetStringErrorMsg = {
   // Won't be empty cause if it's empty it will be undefined.
@@ -151,11 +151,16 @@ class Validations {
         "string.min": `Surname must be at least 3 characters long.`,
         "string.max": `Surname must be shorter than 25 characters.`,
       }),
-      age: Joi.date().min(minDate).max(maxDate).required().messages({
-        "date.base": `You must provide a valid date.`,
-        "date.max": `99 years old is the max age allowed.`,
-        "date.min": `10 years old is the min age allowed.`,
-      }),
+      age: Joi.date()
+        .min(minDate)
+        .max(maxDate)
+        .required()
+        .messages({
+          "date.base": `You must provide a valid date.`,
+          "date.max": `10 years old is the min age allowed.
+        `,
+          "date.min": `99 years old is the max age allowed.`,
+        }),
       phoneNumber: Joi.string()
         .pattern(
           /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/m
@@ -165,6 +170,9 @@ class Validations {
           "string.empty": `You must provide your phone number.`,
           "string.pattern.base": `The phone number submitted is not a valid one.`,
         }),
+        facebookID: Joi.string().allow("").optional(),
+        avatar: Joi.string().uri().allow("").optional(),
+        isAdmin: Joi.boolean().required(),
     });
     /**
      *

@@ -24,16 +24,17 @@ import moment from "moment";
 
 class UsersController {
   async getOne(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const user_id = (req.user as Express.User)._id;
+    const user_email = req.params.email;
     logger.info(`[PATH]: Inside User Controller`);
-    if (isValidObjectId(user_id)) {
-      const result: IMongoUser[] | ApiError = await usersApi.getUser(
-        user_id.toString()
+    if (user_email) {
+      const result: IMongoUser | ApiError = await usersApi.getUserByUsername(
+        user_email
       );
+      console.log(result);
       if (result instanceof ApiError) next(result);
-      else res.status(200).send(result[0]);
+      else res.status(200).send(result);
     } else {
-      next(ApiError.badRequest(EProductsErrors.IdIncorrect));
+      next(ApiError.badRequest(`No user email submitted`));
     }
   }
 
@@ -50,8 +51,7 @@ class UsersController {
     const { error } = await validator.user.validate(userInfo);
     if (error) next(ApiError.badRequest(error.message));
     else {
-      if (userInfo.addresses)
-        userInfo.addresses[0]._id = new ObjectId();
+      if (userInfo.addresses) userInfo.addresses[0]._id = new ObjectId();
       const newUser: INew_User = {
         createdAt: moment().format("YYYY-MM-DD HH:mm:ss"),
         modifiedAt: moment().format("YYYY-MM-DD HH:mm:ss"),

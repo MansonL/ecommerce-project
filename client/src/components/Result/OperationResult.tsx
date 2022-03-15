@@ -10,7 +10,7 @@ export function OperationResult(props: IOperationResult) {
     <div
       className={`operation-result ${
         props.result === "success"
-          ? "succes"
+          ? "success"
           : props.result === "warning"
           ? "warning"
           : "error"
@@ -19,11 +19,13 @@ export function OperationResult(props: IOperationResult) {
       <img
         className="operation-result-icon"
         src={
-          props.result
-            ? "https://img.icons8.com/cotton/512/checkmark.png"
-            : "https://cdn4.iconfinder.com/data/icons/ecommerce-webdesign-and-business-colorful-pastel-c/283/ec_36-512.png"
+          props.result === 'success'
+            ? "/icons/success.png"
+            : 
+            props.result === 'error' ? "/icons/error.png" :
+            "/icons/warning.png"
         }
-        alt=""
+        alt="operation icon"
       />
       <span>{props.resultMessage}</span>
     </div>

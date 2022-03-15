@@ -13,13 +13,17 @@
   padding: 1rem;
 }
 
-.succes {
+.success {
   background-color: #a3f5c2;
   border: 2px solid #46ec86;
 }
 .error {
   background-color: #ffc2d9;
   border: 2px solid #ffafcc;
+}
+.warning {
+  background-color: #fcefb4;
+  border: 2px solid #f9dc5c;
 }
 
 /* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
