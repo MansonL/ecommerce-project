@@ -10,7 +10,7 @@ import { UserContext } from "../../components/UserProvider";
 
 export function LogIn() {
   const [showResult, setShowResult] = useState(false);
-  const [loginResult, setLoginResult] = useState(false);
+  const [loginResult, setLoginResult] = useState("error" || "success");
   const [resultMsg, setResultMsg] = useState("");
   const [showHide, setShowHide] = useState(false);
   const [credentials, setCredentials] = useState({
@@ -49,13 +49,13 @@ export function LogIn() {
   const thenAxiosCallback = (response: AxiosResponse<authResponse, any>) => {
     const data = response.data;
     setShowResult(true);
-    setLoginResult(true);
+    setLoginResult("success");
     setResultMsg(data.message);
     setLoading(false);
     document.body.style.overflow = "scroll";
     setTimeout(async () => {
       setShowResult(false);
-      setLoginResult(false);
+      setLoginResult("error");
       setResultMsg("");
       updateLoginStatus(data.data);
       setLoggedIn(true);
@@ -72,7 +72,7 @@ export function LogIn() {
     const { error } = validation.login.validate(credentials);
     if (error) {
       setShowResult(true);
-      setLoginResult(false);
+      setLoginResult("error");
       setResultMsg(error.message);
     } else {
       setLoading(true);
@@ -89,7 +89,7 @@ export function LogIn() {
           document.body.style.overflow = "scroll";
           console.log(JSON.stringify(error.response, null, 2));
           setShowResult(true);
-          setLoginResult(false);
+          setLoginResult("error");
           if (error.response) {
             if (error.response.status === 500) {
               setResultMsg(error.response.data.message);
@@ -103,7 +103,6 @@ export function LogIn() {
           }
           setTimeout(async () => {
             setShowResult(false);
-            setLoginResult(false);
             setResultMsg("");
           }, 3000);
         });
@@ -135,7 +134,7 @@ export function LogIn() {
           <h5>Don't you have an account? Sign up here</h5>
         </div>
         {showResult && (
-          <OperationResult success={loginResult} resultMessage={resultMsg} />
+          <OperationResult result={loginResult} resultMessage={resultMsg} />
         )}
         <div className="login-signup-fields">
           <div className="login-signup-field">

@@ -13,7 +13,7 @@ import { formatAddress } from "../../utils/utilities";
 
 export function CreateOrder() {
   const [showResult, setShowResult] = useState(false);
-  const [orderResult, setOrderResult] = useState(false);
+  const [orderResult, setOrderResult] = useState('error' || 'success');
   const [resultMsg, setResultMsg] = useState("");
 
   const { cart } = useContext(UserContext);
@@ -48,13 +48,13 @@ export function CreateOrder() {
   const AxiosThenCallback = (response: AxiosResponse<orderResponse, any>) => {
     const data = response.data;
     setShowResult(true);
-    setOrderResult(true);
+    setOrderResult('success');
     setResultMsg(data.message);
     setLoading(false);
     document.body.style.overflow = "scroll";
     setTimeout(async () => {
       setShowResult(false);
-      setOrderResult(false);
+      setOrderResult('error');
       setResultMsg("");
     }, 2000);
   };
@@ -64,7 +64,7 @@ export function CreateOrder() {
     document.body.style.overflow = "scroll";
     console.log(JSON.stringify(error.response, null, 2));
     setShowResult(true);
-    setOrderResult(false);
+    setOrderResult('error');
     if (error.response) {
       if (error.response.status === 500) {
         setResultMsg(error.response.data.message.message);
@@ -77,7 +77,6 @@ export function CreateOrder() {
       setResultMsg(`Request error.`);
     }
     setTimeout(() => {
-      setOrderResult(false);
       setShowResult(false);
       setResultMsg("");
     }, 3000);
@@ -123,7 +122,7 @@ export function CreateOrder() {
         </ModalContainer>
       )}
       {showResult && (
-        <OperationResult success={orderResult} resultMessage={resultMsg} />
+        <OperationResult result={orderResult} resultMessage={resultMsg} />
       )}
       <div className="order-container">
         <div>

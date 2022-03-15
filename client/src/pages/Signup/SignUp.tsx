@@ -13,7 +13,7 @@ import "./signup.css";
 
 export function SignUp() {
   const [showResult, setShowResult] = useState(false);
-  const [signUpResult, setSignUpResult] = useState(false);
+  const [signUpResult, setSignUpResult] = useState("error" || "success");
   const [resultMsg, setResultMsg] = useState("");
   const [showHide, setShowHide] = useState(false);
   const [newUser, setNewUser] = useState<UserInfo>(newUserDefault);
@@ -47,13 +47,13 @@ export function SignUp() {
   const thenAxiosCallback = (response: AxiosResponse<UserCUDResponse, any>) => {
     const data = response.data;
     setShowResult(true);
-    setSignUpResult(true);
+    setSignUpResult("success");
     setResultMsg(data.message);
     setLoading(false);
     document.body.style.overflow = "scroll";
     setTimeout(async () => {
       setShowResult(false);
-      setSignUpResult(false);
+      setSignUpResult("error");
       setResultMsg("");
     }, 2000);
   };
@@ -75,7 +75,7 @@ export function SignUp() {
     const { error } = validation.user.validate(user);
     if (error) {
       setShowResult(true);
-      setSignUpResult(false);
+      setSignUpResult("error");
       setResultMsg(error.message);
     } else {
       setLoading(true);
@@ -90,7 +90,7 @@ export function SignUp() {
           setLoading(false);
           document.body.style.overflow = "scroll";
           setShowResult(true);
-          setSignUpResult(false);
+          setSignUpResult("error");
           if (error.response) {
             if (error.response.status === 500) {
               setResultMsg(error.response.data.message.message);
@@ -104,7 +104,6 @@ export function SignUp() {
           }
           setTimeout(async () => {
             setShowResult(false);
-            setSignUpResult(false);
             setResultMsg("");
           }, 3000);
         });
@@ -124,7 +123,7 @@ export function SignUp() {
           <h5>You already have an account? Log in here.</h5>
         </div>
         {showResult && (
-          <OperationResult resultMessage={resultMsg} success={signUpResult} />
+          <OperationResult resultMessage={resultMsg} result={signUpResult} />
         )}
         <div className="login-signup-fields">
           <div className="login-signup-field">

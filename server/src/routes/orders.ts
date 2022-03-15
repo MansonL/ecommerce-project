@@ -4,7 +4,7 @@ import { ordersController } from "../controller/orders";
 
 export const ordersRouter = Router();
 
-ordersRouter.get("/see", authController.isAdmin, ordersController.getByAdmin);
+ordersRouter.get("/see/:id", authController.isAdmin, ordersController.getByAdmin);
 ordersRouter.get(
   "/list",
   authController.isAuthorized,

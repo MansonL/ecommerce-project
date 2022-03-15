@@ -11,25 +11,27 @@ import "./cart.css";
 
 export function Cart() {
   const [showModificationResult, setShowModificationResult] = useState(false);
-  const [modificationResult, setModificationResult] = useState(false);
+  const [modificationResult, setModificationResult] = useState(
+    "error" || "success"
+  );
   const [resultMsg, setResultMsg] = useState("");
   const { cart, setCart } = useContext(UserContext);
   const { loading, setLoading } = useContext(UserContext);
-  const { cartConfirmated, setCartConfirmated } = useContext(UserContext);
+  const { setCartConfirmated } = useContext(UserContext);
   const { user, token, updateLoginStatus } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const AxiosThenCallback = (response: AxiosResponse<CartCUDResponse, any>) => {
     const data = response.data;
-    setModificationResult(true);
+    setModificationResult("success");
     setResultMsg(data.message);
     setShowModificationResult(true);
     setCart(data.data);
     setLoading(false);
     document.body.style.overflow = "scroll";
     setTimeout(() => {
-      setModificationResult(false);
+      setModificationResult("error");
       setShowModificationResult(false);
       setResultMsg("");
     }, 2000);
@@ -40,7 +42,7 @@ export function Cart() {
     document.body.style.overflow = "scroll";
     console.log(JSON.stringify(error.response, null, 2));
     setShowModificationResult(true);
-    setModificationResult(false);
+    setModificationResult("error");
     if (error.response) {
       if (error.response.status === 500) {
         setResultMsg(error.response.data.message);
@@ -57,7 +59,6 @@ export function Cart() {
       setResultMsg(`Request error.`);
     }
     setTimeout(() => {
-      setModificationResult(false);
       setShowModificationResult(false);
       setResultMsg("");
     }, 3000);
@@ -117,7 +118,7 @@ export function Cart() {
 
         {showModificationResult && (
           <OperationResult
-            success={modificationResult}
+            result={modificationResult}
             resultMessage={resultMsg}
           />
         )}
@@ -201,7 +202,7 @@ export function Cart() {
         ) : (
           <OperationResult
             resultMessage="Your cart is empty! Let's buy."
-            success={false}
+            result={"warning"}
           />
         )}
       </section>

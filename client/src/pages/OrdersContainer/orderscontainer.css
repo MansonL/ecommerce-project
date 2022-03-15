@@ -1,4 +1,9 @@
-.orders-list {
+.main-content {
+  max-width: 85%;
+}
+
+.orders-list,
+.users-list {
   margin-top: 2rem;
   max-height: 50vh;
   overflow: auto;
@@ -7,10 +12,71 @@
   padding-bottom: 2rem;
 }
 
+.order,
+.user {
+  display: block;
+  margin: 1rem 0.5rem 0rem 0.5rem;
+}
+
+.order-header,
+.user-list-header {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 0.5rem;
+  border: 1px rgba(222, 222, 222, 0.23) solid;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  align-items: center;
+  transition: linear 0.1s;
+  background-color: rgba(222, 222, 222, 0.23);
+  box-shadow: 0.2rem 0.2rem 0.3rem grey;
+  cursor: pointer;
+}
+
+.user-list-header {
+  justify-content: space-around;
+}
+
+.order-header:hover,
+.order-header:focus,
+.user-list-header:hover,
+.user-list-header:focus {
+  box-shadow: 0.4rem 0.4rem 0.3rem grey;
+}
+
+.arrow-icon-container {
+  width: 10%;
+  transition: 0.2s linear;
+}
+
+.arrow-icon-container-rotated {
+  transform: rotate(180deg);
+}
+
+.dropdown-icon {
+  width: 100%;
+}
+
 /* FIXING SOME IPAD UI, WIDTH LIKE A CELLPHONE BUT LARGER */
 
 @media (min-width: 480px) and (max-height: 1200px) {
-  .orders-list {
+  .orders-list,
+  .users-list {
     max-width: 75%;
+  }
+  .order-header,
+  .user-list-header {
+    font-size: 1.5rem;
+  }
+}
+
+/* --------- SQUARE DEVICES LIKE IPAD PRO ------- */
+
+@media (min-width: 1024px) and (min-height: 1024px) {
+  .order-header,
+  .user-list-header,
+  .order-list-total {
+    font-size: 1.8rem;
   }
 }

@@ -14,7 +14,7 @@ import "./addressForm.css";
 export function AddressForm() {
   const [resultMsg, setResultMsg] = useState("");
   const [showResultMsg, setShowResult] = useState(false);
-  const [addressResult, setAddressResult] = useState(false);
+  const [addressResult, setAddressResult] = useState("error" || "success");
 
   const [newAddress, setNewAddress] = useState<UserAddresses>(defaultAddress);
 
@@ -55,7 +55,7 @@ export function AddressForm() {
 
   const AxiosThenCallback = (response: AxiosResponse<UserCUDResponse, any>) => {
     const data = response.data;
-    setAddressResult(true);
+    setAddressResult("success");
     setResultMsg(data.message);
     setUser({
       ...user,
@@ -66,7 +66,7 @@ export function AddressForm() {
     document.body.style.overflow = "scroll";
     setTimeout(() => {
       setShowResult(false);
-      setAddressResult(false);
+      setAddressResult("error");
       setResultMsg("");
       navigate("../addresses");
     }, 2000);
@@ -76,7 +76,7 @@ export function AddressForm() {
     setLoading(false);
     document.body.style.overflow = "scroll";
     console.log(JSON.stringify(error.response, null, 2));
-    setAddressResult(false);
+    setAddressResult("error");
     setShowResult(true);
     if (error.response) {
       if (error.response.status === 500) {
@@ -94,7 +94,6 @@ export function AddressForm() {
       setResultMsg(`Request error.`);
     }
     setTimeout(() => {
-      setAddressResult(false);
       setShowResult(false);
       setResultMsg("");
     }, 3000);
@@ -113,7 +112,7 @@ export function AddressForm() {
     const { error } = validation.address.validate(cleanAddress);
     if (error) {
       setShowResult(true);
-      setAddressResult(false);
+      setAddressResult("error");
       setResultMsg(error.message);
     } else {
       setLoading(true);
@@ -150,7 +149,7 @@ export function AddressForm() {
         </ModalContainer>
       )}
       {showResultMsg && (
-        <OperationResult success={addressResult} resultMessage={resultMsg} />
+        <OperationResult result={addressResult} resultMessage={resultMsg} />
       )}
       <div className="address-fields">
         <div className="address-field">

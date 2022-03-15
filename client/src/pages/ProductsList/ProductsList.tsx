@@ -81,7 +81,7 @@ export function ProductsList(props: IProductsProps) {
   ) => {
     const data = response.data;
     setShowResult(true);
-    setOperationResult(true);
+    setOperationResult("success");
     setResultMsg(data.message);
     if (!user.isAdmin) setCart(data.data as IMongoCart);
     fetchProducts();
@@ -89,7 +89,7 @@ export function ProductsList(props: IProductsProps) {
     document.body.style.overflow = "scroll";
     setTimeout(async () => {
       setShowResult(false);
-      setOperationResult(false);
+      setOperationResult("error");
       setResultMsg("");
     }, 2000);
   };
@@ -99,7 +99,7 @@ export function ProductsList(props: IProductsProps) {
     document.body.style.overflow = "scroll";
     console.log(JSON.stringify(error.response, null, 2));
     setShowResult(true);
-    setOperationResult(false);
+    setOperationResult("error");
     if (error.response) {
       if (error.response.status === 500) {
         setResultMsg(
@@ -124,7 +124,6 @@ export function ProductsList(props: IProductsProps) {
       setResultMsg(`Request error.`);
     }
     setTimeout(() => {
-      setOperationResult(false);
       setShowResult(false);
       setResultMsg("");
     }, 2000);
@@ -163,7 +162,7 @@ export function ProductsList(props: IProductsProps) {
 
   const [showModal, setShowModal] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  const [operationResult, setOperationResult] = useState(false);
+  const [operationResult, setOperationResult] = useState("error" || "success");
   const [resultMsg, setResultMsg] = useState("");
   const [savedCode, setCode] = useState("");
   const [adminView, setAdminView] = useState(false);
@@ -228,7 +227,7 @@ export function ProductsList(props: IProductsProps) {
   return (
     <>
       {showResult && (
-        <OperationResult resultMessage={resultMsg} success={operationResult} />
+        <OperationResult resultMessage={resultMsg} result={operationResult} />
       )}
 
       {showModal && (
@@ -406,7 +405,7 @@ export function ProductsList(props: IProductsProps) {
           ) : (
             <OperationResult
               resultMessage="There are no products stored at DB."
-              success={false}
+              result={"warning"}
             />
           )}
         </ul>

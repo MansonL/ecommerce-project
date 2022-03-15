@@ -26,8 +26,8 @@ export function OrdersList(props: IOrdersListProps) {
               </span>
               <span className="order-list-total">${order.total}</span>
               <i
-                className={`order-icon-container ${
-                  shownDetail === idx ? "order-icon-container-rotated" : ""
+                className={`arrow-icon-container ${
+                  shownDetail === idx ? "arrow-icon-container-rotated" : ""
                 }`}
               >
                 {" "}

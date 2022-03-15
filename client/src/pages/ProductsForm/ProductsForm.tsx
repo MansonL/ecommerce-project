@@ -19,7 +19,7 @@ export function ProductsForm() {
    *
    */
   const [showResult, setShowResult] = useState(false);
-  const [submitResult, setSubmitResult] = useState(false);
+  const [submitResult, setSubmitResult] = useState("error" || "success");
   const [resultMsg, setResultMsg] = useState("");
 
   const { user, token } = useContext(UserContext);
@@ -59,13 +59,13 @@ export function ProductsForm() {
   ) => {
     const data = response.data;
     setShowResult(true);
-    setSubmitResult(true);
+    setSubmitResult("success");
     setResultMsg(data.message);
     setLoading(false);
     document.body.style.overflow = "scroll";
     setTimeout(async () => {
       setShowResult(false);
-      setSubmitResult(false);
+      setSubmitResult("error");
       setResultMsg("");
     }, 2000);
   };
@@ -75,7 +75,7 @@ export function ProductsForm() {
     document.body.style.overflow = "scroll";
     console.log(JSON.stringify(error.response, null, 2));
     setShowResult(true);
-    setSubmitResult(false);
+    setSubmitResult("error");
     if (error.response) {
       if (error.response.status === 500) {
         setResultMsg(error.response.data.message.message);
@@ -88,7 +88,6 @@ export function ProductsForm() {
       setResultMsg(`Request error.`);
     }
     setTimeout(() => {
-      setSubmitResult(false);
       setShowResult(false);
       setResultMsg("");
     }, 3000);
@@ -139,10 +138,10 @@ export function ProductsForm() {
           </ModalContainer>
         )}
         {showResult && (
-          <OperationResult success={submitResult} resultMessage={resultMsg} />
+          <OperationResult result={submitResult} resultMessage={resultMsg} />
         )}
         <div className="product-form">
-          <div className="product-field">
+          <div className="input-field">
             <input
               type="text"
               onChange={onChange}
@@ -168,7 +167,7 @@ export function ProductsForm() {
             </label>
             <span className="input-border"></span>
           </div>
-          <div className="product-field">
+          <div className="input-field">
             <input
               type="text"
               onChange={onChange}
@@ -195,7 +194,7 @@ export function ProductsForm() {
             <span className="input-border"></span>
           </div>
           <div className="code-field">
-            <div className="product-field">
+            <div className="input-field">
               <input
                 type="text"
                 onChange={onChange}
@@ -226,7 +225,7 @@ export function ProductsForm() {
               Generate code
             </button>
           </div>
-          <div className="product-field">
+          <div className="input-field">
             <input
               type="file"
               multiple
@@ -245,7 +244,7 @@ export function ProductsForm() {
             </label>
             <span className="input-border"></span>
           </div>
-          <div className="product-field">
+          <div className="input-field">
             <input
               type="number"
               className="styled-input"
@@ -266,7 +265,7 @@ export function ProductsForm() {
             </label>
             <span className="input-border"></span>
           </div>
-          <div className="product-field">
+          <div className="input-field">
             <input
               type="number"
               className="styled-input"
@@ -287,7 +286,7 @@ export function ProductsForm() {
             </label>
             <span className="input-border"></span>
           </div>
-          <div className="product-field">
+          <div className="input-field">
             <input
               type="text"
               onChange={onChange}

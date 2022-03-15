@@ -25,6 +25,9 @@ class OrdersController {
     next: NextFunction
   ): Promise<void> {
     const { user_id, order_id } = req.body;
+
+    logger.info(JSON.stringify(req, null, "\t"));
+
     if (user_id) {
       if (isValidObjectId(user_id)) {
         const result: IMongoOrderPopulated[] | IOrderPopulated[] | ApiError =

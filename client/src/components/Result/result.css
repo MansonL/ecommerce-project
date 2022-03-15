@@ -13,11 +13,11 @@
   padding: 1rem;
 }
 
-.success {
+.succes {
   background-color: #a3f5c2;
   border: 2px solid #46ec86;
 }
-.failure {
+.error {
   background-color: #ffc2d9;
   border: 2px solid #ffafcc;
 }
