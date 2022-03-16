@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { EProductsErrors } from "../interfaces/EErrors";
 import { ApiError } from "../api/errorApi";
 import { validator } from "../interfaces/joiSchemas";
 import { usersApi } from "../api/users";
@@ -11,7 +10,6 @@ import {
 } from "../interfaces/users";
 import { CUDResponse } from "../interfaces/others";
 import { logger } from "../services/logger";
-import { isValidObjectId } from "mongoose";
 import { ObjectId } from "mongodb";
 import { cartApi } from "../api/cart";
 import moment from "moment";
@@ -32,7 +30,7 @@ class UsersController {
       );
       console.log(result);
       if (result instanceof ApiError) next(result);
-      else res.status(200).send(result);
+      else res.status(200).send([result]);
     } else {
       next(ApiError.badRequest(`No user email submitted`));
     }

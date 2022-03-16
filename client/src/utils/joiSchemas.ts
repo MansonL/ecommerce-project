@@ -163,7 +163,7 @@ class Validations {
         }),
       phoneNumber: Joi.string()
         .pattern(
-          /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/m
+          /^\s*\+?\s*([0-9][\s-]*){9,}$/
         )
         .required()
         .messages({

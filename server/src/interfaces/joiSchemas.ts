@@ -161,7 +161,7 @@ class Validations {
         "date.min": `10 years old is the min age allowed.`,
       }),
       phoneNumber: Joi.string()
-        .pattern(/\+\d{1,4}\d{1,4}\d{7}/)
+        .pattern(/^\s*\+?\s*([0-9][\s-]*){9,}$/)
         .required()
         .messages({
           "string.empty": `You must provide your phone number.`,

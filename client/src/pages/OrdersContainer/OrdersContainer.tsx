@@ -1,7 +1,10 @@
 import axios, { AxiosResponse } from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IOrderPopulated } from "../../../../server/src/interfaces/orders";
+import {
+  IMongoOrderPopulated,
+  IOrderPopulated,
+} from "../../../../server/src/interfaces/orders";
 import { OrdersList } from "../../components/OrdersList/OrdersList";
 import { OperationResult } from "../../components/Result/OperationResult";
 import { ModalContainer } from "../../components/Modal/ModalContainer";
@@ -12,7 +15,8 @@ import { IUser } from "../../utils/interfaces";
 import "./orderscontainer.css";
 
 export function OrdersContainer() {
-  const { loggedIn, token, user, loading, setLoading } = useContext(UserContext);
+  const { loggedIn, token, user, loading, setLoading } =
+    useContext(UserContext);
 
   const [operationResult, setOperationResult] = useState(
     "error" || "success" || "warning"
@@ -28,6 +32,8 @@ export function OrdersContainer() {
 
   const [users, setUsers] = useState<IUser[]>([]);
 
+  const [selectedUser, setSelectedUser] = useState("");
+
   const [showOrdersToAdmin, setShowOrdersToAdmin] = useState(false);
 
   const navigate = useNavigate();
@@ -36,7 +42,7 @@ export function OrdersContainer() {
     response: AxiosResponse<IOrderPopulated[], any>
   ) => {
     setLoading(false);
-          document.body.style.overflow = "scroll";
+    document.body.style.overflow = "scroll";
     const data = response.data;
     setOrders(data);
   };
@@ -44,35 +50,31 @@ export function OrdersContainer() {
   const thenAxiosCallbackUsers = (response: AxiosResponse<IUser[], any>) => {
     setLoading(false);
     document.body.style.overflow = "scroll";
-    console.log(response)
     const data = response.data;
     setUsers(data);
   };
 
-  const fetchOrders = async (user_id?: string) => {
-    if (user_id){
-    setLoading(true);
-    document.body.style.overflow = "hidden";
+  const fetchOrders = async (user_id?: string, username?: string) => {
+    if (user_id && username) {
+      setSelectedUser(username);
+      setLoading(true);
+      document.body.style.overflow = "hidden";
       axios
-        .get(`http://localhost:8080/api/orders/list`, {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            user_id: user_id,
-          },
-        })
+        .get(
+          `http://localhost:8080/api/orders/admin-view/list?user_id=${user_id}`,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then(thenAxiosCallbackOrders)
-        .catch((error) => {
+        .catch(() => {
           setLoading(false);
           document.body.style.overflow = "scroll";
-          setShowResult(true);
-          setOperationResult("error");
-          setResultMessage(error.response.data.message);
         });
-      }
-    else{
+    } else {
       setLoading(true);
       document.body.style.overflow = "hidden";
       axios
@@ -90,7 +92,7 @@ export function OrdersContainer() {
           setOperationResult("error");
           setResultMessage(error.response.data.message);
         });
-      }
+    }
   };
 
   const handleEmailChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,6 +100,7 @@ export function OrdersContainer() {
   };
 
   const handleUserSearch = () => {
+    setShowOrdersToAdmin(false);
     setLoading(true);
     document.body.style.overflow = "hidden";
     axios
@@ -110,16 +113,16 @@ export function OrdersContainer() {
       .then(thenAxiosCallbackUsers)
       .catch((error) => {
         setLoading(false);
-          document.body.style.overflow = "scroll";
-          setShowResult(true);
-          setOperationResult("error");
-          setResultMessage(error.response.data.message);
+        document.body.style.overflow = "scroll";
+        setShowResult(true);
+        setOperationResult("error");
+        setResultMessage(error.response.data.message);
       });
   };
 
-  const handleUserCardClick = (user_id: string) => {
+  const handleUserCardClick = (user_id: string, username: string) => {
     setShowOrdersToAdmin(true);
-    fetchOrders(user_id);
+    fetchOrders(user_id, username);
   };
 
   useEffect(() => {
@@ -136,74 +139,86 @@ export function OrdersContainer() {
 
   return (
     <>
-    {loading && (
+      {loading && (
         <ModalContainer>
           <LoadingSpinner />
         </ModalContainer>
       )}
-    <div className="body-container">
-      {showResult ? (
-        <OperationResult
-          result={operationResult}
-          resultMessage={resultMessage}
-        />
-      ) : (
-        <>
-          <header className="header">
-            <h2 className="header-title">Orders</h2>
-            <h5>
-              {user.isAdmin
-                ? `Search for the user you want to look his address with his email.`
-                : "Here are all of your orders."}
-            </h5>
-          </header>
-          <div className="main-content">
-            <div className="input-field">
-              <input
-                type="email"
-                className="styled-input"
-                value={email}
-                onChange={handleEmailChange}
-              />
-              <label htmlFor="email" className={email !== '' ? "filled-input-label" : "animated-label"}>
-                User email
-              </label>
-              <span className="input-border" />
+      <div className="body-container">
+        {showResult ? (
+          <OperationResult
+            result={operationResult}
+            resultMessage={resultMessage}
+          />
+        ) : (
+          <>
+            <header className="header">
+              <h2 className="header-title">Orders</h2>
+              <h5>
+                {user.isAdmin
+                  ? `Search for the user you want to look his address with his email.`
+                  : "Here are all of your orders."}
+              </h5>
+            </header>
+            <div className="main-content">
+              {user.isAdmin && (
+                <>
+                  <div className="input-field">
+                    <input
+                      type="email"
+                      className="styled-input"
+                      value={email}
+                      onChange={handleEmailChange}
+                    />
+                    <label
+                      htmlFor="email"
+                      className={
+                        email !== "" ? "filled-input-label" : "animated-label"
+                      }
+                    >
+                      User email
+                    </label>
+                    <span className="input-border" />
+                  </div>
+                  <div className="submit-row">
+                    <button className="submit-btn" onClick={handleUserSearch}>
+                      Search
+                    </button>
+                  </div>
+                </>
+              )}
+              {user.isAdmin && showOrdersToAdmin && orders.length > 0 ? (
+                <>
+                  <span className="selected-user">{selectedUser} <b>selected</b>.</span>
+                  <OrdersList orders={orders} />
+                </>
+              ) : user.isAdmin && showOrdersToAdmin ? (
+                <OperationResult
+                  result={"warning"}
+                  resultMessage="The selected user has no orders created."
+                />
+              ) : user.isAdmin && !showOrdersToAdmin && users.length > 0 ? (
+                <UsersList
+                  users={users}
+                  handleUserCardClick={handleUserCardClick}
+                />
+              ) : user.isAdmin && !showOrdersToAdmin ? (
+                <OperationResult
+                  result="warning"
+                  resultMessage="There are no customer users created."
+                />
+              ) : !user.isAdmin && orders.length > 0 ? (
+                <OrdersList orders={orders} />
+              ) : (
+                <OperationResult
+                  result={"warning"}
+                  resultMessage={"You have no orders created."}
+                />
+              )}
             </div>
-            <div className="submit-row">
-              <button className="submit-btn" onClick={handleUserSearch}>
-                Search
-              </button>
-            </div>
-            {user.isAdmin && showOrdersToAdmin && orders.length > 0 ? (
-              <OrdersList orders={orders} />
-            ) : user.isAdmin && showOrdersToAdmin ? (
-              <OperationResult
-                result={"warning"}
-                resultMessage="The selected user has no orders created."
-              />
-            ) : user.isAdmin && !showOrdersToAdmin && users.length > 0 ? (
-              <UsersList
-                users={users}
-                handleUserCardClick={handleUserCardClick}
-              />
-            ) : user.isAdmin && !showOrdersToAdmin ? (
-              <OperationResult
-                result="warning"
-                resultMessage="There are no customer users created."
-              />
-            ) : !user.isAdmin && orders.length > 0 ? (
-              <OrdersList orders={orders} />
-            ) : (
-              <OperationResult
-                result={"warning"}
-                resultMessage={"You have no orders created."}
-              />
-            )}
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
     </>
   );
 }

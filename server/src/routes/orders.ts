@@ -4,7 +4,11 @@ import { ordersController } from "../controller/orders";
 
 export const ordersRouter = Router();
 
-ordersRouter.get("/see/:id", authController.isAdmin, ordersController.getByAdmin);
+ordersRouter.get(
+  "/admin-view/list",
+  authController.isAdmin,
+  ordersController.getByAdmin
+);
 ordersRouter.get(
   "/list",
   authController.isAuthorized,

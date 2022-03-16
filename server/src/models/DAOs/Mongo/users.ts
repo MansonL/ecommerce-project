@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import { model, Model, Schema } from "mongoose";
 import { ApiError } from "../../../api/errorApi";
 import { EUsersErrors } from "../../../interfaces/EErrors";
@@ -120,8 +122,8 @@ export const customerTest: INew_User = {
   isAdmin: false,
 };
 
-const WelcomeBot = new usersModel(botData);
-const CustomerTest = new usersModel(customerTest);
+// const WelcomeBot = new usersModel(botData);
+// const CustomerTest = new usersModel(customerTest);
 
 export class MongoUsers {
   private users: Model<INew_User>;
@@ -130,25 +132,25 @@ export class MongoUsers {
     this.init();
   }
   async init() {
-    if (Config.MODE === "CLUSTER") {
-      if (cluster.isMaster) {
-        if (Config.NODE_ENV !== "test") {
-          await this.users.deleteMany({});
-          await WelcomeBot.save();
-          const customerTestId = String((await CustomerTest.save())._id);
-          await cartApi.createEmptyCart(customerTestId);
-          logger.info(`Users initialized`);
-        } else await this.users.deleteMany({});
-      }
-    } else {
-      if (Config.NODE_ENV !== "test") {
-        await this.users.deleteMany({});
-        await WelcomeBot.save();
-        const customerTestId = String((await CustomerTest.save())._id);
-        await cartApi.createEmptyCart(customerTestId);
-        logger.info(`Users initialized`);
-      } else await this.users.deleteMany({});
-    }
+    // if (Config.MODE === "CLUSTER") {
+    //   if (cluster.isMaster) {
+    //     if (Config.NODE_ENV !== "test") {
+    //       await this.users.deleteMany({});
+    //       await WelcomeBot.save();
+    //       const customerTestId = String((await CustomerTest.save())._id);
+    //       await cartApi.createEmptyCart(customerTestId);
+    //       logger.info(`Users initialized`);
+    //     } else await this.users.deleteMany({});
+    //   }
+    // } else {
+    //   if (Config.NODE_ENV !== "test") {
+    //     await this.users.deleteMany({});
+    //     await WelcomeBot.save();
+    //     const customerTestId = String((await CustomerTest.save())._id);
+    //     await cartApi.createEmptyCart(customerTestId);
+    //     logger.info(`Users initialized`);
+    //   } else await this.users.deleteMany({});
+    // }
   }
   async get(id?: string | undefined): Promise<IMongoUser[] | ApiError> {
     try {

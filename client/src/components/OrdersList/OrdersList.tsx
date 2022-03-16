@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IOrderPopulated } from "../../../../server/src/interfaces/orders";
 import { formatAddress } from "../../utils/utilities";
+import { UserContext } from "../UserProvider";
 import "./orderslist.css";
 
 interface IOrdersListProps {
@@ -9,6 +10,8 @@ interface IOrdersListProps {
 
 export function OrdersList(props: IOrdersListProps) {
   const [shownDetail, setShownDetail] = useState(-1);
+
+  const { user } = useContext(UserContext);
 
   const hideDetails = (idx: number) => {
     idx !== shownDetail ? setShownDetail(idx) : setShownDetail(-1);
@@ -46,6 +49,11 @@ export function OrdersList(props: IOrdersListProps) {
               }`}
             >
               <span style={{ display: "block", margin: ".5rem 0 0 .4rem" }}>
+                {user.isAdmin && (
+                  <>
+                    <b className="order-modify">Modify status</b> <br />
+                  </>
+                )}
                 Status:{` ${order.status}`} <br />
                 Created at: {` ${order.createdAt}`}
               </span>
@@ -76,7 +84,7 @@ export function OrdersList(props: IOrdersListProps) {
                 <span>{order.total}</span>
               </div>
               <div className="order-detail-address">
-                <b className="order-detail-modify">Modify</b>
+                {!user.isAdmin && <b className="order-modify">Modify</b>}
                 <br />
                 <b>Address selected:</b> {formatAddress(order.address)}
               </div>

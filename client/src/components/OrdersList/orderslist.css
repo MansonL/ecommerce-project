@@ -51,7 +51,7 @@ td {
   justify-content: space-between;
 }
 
-.order-detail-modify {
+.order-modify {
   font-size: 0.6rem;
   cursor: pointer;
 }
@@ -95,7 +95,7 @@ td {
   .order-detail {
     font-size: 1.2rem;
   }
-  .order-detail-modify {
+  .order-modify {
     font-size: unset;
   }
 }
@@ -113,7 +113,7 @@ td {
   .order-detail {
     font-size: 1.2rem;
   }
-  .order-detail-modify {
+  .order-modify {
     font-size: 1rem;
   }
 }

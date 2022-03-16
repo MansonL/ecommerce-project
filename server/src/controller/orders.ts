@@ -24,9 +24,12 @@ class OrdersController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const { user_id, order_id } = req.body;
+    const { user_id, order_id } = req.query as {
+      user_id: string | undefined;
+      order_id: string | undefined;
+    };
 
-    logger.info(JSON.stringify(req, null, "\t"));
+    console.log(JSON.stringify(req.query, null, "\t"));
 
     if (user_id) {
       if (isValidObjectId(user_id)) {
@@ -64,7 +67,7 @@ class OrdersController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const order_id = req.params.id;
+    const { order_id } = req.params;
     const user_id = (req.user as Express.User)._id;
     if (order_id) {
       if (isValidObjectId(order_id)) {

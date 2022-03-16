@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import { model, Model, Schema } from "mongoose";
 import moment from "moment";
 import { ApiError } from "../../../api/errorApi";
@@ -52,17 +54,17 @@ export class MongoProducts implements DBProductsClass {
   }
   async init(): Promise<void> {
     //console.log(mockProducts[0].img)
-    if (Config.MODE === "CLUSTER") {
-      if (cluster.isMaster) {
-        await this.products.deleteMany({});
-        await this.products.insertMany(mockProducts);
-        logger.info(`Mock data inserted.`);
-      }
-    } else {
-      await this.products.deleteMany({});
-      await this.products.insertMany(mockProducts);
-      logger.info(`Mock data inserted.`);
-    }
+    // if (Config.MODE === "CLUSTER") {
+    //   if (cluster.isMaster) {
+    //     await this.products.deleteMany({});
+    //     await this.products.insertMany(mockProducts);
+    //     logger.info(`Mock data inserted.`);
+    //   }
+    // } else {
+    //   await this.products.deleteMany({});
+    //   await this.products.insertMany(mockProducts);
+    //   logger.info(`Mock data inserted.`);
+    // }
   }
   async get(id?: string | undefined): Promise<IMongoProduct[] | ApiError> {
     try {

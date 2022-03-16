@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import cluster from "cluster";
 import { Model, model, Schema, Types } from "mongoose";
 import { ApiError } from "../../../api/errorApi";
@@ -57,15 +59,15 @@ export class MongoOrders implements DBOrdersClass {
   }
 
   async init(): Promise<void> {
-    if (Config.MODE === "CLUSTER") {
-      if (cluster.isMaster) {
-        await this.orders.deleteMany({});
-        logger.info(`Orders cleaned`);
-      }
-    } else {
-      await this.orders.deleteMany({});
-      logger.info(`Orders cleaned`);
-    }
+    // if (Config.MODE === "CLUSTER") {
+    //   if (cluster.isMaster) {
+    //     await this.orders.deleteMany({});
+    //     logger.info(`Orders cleaned`);
+    //   }
+    // } else {
+    //   await this.orders.deleteMany({});
+    //   logger.info(`Orders cleaned`);
+    // }
   }
 
   async get(
