@@ -72,7 +72,7 @@ export function SignUp() {
     ev.preventDefault();
     let user = { ...newUser };
     cleanEmptyProperties(user);
-    console.log(user)
+    console.log(user);
     const { error } = validation.user.validate(user);
     if (error) {
       setShowResult(true);
@@ -118,7 +118,7 @@ export function SignUp() {
           <LoadingSpinner />
         </ModalContainer>
       )}
-      <section className="body-container">
+      <main className="body-container">
         <div className="header">
           <h3 className="header-title">Sign Up</h3>
           <h5>You already have an account? Log in here.</h5>
@@ -350,7 +350,7 @@ export function SignUp() {
             </button>
           </div>
         </div>
-      </section>
+      </main>
     </>
   );
 }

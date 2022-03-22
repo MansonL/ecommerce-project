@@ -244,7 +244,7 @@ export function ProductsList(props: IProductsProps) {
         </ModalContainer>
       )}
 
-      <section className="body-container">
+      <main className="body-container">
         <div className="products-filter-bar">
           <span className="total-results">{`Showing ${products.length} products of ${products.length}`}</span>
           <div className="filter-container">
@@ -409,7 +409,7 @@ export function ProductsList(props: IProductsProps) {
             />
           )}
         </ul>
-      </section>
+      </main>
     </>
   );
 }

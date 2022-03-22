@@ -11,7 +11,7 @@ export function Home() {
 
   return (
     <React.Fragment>
-      <section className="body-container home-background">
+      <main className="body-container home-background">
         <div className="welcome-text">
           <p className="first-text">Welcome to my first</p>
           <p className="second-text">Ecommerce Project </p>
@@ -22,7 +22,7 @@ export function Home() {
         >
           Start looking
         </button>
-      </section>
+      </main>
     </React.Fragment>
   );
 }

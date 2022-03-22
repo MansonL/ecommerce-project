@@ -105,7 +105,7 @@ export function Cart() {
 
   return (
     <React.Fragment>
-      <section className="body-container">
+      <main className="body-container">
         <div className="header">
           <h3 className="header-title">Cart</h3>
         </div>
@@ -205,7 +205,7 @@ export function Cart() {
             result={"warning"}
           />
         )}
-      </section>
+      </main>
     </React.Fragment>
   );
 }

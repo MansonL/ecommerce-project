@@ -13,7 +13,7 @@ import { formatAddress } from "../../utils/utilities";
 
 export function CreateOrder() {
   const [showResult, setShowResult] = useState(false);
-  const [orderResult, setOrderResult] = useState('error' || 'success');
+  const [orderResult, setOrderResult] = useState("error" || "success");
   const [resultMsg, setResultMsg] = useState("");
 
   const { cart } = useContext(UserContext);
@@ -43,18 +43,18 @@ export function CreateOrder() {
     (address) => address.alias === selectedAddress
   )[0];
 
-  const formattedAddress = formatAddress(fullAddress)
+  const formattedAddress = formatAddress(fullAddress);
 
   const AxiosThenCallback = (response: AxiosResponse<orderResponse, any>) => {
     const data = response.data;
     setShowResult(true);
-    setOrderResult('success');
+    setOrderResult("success");
     setResultMsg(data.message);
     setLoading(false);
     document.body.style.overflow = "scroll";
     setTimeout(async () => {
       setShowResult(false);
-      setOrderResult('error');
+      setOrderResult("error");
       setResultMsg("");
     }, 2000);
   };
@@ -64,7 +64,7 @@ export function CreateOrder() {
     document.body.style.overflow = "scroll";
     console.log(JSON.stringify(error.response, null, 2));
     setShowResult(true);
-    setOrderResult('error');
+    setOrderResult("error");
     if (error.response) {
       if (error.response.status === 500) {
         setResultMsg(error.response.data.message.message);
@@ -108,7 +108,7 @@ export function CreateOrder() {
   };
 
   return (
-    <section className="body-container">
+    <main className="body-container">
       <div className="header">
         <h2 className="header-title">Order Confirmation</h2>
         <h5>
@@ -128,7 +128,7 @@ export function CreateOrder() {
         <div>
           <span>Products:</span>{" "}
           <span
-            style={{ float: "right", fontSize: "0.8rem", cursor: 'pointer' }}
+            style={{ float: "right", fontSize: "0.8rem", cursor: "pointer" }}
             onClick={modifyCart}
           >
             Modify
@@ -177,7 +177,7 @@ export function CreateOrder() {
             The <b>address</b> you selected:
           </span>
           <span
-            style={{ fontSize: "0.8rem", float: "right", cursor: 'pointer' }}
+            style={{ fontSize: "0.8rem", float: "right", cursor: "pointer" }}
             onClick={modifyAddress}
           >
             Modify
@@ -194,6 +194,6 @@ export function CreateOrder() {
           </button>
         </div>
       </div>
-    </section>
+    </main>
   );
 }

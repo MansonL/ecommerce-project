@@ -1,17 +1,10 @@
 import { UserContext } from "../../components/UserProvider";
-import {
-  Routes,
-  Link,
-  Route,
-  BrowserRouter,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Link, Route, BrowserRouter } from "react-router-dom";
 import { ProductsForm } from "../ProductsForm/ProductsForm";
 import { Home } from "../Home/Home";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Cart } from "../Cart/Cart";
 import { LogIn } from "../Login/LogIn";
-import { Chat } from "../Chat/Chat";
 import { ProductsList } from "../ProductsList/ProductsList";
 import { SignUp } from "../Signup/SignUp";
 import { AddressForm } from "../AddressForm/AddressForm";
@@ -19,6 +12,7 @@ import { AddressesList } from "../AddressesList/AddressesList";
 import { CreateOrder } from "../CreateOrder/CreateOrder";
 import "./main.css";
 import { OrdersContainer } from "../OrdersContainer/OrdersContainer";
+import { ChatContainer } from "../ChatContainer/ChatCointainer";
 
 export function Main() {
   const dropdownBtn = useRef<HTMLButtonElement>(null);
@@ -75,67 +69,61 @@ export function Main() {
 
   return (
     <BrowserRouter>
-      <div
-        className='main'
-      >
-        <div
+      <div className="container">
+        <nav
           className={`main-menu ${showSideMenu ? "main-menu-active" : ""}`}
           ref={sideMenu}
         >
-          <div className="avatar-row">
+          <ul className="avatar-row">
             <img
-              src={
-                user.avatar
-                  ? user.avatar
-                  : "/icons/avatar.png"
-              }
+              src={user.avatar ? user.avatar : "/icons/avatar.png"}
               alt=""
               className="avatar-img"
             />
             {!loggedIn ? (
               <>
-                <span className="login-logout-avatar">
+                <li className="login-logout-avatar">
                   <Link to="/login">Login</Link>
-                </span>
-                <span className="login-logout-avatar">
+                </li>
+                <li className="login-logout-avatar">
                   <Link to="/signup">SignUp</Link>
-                </span>
+                </li>
               </>
             ) : (
               <>
-                <span className="login-logout-avatar">
+                <li className="login-logout-avatar">
                   <Link to="/profile">{user.name}</Link>
-                </span>
-                <span className="login-logout-avatar" onClick={handleLogout}>
+                </li>
+                <li className="login-logout-avatar" onClick={handleLogout}>
                   <Link to="/login">Logout</Link>
-                </span>
+                </li>
               </>
             )}
-          </div>
-          <div className="menu-rows">
-            <div className="first-menu-row">
+          </ul>
+          <ul className="menu-rows">
+            <li className="first-menu-row">
               <Link to="/">Home</Link>
-            </div>
-            <div className="menu-row">
+            </li>
+            <li className="menu-row">
               <Link to="/products">Products</Link>
-            </div>
+            </li>
             {user.isAdmin && (
-              <div className="menu-row">
+              <li className="menu-row">
                 <Link to="/new-product">Products form</Link>
-              </div>
+              </li>
             )}
             {loggedIn && (
-              <div className="menu-row">
+              <li className="menu-row">
                 <Link to="/chat">Chat</Link>
-              </div>
+              </li>
             )}
-            {
-              loggedIn &&  <div className="menu-row">
+            {loggedIn && (
+              <li className="menu-row">
                 <Link to="/orders">Orders</Link>
-              </div>
-            }
-          </div>
-        </div>
+              </li>
+            )}
+          </ul>
+        </nav>
         <div className="nav-bar">
           <button
             className="main-menu-btn"
@@ -190,7 +178,7 @@ export function Main() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/new-product" element={<ProductsForm />} />
           <Route path="/login" element={<LogIn />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/chat" element={<ChatContainer />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/new-address" element={<AddressForm />} />
           <Route path="/addresses" element={<AddressesList />} />

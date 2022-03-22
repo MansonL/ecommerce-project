@@ -128,10 +128,18 @@ export function LogIn() {
           <LoadingSpinner />
         </ModalContainer>
       )}
-      <section className="body-container">
+      <main className="body-container">
         <div className="header">
           <h3 className="header-title">Log in</h3>
-          <h5>Don't you have an account? <span style={{cursor: "pointer"}} onClick={() => navigate('../signup')}>Sign up here</span></h5>
+          <h5>
+            Don't you have an account?{" "}
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("../signup")}
+            >
+              Sign up here
+            </span>
+          </h5>
         </div>
         {showResult && (
           <OperationResult result={loginResult} resultMessage={resultMsg} />
@@ -193,7 +201,7 @@ export function LogIn() {
             </button>
           </div>
         </div>
-      </section>
+      </main>
     </>
   );
 }

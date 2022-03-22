@@ -133,7 +133,7 @@ export function AddressForm() {
   };
 
   return (
-    <section className="body-container">
+    <main className="body-container">
       <div className="header">
         <h3 className="header-title">Address</h3>
       </div>
@@ -406,6 +406,6 @@ export function AddressForm() {
           </button>
         </div>
       </div>
-    </section>
+    </main>
   );
 }

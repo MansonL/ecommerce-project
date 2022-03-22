@@ -121,7 +121,7 @@ export function ProductsForm() {
 
   return (
     <>
-      <section className="body-container">
+      <main className="body-container">
         <header className="header">
           <h3 className="header-title">Upload product</h3>
           <h5>
@@ -318,7 +318,7 @@ export function ProductsForm() {
             </button>
           </div>
         </div>
-      </section>
+      </main>
     </>
   );
 }

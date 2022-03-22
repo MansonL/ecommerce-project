@@ -32,7 +32,7 @@ export function AddressesList() {
   console.log(selectedAddress);
 
   return (
-    <section className="body-container">
+    <main className="body-container">
       <div className="header">
         <h3 className="header-title">Address</h3>
         <h5>
@@ -85,6 +85,6 @@ export function AddressesList() {
           Confirm address
         </button>
       </div>
-    </section>
+    </main>
   );
 }
