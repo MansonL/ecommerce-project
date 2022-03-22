@@ -36,7 +36,7 @@ export interface IMongoPopulatedMessages {
 }
 
 /**
- * Type of Message Object after being popualted
+ * Type of Message Object after being populated
  */
 export interface IMessageSentPopulated {
   _id: ObjectId;

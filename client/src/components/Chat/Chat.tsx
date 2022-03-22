@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./chat.css";
 
 export function Chat() {
+  const [messages, setMessages] = useState([]);
+
   const autoGrow = (ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const textarea = ev.currentTarget;
     if (textarea.scrollHeight > textarea.clientHeight)

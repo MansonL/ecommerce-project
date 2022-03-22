@@ -45,44 +45,36 @@ export class MongoMessages implements DBMessagesClass {
       logger.info(`Messages initialized`);
     }
   }
-  async get(user_id: string | undefined): Promise<IMongoMessage[] | ApiError> {
+  async get(
+    user_id: string,
+    type: "latest" | "chat"
+  ): Promise<IMongoMessage[] | ApiError> {
     try {
       const docs = await this.messages.find({});
       if (docs.length > 0) {
-        if (user_id) {
-          const messages: (Document<any, any, INew_Message> &
-            INew_Message & {
-              _id: Types.ObjectId;
-            })[] = [];
-          for await (const document of docs) {
-            if (String(document.from) == user_id) {
-              const populatedDoc = await document.populate({
-                path: "to",
-                select: "username name surname _id avatar",
-              });
-              messages.push(populatedDoc);
-            } else if (String(document.to) == user_id) {
-              const populatedDoc = await document.populate({
-                path: "from",
-                select: "username name surname _id avatar",
-              });
-              messages.push(populatedDoc);
-            }
+        const messages: { [index: string]: INew_Message[] } = {};
+        docs.forEach((document) => {
+          const isInvolved =
+            document.to.toString() === user_id
+              ? "received"
+              : document.from.toString() === user_id
+              ? "sent"
+              : false;
+          if (typeof isInvolved === "string") {
+            const otherUser =
+              isInvolved === "sent"
+                ? document.to.toString()
+                : document.from.toString();
+            messages[otherUser]
+              ? messages[otherUser].push(document)
+              : (messages[otherUser] = [document]);
           }
-          return messages as IMongoMessage[];
+        });
+        if (type === "latest") {
+          for await (const documents of messages) {
+            
+          }
         } else {
-          const messages: (Document<any, any, INew_Message> &
-            INew_Message & {
-              _id: Types.ObjectId;
-            })[] = [];
-          await docs.forEach(async (document) => {
-            const populatedDoc = await document.populate({
-              path: "from to",
-              select: "username",
-            });
-            messages.push(populatedDoc);
-          });
-          return messages as IMongoMessage[];
         }
       } else {
         return ApiError.notFound(`No messages.`);
