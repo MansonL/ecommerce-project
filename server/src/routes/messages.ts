@@ -5,11 +5,6 @@ import { messagesController } from "../controller/messages";
 export const messagesRouter: e.Router = Router();
 
 messagesRouter.get(
-  "/list",
-  authController.isAdmin,
-  messagesController.getAllMessages
-);
-messagesRouter.get(
   "/list/:id",
   authController.isAuthorized,
   messagesController.getUserMessages

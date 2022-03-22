@@ -28,9 +28,6 @@ class OrdersController {
       user_id: string | undefined;
       order_id: string | undefined;
     };
-
-    console.log(JSON.stringify(req.query, null, "\t"));
-
     if (user_id) {
       if (isValidObjectId(user_id)) {
         const result: IMongoOrderPopulated[] | IOrderPopulated[] | ApiError =

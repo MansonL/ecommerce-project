@@ -16,6 +16,24 @@ import { CUDResponse } from "./others";
 }
 */
 
+/**
+ * Type of Message Object after being sent and populated. Its mainly purpose is for emailing service.
+ */
+export interface IMessageSentPopulated {
+  _id: ObjectId;
+  timestamp: string;
+  from: ObjectId;
+  to: {
+    username: string;
+  };
+  message: string;
+  type: string;
+}
+
+/**
+ * Type of Message Object populated. For sending it to the client.
+ */
+
 export interface IMongoPopulatedMessages {
   timestamp: string;
   from: {
@@ -33,20 +51,6 @@ export interface IMongoPopulatedMessages {
     _id: string;
   };
   message: string;
-}
-
-/**
- * Type of Message Object after being populated
- */
-export interface IMessageSentPopulated {
-  _id: ObjectId;
-  timestamp: string;
-  from: ObjectId;
-  to: {
-    username: string;
-  };
-  message: string;
-  type: string;
 }
 
 /**
@@ -78,7 +82,11 @@ export interface INew_Message {
  */
 export interface DBMessagesClass {
   init?(): Promise<void>;
-  get(user_id: string): Promise<IMongoMessage[] | ApiError>;
+  get(
+    user_id: string,
+    type: "latest" | "chat",
+    otherUser: string | undefined
+  ): Promise<Map<string, IMongoPopulatedMessages[]> | ApiError>;
   add(msg: INew_Message): Promise<CUDResponse | ApiError>;
 }
 

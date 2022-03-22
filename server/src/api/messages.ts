@@ -2,7 +2,7 @@ import { CUDResponse } from "../interfaces/others";
 import { MongoMessages } from "../models/DAOs/Mongo/messages";
 import { MessagesFactory } from "../models/messagesFactory";
 import { ApiError } from "./errorApi";
-import { IMongoMessage, INew_Message } from "../interfaces/messages";
+import { IMongoPopulatedMessages, INew_Message } from "../interfaces/messages";
 import { storage } from "../config/config";
 
 export class MessagesApi {
@@ -11,9 +11,12 @@ export class MessagesApi {
     this.messages = MessagesFactory.get(storage);
   }
   async getMsg(
-    user_id: string | undefined
-  ): Promise<IMongoMessage[] | ApiError> {
-    const result: IMongoMessage[] | ApiError = await this.messages.get(user_id);
+    user_id: string,
+    type: "latest" | "chat",
+    otherUser: string | undefined
+  ): Promise<Map<string, IMongoPopulatedMessages[]> | ApiError> {
+    const result: Map<string, IMongoPopulatedMessages[]> | ApiError =
+      await this.messages.get(user_id, type, otherUser);
     return result;
   }
   async addMsg(message: INew_Message): Promise<CUDResponse | ApiError> {

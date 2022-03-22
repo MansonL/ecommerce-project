@@ -5,6 +5,7 @@ import { ObjectId } from "mongodb";
 import {
   IMessageSentPopulated,
   IMongoMessage,
+  IMongoPopulatedMessages,
   INew_Message,
 } from "../interfaces/messages";
 import { CUDResponse } from "../interfaces/others";
@@ -18,28 +19,19 @@ import { logger } from "../services/logger";
  */
 
 class MessagesController {
-  async getAllMessages(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
-    const result: IMongoMessage[] | ApiError = await messagesApi.getMsg(
-      undefined
-    );
-    if (result instanceof ApiError) next(result);
-    else res.status(200).send(result);
-  }
-
   async getUserMessages(
     req: Request,
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const user_id: string = req.params.id;
+    const user_id = req.user?._id.toString() as string; // There always gonna be an user defined in request object because of the only way to access this method is passing the authorized auth controller.
+    const { user, type } = req.query as {
+      user: string;
+      type: "latest" | "chat";
+    };
     if (ObjectId.isValid(user_id)) {
-      const result: IMongoMessage[] | ApiError = await messagesApi.getMsg(
-        user_id
-      );
+      const result: Map<string, IMongoPopulatedMessages[]> | ApiError =
+        await messagesApi.getMsg(user_id, type, user);
       logger.info(result);
       if (result instanceof ApiError) next(result);
       else res.status(200).send(result);
