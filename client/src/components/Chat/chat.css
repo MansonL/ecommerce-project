@@ -85,3 +85,18 @@ textarea {
   font-size: 1rem;
   transition: all 0.2s 0.1s ease-in;
 }
+
+.new-chat-username-input {
+  width: 75%;
+  border-radius: 0.4rem;
+  border: none;
+  padding: 0.3rem;
+}
+.new-chat-username-input:active {
+  outline: 2px solid #83dbec;
+}
+
+.search-user-icon {
+  max-width: 5%;
+  
+}

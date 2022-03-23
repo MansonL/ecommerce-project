@@ -6,12 +6,12 @@ export function ChatContainer() {
     <>
       {window.innerWidth < 1024 ? (
         <main>
-          <Chat />
+          <ChatList />
         </main>
       ) : (
         <>
           <ChatList />
-          <Chat />
+          <Chat type="new" />
         </>
       )}
     </>

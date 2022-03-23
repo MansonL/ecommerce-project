@@ -22,17 +22,41 @@ import moment from "moment";
 
 class UsersController {
   async getOne(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const user_email = req.params.email;
+    const user_email = req.params.username;
     logger.info(`[PATH]: Inside User Controller`);
     if (user_email) {
       const result: IMongoUser | ApiError = await usersApi.getUserByUsername(
         user_email
       );
-      console.log(result);
       if (result instanceof ApiError) next(result);
       else res.status(200).send([result]);
     } else {
       next(ApiError.badRequest(`No user email submitted`));
+    }
+  }
+
+  async checkUserExistance(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const { fullname } = req.query as {
+      fullname: string;
+    };
+    logger.info(`[PATH]: Inside User Controller`);
+    if (fullname) {
+      const result: IMongoUser[] | ApiError = await usersApi.getUserByFullname(
+        fullname
+      );
+      if (result instanceof ApiError) next(result);
+      else {
+        const publicData = {
+          _id: result._id.toString(),
+          avatar: result.avatar,
+        };
+      }
+    } else {
+      next(ApiError.badRequest(`Couldn't find the user.`));
     }
   }
 

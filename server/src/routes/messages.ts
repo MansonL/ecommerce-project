@@ -9,6 +9,11 @@ messagesRouter.get(
   authController.isAuthorized,
   messagesController.getUserMessages
 );
+messagesRouter.get(
+  "/list",
+  authController.isAuthorized,
+  messagesController.getUserMessages
+);
 messagesRouter.post(
   "/save",
   authController.isAuthorized,

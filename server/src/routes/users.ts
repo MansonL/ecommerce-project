@@ -5,7 +5,16 @@ import { usersController } from "../controller/users";
 export const usersRouter: e.Router = Router();
 
 usersRouter.get("/list", authController.isAdmin, usersController.getAll);
-usersRouter.get("/list/?:email", authController.isAdmin, usersController.getOne);
+usersRouter.get(
+  "/list/:username",
+  authController.isAdmin,
+  usersController.getOne
+);
+usersRouter.get(
+  "/exists/:username",
+  authController.isAuthorized,
+  usersController.checkUserExistance
+);
 usersRouter.post("/save", usersController.save);
 usersRouter.post(
   "/address",

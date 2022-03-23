@@ -204,6 +204,20 @@ export class MongoUsers {
     }
   }
 
+  async getByFullname(fullname: string): Promise<IMongoUser | ApiError> {
+    try {
+      const docs = await this.users.find({});
+      if (docs.length > 0) {
+        const matchedUsers = docs.filter(user => {
+          const userFullname = `${user.name} ${user.surname}`;
+          return /([ ]{1,3})|(Lautaro[ ]{1,2}Manson)|(Manson\s{1,2})/
+        })
+      } else return ApiError.notFound(EUsersErrors.UserNotFound);
+    } catch (error) {
+      return ApiError.internalError(`An error occured.`);
+    }
+  }
+
   async add(user: INew_User): Promise<CUDResponse | ApiError> {
     try {
       const doc = await this.users.create(user);
