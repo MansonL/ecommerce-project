@@ -3,9 +3,18 @@ import { ApiError } from "../api/errorApi";
 import { CUDResponse } from "./others";
 
 /**
- *
+ * Users data for requests from other users without admin permissions.
+ */
+export interface IUserShortInfo {
+  _id: string;
+  username: string;
+  name: string;
+  surname: string;
+  avatar: string;
+}
+
+/**
  * Type of User Object to be stored and query from Mongo.
- *
  */
 export interface IMongoUser extends Document, INew_User {
   _id: ObjectId;

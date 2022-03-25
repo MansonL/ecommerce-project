@@ -6,6 +6,7 @@ import { EUsersErrors } from "../../../interfaces/EErrors";
 import {
   IMongoUser,
   INew_User,
+  IUserShortInfo,
   UserAddresses,
 } from "../../../interfaces/users";
 import { CUDResponse } from "../../../interfaces/others";
@@ -204,14 +205,27 @@ export class MongoUsers {
     }
   }
 
-  async getByFullname(fullname: string): Promise<IMongoUser | ApiError> {
+  async getByFullname(fullname: string): Promise<IUserShortInfo[] | ApiError> {
     try {
       const docs = await this.users.find({});
       if (docs.length > 0) {
-        const matchedUsers = docs.filter(user => {
+        const matchedUsers = docs.filter((user) => {
           const userFullname = `${user.name} ${user.surname}`;
-          return /([ ]{1,3})|(Lautaro[ ]{1,2}Manson)|(Manson\s{1,2})/
-        })
+          const fullnameToMatch = fullname.split(" ");
+          const pattern = `/${fullnameToMatch[0]}[ ]{0,2}|${fullnameToMatch[0]}[ ]${fullnameToMatch[1]}|${fullnameToMatch[1]}[ ]{0,2}/`;
+          const regex = new RegExp(pattern, "g");
+          return regex.test(userFullname);
+        });
+        const clearedUserInfo: IUserShortInfo[] = matchedUsers.map((user) => ({
+          _id: user._id as string,
+          username: user.username,
+          name: user.name,
+          surname: user.surname,
+          avatar: user.avatar as string,
+        }));
+        return clearedUserInfo.length > 0
+          ? clearedUserInfo
+          : ApiError.notFound(`No users matching your search.`);
       } else return ApiError.notFound(EUsersErrors.UserNotFound);
     } catch (error) {
       return ApiError.internalError(`An error occured.`);

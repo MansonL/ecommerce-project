@@ -86,6 +86,10 @@ textarea {
   transition: all 0.2s 0.1s ease-in;
 }
 
+.search-user-container {
+  position: relative;
+}
+
 .new-chat-username-input {
   width: 75%;
   border-radius: 0.4rem;
@@ -98,5 +102,9 @@ textarea {
 
 .search-user-icon {
   max-width: 5%;
-  
+}
+
+.searched-users {
+  position: absolute;
+  bottom: 0;
 }

@@ -14,13 +14,8 @@ export function Chat(props: IChatProps) {
   const { user, token } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [username, setUsername] = useState("");
-  const [showResult, setShowResult] = useState(false);
-  const [userSearchResult, setUserSearchResult] = useState(
-    "error" || "success" || "warning"
-  );
-  const [resultMsg, setResultMsg] = useState("");
 
-  const handleMessageChange = (ev: React.ChangeEvent<HTMLInputElement>) =>
+  const handleMessageChange = (ev: React.ChangeEvent<HTMLTextAreaElement>) =>
     setMessage(ev.target.value);
 
   const handleUsernameChange = (ev: React.ChangeEvent<HTMLInputElement>) =>
@@ -39,17 +34,13 @@ export function Chat(props: IChatProps) {
 
   const searchUser = () => {
     axios
-      .get(`http://localhost:8080/api/users/exists/${username}`, {
+      .get(`http://localhost:8080/api/users/exists?fullname=${username}`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
-        setShowResult(true);
-        setUserSearchResult("success");
-        setResultMsg(response.data.message);
-      });
+      .then((response) => {});
   };
 
   return (
@@ -78,7 +69,12 @@ export function Chat(props: IChatProps) {
             })}
           </ul>
           <footer className="main-chat-footer">
-            <textarea name="message" onKeyUp={autoGrow} value={message} />
+            <textarea
+              name="message"
+              onKeyUp={autoGrow}
+              value={message}
+              onChange={handleMessageChange}
+            />
             <button
               className="send-msg-btn"
               onClick={() => props.submitMessage(message)}
@@ -97,13 +93,27 @@ export function Chat(props: IChatProps) {
               alignItems: "center",
             }}
           >
-            <input
-              type="email"
-              className="new-chat-username-input"
-              placeholder="Input the email of the user you want to chat to..."
-              value={username}
-              onChange={handleUsernameChange}
-            />
+            <div className="search-user-container">
+              <input
+                type="email"
+                className="new-chat-username-input"
+                placeholder="Input the email of the user you want to chat to..."
+                value={username}
+                onChange={handleUsernameChange}
+              />
+              <div className="searched-users">
+                <ul>
+                  <li className="search-users-result">
+                    <img
+                      src="/icons/avatar.png"
+                      alt="user avatar"
+                      className="user-img"
+                    />
+                    <span className="user-fullname">Lautaro Manson</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <img
               src="/icons/search.png"
               alt="search icon"

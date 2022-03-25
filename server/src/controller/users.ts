@@ -5,6 +5,7 @@ import { usersApi } from "../api/users";
 import {
   IMongoUser,
   INew_User,
+  IUserShortInfo,
   UserAddresses,
   UserInfo,
 } from "../interfaces/users";
@@ -44,19 +45,13 @@ class UsersController {
       fullname: string;
     };
     logger.info(`[PATH]: Inside User Controller`);
-    if (fullname) {
-      const result: IMongoUser[] | ApiError = await usersApi.getUserByFullname(
-        fullname
-      );
+    if (fullname && fullname.split(" ").length < 3) {
+      const result: IUserShortInfo[] | ApiError =
+        await usersApi.getUserByFullname(fullname);
       if (result instanceof ApiError) next(result);
-      else {
-        const publicData = {
-          _id: result._id.toString(),
-          avatar: result.avatar,
-        };
-      }
+      else res.status(200).send(result);
     } else {
-      next(ApiError.badRequest(`Couldn't find the user.`));
+      next(ApiError.badRequest(`No user matching your search.`));
     }
   }
 
