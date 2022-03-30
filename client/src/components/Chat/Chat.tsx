@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { IMongoPopulatedMessages } from "../../../../server/src/interfaces/messages";
+import { IUserShortInfo } from "../../../../server/src/interfaces/users";
 import { UserContext } from "../UserProvider";
 import "./chat.css";
 
@@ -14,6 +15,7 @@ export function Chat(props: IChatProps) {
   const { user, token } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [username, setUsername] = useState("");
+  const [users, setUsers] = useState<IUserShortInfo[]>([]);
 
   const handleMessageChange = (ev: React.ChangeEvent<HTMLTextAreaElement>) =>
     setMessage(ev.target.value);

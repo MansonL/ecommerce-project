@@ -48,9 +48,12 @@ export class MongoMessages implements DBMessagesClass {
   }
   async get(
     user_id: string,
-    type: "latest" | "chat",
     otherUser: string | undefined
-  ): Promise<Map<string, IMongoPopulatedMessages[]> | ApiError> {
+  ): Promise<
+    | Map<string, IMongoPopulatedMessages[]>
+    | IMongoPopulatedMessages[]
+    | ApiError
+  > {
     try {
       const docs = (await this.messages
         .find({})
@@ -59,7 +62,8 @@ export class MongoMessages implements DBMessagesClass {
           "username name surname avatar _id"
         )) as IMongoPopulatedMessages[];
       if (docs.length > 0) {
-        const messages = new Map<string, IMongoPopulatedMessages[]>();
+        const latestMessages = new Map<string, IMongoPopulatedMessages[]>();
+        const chatMessages: IMongoPopulatedMessages[] = [];
         docs.forEach((document) => {
           const isInvolved =
             document.to.toString() === user_id
@@ -73,29 +77,28 @@ export class MongoMessages implements DBMessagesClass {
               (document.to.toString() === otherUser ||
                 document.from.toString() === otherUser)
             ) {
-              messages.has(otherUser)
-                ? messages.get(otherUser)?.push(document)
-                : messages.set(otherUser, [document]);
+              chatMessages.push(document);
             } else if (!otherUser) {
               const otherUser =
                 isInvolved === "received"
                   ? document.from.toString()
                   : document.to.toString();
-              messages.has(otherUser)
-                ? messages.get(otherUser)?.push(document)
-                : messages.set(otherUser, [document]);
+              latestMessages.has(otherUser)
+                ? latestMessages.get(otherUser)?.push(document)
+                : latestMessages.set(otherUser, [document]);
             }
           }
         });
-        if (type === "latest") {
-          messages.forEach((conversation, otherUser) => {
-            const lastMessage = conversation.pop() as IMongoPopulatedMessages; // This line is due to we have already checked that this array won't be empty, would be empty if we were creating a map of messages array with every user, but we're doing it only with the users the user that hitted this method has chatted.
-            messages.set(otherUser, [lastMessage]);
-          });
-          return messages;
-        } else {
-          return messages;
-        }
+        if (!otherUser) {
+          if (latestMessages.size > 0) {
+            latestMessages.forEach((conversation, otherUser) => {
+              const lastMessage = conversation.pop() as IMongoPopulatedMessages; // This line is due to we have already checked that this array won't be empty, would be empty if we were creating a map of messages array with every user, but we're doing it only with the users the user that hitted this method has chatted.
+              latestMessages.set(otherUser, [lastMessage]);
+            });
+            return latestMessages;
+          } else return ApiError.notFound(`No messages.`);
+        } else if (chatMessages.length > 0) return chatMessages;
+        else return ApiError.notFound(`No messages.`);
       } else {
         return ApiError.notFound(`No messages.`);
       }

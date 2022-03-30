@@ -4,13 +4,13 @@ import { ApiError } from "../api/errorApi";
 import { ObjectId } from "mongodb";
 import {
   IMessageSentPopulated,
-  IMongoMessage,
   IMongoPopulatedMessages,
   INew_Message,
 } from "../interfaces/messages";
 import { CUDResponse } from "../interfaces/others";
 import { EmailUtilities, htmlFooter, htmlGeneral } from "../utils/emails";
 import { logger } from "../services/logger";
+import { EUsersErrors } from "../interfaces/EErrors";
 
 /**
  *
@@ -25,17 +25,32 @@ class MessagesController {
     next: NextFunction
   ): Promise<void> {
     const user_id = req.user?._id.toString() as string; // There always gonna be an user defined in request object because of the only way to access this method is passing the authorized auth controller.
-    const { user, type } = req.query as {
-      user: string;
-      type: "latest" | "chat";
+    const { user } = req.query as {
+      user: string | undefined;
     };
     if (ObjectId.isValid(user_id)) {
-      const result: Map<string, IMongoPopulatedMessages[]> | ApiError =
-        await messagesApi.getMsg(user_id, type, user);
-      logger.info(result);
-      if (result instanceof ApiError) next(result);
-      else res.status(200).send(result);
-    }
+      if (user) {
+        if (ObjectId.isValid(user)) {
+          const result: IMongoPopulatedMessages[] | ApiError =
+            (await messagesApi.getMsg(user_id, user)) as
+              | IMongoPopulatedMessages[]
+              | ApiError;
+          // This line is just cause inside the model we already know that if there's an user specified in the query, the answer is gonna be the array or an ApiError.
+          logger.info(result);
+          if (result instanceof ApiError) res.send(result);
+          else res.status(200).send(result);
+        } else res.send(ApiError.badRequest(EUsersErrors.UserNotFound));
+      } else {
+        const result: Map<string, IMongoPopulatedMessages[]> | ApiError =
+          (await messagesApi.getMsg(user_id, undefined)) as
+            | Map<string, IMongoPopulatedMessages[]>
+            | ApiError;
+        // This line is just cause inside the model we already know that if there's no user specified in the query, the answer is gonna be the map or an ApiError.
+        logger.info(result);
+        if (result instanceof ApiError) next(result);
+        else res.status(200).send(result);
+      }
+    } else res.send(ApiError.badRequest(EUsersErrors.UserNotFound));
   }
 
   async save(req: Request, res: Response, next: NextFunction): Promise<void> {

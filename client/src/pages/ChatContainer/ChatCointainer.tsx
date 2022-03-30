@@ -11,7 +11,8 @@ export function ChatContainer() {
 
   const { user, token, loggedIn } = useContext(UserContext);
   const [chats, setChats] = useState<Map<string, IMongoPopulatedMessages[]>>();
-
+  const [selectedChat, setSelectedChat] = useState([])
+  const [messages, setMessages] = useState<IMongoPopulatedMessages[] | boolean>(false);
 
   const [showNewChat, setShowNewChat] = useState(false);
 
@@ -26,7 +27,7 @@ export function ChatContainer() {
 
   const fetchChats = () => {
     axios
-      .get("http://localhost:8080/api/messages/list", {
+      .get<Map<string, IMongoPopulatedMessages[]>>("http://localhost:8080/api/messages/list", {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -52,6 +53,31 @@ export function ChatContainer() {
     setShowResult(false);
   };
 
+  const chatSelectionHandler = (user_id: string) => {
+    const selectedUserLatestMsgs = chats?.forEach((conversation, user, map) => {
+      if(user === user_id && conversation)
+      setMessages(conversation)
+    })
+    axios.get<IMongoPopulatedMessages[]>(`http://localhost:8080/api/messages/list?user=${user_id}`, {
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${token}`
+        }
+      }
+    ).then(response => {
+      const data = response.data;
+      setMessages(data);
+    }).catch(error => {
+      setShowResult(true);
+      setFetchResult(
+        `${
+          error.response.data.message === "No messages." ? "warning" : "error"
+        }`
+      );
+      setResultMsg(error.response.data.message);
+    });
+  }
+
   useEffect(() => {
     if (!loggedIn) navigate("../login");
     else fetchChats();
@@ -61,7 +87,7 @@ export function ChatContainer() {
     <>
       {window.innerWidth < 1024 ? (
         <main>
-          <ChatList />
+          <ChatList chats={chats} chatSelectionHandler={chatSelectionHandler}/>
         </main>
       ) : (
         <>
@@ -75,12 +101,17 @@ export function ChatContainer() {
           </div>
         </>
       ) : showNewChat && user.isAdmin ? (
-        <Chat type="new" />
-      ) : <>
-          <ChatList />
+        <Chat type="new" messages={messages} submitMessage/>
+      ) : user.isAdmin ? 
+      (<>
+          <div className="no-msgs-container">
+            <button className="submit-btn" onClick={newChatHandler}>
+              New chat
+            </button>
+          </div>
+          <ChatList chats={chats} chatSelectionHandler={chatSelectionHandler}/>
           <Chat type="new" />
         </>
-      )}
+      ) : <></>}
     </>
   );
-}

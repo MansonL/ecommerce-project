@@ -84,9 +84,12 @@ export interface DBMessagesClass {
   init?(): Promise<void>;
   get(
     user_id: string,
-    type: "latest" | "chat",
     otherUser: string | undefined
-  ): Promise<Map<string, IMongoPopulatedMessages[]> | ApiError>;
+  ): Promise<
+    | Map<string, IMongoPopulatedMessages[]>
+    | IMongoPopulatedMessages[]
+    | ApiError
+  >;
   add(msg: INew_Message): Promise<CUDResponse | ApiError>;
 }
 

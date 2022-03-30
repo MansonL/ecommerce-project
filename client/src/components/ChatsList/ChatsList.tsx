@@ -8,57 +8,53 @@ import { UserContext } from "../UserProvider";
 import "./chatslist.css";
 
 interface IChatListProps {
-  chats: Map<string, IMongoPopulatedMessages[]>;
-
+  chats: Map<string, IMongoPopulatedMessages[]> | undefined;
+  chatSelectionHandler: (selected: string) => void;
 }
 
-export function ChatList() {
-
-  
-
-
-
+export function ChatList(props: IChatListProps) {
   return (
     <>
-       : (
-        <div className="chats-list">
-          <header>
-            <h5 className="chats-header">Chats</h5>
-          </header>
-          <section className="chats">
-            <ul>
-              {(function () {
-                const elements: JSX.Element[] = [];
-                chats?.forEach((conversations, user, map) => {
-                  const otherUser =
-                    conversations[0].from._id === user
-                      ? conversations[0].from
-                      : conversations[0].to;
-                  elements.push(
-                    <>
-                      <li className="chat">
-                        <img
-                          src={otherUser.avatar}
-                          alt="user avatar"
-                          className="user-img"
-                        />
-                        <div className="user-info-container">
-                          <span className="user-name">{`${otherUser.name} ${otherUser.surname}`}</span>
-                          <span className="chat-last-message">
-                            {conversations[0].message}
-                          </span>
-                        </div>
-                      </li>
-                      <div className="user-chat-divisor" />
-                    </>
-                  );
-                });
-                return elements;
-              })()}
-            </ul>
-          </section>
-        </div>
-      )}
+      <div className="chats-list">
+        <header>
+          <h5 className="chats-header">Chats</h5>
+        </header>
+        <section className="chats">
+          <ul>
+            {(function () {
+              const elements: JSX.Element[] = [];
+              props.chats?.forEach((conversations, user, map) => {
+                const otherUser =
+                  conversations[0].from._id === user
+                    ? conversations[0].from
+                    : conversations[0].to;
+                elements.push(
+                  <>
+                    <li
+                      className="chat"
+                      onClick={() => props.chatSelectionHandler(user)}
+                    >
+                      <img
+                        src={otherUser.avatar}
+                        alt="user avatar"
+                        className="user-img"
+                      />
+                      <div className="user-info-container">
+                        <span className="user-name">{`${otherUser.name} ${otherUser.surname}`}</span>
+                        <span className="chat-last-message">
+                          {conversations[0].message}
+                        </span>
+                      </div>
+                    </li>
+                    <div className="user-chat-divisor" />
+                  </>
+                );
+              });
+              return elements;
+            })()}
+          </ul>
+        </section>
+      </div>
     </>
   );
 }

@@ -12,11 +12,16 @@ export class MessagesApi {
   }
   async getMsg(
     user_id: string,
-    type: "latest" | "chat",
     otherUser: string | undefined
-  ): Promise<Map<string, IMongoPopulatedMessages[]> | ApiError> {
-    const result: Map<string, IMongoPopulatedMessages[]> | ApiError =
-      await this.messages.get(user_id, type, otherUser);
+  ): Promise<
+    | Map<string, IMongoPopulatedMessages[]>
+    | IMongoPopulatedMessages[]
+    | ApiError
+  > {
+    const result:
+      | Map<string, IMongoPopulatedMessages[]>
+      | IMongoPopulatedMessages[]
+      | ApiError = await this.messages.get(user_id, otherUser);
     return result;
   }
   async addMsg(message: INew_Message): Promise<CUDResponse | ApiError> {
