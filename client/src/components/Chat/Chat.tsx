@@ -8,7 +8,7 @@ import "./chat.css";
 interface IChatProps {
   type: "new" | "created";
   messages: IMongoPopulatedMessages[];
-  submitMessage: (message: string) => void;
+  submitMessage: (message: string, user_id: string) => void;
 }
 
 export function Chat(props: IChatProps) {
@@ -36,13 +36,16 @@ export function Chat(props: IChatProps) {
 
   const searchUser = () => {
     axios
-      .get(`http://localhost:8080/api/users/exists?fullname=${username}`, {
+      .get<IUserShortInfo[]>(`http://localhost:8080/api/users/exists?fullname=${username}`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {});
+      .then((response) => {
+        const searchedUsers = response.data;
+        setUsers(searchedUsers);
+      });
   };
 
   return (
@@ -79,7 +82,7 @@ export function Chat(props: IChatProps) {
             />
             <button
               className="send-msg-btn"
-              onClick={() => props.submitMessage(message)}
+              onClick={() => props.submitMessage(message, otherUser._id)}
             >
               Send
             </button>

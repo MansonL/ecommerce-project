@@ -118,7 +118,7 @@ class OrdersController {
       if (result instanceof ApiError) next(result);
       else {
         const user = (
-          (await usersApi.getUser(user_id.toString())) as IMongoUser[]
+          (await usersApi.getUsers(user_id.toString())) as IMongoUser[]
         )[0];
         const customerTo = user.username;
         const customerSubject = `[NEW ORDER]: You have created a new order at Ecommerce.`;

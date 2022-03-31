@@ -1,7 +1,12 @@
 import { UsersFactory } from "../models/usersFactory";
 import { MongoUsers } from "../models/DAOs/Mongo/users";
 import { ApiError } from "./errorApi";
-import { IMongoUser, INew_User, IUserShortInfo, UserAddresses } from "../interfaces/users";
+import {
+  IMongoUser,
+  INew_User,
+  IUserShortInfo,
+  UserAddresses,
+} from "../interfaces/users";
 import { CUDResponse } from "../interfaces/others";
 import { storage } from "../config/config";
 
@@ -10,8 +15,10 @@ export class UsersApi {
   constructor() {
     this.users = UsersFactory.get(storage);
   }
-  async getUsers(): Promise<IMongoUser[] | ApiError> {
-    const result: IMongoUser[] | ApiError = await this.users.get();
+  async getUsers(
+    user_id?: string
+  ): Promise<IMongoUser[] | ApiError> {
+    const result: IMongoUser[] | ApiError = await this.users.get(user_id);
     return result;
   }
   async getUserByUsername(username: string): Promise<IMongoUser | ApiError> {
@@ -26,7 +33,9 @@ export class UsersApi {
     return result;
   }
 
-  async getUserByFullname(fullname: string): Promise<IUserShortInfo[] | ApiError> {
+  async getUserByFullname(
+    fullname: string
+  ): Promise<IUserShortInfo[] | ApiError> {
     const result: IUserShortInfo[] | ApiError = await this.users.getByFullname(
       fullname
     );

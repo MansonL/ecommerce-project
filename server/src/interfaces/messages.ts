@@ -72,7 +72,7 @@ export interface INew_Message {
   from: ObjectId;
   to: ObjectId;
   message: string;
-  type: string;
+  type: "user" | "bot";
 }
 
 /**
