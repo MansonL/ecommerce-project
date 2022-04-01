@@ -4,6 +4,7 @@ import { ObjectId } from "mongodb";
 import { Document } from "mongoose";
 import { ApiError } from "../api/errorApi";
 import { CUDResponse } from "./others";
+import { IUserShortInfo } from "./users";
 
 /**
  * 
@@ -36,20 +37,8 @@ export interface IMessageSentPopulated {
 
 export interface IMongoPopulatedMessages {
   timestamp: string;
-  from: {
-    username: string;
-    name: string;
-    surname: string;
-    avatar: string;
-    _id: string;
-  };
-  to: {
-    username: string;
-    name: string;
-    surname: string;
-    avatar: string;
-    _id: string;
-  };
+  from: IUserShortInfo;
+  to: IUserShortInfo;
   message: string;
 }
 

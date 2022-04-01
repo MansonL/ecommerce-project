@@ -213,7 +213,7 @@ export class MongoUsers {
           const userFullname = `${user.name} ${user.surname}`;
           const fullnameToMatch = fullname.split(" ");
           const pattern = `/${fullnameToMatch[0]}[ ]{0,2}|${fullnameToMatch[0]}[ ]${fullnameToMatch[1]}|${fullnameToMatch[1]}[ ]{0,2}/`;
-          const regex = new RegExp(pattern, "g");
+          const regex = new RegExp(pattern, "gi");
           return regex.test(userFullname);
         });
         const clearedUserInfo: IUserShortInfo[] = matchedUsers.map((user) => ({

@@ -11,7 +11,7 @@ usersRouter.get(
   usersController.getOne
 );
 usersRouter.get(
-  "/exists/:username",
+  "/exists",
   authController.isAuthorized,
   usersController.checkUserExistance
 );

@@ -1,3 +1,6 @@
 .chat-container {
-    
+    display: flex;
+    column-gap: 1.5rem;
+    width: 95%;
+    margin: auto;
 }

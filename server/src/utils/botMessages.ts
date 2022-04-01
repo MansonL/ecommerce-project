@@ -25,7 +25,7 @@ export const botAnswer = async (
           timestamp: moment().format("YYYY-MM-DD HH:mm:ss"),
           from: BOTID,
           to: new Types.ObjectId(user_id),
-          type: "system",
+          type: "bot",
           message: JSON.stringify(result, null, "\t"),
         });
         if (result2 instanceof ApiError) return result2.message;
@@ -44,7 +44,7 @@ export const botAnswer = async (
           timestamp: moment().format("YYYY-MM-DD HH:mm:ss"),
           from: BOTID,
           to: new Types.ObjectId(user_id),
-          type: "system",
+          type: "bot",
           message: JSON.stringify(result, null, "\t"),
         });
         if (result2 instanceof ApiError) return result2.message;
@@ -62,7 +62,7 @@ export const botAnswer = async (
           timestamp: moment().format("YYYY-MM-DD HH:mm:ss"),
           from: BOTID,
           to: new Types.ObjectId(user_id),
-          type: "system",
+          type: "bot",
           message: JSON.stringify(result, null, "\t"),
         });
         if (result2 instanceof ApiError) return result2.message;

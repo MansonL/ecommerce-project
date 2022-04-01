@@ -2274,3 +2274,1665 @@ Mar-22-2022 23:40:29 | [31merror[39m : Error: 400. Message: You must be logged
     at new Promise (<anonymous>)
     at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
     at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:04:59 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:08:19 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:32:38 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:32:49 | [31merror[39m : Error: 404. Message: No messages.. Stack: Error: No messages.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoMessages.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:103:25)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:5:58)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Mar-31-2022 23:40:41 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:41:08 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:41:11 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:41:11 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:41:41 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:41:48 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:41:52 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:41:59 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:41:59 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:48:57 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:48:57 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:50:43 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:50:43 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:53:59 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:53:59 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:55:07 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Mar-31-2022 23:55:07 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:56:37 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:56:39 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:59:09 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:59:47 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:59:50 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:59:57 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Mar-31-2022 23:59:59 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:00:01 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:00:11 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:00:17 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:00:19 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:00:25 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:00:34 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:00:36 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:00:47 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:01:35 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:01:35 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:01:35 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:01:55 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:01:55 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:02:25 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:02:38 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:02:54 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:02:54 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:02:56 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:02:56 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:03:49 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:03:49 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:05:10 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:05:10 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:05:30 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:05:30 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:06:40 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:06:40 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:06:53 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:06:53 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:07:09 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:07:09 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:07:39 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:07:39 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:07:50 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:07:50 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:10:18 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:10:18 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:11:23 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:11:23 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:18:02 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:18:02 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:20:16 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:20:16 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:22:25 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:22:25 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:22:57 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:22:57 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:23:29 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:23:29 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:24:05 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:24:05 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:24:07 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:24:07 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:24:51 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:24:51 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:25:36 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:25:36 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:25:54 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:25:54 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:27:36 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:27:36 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:27:43 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:27:43 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:27:52 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:27:52 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:28:31 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:28:31 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:29:07 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:29:07 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:29:21 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:29:21 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:29:51 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:29:51 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:31:05 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:31:05 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:31:49 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:31:49 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:32:29 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:32:29 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:33:07 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:33:07 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:34:28 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:34:30 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:34:47 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:35:09 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:35:10 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:35:27 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:35:28 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:35:34 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:35:37 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:35:37 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:36:56 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:36:56 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:39:03 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:39:03 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:42:30 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:42:30 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:56:23 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:56:23 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:56:52 | [31merror[39m : Error: 404. Message: No messages.. Stack: Error: No messages.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoMessages.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:103:25)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:5:58)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 00:58:05 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:58:05 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:59:10 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 00:59:10 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 00:59:27 | [31merror[39m : Error: 404. Message: No messages.. Stack: Error: No messages.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoMessages.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:103:25)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:5:58)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:01:18 | [31merror[39m : Error: 404. Message: No messages.. Stack: Error: No messages.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoMessages.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:103:25)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:01:21 | [31merror[39m : Error: 404. Message: No users matching your search.. Stack: Error: No users matching your search.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:228:22)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:6:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:02:05 | [31merror[39m : Error: 404. Message: No users matching your search.. Stack: Error: No users matching your search.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:228:22)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:6:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:09:31 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 01:09:31 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 01:09:46 | [31merror[39m : Error: 404. Message: No messages.. Stack: Error: No messages.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoMessages.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:103:25)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:09:51 | [31merror[39m : Error: 404. Message: No users matching your search.. Stack: Error: No users matching your search.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:228:22)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:6:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:09:53 | [31merror[39m : Error: 404. Message: No users matching your search.. Stack: Error: No users matching your search.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:228:22)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:6:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:09:54 | [31merror[39m : Error: 404. Message: No users matching your search.. Stack: Error: No users matching your search.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:228:22)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:6:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:09:54 | [31merror[39m : Error: 404. Message: No users matching your search.. Stack: Error: No users matching your search.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:228:22)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:6:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:10:30 | [31merror[39m : Error: 404. Message: No users matching your search.. Stack: Error: No users matching your search.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:228:22)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:6:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:10:32 | [31merror[39m : Error: 404. Message: No users matching your search.. Stack: Error: No users matching your search.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:228:22)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:6:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:11:40 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 01:11:40 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 01:11:51 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 01:12:00 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 01:12:27 | [31merror[39m : Error: 404. Message: No messages.. Stack: Error: No messages.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoMessages.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:103:25)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:13:43 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 01:13:43 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 01:13:54 | [31merror[39m : Error: 404. Message: No messages.. Stack: Error: No messages.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoMessages.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:103:25)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:15:16 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:34:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:30:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at login (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:21:16)
+Apr-01-2022 01:15:16 | [31merror[39m : Error: 400. Message: You must be logged in.. Stack: Error: You must be logged in.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.badRequest (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:23:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:133:34
+    at module.exports (D:\ESTUDIO\ecommerce\server\node_modules\jsonwebtoken\verify.js:53:12)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:129:13
+    at Generator.next (<anonymous>)
+    at D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:4:12)
+    at isAuthorized (D:\ESTUDIO\ecommerce\server\src\controller\auth.ts:112:16)
+Apr-01-2022 01:15:27 | [31merror[39m : Error: 404. Message: No messages.. Stack: Error: No messages.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoMessages.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:103:25)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\messages.ts:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+Apr-01-2022 01:15:43 | [31merror[39m : Error: 404. Message: No users matching your search.. Stack: Error: No users matching your search.
+    at new ApiError (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:14:11)
+    at Function.ApiError.notFound (D:\ESTUDIO\ecommerce\server\src\api\errorApi.ts:26:12)
+    at MongoUsers.<anonymous> (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:228:22)
+    at Generator.next (<anonymous>)
+    at fulfilled (D:\ESTUDIO\ecommerce\server\src\models\DAOs\Mongo\users.ts:6:58)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)

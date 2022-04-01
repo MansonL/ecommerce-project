@@ -8,7 +8,8 @@ import "./chat.css";
 interface IChatProps {
   type: "new" | "created";
   messages: IMongoPopulatedMessages[];
-  submitMessage: (message: string, user_id: string) => void;
+  submitMessage: (message: string) => void;
+  otherUser: IUserShortInfo | undefined;
 }
 
 export function Chat(props: IChatProps) {
@@ -29,19 +30,17 @@ export function Chat(props: IChatProps) {
       textarea.style.height = `${textarea.scrollHeight}px`;
   };
 
-  const otherUser =
-    props.messages[0].from._id === user._id
-      ? props.messages[0].to
-      : props.messages[0].from;
-
   const searchUser = () => {
     axios
-      .get<IUserShortInfo[]>(`http://localhost:8080/api/users/exists?fullname=${username}`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get<IUserShortInfo[]>(
+        `http://localhost:8080/api/users/exists?fullname=${username}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         const searchedUsers = response.data;
         setUsers(searchedUsers);
@@ -50,15 +49,15 @@ export function Chat(props: IChatProps) {
 
   return (
     <>
-      {props.type === "created" ? (
+      {props.type === "created" && props.otherUser ? (
         <div className="main-chat">
           <header className="main-chat-header">
-            <h1>{`${otherUser.name} ${otherUser.surname}`}</h1>
+            <h1>{`${props.otherUser.name} ${props.otherUser.surname}`}</h1>
           </header>
           <ul className="msgs-container">
             {props.messages.map((message) => {
               const sentOrReceivedClassname =
-                message.to._id === otherUser._id
+                message.to._id === props.otherUser?._id
                   ? "sent-msg-container"
                   : "received-msg-container";
               return (
@@ -82,7 +81,7 @@ export function Chat(props: IChatProps) {
             />
             <button
               className="send-msg-btn"
-              onClick={() => props.submitMessage(message, otherUser._id)}
+              onClick={() => props.submitMessage(message)}
             >
               Send
             </button>
@@ -108,14 +107,18 @@ export function Chat(props: IChatProps) {
               />
               <div className="searched-users">
                 <ul>
-                  <li className="search-users-result">
-                    <img
-                      src="/icons/avatar.png"
-                      alt="user avatar"
-                      className="user-img"
-                    />
-                    <span className="user-fullname">Lautaro Manson</span>
-                  </li>
+                  {users.map((user, idx) => {
+                    return (
+                      <li className="search-users-result" key={idx}>
+                        <img
+                          src={user.avatar ? user.avatar : "/icons/avatar.png"}
+                          alt="user avatar"
+                          className="user-img"
+                        />
+                        <span>{`${user.name} ${user.surname}`}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>

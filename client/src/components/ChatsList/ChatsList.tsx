@@ -17,7 +17,7 @@ export function ChatList(props: IChatListProps) {
     <>
       <div className="chats-list">
         <header>
-          <h5 className="chats-header">Chats</h5>
+          <h4 className="chats-header">Chats</h4>
         </header>
         <section className="chats">
           <ul>
@@ -35,7 +35,11 @@ export function ChatList(props: IChatListProps) {
                       onClick={() => props.chatSelectionHandler(user)}
                     >
                       <img
-                        src={otherUser.avatar}
+                        src={
+                          otherUser.avatar
+                            ? otherUser.avatar
+                            : "/icons/avatar.png"
+                        }
                         alt="user avatar"
                         className="user-img"
                       />
@@ -50,7 +54,16 @@ export function ChatList(props: IChatListProps) {
                   </>
                 );
               });
-              return elements;
+              return elements.length > 0 ? (
+                elements
+              ) : (
+                <>
+                  <div style={{ textAlign: "center", marginTop: "3rem" }}>
+                    There are no chats started. Start one by pressing the button
+                    above...
+                  </div>
+                </>
+              );
             })()}
           </ul>
         </section>

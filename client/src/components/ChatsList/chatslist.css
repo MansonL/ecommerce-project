@@ -17,12 +17,14 @@
   background-color: #fcde67;
   margin: 0;
   padding: 0.4rem;
+  font-size: 1.5rem;
 }
 
 .chats {
   display: flex;
   flex-direction: column;
   padding: 0.2rem;
+  min-height: 50vh;
   max-height: 80vh;
   overflow-y: scroll;
 }
