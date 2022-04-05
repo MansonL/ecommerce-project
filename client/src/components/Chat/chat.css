@@ -93,6 +93,7 @@ textarea {
   border-radius: 0.4rem;
   border: none;
   padding: 0.3rem;
+  outline: 2px solid white;
 }
 
 .new-chat-username-input:focus {
@@ -112,6 +113,7 @@ textarea {
 .searched-users {
   width: 85%;
   left: 0;
+  top: calc(109%);
   position: absolute;
   background: white;
   border-radius: 0.2rem;

@@ -1,15 +1,10 @@
-import axios, { AxiosResponse } from "axios";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { IMongoPopulatedMessages } from "../../../../server/src/interfaces/messages";
-import { Chat } from "../Chat/Chat";
-import { OperationResult } from "../Result/OperationResult";
-import { UserContext } from "../UserProvider";
+import { IUserShortInfo } from "../../../../server/src/interfaces/users";
 import "./chatslist.css";
 
 interface IChatListProps {
   chats: Map<string, IMongoPopulatedMessages[]> | undefined;
-  chatSelectionHandler: (selected: string) => void;
+  chatSelectionHandler: (selected: IUserShortInfo) => void;
 }
 
 export function ChatList(props: IChatListProps) {
@@ -32,7 +27,7 @@ export function ChatList(props: IChatListProps) {
                   <>
                     <li
                       className="chat"
-                      onClick={() => props.chatSelectionHandler(user)}
+                      onClick={() => props.chatSelectionHandler(otherUser)}
                     >
                       <img
                         src={

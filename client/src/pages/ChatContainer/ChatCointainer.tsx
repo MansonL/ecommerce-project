@@ -20,7 +20,6 @@ export function ChatContainer() {
   const [chats, setChats] = useState<Map<string, IMongoPopulatedMessages[]>>(
     new Map<string, IMongoPopulatedMessages[]>()
   );
-  const [selectedChat, setSelectedChat] = useState(false);
   const [messages, setMessages] = useState<IMongoPopulatedMessages[]>([]);
   const [selectedUser, setSelectedUser] = useState<IUserShortInfo>();
 
@@ -33,6 +32,14 @@ export function ChatContainer() {
   const [resultMsg, setResultMsg] = useState("");
 
   const navigate = useNavigate();
+
+  const commonCatchHandler = (error: any) => {
+    setShowResult(true);
+    setOperationResult(
+      `${error.response.data.message === "No messages." ? "warning" : "error"}`
+    );
+    setResultMsg(error.response.data.message);
+  };
 
   const fetchChats = () => {
     axios
@@ -49,15 +56,7 @@ export function ChatContainer() {
         const data = response.data;
         setChats(data);
       })
-      .catch((error) => {
-        setShowResult(true);
-        setOperationResult(
-          `${
-            error.response.data.message === "No messages." ? "warning" : "error"
-          }`
-        );
-        setResultMsg(error.response.data.message);
-      });
+      .catch(commonCatchHandler);
   };
 
   const fetchOneChat = (user_id: string) => {
@@ -75,23 +74,17 @@ export function ChatContainer() {
         const data = response.data;
         setMessages(data);
       })
-      .catch((error) => {
-        setShowResult(true);
-        setOperationResult(
-          `${
-            error.response.data.message === "No messages." ? "warning" : "error"
-          }`
-        );
-        setResultMsg(error.response.data.message);
-      });
+      .catch(commonCatchHandler);
   };
 
-  const chatSelectionHandler = (user_id: string) => {
-    chats.forEach((conversation, user, map) => {
-      if (user === user_id && conversation) setMessages(conversation);
-    });
-    setSelectedChat(true);
-    fetchOneChat(user_id);
+  const chatSelectionHandler = (otherUser: IUserShortInfo) => {
+    if (chats.size > 0) {
+      chats.forEach((conversation, user, map) => {
+        if (user === otherUser._id && conversation) setMessages(conversation);
+      });
+    }
+    setSelectedUser(otherUser);
+    fetchOneChat(otherUser._id);
   };
 
   const submitMessage = (message: string) => {
@@ -124,6 +117,8 @@ export function ChatContainer() {
       });
   };
 
+  const closeMsg = () => setShowResult(false);
+
   useEffect(() => {
     //if (!loggedIn) navigate("../login");
     /*else*/ fetchChats();
@@ -133,13 +128,21 @@ export function ChatContainer() {
     <>
       {window.innerWidth > 1024 ? (
         <>
+          {showResult && (
+            <OperationResult
+              closeMsg={closeMsg}
+              result={operationResult}
+              resultMessage={resultMsg}
+            />
+          )}
           <div className="chat-container">
             <ChatList
               chats={chats}
               chatSelectionHandler={chatSelectionHandler}
             />
-            {selectedChat && selectedUser ? (
+            {selectedUser ? (
               <Chat
+                showError={commonCatchHandler}
                 submitMessage={submitMessage}
                 type="created"
                 messages={messages}
@@ -147,6 +150,7 @@ export function ChatContainer() {
               />
             ) : (
               <Chat
+                showError={commonCatchHandler}
                 submitMessage={submitMessage}
                 type="new"
                 messages={[]}
@@ -157,9 +161,17 @@ export function ChatContainer() {
         </>
       ) : (
         <>
-          {selectedChat && selectedUser ? (
+          {selectedUser ? (
             <>
+              {showResult && (
+                <OperationResult
+                  closeMsg={closeMsg}
+                  result={operationResult}
+                  resultMessage={resultMsg}
+                />
+              )}
               <Chat
+                showError={commonCatchHandler}
                 submitMessage={submitMessage}
                 type="created"
                 messages={messages}
@@ -170,6 +182,13 @@ export function ChatContainer() {
             <>
               {showNewChat ? (
                 <>
+                  {showResult && (
+                    <OperationResult
+                      closeMsg={closeMsg}
+                      result={operationResult}
+                      resultMessage={resultMsg}
+                    />
+                  )}
                   <div className="submit-row" style={{ marginTop: "2rem" }}>
                     <button
                       className="submit-btn"
@@ -178,7 +197,9 @@ export function ChatContainer() {
                       Back to chats
                     </button>
                   </div>
+
                   <Chat
+                    showError={commonCatchHandler}
                     submitMessage={submitMessage}
                     type="new"
                     messages={[]}
@@ -187,6 +208,13 @@ export function ChatContainer() {
                 </>
               ) : (
                 <>
+                  {showResult && (
+                    <OperationResult
+                      closeMsg={closeMsg}
+                      result={operationResult}
+                      resultMessage={resultMsg}
+                    />
+                  )}
                   <div className="submit-row" style={{ marginTop: "2rem" }}>
                     <button
                       className="submit-btn"

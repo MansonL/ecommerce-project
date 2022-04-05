@@ -10,6 +10,8 @@ interface IChatProps {
   messages: IMongoPopulatedMessages[];
   submitMessage: (message: string) => void;
   otherUser: IUserShortInfo | undefined;
+  showError: (error: any) => void;
+  handleChatSelection: (user: IUserShortInfo) => void;
 }
 
 export function Chat(props: IChatProps) {
@@ -44,7 +46,13 @@ export function Chat(props: IChatProps) {
       .then((response) => {
         const searchedUsers = response.data;
         setUsers(searchedUsers);
-      });
+      })
+      .catch((error) => props.showError(error));
+  };
+
+  const handleUserSelection = (user: IUserShortInfo) => {
+    setUsers([]);
+    props.handleChatSelection(user);
   };
 
   return (
@@ -109,7 +117,11 @@ export function Chat(props: IChatProps) {
                 <ul>
                   {users.map((user, idx) => {
                     return (
-                      <li className="search-users-result" key={idx}>
+                      <li
+                        className="search-users-result"
+                        key={idx}
+                        onClick={() => handleUserSelection(user)}
+                      >
                         <img
                           src={user.avatar ? user.avatar : "/icons/avatar.png"}
                           alt="user avatar"
