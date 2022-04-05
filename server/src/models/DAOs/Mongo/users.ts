@@ -209,11 +209,19 @@ export class MongoUsers {
     try {
       const docs = await this.users.find({});
       if (docs.length > 0) {
+        const pattern = fullname
+          .split(" ")
+          .reduce((pattern, string, idx, array) => {
+            return array.length === 1
+              ? pattern.concat(`${string} ?)`)
+              : idx !== array.length - 1
+              ? pattern.concat(`(${string} ?)?`)
+              : pattern.concat(`(${string} ?)?)`);
+          }, "(");
+        const regex = new RegExp(pattern, "gi");
         const matchedUsers = docs.filter((user) => {
           const userFullname = `${user.name} ${user.surname}`;
-          const fullnameToMatch = fullname.split(" ");
-          const pattern = `/${fullnameToMatch[0]}[ ]{0,2}|${fullnameToMatch[0]}[ ]${fullnameToMatch[1]}|${fullnameToMatch[1]}[ ]{0,2}/`;
-          const regex = new RegExp(pattern, "gi");
+
           return regex.test(userFullname);
         });
         const clearedUserInfo: IUserShortInfo[] = matchedUsers.map((user) => ({
