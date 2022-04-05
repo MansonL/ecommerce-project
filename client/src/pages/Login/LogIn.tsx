@@ -109,6 +109,9 @@ export function LogIn() {
     }
   };
 
+
+  const closeMsg = () => setShowResult(false)
+
   useEffect(() => {
     setCredentials({
       username: "",
@@ -142,7 +145,11 @@ export function LogIn() {
           </h5>
         </div>
         {showResult && (
-          <OperationResult result={loginResult} resultMessage={resultMsg} />
+          <OperationResult
+            closeMsg={closeMsg}
+            result={loginResult}
+            resultMessage={resultMsg}
+          />
         )}
         <div className="login-signup-fields">
           <div className="login-signup-field">

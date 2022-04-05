@@ -119,6 +119,9 @@ export function ProductsForm() {
     }
   };
 
+
+  const closeMsg = () => setShowResult(false)
+
   return (
     <>
       <main className="body-container">
@@ -138,7 +141,11 @@ export function ProductsForm() {
           </ModalContainer>
         )}
         {showResult && (
-          <OperationResult result={submitResult} resultMessage={resultMsg} />
+          <OperationResult
+            closeMsg={closeMsg}
+            result={submitResult}
+            resultMessage={resultMsg}
+          />
         )}
         <div className="product-form">
           <div className="input-field">

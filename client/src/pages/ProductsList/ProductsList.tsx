@@ -224,10 +224,17 @@ export function ProductsList(props: IProductsProps) {
     fetchProducts();
   }, []);
 
+
+  const closeMsg = () => setShowResult(false)
+
   return (
     <>
       {showResult && (
-        <OperationResult resultMessage={resultMsg} result={operationResult} />
+        <OperationResult
+          closeMsg={closeMsg}
+          resultMessage={resultMsg}
+          result={operationResult}
+        />
       )}
 
       {showModal && (
@@ -404,6 +411,7 @@ export function ProductsList(props: IProductsProps) {
             })
           ) : (
             <OperationResult
+              closeMsg={closeMsg}
               resultMessage="There are no products stored at DB."
               result={"warning"}
             />

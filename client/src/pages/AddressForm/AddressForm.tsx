@@ -132,6 +132,8 @@ export function AddressForm() {
     }
   };
 
+  const closeMsg = () => setShowResult(false)
+
   return (
     <main className="body-container">
       <div className="header">
@@ -149,7 +151,11 @@ export function AddressForm() {
         </ModalContainer>
       )}
       {showResultMsg && (
-        <OperationResult result={addressResult} resultMessage={resultMsg} />
+        <OperationResult
+          closeMsg={closeMsg}
+          result={addressResult}
+          resultMessage={resultMsg}
+        />
       )}
       <div className="address-fields">
         <div className="address-field">

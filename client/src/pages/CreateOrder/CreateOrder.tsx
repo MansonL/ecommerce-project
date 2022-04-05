@@ -107,6 +107,9 @@ export function CreateOrder() {
       .catch(AxiosCatchCallback);
   };
 
+  
+  const closeMsg = () => setShowResult(false)
+
   return (
     <main className="body-container">
       <div className="header">
@@ -122,7 +125,11 @@ export function CreateOrder() {
         </ModalContainer>
       )}
       {showResult && (
-        <OperationResult result={orderResult} resultMessage={resultMsg} />
+        <OperationResult
+          closeMsg={closeMsg}
+          result={orderResult}
+          resultMessage={resultMsg}
+        />
       )}
       <div className="order-container">
         <div>

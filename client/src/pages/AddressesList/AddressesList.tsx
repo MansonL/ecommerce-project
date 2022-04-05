@@ -29,7 +29,6 @@ export function AddressesList() {
     navigate("../order");
   };
 
-  console.log(selectedAddress);
 
   return (
     <main className="body-container">

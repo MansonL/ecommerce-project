@@ -103,6 +103,9 @@ export function Cart() {
     else navigate("../new-address");
   };
 
+  
+  const closeMsg = () => setShowModificationResult(false)
+
   return (
     <React.Fragment>
       <main className="body-container">
@@ -118,6 +121,7 @@ export function Cart() {
 
         {showModificationResult && (
           <OperationResult
+            closeMsg={closeMsg}
             result={modificationResult}
             resultMessage={resultMsg}
           />
@@ -201,6 +205,7 @@ export function Cart() {
           </>
         ) : (
           <OperationResult
+            closeMsg={closeMsg}
             resultMessage="Your cart is empty! Let's buy."
             result={"warning"}
           />

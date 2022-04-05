@@ -111,6 +111,9 @@ export function SignUp() {
     }
   };
 
+
+  const closeMsg = () => setShowResult(false)
+
   return (
     <>
       {loading && (
@@ -124,7 +127,11 @@ export function SignUp() {
           <h5>You already have an account? Log in here.</h5>
         </div>
         {showResult && (
-          <OperationResult resultMessage={resultMsg} result={signUpResult} />
+          <OperationResult
+            closeMsg={closeMsg}
+            resultMessage={resultMsg}
+            result={signUpResult}
+          />
         )}
         <div className="login-signup-fields">
           <div className="login-signup-field">

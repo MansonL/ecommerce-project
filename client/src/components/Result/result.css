@@ -1,5 +1,6 @@
 .operation-result {
-  max-width: 70%;
+  position: relative;
+  max-width: 75%;
   margin: 1.5rem auto 1.5rem auto;
   display: flex;
   align-items: center;
@@ -9,8 +10,15 @@
 }
 
 .operation-result-icon {
-  max-width: 30%;
+  max-width: 20%;
   padding: 1rem;
+}
+
+.close-result-msg {
+  position: absolute;
+  top: 5%;
+  right: 0;
+  max-width: 8%;
 }
 
 .success {

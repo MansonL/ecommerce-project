@@ -125,6 +125,9 @@ export function OrdersContainer() {
     fetchOrders(user_id, username);
   };
 
+  
+  const closeMsg = () => setShowResult(false)
+
   useEffect(() => {
     if (!user.isAdmin) fetchOrders();
     if (!loggedIn) {
@@ -147,6 +150,7 @@ export function OrdersContainer() {
       <div className="body-container">
         {showResult ? (
           <OperationResult
+            closeMsg={closeMsg}
             result={operationResult}
             resultMessage={resultMessage}
           />
@@ -189,11 +193,14 @@ export function OrdersContainer() {
               )}
               {user.isAdmin && showOrdersToAdmin && orders.length > 0 ? (
                 <>
-                  <span className="selected-user">{selectedUser} <b>selected</b>.</span>
+                  <span className="selected-user">
+                    {selectedUser} <b>selected</b>.
+                  </span>
                   <OrdersList orders={orders} />
                 </>
               ) : user.isAdmin && showOrdersToAdmin ? (
                 <OperationResult
+                  closeMsg={closeMsg}
                   result={"warning"}
                   resultMessage="The selected user has no orders created."
                 />
@@ -204,6 +211,7 @@ export function OrdersContainer() {
                 />
               ) : user.isAdmin && !showOrdersToAdmin ? (
                 <OperationResult
+                  closeMsg={closeMsg}
                   result="warning"
                   resultMessage="There are no customer users created."
                 />
@@ -211,6 +219,7 @@ export function OrdersContainer() {
                 <OrdersList orders={orders} />
               ) : (
                 <OperationResult
+                  closeMsg={closeMsg}
                   result={"warning"}
                   resultMessage={"You have no orders created."}
                 />
