@@ -1,6 +1,5 @@
 import axios from "axios";
 import moment from "moment";
-import { ObjectId } from "mongodb";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -34,6 +33,7 @@ export function ChatContainer() {
   const navigate = useNavigate();
 
   const commonCatchHandler = (error: any) => {
+    console.log(error);
     setShowResult(true);
     setOperationResult(
       `${error.response.data.message === "No messages." ? "warning" : "error"}`
@@ -42,6 +42,7 @@ export function ChatContainer() {
   };
 
   const fetchChats = () => {
+    console.log(`Updating chats`);
     axios
       .get<Map<string, IMongoPopulatedMessages[]>>(
         "http://localhost:8080/api/messages/list",
@@ -79,9 +80,8 @@ export function ChatContainer() {
 
   const chatSelectionHandler = (otherUser: IUserShortInfo) => {
     if (chats.size > 0) {
-      chats.forEach((conversation, user, map) => {
-        if (user === otherUser._id && conversation) setMessages(conversation);
-      });
+      const latestMessages = chats.get(otherUser._id);
+      if (latestMessages) setMessages(latestMessages);
     }
     setSelectedUser(otherUser);
     fetchOneChat(otherUser._id);
@@ -90,8 +90,8 @@ export function ChatContainer() {
   const submitMessage = (message: string) => {
     const newMessage: INew_Message = {
       timestamp: moment().format("YYYY-MM-DD HH:mm:ss"),
-      from: new ObjectId(user._id),
-      to: new ObjectId(selectedUser?._id),
+      from: user._id,
+      to: selectedUser?._id as string,
       message: message,
       type: "user",
     };
@@ -142,6 +142,7 @@ export function ChatContainer() {
             />
             {selectedUser ? (
               <Chat
+                handleChatSelection={chatSelectionHandler}
                 showError={commonCatchHandler}
                 submitMessage={submitMessage}
                 type="created"
@@ -150,6 +151,7 @@ export function ChatContainer() {
               />
             ) : (
               <Chat
+                handleChatSelection={chatSelectionHandler}
                 showError={commonCatchHandler}
                 submitMessage={submitMessage}
                 type="new"
@@ -171,6 +173,7 @@ export function ChatContainer() {
                 />
               )}
               <Chat
+                handleChatSelection={chatSelectionHandler}
                 showError={commonCatchHandler}
                 submitMessage={submitMessage}
                 type="created"
@@ -199,6 +202,7 @@ export function ChatContainer() {
                   </div>
 
                   <Chat
+                    handleChatSelection={chatSelectionHandler}
                     showError={commonCatchHandler}
                     submitMessage={submitMessage}
                     type="new"
