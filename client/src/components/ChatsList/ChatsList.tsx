@@ -18,6 +18,14 @@ export function ChatList(props: IChatListProps) {
           <ul>
             {(function () {
               const elements: JSX.Element[] = [];
+              console.log(props.chats);
+              if (!props.chats)
+                return (
+                  <div style={{ textAlign: "center", marginTop: "3rem" }}>
+                    There are no chats started. Start one by pressing the button
+                    above...
+                  </div>
+                );
               props.chats?.forEach((conversations, user, map) => {
                 const otherUser =
                   conversations[0].from._id === user
@@ -49,16 +57,7 @@ export function ChatList(props: IChatListProps) {
                   </>
                 );
               });
-              return elements.length > 0 ? (
-                elements
-              ) : (
-                <>
-                  <div style={{ textAlign: "center", marginTop: "3rem" }}>
-                    There are no chats started. Start one by pressing the button
-                    above...
-                  </div>
-                </>
-              );
+              return elements;
             })()}
           </ul>
         </section>
