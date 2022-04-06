@@ -26,11 +26,13 @@ h1 {
   border-radius: 0.4rem;
   font-size: 0.8rem;
   min-height: 50vh;
+  text-align: center;
 }
 
 .received-msg-container,
 .sent-msg-container {
   display: flex;
+  text-align: left;
   flex-direction: column;
   row-gap: 0.2rem;
   padding: 0.3rem;
@@ -120,8 +122,8 @@ textarea {
   max-height: 9rem;
   overflow-y: scroll;
   border-right: 1px solid grey;
-  border-left:  grey solid 1px;
-  border-bottom:  grey solid 1px;
+  border-left: grey solid 1px;
+  border-bottom: grey solid 1px;
 }
 
 .search-users-result {
