@@ -57,46 +57,12 @@ export function Chat(props: IChatProps) {
 
   return (
     <>
-      {props.type === "created" && props.otherUser ? (
-        <div className="main-chat">
+      <div className="main-chat">
+        {props.type === "created" && props.otherUser ? (
           <header className="main-chat-header">
             <h1>{`${props.otherUser.name} ${props.otherUser.surname}`}</h1>
           </header>
-          <ul className="msgs-container">
-            {props.messages.map((message) => {
-              const sentOrReceivedClassname =
-                message.to._id === props.otherUser?._id
-                  ? "sent-msg-container"
-                  : "received-msg-container";
-              return (
-                <>
-                  <li className={sentOrReceivedClassname}>
-                    <header className="msg-header">
-                      <span className="msg-date">{message.timestamp}</span>
-                    </header>
-                    <span className="msg">{message.message}</span>
-                  </li>
-                </>
-              );
-            })}
-          </ul>
-          <footer className="main-chat-footer">
-            <textarea
-              name="message"
-              onKeyUp={autoGrow}
-              value={message}
-              onChange={handleMessageChange}
-            />
-            <button
-              className="send-msg-btn"
-              onClick={() => props.submitMessage(message)}
-            >
-              Send
-            </button>
-          </footer>
-        </div>
-      ) : (
-        <div className="main-chat">
+        ) : (
           <header
             className="main-chat-header"
             style={{
@@ -141,13 +107,48 @@ export function Chat(props: IChatProps) {
               onClick={searchUser}
             />
           </header>
-          <div className="msgs-container" style={{ height: "2rem" }} />
-          <footer className="main-chat-footer">
-            <textarea name="message" onKeyUp={autoGrow}></textarea>
-            <button className="send-msg-btn">Send</button>
-          </footer>
-        </div>
-      )}
+        )}
+        <ul className="msgs-container">
+          {props.messages.length > 0 ? (
+            props.messages.map((message, idx) => {
+              const sentOrReceivedClassname =
+                message.to._id === props.otherUser?._id
+                  ? "sent-msg-container"
+                  : "received-msg-container";
+              return (
+                <>
+                  <li className={sentOrReceivedClassname} key={idx}>
+                    <header className="msg-header">
+                      <span className="msg-date">{message.timestamp}</span>
+                    </header>
+                    <span className="msg">{message.message}</span>
+                  </li>
+                </>
+              );
+            })
+          ) : (
+            <>
+              <span className="no-msg" style={{ margin: "auto" }}>
+                No messages. Type and send a message to start the conversation.
+              </span>
+            </>
+          )}
+        </ul>
+        <footer className="main-chat-footer">
+          <textarea
+            name="message"
+            onKeyUp={autoGrow}
+            value={message}
+            onChange={handleMessageChange}
+          />
+          <button
+            className="send-msg-btn"
+            onClick={() => props.submitMessage(message)}
+          >
+            Send
+          </button>
+        </footer>
+      </div>
     </>
   );
 }
