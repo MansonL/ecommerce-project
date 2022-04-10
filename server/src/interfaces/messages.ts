@@ -58,8 +58,8 @@ export interface IMongoMessage extends INew_Message, Document {
  */
 export interface INew_Message {
   timestamp: string;
-  from: ObjectId;
-  to: ObjectId;
+  from: string;
+  to: string;
   message: string;
   type: "user" | "bot";
 }

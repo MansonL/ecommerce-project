@@ -36,7 +36,6 @@ class MessagesController {
               | IMongoPopulatedMessages[]
               | ApiError;
           // This line is just cause inside the model we already know that if there's an user specified in the query, the answer is gonna be the array or an ApiError.
-          logger.info(result);
           if (result instanceof ApiError) res.send(result);
           else res.status(200).send(result);
         } else res.send(ApiError.badRequest(EUsersErrors.UserNotFound));
@@ -46,7 +45,7 @@ class MessagesController {
             | Map<string, IMongoPopulatedMessages[]>
             | ApiError;
         // This line is just cause inside the model we already know that if there's no user specified in the query, the answer is gonna be the map or an ApiError.
-        logger.info(result);
+        console.log(JSON.stringify(result, null, "\t"));
         if (result instanceof ApiError) next(result);
         else res.status(200).send(result);
       }

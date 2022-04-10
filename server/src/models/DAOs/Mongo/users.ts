@@ -85,7 +85,7 @@ usersSchema.pre("save", async function (next) {
       url: "https://www.pinclipart.com/picdir/middle/169-1692839_default-avatar-transparent-clipart.png",
       photo_id: "default_avatar_image",
     });
-  if (this.avatar)
+  if (!this.avatar)
     this.avatar =
       "https://www.pinclipart.com/picdir/middle/169-1692839_default-avatar-transparent-clipart.png";
   next();

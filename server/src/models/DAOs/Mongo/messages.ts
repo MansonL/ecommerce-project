@@ -66,23 +66,20 @@ export class MongoMessages implements DBMessagesClass {
         const chatMessages: IMongoPopulatedMessages[] = [];
         docs.forEach((document) => {
           const isInvolved =
-            document.to.toString() === user_id
+            document.to._id == user_id
               ? "received"
-              : document.from.toString() === user_id
+              : document.from._id == user_id
               ? "sent"
               : false;
           if (typeof isInvolved === "string") {
             if (
               otherUser &&
-              (document.to.toString() === otherUser ||
-                document.from.toString() === otherUser)
+              (document.to._id == otherUser || document.from._id == otherUser)
             ) {
               chatMessages.push(document);
             } else if (!otherUser) {
               const otherUser =
-                isInvolved === "received"
-                  ? document.from.toString()
-                  : document.to.toString();
+                isInvolved === "received" ? document.from._id : document.to._id;
               latestMessages.has(otherUser)
                 ? latestMessages.get(otherUser)?.push(document)
                 : latestMessages.set(otherUser, [document]);

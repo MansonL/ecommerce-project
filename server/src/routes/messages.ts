@@ -4,11 +4,11 @@ import { messagesController } from "../controller/messages";
 
 export const messagesRouter: e.Router = Router();
 
-messagesRouter.get(
-  "/list/:id",
-  authController.isAuthorized,
-  messagesController.getUserMessages
-);
+// messagesRouter.get(
+//   "/list/:id",
+//   authController.isAuthorized,
+//   messagesController.getUserMessages
+// );
 messagesRouter.get(
   "/list",
   authController.isAuthorized,

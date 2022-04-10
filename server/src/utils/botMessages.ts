@@ -1,5 +1,4 @@
 import moment from "moment";
-import { Types } from "mongoose";
 import { cartApi } from "../api/cart";
 import { ApiError } from "../api/errorApi";
 import { messagesApi } from "../api/messages";
@@ -9,7 +8,9 @@ import { IMongoOrderPopulated, IOrderPopulated } from "../interfaces/orders";
 import { CUDResponse } from "../interfaces/others";
 import { IMongoCart, IMongoProduct } from "../interfaces/products";
 
-const BOTID = new Types.ObjectId();
+// In next line we have the already created user bot,  which is stored in DB, id. This will be implemented by creating a new ObjectId to be assigned to the BOT at the moment of its storing in DB and therefore being available to be used here.
+
+const BOTID = "62314984224672161087f8e4";
 
 export const botAnswer = async (
   message: string,
@@ -24,7 +25,7 @@ export const botAnswer = async (
         const result2: CUDResponse | ApiError = await messagesApi.addMsg({
           timestamp: moment().format("YYYY-MM-DD HH:mm:ss"),
           from: BOTID,
-          to: new Types.ObjectId(user_id),
+          to: user_id,
           type: "bot",
           message: JSON.stringify(result, null, "\t"),
         });
@@ -43,7 +44,7 @@ export const botAnswer = async (
         const result2: CUDResponse | ApiError = await messagesApi.addMsg({
           timestamp: moment().format("YYYY-MM-DD HH:mm:ss"),
           from: BOTID,
-          to: new Types.ObjectId(user_id),
+          to: user_id,
           type: "bot",
           message: JSON.stringify(result, null, "\t"),
         });
@@ -61,7 +62,7 @@ export const botAnswer = async (
         const result2: CUDResponse | ApiError = await messagesApi.addMsg({
           timestamp: moment().format("YYYY-MM-DD HH:mm:ss"),
           from: BOTID,
-          to: new Types.ObjectId(user_id),
+          to: user_id,
           type: "bot",
           message: JSON.stringify(result, null, "\t"),
         });
