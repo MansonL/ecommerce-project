@@ -3,13 +3,13 @@ import { messagesApi } from "../api/messages";
 import { ApiError } from "../api/errorApi";
 import { ObjectId } from "mongodb";
 import {
+  IChats,
   IMessageSentPopulated,
   IMongoPopulatedMessages,
   INew_Message,
 } from "../interfaces/messages";
 import { CUDResponse } from "../interfaces/others";
 import { EmailUtilities, htmlFooter, htmlGeneral } from "../utils/emails";
-import { logger } from "../services/logger";
 import { EUsersErrors } from "../interfaces/EErrors";
 
 /**
@@ -40,12 +40,11 @@ class MessagesController {
           else res.status(200).send(result);
         } else res.send(ApiError.badRequest(EUsersErrors.UserNotFound));
       } else {
-        const result: Map<string, IMongoPopulatedMessages[]> | ApiError =
-          (await messagesApi.getMsg(user_id, undefined)) as
-            | Map<string, IMongoPopulatedMessages[]>
-            | ApiError;
-        // This line is just cause inside the model we already know that if there's no user specified in the query, the answer is gonna be the map or an ApiError.
-        console.log(JSON.stringify(result, null, "\t"));
+        const result: IChats | ApiError = (await messagesApi.getMsg(
+          user_id,
+          undefined
+        )) as IChats | ApiError;
+        // This line is just cause inside the model we already know that if there's no user specified in the request, the answer is gonna be an IChats or an ApiError object.
         if (result instanceof ApiError) next(result);
         else res.status(200).send(result);
       }

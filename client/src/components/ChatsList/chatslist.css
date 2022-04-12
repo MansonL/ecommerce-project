@@ -13,11 +13,17 @@
 }
 
 .chats-header {
-  text-align: center;
+  display: flex;
+  padding: 0.5rem;
   background-color: #fcde67;
-  margin: 0;
-  padding: 0.4rem;
   font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+}
+
+.chats-header-title {
+  margin: 0;
+  flex-grow: 1;
 }
 
 .chats {

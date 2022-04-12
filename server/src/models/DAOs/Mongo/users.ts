@@ -7,14 +7,12 @@ import {
   IMongoUser,
   INew_User,
   IUserShortInfo,
+  IUserUpdate,
   UserAddresses,
 } from "../../../interfaces/users";
 import { CUDResponse } from "../../../interfaces/others";
 import bcrypt from "bcrypt";
-import { logger } from "../../../services/logger";
 import { Config } from "../../../config/config";
-import cluster from "cluster";
-import { cartApi } from "../../../api/cart";
 import moment from "moment";
 
 const usersSchema = new Schema({
@@ -28,14 +26,8 @@ const usersSchema = new Schema({
   age: { type: String, required: true },
   avatar: { type: String },
   phoneNumber: { type: String, required: true },
-  images: [
-    {
-      url: { type: String, required: true },
-      photo_id: { type: String, required: true },
-      _id: false,
-    },
-  ],
   facebookID: { type: String },
+  connectionID: { type: String },
   addresses: [
     {
       alias: { type: String },
@@ -225,7 +217,7 @@ export class MongoUsers {
           return regex.test(userFullname);
         });
         const clearedUserInfo: IUserShortInfo[] = matchedUsers.map((user) => ({
-          _id: user._id as string,
+          _id: user._id,
           username: user.username,
           name: user.name,
           surname: user.surname,
@@ -269,6 +261,28 @@ export class MongoUsers {
       } else return ApiError.notFound(EUsersErrors.UserNotFound);
     } catch (error) {
       return ApiError.internalError(`An error occured.`);
+    }
+  }
+
+  async updateUser(updatedData: IUserUpdate, username: string): Promise<CUDResponse | ApiError> {
+    try {
+      const doc = await this.users.findOne({username: username});
+      if(doc){
+        if(updatedData.address){
+          if(doc.addresses){
+            doc.addresses = typeof updatedData.address === 'string' ? doc.addresses.filter(address => address._id.toString() !== updatedData.address) : doc.addresses.filter(address => !updatedData.address?.includes(address._id.toString()));
+          }else
+            return ApiError.badRequest(`No addresses to delete.`)
+        }
+        const updates = {} = updatedData
+        await this.users.updateOne({username: username}, )
+    
+      }else{
+        // This won't happen if the request comes from the client, cause every client request to update the profile is after the client have logged in.
+        return ApiError.notFound(EUsersErrors.UserNotFound)
+      }
+    } catch (error) {
+      
     }
   }
 }

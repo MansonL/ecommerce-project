@@ -1,8 +1,9 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, isValidObjectId } from "mongoose";
 import { ApiError } from "../../../api/errorApi";
 import {
   DBMessagesClass,
-  IMongoMessage,
+  IChats,
+  IMessageSentPopulated,
   IMongoPopulatedMessages,
   INew_Message,
 } from "../../../interfaces/messages";
@@ -10,6 +11,7 @@ import { CUDResponse } from "../../../interfaces/others";
 import { Config } from "../../../config/config";
 import cluster from "cluster";
 import { logger } from "../../../services/logger";
+import { IUserShortInfo } from "../../../interfaces/users";
 
 const messagesSchema = new Schema({
   timestamp: { type: String, required: true },
@@ -49,53 +51,52 @@ export class MongoMessages implements DBMessagesClass {
   async get(
     user_id: string,
     otherUser: string | undefined
-  ): Promise<
-    | Map<string, IMongoPopulatedMessages[]>
-    | IMongoPopulatedMessages[]
-    | ApiError
-  > {
+  ): Promise<IChats | IMongoPopulatedMessages[] | ApiError> {
     try {
-      const docs = (await this.messages
-        .find({})
+      const receivedMessages = (await this.messages
+        .find({ to: user_id })
         .populate(
-          "to from",
+          "from",
           "username name surname avatar _id"
         )) as IMongoPopulatedMessages[];
-      if (docs.length > 0) {
-        const latestMessages = new Map<string, IMongoPopulatedMessages[]>();
-        const chatMessages: IMongoPopulatedMessages[] = [];
-        docs.forEach((document) => {
-          const isInvolved =
-            document.to._id == user_id
-              ? "received"
-              : document.from._id == user_id
-              ? "sent"
-              : false;
-          if (typeof isInvolved === "string") {
-            if (
-              otherUser &&
-              (document.to._id == otherUser || document.from._id == otherUser)
-            ) {
-              chatMessages.push(document);
-            } else if (!otherUser) {
-              const otherUser =
-                isInvolved === "received" ? document.from._id : document.to._id;
-              latestMessages.has(otherUser)
-                ? latestMessages.get(otherUser)?.push(document)
-                : latestMessages.set(otherUser, [document]);
-            }
-          }
-        });
-        if (!otherUser) {
-          if (latestMessages.size > 0) {
-            latestMessages.forEach((conversation, otherUser) => {
-              const lastMessage = conversation.pop() as IMongoPopulatedMessages; // This line is due to we have already checked that this array won't be empty, would be empty if we were creating a map of messages array with every user, but we're doing it only with the users the user that hitted this method has chatted.
-              latestMessages.set(otherUser, [lastMessage]);
-            });
-            return latestMessages;
-          } else return ApiError.notFound(`No messages.`);
-        } else if (chatMessages.length > 0) return chatMessages;
-        else return ApiError.notFound(`No messages.`);
+
+      const sentMessages = (await this.messages
+        .find({ from: user_id })
+        .populate(
+          "to",
+          "username name surname avatar _id"
+        )) as IMongoPopulatedMessages[];
+      if (sentMessages.length > 0 || receivedMessages.length > 0) {
+        const chats = [...receivedMessages, ...sentMessages].sort((a, b) =>
+          a.timestamp > b.timestamp ? 1 : a.timestamp === b.timestamp ? 0 : -1
+        );
+        if (otherUser) {
+          return chats.filter((document) => {
+            const otherInvolved = isValidObjectId(document.from)
+              ? (document.to as IUserShortInfo)._id.toString()
+              : (document.from as IUserShortInfo)._id.toString();
+            return otherUser === otherInvolved;
+          });
+        } else {
+          const messages: IChats = {};
+          chats.forEach((document, idx, chats) => {
+            // In the above queries, the documents have only one property populated, between 'to' and 'from', which will contain the other user information & the other property will contain the id string of the user making the request.
+            const otherUser = isValidObjectId(document.from)
+              ? (document.to as IUserShortInfo)._id
+              : (document.from as IUserShortInfo)._id;
+            if (!messages[otherUser.toString()])
+              messages[otherUser.toString()] = chats
+                .filter((document) => {
+                  const otherInvolved = isValidObjectId(document.from)
+                    ? (document.to as IUserShortInfo)._id
+                    : (document.from as IUserShortInfo)._id;
+                  return otherUser === otherInvolved;
+                })
+                .slice(-3)
+                .reverse();
+          });
+          return messages;
+        }
       } else {
         return ApiError.notFound(`No messages.`);
       }
@@ -110,7 +111,7 @@ export class MongoMessages implements DBMessagesClass {
       ).populate({ path: "to", select: "username" });
       return {
         message: `Message successfully added.`,
-        data: doc as IMongoMessage,
+        data: doc as unknown as IMessageSentPopulated,
       };
     } catch (error) {
       return ApiError.internalError(`An error occured.`);

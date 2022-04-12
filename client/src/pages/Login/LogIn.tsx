@@ -7,6 +7,7 @@ import { ModalContainer } from "../../components/Modal/ModalContainer";
 import { OperationResult } from "../../components/Result/OperationResult";
 import { LoadingSpinner } from "../../components/Spinner/Spinner";
 import { UserContext } from "../../components/UserProvider";
+import { socket } from "../../lib/socket";
 
 export function LogIn() {
   const [showResult, setShowResult] = useState(false);
@@ -17,6 +18,8 @@ export function LogIn() {
     username: "",
     password: "",
   });
+
+  const { user } = useContext(UserContext)
 
   const { updateLoginStatus } = useContext(UserContext);
   const { loading, setLoading } = useContext(UserContext);
@@ -47,6 +50,7 @@ export function LogIn() {
   };
 
   const thenAxiosCallback = (response: AxiosResponse<authResponse, any>) => {
+    socket.emit('attach user to id', user.username);
     const data = response.data;
     setShowResult(true);
     setLoginResult("success");

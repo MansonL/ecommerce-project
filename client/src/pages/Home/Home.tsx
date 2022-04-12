@@ -20,7 +20,7 @@ export function Home() {
           className="welcome-products-btn"
           onClick={() => navigate("../products")}
         >
-          Start looking
+          Start buying
         </button>
       </main>
     </React.Fragment>

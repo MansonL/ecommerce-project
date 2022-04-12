@@ -18,12 +18,20 @@ import { IUserShortInfo } from "./users";
 */
 
 /**
+ * Type of Object containing the latest messages with differents users.
+ */
+
+export interface IChats {
+  [key: string]: IMongoPopulatedMessages[];
+}
+
+/**
  * Type of Message Object after being sent and populated. Its mainly purpose is for emailing service.
  */
 export interface IMessageSentPopulated {
-  _id: ObjectId;
+  _id: ObjectId; // ObjectId.toString()
   timestamp: string;
-  from: ObjectId;
+  from: ObjectId; // ObjectId.toString()
   to: {
     username: string;
   };
@@ -36,9 +44,10 @@ export interface IMessageSentPopulated {
  */
 
 export interface IMongoPopulatedMessages {
+  _id: ObjectId;
   timestamp: string;
-  from: IUserShortInfo;
-  to: IUserShortInfo;
+  from: IUserShortInfo | ObjectId;
+  to: IUserShortInfo | ObjectId;
   message: string;
 }
 
@@ -48,7 +57,7 @@ export interface IMongoPopulatedMessages {
  *
  */
 export interface IMongoMessage extends INew_Message, Document {
-  _id: ObjectId;
+  _id: ObjectId; // ObjectId.toString()
 }
 
 /**
@@ -74,11 +83,7 @@ export interface DBMessagesClass {
   get(
     user_id: string,
     otherUser: string | undefined
-  ): Promise<
-    | Map<string, IMongoPopulatedMessages[]>
-    | IMongoPopulatedMessages[]
-    | ApiError
-  >;
+  ): Promise<IChats | IMongoPopulatedMessages[] | ApiError>;
   add(msg: INew_Message): Promise<CUDResponse | ApiError>;
 }
 

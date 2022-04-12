@@ -2,11 +2,18 @@ import { Document, ObjectId } from "mongodb";
 import { ApiError } from "../api/errorApi";
 import { CUDResponse } from "./others";
 
+export interface IUserUpdate {
+  password?: string;
+  repeatedPassword?: string;
+  connectionID?: string;
+  address?: string | string[]; // This property is gonna hold the addresses or one address id in order to modify the user addresses array stored at DB
+}
+
 /**
  * Users data for requests from other users without admin permissions.
  */
 export interface IUserShortInfo {
-  _id: string;
+  _id: ObjectId;
   username: string;
   name: string;
   surname: string;
@@ -21,6 +28,31 @@ export interface IMongoUser extends Document, INew_User {
   // eslint-disable-next-line no-unused-vars
   isValidPassword: (password: string) => Promise<boolean>;
 }
+
+/**
+ *
+ * Type of User Object receiving from the frontend.
+ *
+ */
+export interface INew_User extends UserInfo {
+  createdAt: string;
+  modifiedAt: string;
+}
+
+export type UserInfo = {
+  username: string;
+  password: string;
+  repeatedPassword: string;
+  name: string;
+  surname: string;
+  age: string;
+  avatar?: string;
+  phoneNumber: string;
+  facebookID?: string;
+  addresses?: UserAddresses[];
+  isAdmin: boolean;
+  connectionID?: string;
+};
 
 export type UserAddresses = {
   _id: ObjectId;
@@ -37,29 +69,6 @@ export type UserAddresses = {
   city: string;
   extra_info: string;
 };
-
-export type UserInfo = {
-  username: string;
-  password: string;
-  repeatedPassword: string;
-  name: string;
-  surname: string;
-  age: string;
-  avatar?: string;
-  phoneNumber: string;
-  facebookID?: string;
-  addresses?: UserAddresses[];
-  isAdmin: boolean;
-};
-/**
- *
- * Type of User Object receiving from the frontend.
- *
- */
-export interface INew_User extends UserInfo {
-  createdAt: string;
-  modifiedAt: string;
-}
 
 /**
  *

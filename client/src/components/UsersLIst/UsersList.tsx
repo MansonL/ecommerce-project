@@ -17,6 +17,7 @@ export function UsersList(props: UsersListProps) {
                 onClick={() =>
                   props.handleUserCardClick(user._id, user.username)
                 }
+                key={user._id}
               >
                 <header className="user-list-header">
                   <span>

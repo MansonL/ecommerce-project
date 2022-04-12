@@ -5,8 +5,11 @@
   border-radius: 0.5rem;
 }
 
-.main-chat-header {
+.selected-chat-header {
+  display: flex;
+  align-items: center;
   position: relative;
+  column-gap: 0.4rem;
   padding: 0.5rem;
   margin-bottom: 0.2rem;
   background: #fcde67;
@@ -130,6 +133,7 @@ textarea {
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
+  cursor: pointer;
 }
 
 /* ------- FOR THE NARROWEST DEVICES ---------------- */

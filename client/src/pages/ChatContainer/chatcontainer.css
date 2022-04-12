@@ -4,3 +4,8 @@
     width: 95%;
     margin: auto;
 }
+
+.new-chat-icon, .back-to-chats-icon {
+    width: 12%;
+    cursor: pointer;
+  }

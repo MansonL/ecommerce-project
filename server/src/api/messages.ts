@@ -2,7 +2,7 @@ import { CUDResponse } from "../interfaces/others";
 import { MongoMessages } from "../models/DAOs/Mongo/messages";
 import { MessagesFactory } from "../models/messagesFactory";
 import { ApiError } from "./errorApi";
-import { IMongoPopulatedMessages, INew_Message } from "../interfaces/messages";
+import { IChats, IMongoPopulatedMessages, INew_Message } from "../interfaces/messages";
 import { storage } from "../config/config";
 
 export class MessagesApi {
@@ -14,12 +14,12 @@ export class MessagesApi {
     user_id: string,
     otherUser: string | undefined
   ): Promise<
-    | Map<string, IMongoPopulatedMessages[]>
+    | IChats
     | IMongoPopulatedMessages[]
     | ApiError
   > {
     const result:
-      | Map<string, IMongoPopulatedMessages[]>
+      | IChats
       | IMongoPopulatedMessages[]
       | ApiError = await this.messages.get(user_id, otherUser);
     return result;
