@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { JwtPayload, sign, verify, VerifyErrors } from "jsonwebtoken";
+import { JwtPayload, sign, verify } from "jsonwebtoken";
 import { ApiError } from "../api/errorApi";
 import { usersApi } from "../api/users";
-import { EAuthErrors, EUsersErrors } from "../interfaces/EErrors";
+import { EUsersErrors } from "../interfaces/EErrors";
 import { IMongoCart } from "../interfaces/products";
 import { IMongoUser, INew_User } from "../interfaces/users";
 import { Config } from "../config/config";
@@ -16,30 +16,14 @@ declare global {
   }
 }
 
-declare module "jsonwebtoken" {
-  export interface JwtPayload extends IMongoUser {
-    user_cart: IMongoCart;
-  }
-}
-
 class AuthController {
-  async login(req: Request, res: Response, next: NextFunction) {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const bearerJWToken = authHeader.split(" ")[1];
-      verify(
-        bearerJWToken,
-        Config.JWT_SECRET,
-        (err: VerifyErrors | null, token: JwtPayload | undefined) => {
-          if (err) next(ApiError.badRequest(EAuthErrors.NotLoggedIn));
-          else
-            res.send({
-              message: "Already logged in.",
-              data: token,
-            });
-        }
-      );
-    } else next(ApiError.badRequest(EAuthErrors.NotLoggedIn));
+  async login(req: Request, res: Response) {
+    const jwt = req.cookies.auth;
+    if (jwt) {
+      const result = verify(jwt, Config.JWT_SECRET);
+      if (typeof result === "string") res.status(200).send("Need to log in.");
+      res.status(400).send(ApiError.badRequest("You're already logged in."));
+    } else res.status(200).send("Need to login");
   }
 
   async loginPost(req: Request, res: Response, next: NextFunction) {
@@ -53,27 +37,26 @@ class AuthController {
         .isValidPassword(password)
         .then(() => {
           Utils.getUserCartOrDefault(result._id.toString()).then((userCart) => {
-            const userData = {
+            const response = {
               user: Object.assign(
-                {
-                  user_cart: userCart,
-                },
+                { user_cart: userCart },
                 JSON.parse(JSON.stringify(result))
               ),
             };
-            sign(
-              Object.assign({}, userData),
+            const jwt = sign(
+              { user_id: result._id.toString() },
               Config.JWT_SECRET,
-              { expiresIn: Config.JWT_EXPIRATION_TIME },
-              (err, token) => {
-                if (err) next(ApiError.internalError(err.message));
-                else
-                  res.send({
-                    message: "Successfully logged in.",
-                    data: token,
-                  });
+              {
+                expiresIn: Config.JWT_EXPIRATION_TIME,
               }
             );
+            res
+              .cookie("auth", jwt, {
+                httpOnly: true,
+                secure: true,
+                sameSite: true,
+              })
+              .json({ message: "Succesfully logged in.", data: response });
           });
         })
         .catch(() => {
@@ -83,30 +66,12 @@ class AuthController {
   }
 
   async signup(req: Request, res: Response) {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const bearerJWToken = authHeader.split(" ")[1];
-      verify(
-        bearerJWToken,
-        Config.JWT_SECRET,
-        (err: VerifyErrors | null, token: JwtPayload | undefined) => {
-          if (err)
-            res.json({
-              message: "You can sign up.",
-              data: {},
-            });
-          else
-            res.json({
-              message: "Already logged in.",
-              data: token,
-            });
-        }
-      );
-    } else
-      res.json({
-        message: "You can sign up.",
-        data: {},
-      });
+    const jwt = req.cookies.auth;
+    if (jwt) {
+      const result: JwtPayload | string = verify(jwt, Config.JWT_SECRET);
+      if (typeof result === "string") res.status(200).send("You can sign up.");
+      res.status(400).send(ApiError.badRequest("You're already logged in."));
+    } else res.status(200).send("You can sign up.");
   }
 
   async signupPost(req: Request, res: Response, next: NextFunction) {
@@ -116,48 +81,38 @@ class AuthController {
     );
     if (result instanceof ApiError) {
       next();
-    } else res.status(400).json({
+    } else
+      res.status(400).json({
         error: 404,
-        message: `Username already taken.`
-    });
+        message: `Username already taken.`,
+      });
   }
 
   async isAuthorized(req: Request, res: Response, next: NextFunction) {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const bearerJWToken = authHeader.split(" ")[1];
-      verify(
-        bearerJWToken,
-        Config.JWT_SECRET,
-        (err: VerifyErrors | null, token: JwtPayload | undefined) => {
-          if (err) next(ApiError.badRequest(EAuthErrors.NotLoggedIn));
-          // For going directly to the error handler adn refusing the main routing
-          else if (token) {
-            req.user = token.user; // Passing user logged in data to the next function in req.user
-            next();
-          }
-        }
-      );
-    } else next(ApiError.badRequest(EAuthErrors.NotLoggedIn)); // For going directly to the error handler and refusing the main routing
+    const jwt = req.cookies.auth;
+    if (jwt) {
+      const result: JwtPayload | string = verify(jwt, Config.JWT_SECRET);
+      if (typeof result === "string") res.status(400).send("Need to log in.");
+      next();
+    } else res.status(400).send("Need to login");
   }
 
   async isAdmin(req: Request, res: Response, next: NextFunction) {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const bearerJWToken = authHeader.split(" ")[1];
-      verify(
-        bearerJWToken,
-        Config.JWT_SECRET,
-        (err: VerifyErrors | null, token: JwtPayload | undefined) => {
-          console.log(token?.user);
-          if (err) next(ApiError.badRequest(EAuthErrors.NotAuthorizedUser));
-          else if (token && token.user.isAdmin) {
-            req.user = token.user;
-            next();
-          }
+    const jwt = req.cookies.auth;
+    if (jwt) {
+      const result: JwtPayload | string = verify(jwt, Config.JWT_SECRET);
+      if (typeof result === "string" || result["user_id"])
+        res.status(200).send("Need to log in.");
+      else {
+        const possibleUser = await usersApi.getUsers(result["user_id"]);
+        if (possibleUser instanceof ApiError)
+          res.status(400).send("Need to log in.");
+        else {
+          if (possibleUser[0].isAdmin) next();
+          else res.status(400).send("You have no permissions.");
         }
-      );
-    } else next(ApiError.badRequest(EAuthErrors.NotLoggedIn));
+      }
+    } else res.status(200).send("Need to login");
   }
 }
 
