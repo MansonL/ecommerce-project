@@ -264,25 +264,40 @@ export class MongoUsers {
     }
   }
 
-  async updateUser(updatedData: IUserUpdate, username: string): Promise<CUDResponse | ApiError> {
+  async updateUser(
+    updatedData: IUserUpdate,
+    username: string
+  ): Promise<CUDResponse | ApiError> {
     try {
-      const doc = await this.users.findOne({username: username});
-      if(doc){
-        if(updatedData.address){
-          if(doc.addresses){
-            doc.addresses = typeof updatedData.address === 'string' ? doc.addresses.filter(address => address._id.toString() !== updatedData.address) : doc.addresses.filter(address => !updatedData.address?.includes(address._id.toString()));
-          }else
-            return ApiError.badRequest(`No addresses to delete.`)
+      const doc = await this.users.findOne({ username: username });
+      if (doc) {
+        const { address, ...update } = updatedData;
+        if (address) {
+          if (doc.addresses) {
+            doc.addresses =
+              typeof updatedData.address === "string"
+                ? doc.addresses.filter(
+                    (address) => address._id.toString() !== updatedData.address
+                  )
+                : doc.addresses.filter(
+                    (address) =>
+                      !updatedData.address?.includes(address._id.toString())
+                  );
+          } else return ApiError.badRequest(`No addresses to delete.`);
         }
-        const updates = {} = updatedData
-        await this.users.updateOne({username: username}, )
-    
-      }else{
+        await this.users.updateOne({ username: username }, update);
+        doc.save();
+        const newDoc = await this.users.findOne({ username: username });
+        return {
+          message: "Properties successfully updated",
+          data: newDoc as unknown as IMongoUser,
+        };
+      } else {
         // This won't happen if the request comes from the client, cause every client request to update the profile is after the client have logged in.
-        return ApiError.notFound(EUsersErrors.UserNotFound)
+        return ApiError.notFound(EUsersErrors.UserNotFound);
       }
     } catch (error) {
-      
+      return ApiError.internalError(`An error occured.`);
     }
   }
 }

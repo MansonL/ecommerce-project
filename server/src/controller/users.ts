@@ -90,6 +90,7 @@ class UsersController {
   ): Promise<void> {
     const user_id = (req.user as Express.User)._id;
     const address = req.body as UserAddresses;
+    address._id = new ObjectId();
     const { error } = validator.address.validate(address);
     if (error) next(ApiError.badRequest(error.message));
     else {
