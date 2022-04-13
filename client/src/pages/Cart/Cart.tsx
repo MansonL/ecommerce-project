@@ -18,7 +18,7 @@ export function Cart() {
   const { cart, setCart } = useContext(UserContext);
   const { loading, setLoading } = useContext(UserContext);
   const { setCartConfirmated } = useContext(UserContext);
-  const { user, token, updateLoginStatus } = useContext(UserContext);
+  const { user, updateLoginStatus } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -74,8 +74,7 @@ export function Cart() {
     axios
       .delete<CartCUDResponse>("http://localhost:8080/api/cart/delete", {
         data: cartData,
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${token}` },
+        
       })
       .then(AxiosThenCallback)
       .catch(AxiosCatchCallback);
@@ -89,17 +88,14 @@ export function Cart() {
     setLoading(true);
     document.body.style.overflow = "hidden";
     axios
-      .post<CartCUDResponse>("http://localhost:8080/api/cart/add", cartData, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post<CartCUDResponse>("http://localhost:8080/api/cart/add", cartData)
       .then(AxiosThenCallback)
       .catch(AxiosCatchCallback);
   };
 
   const cartConfirmation = () => {
     setCartConfirmated(true);
-    if (user.addresses && user.addresses.length > 0) navigate("../addresses");
+    if (user?.addresses && user.addresses.length > 0) navigate("../addresses");
     else navigate("../new-address");
   };
 
@@ -128,8 +124,8 @@ export function Cart() {
         )}
 
         <ul className="products-list cart-products">
-          {cart.products.length > 0
-            ? cart.products.map((product, idx) => {
+          { cart && cart.products.length > 0
+            ? cart?.products.map((product, idx) => {
                 return (
                   <li className="cart-product" key={String(idx)}>
                     <img
@@ -182,7 +178,7 @@ export function Cart() {
               })
             : ""}
         </ul>
-        {cart.products.length > 0 ? (
+        { cart && cart.products.length > 0 ? (
           <>
             <div className="cart-confirmation">
               <p>Everything right? Let's confirm and finish your order!</p>

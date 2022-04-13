@@ -79,7 +79,7 @@ export function ProductsList(props: IProductsProps) {
         setShowResult(true);
         setOperationResult('success');
         setResultMsg(data.message);
-        if (!user.isAdmin) setCart(data.data as IMongoCart);
+        if (!user?.isAdmin) setCart(data.data as IMongoCart);
         fetchProducts();
         setLoading(false);
         document.body.style.overflow = 'scroll';
@@ -163,7 +163,7 @@ export function ProductsList(props: IProductsProps) {
     const [savedCode, setCode] = useState('');
     const [adminView, setAdminView] = useState(false);
 
-    const { user, token } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const { loading, setLoading } = useContext(UserContext);
     const { loggedIn } = useContext(UserContext);
 
@@ -179,10 +179,7 @@ export function ProductsList(props: IProductsProps) {
         setLoading(true);
         document.body.style.overflow = 'hidden';
         axios
-            .post<ProductCUDResponse>(`http://localhost:8080/api/cart/add/`, cartData, {
-                withCredentials: true,
-                headers: { Authorization: `Bearer ${token}` },
-            })
+            .post<ProductCUDResponse>(`http://localhost:8080/api/cart/add/`, cartData)
             .then(CUDAxiosThenCallback)
             .catch(AxiosCatchCallback);
     };
@@ -200,10 +197,7 @@ export function ProductsList(props: IProductsProps) {
         setLoading(true);
         document.body.style.overflow = 'hidden';
         axios
-            .delete<ProductCUDResponse>(`http://localhost:8080/api/products/delete/${savedCode}`, {
-                withCredentials: true,
-                headers: { Authorization: `Bearer ${token}` },
-            })
+            .delete<ProductCUDResponse>(`http://localhost:8080/api/products/delete/${savedCode}`)
             .then(CUDAxiosThenCallback)
             .catch(AxiosCatchCallback);
     };
@@ -349,7 +343,7 @@ export function ProductsList(props: IProductsProps) {
                         </div>
                     </div>
                 </div>
-                {user.isAdmin && (
+                {user?.isAdmin && (
                     <div className="see-as-admin">
                         <span onClick={changeToAdmingView}>See as an admin here</span>
                     </div>
@@ -369,7 +363,7 @@ export function ProductsList(props: IProductsProps) {
                                         <span className="product-price">{product.price}</span>
                                     </div>
                                     <div className="add-remove-container">
-                                        {!user.isAdmin && loggedIn && (
+                                        {!user?.isAdmin && loggedIn && (
                                             <button
                                                 className="add-remove-btn"
                                                 onClick={() => handleAdd(String(product._id))}
@@ -381,7 +375,7 @@ export function ProductsList(props: IProductsProps) {
                                                 />
                                             </button>
                                         )}
-                                        {user.isAdmin && adminView && (
+                                        {user?.isAdmin && adminView && (
                                             <button
                                                 className="add-remove-btn"
                                                 onClick={() =>

@@ -1,9 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import { Types } from 'mongoose';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserAddresses } from '../../../../server/src/interfaces/users';
-import { defaultAddress, UserCUDResponse } from '../../utils/interfaces';
+import { IUser, UserCUDResponse } from '../../utils/interfaces';
 import { validation } from '../../utils/joiSchemas';
 import { ModalContainer } from '../../components/Modal/ModalContainer';
 import { OperationResult } from '../../components/Result/OperationResult';
@@ -16,11 +15,11 @@ export function AddressForm() {
     const [showResultMsg, setShowResult] = useState(false);
     const [addressResult, setAddressResult] = useState('error' || 'success');
 
-    const [newAddress, setNewAddress] = useState<UserAddresses>(defaultAddress);
+    const [newAddress, setNewAddress] = useState<UserAddresses>();
 
     const { loading, setLoading } = useContext(UserContext);
     const { cartConfirmated } = useContext(UserContext);
-    const { token, user, setUser, updateLoginStatus } = useContext(UserContext);
+    const { user, setUser, updateLoginStatus } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -31,23 +30,23 @@ export function AddressForm() {
         let value = ev.target.value;
         if (name === 'name') {
             setNewAddress({
-                ...newAddress,
+                ...newAddress as UserAddresses,
                 street1: {
-                    ...newAddress.street1,
+                    ...(newAddress as UserAddresses).street1,
                     [name]: value,
                 },
             });
         } else if (name === 'number') {
             setNewAddress({
-                ...newAddress,
+                ...newAddress as UserAddresses,
                 street1: {
-                    ...newAddress.street1,
+                    ...(newAddress as UserAddresses).street1,
                     [name]: Number(value),
                 },
             });
         } else {
             setNewAddress({
-                ...newAddress,
+                ...newAddress as UserAddresses,
                 [name]: value,
             });
         }
@@ -58,7 +57,7 @@ export function AddressForm() {
         setAddressResult('success');
         setResultMsg(data.message);
         setUser({
-            ...user,
+            ...user as IUser,
             addresses: data.data.addresses,
         });
         setShowResult(true);
@@ -102,11 +101,11 @@ export function AddressForm() {
     const saveAddress = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const cleanAddress = JSON.parse(JSON.stringify(newAddress));
-        if (newAddress.street2 === '') delete cleanAddress.street2;
-        if (newAddress.street3 === '') delete cleanAddress.street3;
-        if (newAddress.floor === '') delete cleanAddress.floor;
-        if (newAddress.department === '') delete cleanAddress.department;
-        if (newAddress.extra_info === '') delete cleanAddress.extra_info;
+        if (newAddress?.street2 === '') delete cleanAddress.street2;
+        if (newAddress?.street3 === '') delete cleanAddress.street3;
+        if (newAddress?.floor === '') delete cleanAddress.floor;
+        if (newAddress?.department === '') delete cleanAddress.department;
+        if (newAddress?.extra_info === '') delete cleanAddress.extra_info;
         delete cleanAddress._id;
         console.log(cleanAddress);
         const { error } = validation.address.validate(cleanAddress);
@@ -119,14 +118,11 @@ export function AddressForm() {
             document.body.style.overflow = 'hidden';
             const address: UserAddresses = {
                 ...cleanAddress,
-                _id: new Types.ObjectId().toString(),
+                _id: '',
             };
             console.log(address);
             axios
-                .post('http://localhost:8080/api/users/address', address, {
-                    withCredentials: true,
-                    headers: { Authorization: `Bearer ${token}` },
-                })
+                .post('http://localhost:8080/api/users/address', address)
                 .then(AxiosThenCallback)
                 .catch(AxiosCatchCallback);
         }
@@ -162,7 +158,7 @@ export function AddressForm() {
                     <input
                         type="text"
                         onChange={onChange}
-                        value={newAddress.alias}
+                        value={newAddress?.alias}
                         className="styled-input"
                         name="alias"
                         id="alias"
@@ -170,7 +166,7 @@ export function AddressForm() {
                     <label
                         htmlFor="alias"
                         className={
-                            newAddress.alias !== '' ? 'filled-input-label' : 'animated-label'
+                            newAddress?.alias !== '' ? 'filled-input-label' : 'animated-label'
                         }
                     >
                         <img
@@ -191,7 +187,7 @@ export function AddressForm() {
                             <input
                                 type="text"
                                 onChange={onChange}
-                                value={newAddress.street1.name}
+                                value={newAddress?.street1.name}
                                 className="styled-input"
                                 name="name"
                                 id="stree1name"
@@ -199,7 +195,7 @@ export function AddressForm() {
                             <label
                                 htmlFor="street1name"
                                 className={
-                                    newAddress.street1.name !== ''
+                                    newAddress?.street1.name !== ''
                                         ? 'filled-input-label'
                                         : 'animated-label'
                                 }
@@ -218,7 +214,7 @@ export function AddressForm() {
                             <input
                                 type="number"
                                 onChange={onChange}
-                                value={newAddress.street1.number}
+                                value={newAddress?.street1.number}
                                 className="styled-input"
                                 name="number"
                                 id="stree1number"
@@ -244,7 +240,7 @@ export function AddressForm() {
                         <input
                             type="text"
                             onChange={onChange}
-                            value={newAddress.department}
+                            value={newAddress?.department}
                             className="styled-input"
                             name="department"
                             id="department"
@@ -252,7 +248,7 @@ export function AddressForm() {
                         <label
                             htmlFor="department"
                             className={
-                                newAddress.department !== ''
+                                newAddress?.department !== ''
                                     ? 'filled-input-label'
                                     : 'animated-label'
                             }
@@ -260,7 +256,7 @@ export function AddressForm() {
                             Department{' '}
                             {window.innerWidth > 400 ? (
                                 <span className="optional-label">(optional)</span>
-                            ) : newAddress.department === '' ? (
+                            ) : newAddress?.department === '' ? (
                                 <span className="optional-label">(optional)</span>
                             ) : (
                                 ''
@@ -272,7 +268,7 @@ export function AddressForm() {
                         <input
                             type="text"
                             onChange={onChange}
-                            value={newAddress.floor}
+                            value={newAddress?.floor}
                             className="styled-input"
                             name="floor"
                             id="floor"
@@ -280,7 +276,7 @@ export function AddressForm() {
                         <label
                             htmlFor="floor"
                             className={
-                                newAddress.floor !== '' ? 'filled-input-label' : 'animated-label'
+                                newAddress?.floor !== '' ? 'filled-input-label' : 'animated-label'
                             }
                         >
                             Floor <span className="optional-label">(optional)</span>
@@ -292,7 +288,7 @@ export function AddressForm() {
                     <input
                         type="text"
                         onChange={onChange}
-                        value={newAddress.street2}
+                        value={newAddress?.street2}
                         className="styled-input"
                         name="street2"
                         id="stree2"
@@ -300,7 +296,7 @@ export function AddressForm() {
                     <label
                         htmlFor="street2"
                         className={
-                            newAddress.street2 !== '' ? 'filled-input-label' : 'animated-label'
+                            newAddress?.street2 !== '' ? 'filled-input-label' : 'animated-label'
                         }
                     >
                         {' '}
@@ -312,7 +308,7 @@ export function AddressForm() {
                     <input
                         type="text"
                         onChange={onChange}
-                        value={newAddress.street3}
+                        value={newAddress?.street3}
                         className="styled-input"
                         name="street3"
                         id="stree3"
@@ -320,7 +316,7 @@ export function AddressForm() {
                     <label
                         htmlFor="street3"
                         className={
-                            newAddress.street3 !== '' ? 'filled-input-label' : 'animated-label'
+                            newAddress?.street3 !== '' ? 'filled-input-label' : 'animated-label'
                         }
                     >
                         {' '}
@@ -332,14 +328,14 @@ export function AddressForm() {
                     <input
                         type="text"
                         onChange={onChange}
-                        value={newAddress.city}
+                        value={newAddress?.city}
                         className="styled-input"
                         name="city"
                         id="city"
                     />
                     <label
                         htmlFor="city"
-                        className={newAddress.city !== '' ? 'filled-input-label' : 'animated-label'}
+                        className={newAddress?.city !== '' ? 'filled-input-label' : 'animated-label'}
                     >
                         <img
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_asterisk.svg/1200px-Red_asterisk.svg.png"
@@ -354,7 +350,7 @@ export function AddressForm() {
                     <input
                         type="text"
                         onChange={onChange}
-                        value={newAddress.zipcode}
+                        value={newAddress?.zipcode}
                         className="styled-input"
                         name="zipcode"
                         id="zipcode"
@@ -362,7 +358,7 @@ export function AddressForm() {
                     <label
                         htmlFor="zipcode"
                         className={
-                            newAddress.zipcode !== '' ? 'filled-input-label' : 'animated-label'
+                            newAddress?.zipcode !== '' ? 'filled-input-label' : 'animated-label'
                         }
                     >
                         <img
@@ -378,7 +374,7 @@ export function AddressForm() {
                     <input
                         type="text"
                         onChange={onChange}
-                        value={newAddress.extra_info}
+                        value={newAddress?.extra_info}
                         className="styled-input"
                         name="extra_info"
                         id="extra_info"
@@ -386,7 +382,7 @@ export function AddressForm() {
                     <label
                         htmlFor="extra_info"
                         className={
-                            newAddress.extra_info !== '' ? 'filled-input-label' : 'animated-label'
+                            newAddress?.extra_info !== '' ? 'filled-input-label' : 'animated-label'
                         }
                     >
                         Additional instructions <span className="optional-label">(optional)</span>

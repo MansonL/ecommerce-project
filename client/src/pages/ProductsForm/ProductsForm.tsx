@@ -3,7 +3,7 @@ import moment from 'moment';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { INew_Product } from '../../../../server/src/interfaces/products';
-import { defaultProduct, ProductCUDResponse } from '../../utils/interfaces';
+import { ProductCUDResponse } from '../../utils/interfaces';
 import { validation } from '../../utils/joiSchemas';
 import { ModalContainer } from '../../components/Modal/ModalContainer';
 import { OperationResult } from '../../components/Result/OperationResult';
@@ -22,14 +22,14 @@ export function ProductsForm() {
     const [submitResult, setSubmitResult] = useState('error' || 'success');
     const [resultMsg, setResultMsg] = useState('');
 
-    const { user, token } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const { loading, setLoading } = useContext(UserContext);
 
     const navigate = useNavigate();
 
-    if (!user.isAdmin) navigate('../login');
+    if (!user?.isAdmin) navigate('../login');
 
-    const [newProduct, setNewProduct] = useState<INew_Product>(defaultProduct);
+    const [newProduct, setNewProduct] = useState<INew_Product | undefined>();
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -37,7 +37,7 @@ export function ProductsForm() {
         const property: string = e.target.name;
         const value: string | number = e.target.value;
         setNewProduct({
-            ...newProduct,
+            ...newProduct as INew_Product,
             [property]:
                 property === 'price' ? Number(value) : property === 'stock' ? Number(value) : value,
         });
@@ -45,7 +45,7 @@ export function ProductsForm() {
 
     const generateCode = () => {
         setNewProduct({
-            ...newProduct,
+            ...newProduct as INew_Product,
             code: `${Math.random().toString(36).substr(2, 9)}`,
         });
     };
@@ -90,7 +90,7 @@ export function ProductsForm() {
     const submitProduct = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const product: INew_Product = {
-            ...newProduct,
+            ...newProduct as INew_Product,
             createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
             modifiedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         };
@@ -100,10 +100,7 @@ export function ProductsForm() {
             setLoading(true);
             document.body.style.overflow = 'hidden';
             axios
-                .post<ProductCUDResponse>('http://localhost:8080/api/products/save', product, {
-                    withCredentials: true,
-                    headers: { Authorization: `Bearer ${token}` },
-                })
+                .post<ProductCUDResponse>('http://localhost:8080/api/products/save', product)
                 .then(AxiosThenCallback)
                 .catch(AxiosCatchCallback);
         }
@@ -142,12 +139,12 @@ export function ProductsForm() {
                             className="styled-input"
                             id="title"
                             name="title"
-                            value={newProduct.title}
+                            value={newProduct?.title}
                         />
                         <label
                             htmlFor="title"
                             className={
-                                newProduct.title !== '' ? 'filled-input-label' : 'animated-label'
+                                newProduct?.title !== '' ? 'filled-input-label' : 'animated-label'
                             }
                         >
                             <img
@@ -166,12 +163,12 @@ export function ProductsForm() {
                             className="styled-input"
                             id="description"
                             name="description"
-                            value={newProduct.description}
+                            value={newProduct?.description}
                         />
                         <label
                             htmlFor="description"
                             className={
-                                newProduct.description !== ''
+                                newProduct?.description !== ''
                                     ? 'filled-input-label'
                                     : 'animated-label'
                             }
@@ -193,12 +190,12 @@ export function ProductsForm() {
                                 className="styled-input"
                                 id="code"
                                 name="code"
-                                value={newProduct.code}
+                                value={newProduct?.code}
                             />
                             <label
                                 htmlFor="code"
                                 className={
-                                    newProduct.code !== '' ? 'filled-input-label' : 'animated-label'
+                                    newProduct?.code !== '' ? 'filled-input-label' : 'animated-label'
                                 }
                             >
                                 <img
@@ -243,7 +240,7 @@ export function ProductsForm() {
                             name="stock"
                             min="1"
                             step="1"
-                            value={newProduct.stock}
+                            value={newProduct?.stock}
                         />
                         <label htmlFor="stock" className="filled-input-label">
                             <img
@@ -264,7 +261,7 @@ export function ProductsForm() {
                             name="price"
                             min="0.01"
                             step="0.25"
-                            value={newProduct.price}
+                            value={newProduct?.price}
                         />
                         <label htmlFor="price" className="filled-input-label">
                             <img
@@ -283,12 +280,12 @@ export function ProductsForm() {
                             className="styled-input"
                             id="category"
                             name="category"
-                            value={newProduct.category}
+                            value={newProduct?.category}
                         />
                         <label
                             htmlFor="category"
                             className={
-                                newProduct.category !== '' ? 'filled-input-label' : 'animated-label'
+                                newProduct?.category !== '' ? 'filled-input-label' : 'animated-label'
                             }
                         >
                             <img

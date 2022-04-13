@@ -24,7 +24,6 @@ export function Chat({
     handleChatSelection,
     backToChats,
 }: IChatProps) {
-    const { token } = useContext(UserContext);
     const [message, setMessage] = useState('');
     const [username, setUsername] = useState('');
     const [users, setUsers] = useState<IUserShortInfo[]>([]);
@@ -43,12 +42,7 @@ export function Chat({
 
     const searchUser = () => {
         axios
-            .get<IUserShortInfo[]>(`http://localhost:8080/api/users/exists?fullname=${username}`, {
-                withCredentials: true,
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            .get<IUserShortInfo[]>(`http://localhost:8080/api/users/exists?fullname=${username}`)
             .then((response) => {
                 const searchedUsers = response.data;
                 setUsers(searchedUsers);

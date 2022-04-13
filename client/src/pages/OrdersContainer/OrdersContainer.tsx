@@ -12,7 +12,7 @@ import { IUser } from '../../utils/interfaces';
 import './orderscontainer.css';
 
 export function OrdersContainer() {
-    const { loggedIn, token, user, loading, setLoading } = useContext(UserContext);
+    const { loggedIn, user, loading, setLoading } = useContext(UserContext);
 
     const [operationResult, setOperationResult] = useState('error' || 'success' || 'warning');
 
@@ -52,12 +52,7 @@ export function OrdersContainer() {
             setLoading(true);
             document.body.style.overflow = 'hidden';
             axios
-                .get(`http://localhost:8080/api/orders/admin-view/list?user_id=${user_id}`, {
-                    withCredentials: true,
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
+                .get(`http://localhost:8080/api/orders/admin-view/list?user_id=${user_id}`)
                 .then(thenAxiosCallbackOrders)
                 .catch(() => {
                     setLoading(false);
@@ -67,12 +62,7 @@ export function OrdersContainer() {
             setLoading(true);
             document.body.style.overflow = 'hidden';
             axios
-                .get(`http://localhost:8080/api/orders/list`, {
-                    withCredentials: true,
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
+                .get(`http://localhost:8080/api/orders/list`)
                 .then(thenAxiosCallbackOrders)
                 .catch((error) => {
                     setLoading(false);
@@ -93,12 +83,7 @@ export function OrdersContainer() {
         setLoading(true);
         document.body.style.overflow = 'hidden';
         axios
-            .get(`http://localhost:8080/api/users/list/${email}`, {
-                withCredentials: true,
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            .get(`http://localhost:8080/api/users/list/${email}`)
             .then(thenAxiosCallbackUsers)
             .catch((error) => {
                 setLoading(false);
@@ -117,7 +102,7 @@ export function OrdersContainer() {
     const closeMsg = () => setShowResult(false);
 
     useEffect(() => {
-        if (!user.isAdmin) fetchOrders();
+        if (!user?.isAdmin) fetchOrders();
         if (!loggedIn) {
             setOperationResult('error');
             setShowResult(true);
@@ -147,13 +132,13 @@ export function OrdersContainer() {
                         <header className="header">
                             <h2 className="header-title">Orders</h2>
                             <h5>
-                                {user.isAdmin
+                                {user?.isAdmin
                                     ? `Search for the user you want to look his address with his email.`
                                     : 'Here are all of your orders.'}
                             </h5>
                         </header>
                         <div className="main-content">
-                            {user.isAdmin && (
+                            {user?.isAdmin && (
                                 <>
                                     <div className="input-field">
                                         <input
@@ -181,31 +166,31 @@ export function OrdersContainer() {
                                     </div>
                                 </>
                             )}
-                            {user.isAdmin && showOrdersToAdmin && orders.length > 0 ? (
+                            {user?.isAdmin && showOrdersToAdmin && orders.length > 0 ? (
                                 <>
                                     <span className="selected-user">
                                         {selectedUser} <b>selected</b>.
                                     </span>
                                     <OrdersList orders={orders} />
                                 </>
-                            ) : user.isAdmin && showOrdersToAdmin ? (
+                            ) : user?.isAdmin && showOrdersToAdmin ? (
                                 <OperationResult
                                     closeMsg={closeMsg}
                                     result={'warning'}
                                     resultMessage="The selected user has no orders created."
                                 />
-                            ) : user.isAdmin && !showOrdersToAdmin && users.length > 0 ? (
+                            ) : user?.isAdmin && !showOrdersToAdmin && users.length > 0 ? (
                                 <UsersList
                                     users={users}
                                     handleUserCardClick={handleUserCardClick}
                                 />
-                            ) : user.isAdmin && !showOrdersToAdmin ? (
+                            ) : user?.isAdmin && !showOrdersToAdmin ? (
                                 <OperationResult
                                     closeMsg={closeMsg}
                                     result="warning"
                                     resultMessage="There are no customer users created."
                                 />
-                            ) : !user.isAdmin && orders.length > 0 ? (
+                            ) : !user?.isAdmin && orders.length > 0 ? (
                                 <OrdersList orders={orders} />
                             ) : (
                                 <OperationResult

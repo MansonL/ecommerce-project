@@ -1,8 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { Types } from 'mongoose';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserAddresses } from '../../../../server/src/interfaces/users';
+import { UserAddresses } from '../../utils/interfaces';
 import { orderResponse } from '../../utils/interfaces';
 import { ModalContainer } from '../../components/Modal/ModalContainer';
 import { OperationResult } from '../../components/Result/OperationResult';
@@ -17,7 +16,7 @@ export function CreateOrder() {
     const [resultMsg, setResultMsg] = useState('');
 
     const { cart } = useContext(UserContext);
-    const { user, token } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const { loading, setLoading } = useContext(UserContext);
     const { selectedAddress } = useContext(UserContext);
 
@@ -33,13 +32,13 @@ export function CreateOrder() {
 
     let totalOrder = 0;
 
-    cart.products.forEach((product) => {
+    cart?.products.forEach((product) => {
         totalOrder += product.quantity * product.product.price;
     });
 
     totalOrder = Math.floor(totalOrder * 100) / 100;
 
-    const fullAddress = (user.addresses as UserAddresses[]).filter(
+    const fullAddress = (user?.addresses as UserAddresses[]).filter(
         (address) => address.alias === selectedAddress
     )[0];
 
@@ -85,7 +84,7 @@ export function CreateOrder() {
     const confirmOrder = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const data = {
-            products: cart.products.map((product) => {
+            products: cart?.products.map((product) => {
                 return {
                     product_id: product.product._id,
                     product_title: product.product.title,
@@ -94,15 +93,12 @@ export function CreateOrder() {
                 };
             }),
             total: totalOrder,
-            address: new Types.ObjectId(fullAddress._id),
+            address: fullAddress._id,
         };
         setLoading(true);
         document.body.style.overflow = 'hidden';
         axios
-            .post<orderResponse>('http://localhost:8080/api/orders/create', data, {
-                withCredentials: true,
-                headers: { Authorization: `Bearer ${token}` },
-            })
+            .post<orderResponse>('http://localhost:8080/api/orders/create', data)
             .then(AxiosThenCallback)
             .catch(AxiosCatchCallback);
     };
@@ -141,7 +137,7 @@ export function CreateOrder() {
                     </span>
                     <div className="order-products-container">
                         <ul className="products">
-                            {cart.products.map((product, idx) => {
+                            {cart?.products.map((product, idx) => {
                                 return (
                                     <li className="cart-product" key={String(idx)}>
                                         <img

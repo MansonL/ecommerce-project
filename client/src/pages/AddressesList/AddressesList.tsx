@@ -11,7 +11,7 @@ export function AddressesList() {
   const navigate = useNavigate();
 
   if (!cartConfirmated) navigate("../cart");
-  if (!(user.addresses && user.addresses.length > 0))
+  if (!(user?.addresses && user.addresses.length > 0))
     navigate("../new-address");
 
   const goToCreateAddress = () => {
@@ -24,7 +24,7 @@ export function AddressesList() {
 
   const addressConfirmation = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (selectedAddress === "" && user.addresses)
+    if (selectedAddress === "" && user?.addresses)
       setSelectedAddress(user.addresses[0].alias);
     navigate("../order");
   };
@@ -46,7 +46,7 @@ export function AddressesList() {
         Create a new address
       </div>
       <ul className="addresses-list">
-        {user.addresses?.map((address, idx) => {
+        {user?.addresses?.map((address, idx) => {
           return (
             <li className="address" key={String(idx)}>
               <input

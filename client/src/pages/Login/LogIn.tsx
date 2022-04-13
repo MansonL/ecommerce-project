@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authResponse } from "../../utils/interfaces";
+import { Authenticated, authResponse, IUser } from "../../utils/interfaces";
 import { validation } from "../../utils/joiSchemas";
 import { ModalContainer } from "../../components/Modal/ModalContainer";
 import { OperationResult } from "../../components/Result/OperationResult";
@@ -50,7 +50,7 @@ export function LogIn() {
   };
 
   const thenAxiosCallback = (response: AxiosResponse<authResponse, any>) => {
-    socket.emit('attach user to id', user.username);
+    socket.emit('attach user to id', (user as IUser).username);
     const data = response.data;
     setShowResult(true);
     setLoginResult("success");
@@ -84,8 +84,7 @@ export function LogIn() {
       axios
         .post<authResponse>(
           `http://localhost:8080/api/auth/login`,
-          credentials,
-          { withCredentials: true }
+          credentials
         )
         .then(thenAxiosCallback)
         .catch((error) => {
@@ -121,7 +120,6 @@ export function LogIn() {
       username: "",
       password: "",
     });
-
     setShowResult(false);
     if (loggedIn) {
       navigate("../cart");

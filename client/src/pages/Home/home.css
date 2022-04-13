@@ -33,6 +33,7 @@
   margin: auto;
   width: fit-content;
   bottom: 10%;
+  cursor: pointer;
 }
 
 /* ------- FOR THE NARROWEST DEVICES ---------------- */

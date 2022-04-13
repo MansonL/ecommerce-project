@@ -1,8 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import moment from 'moment';
 import { useContext, useState } from 'react';
-import { INew_User, UserInfo } from '../../../../server/src/interfaces/users';
-import { newUserDefault, UserCUDResponse } from '../../utils/interfaces';
+import { UserCUDResponse, UserInfo } from '../../utils/interfaces';
 import { maxDate, minDate, validation } from '../../utils/joiSchemas';
 import { cleanEmptyProperties } from '../../utils/utilities';
 import { ModalContainer } from '../../components/Modal/ModalContainer';
@@ -16,7 +15,7 @@ export function SignUp() {
     const [signUpResult, setSignUpResult] = useState('error' || 'success');
     const [resultMsg, setResultMsg] = useState('');
     const [showHide, setShowHide] = useState(false);
-    const [newUser, setNewUser] = useState<UserInfo>(newUserDefault);
+    const [newUser, setNewUser] = useState<UserInfo>();
 
     const { loading, setLoading } = useContext(UserContext);
 
@@ -39,7 +38,7 @@ export function SignUp() {
         const property = ev.target.name;
         const value = ev.target.value;
         setNewUser({
-            ...newUser,
+            ...newUser as UserInfo,
             [property]: value,
         });
     };
@@ -71,7 +70,7 @@ export function SignUp() {
     const signupSubmit = (ev: React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault();
         let user = { ...newUser };
-        cleanEmptyProperties(user);
+        cleanEmptyProperties(user as UserInfo);
         console.log(user);
         const { error } = validation.user.validate(user);
         if (error) {
@@ -82,9 +81,7 @@ export function SignUp() {
             setLoading(true);
             document.body.style.overflow = 'hidden';
             axios
-                .post<UserCUDResponse>('http://localhost:8080/api/auth/signup', user, {
-                    withCredentials: true,
-                })
+                .post<UserCUDResponse>('http://localhost:8080/api/auth/signup', user)
                 .then(thenAxiosCallback)
                 .catch((error) => {
                     console.log(JSON.stringify(error.response, null, 2));
@@ -137,7 +134,7 @@ export function SignUp() {
                         <input
                             type="text"
                             onChange={onChange}
-                            value={newUser.name}
+                            value={newUser?.name}
                             className="styled-input"
                             id="name"
                             name="name"
@@ -145,7 +142,7 @@ export function SignUp() {
                         <label
                             htmlFor="name"
                             className={
-                                newUser.name !== '' ? 'filled-input-label' : 'animated-label'
+                                newUser?.name !== '' ? 'filled-input-label' : 'animated-label'
                             }
                         >
                             <img
@@ -161,7 +158,7 @@ export function SignUp() {
                         <input
                             type="text"
                             onChange={onChange}
-                            value={newUser.surname}
+                            value={newUser?.surname}
                             className="styled-input"
                             id="surname"
                             name="surname"
@@ -169,7 +166,7 @@ export function SignUp() {
                         <label
                             htmlFor="surname"
                             className={
-                                newUser.surname !== '' ? 'filled-input-label' : 'animated-label'
+                                newUser?.surname !== '' ? 'filled-input-label' : 'animated-label'
                             }
                         >
                             <img
@@ -198,7 +195,7 @@ export function SignUp() {
                         <input
                             type="date"
                             onChange={onChange}
-                            value={newUser.age}
+                            value={newUser?.age}
                             className="age-input"
                             id="age"
                             name="age"
@@ -211,7 +208,7 @@ export function SignUp() {
                         <input
                             type="url"
                             onChange={onChange}
-                            value={newUser.avatar}
+                            value={newUser?.avatar}
                             id="avatar"
                             name="avatar"
                             className="styled-input"
@@ -219,7 +216,7 @@ export function SignUp() {
                         <label
                             htmlFor="avatar"
                             className={
-                                newUser.avatar !== '' ? 'filled-input-label' : 'animated-label'
+                                newUser?.avatar !== '' ? 'filled-input-label' : 'animated-label'
                             }
                         >
                             Avatar URL<span className="optional-label">(optional)</span>:
@@ -231,7 +228,7 @@ export function SignUp() {
                         <input
                             type="text"
                             onChange={onChange}
-                            value={newUser.phoneNumber}
+                            value={newUser?.phoneNumber}
                             id="phoneNumber"
                             name="phoneNumber"
                             className="styled-input"
@@ -239,7 +236,7 @@ export function SignUp() {
                         <label
                             htmlFor="phoneNumber"
                             className={
-                                newUser.phoneNumber !== '' ? 'filled-input-label' : 'animated-label'
+                                newUser?.phoneNumber !== '' ? 'filled-input-label' : 'animated-label'
                             }
                         >
                             <img
@@ -255,7 +252,7 @@ export function SignUp() {
                         <input
                             type="text"
                             onChange={onChange}
-                            value={newUser.username}
+                            value={newUser?.username}
                             id="username"
                             name="username"
                             className="styled-input"
@@ -263,7 +260,7 @@ export function SignUp() {
                         <label
                             htmlFor="username"
                             className={
-                                newUser.username !== '' ? 'filled-input-label' : 'animated-label'
+                                newUser?.username !== '' ? 'filled-input-label' : 'animated-label'
                             }
                         >
                             <img
@@ -280,7 +277,7 @@ export function SignUp() {
                             <input
                                 type={showHide ? 'text' : 'password'}
                                 onChange={onChange}
-                                value={newUser.password}
+                                value={newUser?.password}
                                 id="password"
                                 name="password"
                                 className="styled-input password-input"
@@ -288,7 +285,7 @@ export function SignUp() {
                             <label
                                 htmlFor="password"
                                 className={
-                                    newUser.password !== ''
+                                    newUser?.password !== ''
                                         ? 'filled-input-label'
                                         : 'animated-label'
                                 }
@@ -316,7 +313,7 @@ export function SignUp() {
                             <input
                                 type={showHide ? 'text' : 'password'}
                                 onChange={onChange}
-                                value={newUser.repeatedPassword}
+                                value={newUser?.repeatedPassword}
                                 id="repeatedPassword"
                                 name="repeatedPassword"
                                 className="styled-input password-input"
@@ -324,7 +321,7 @@ export function SignUp() {
                             <label
                                 htmlFor="repeteadPassword"
                                 className={
-                                    newUser.repeatedPassword !== ''
+                                    newUser?.repeatedPassword !== ''
                                         ? 'filled-input-label'
                                         : 'animated-label'
                                 }

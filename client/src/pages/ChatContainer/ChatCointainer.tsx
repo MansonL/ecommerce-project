@@ -14,10 +14,11 @@ import { ChatList } from '../../components/ChatsList/ChatsList';
 import { OperationResult } from '../../components/Result/OperationResult';
 import { UserContext } from '../../components/UserProvider';
 import { socket } from '../../lib/socket';
+import { IUser } from '../../utils/interfaces';
 import './chatcontainer.css';
 
 export function ChatContainer() {
-    const { user, token, loggedIn } = useContext(UserContext);
+    const { user, loggedIn } = useContext(UserContext);
     const [chats, setChats] = useState<IChats>();
     const [messages, setMessages] = useState<IMongoPopulatedMessages[]>([]);
     const [selectedUser, setSelectedUser] = useState<IUserShortInfo>();
@@ -41,12 +42,7 @@ export function ChatContainer() {
     const fetchChats = () => {
         console.log(`Updating chats`);
         axios
-            .get<IChats>('http://localhost:8080/api/messages/list', {
-                withCredentials: true,
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            .get<IChats>('http://localhost:8080/api/messages/list')
             .then((response) => {
                 console.log(response);
                 const data = response.data;
@@ -58,13 +54,7 @@ export function ChatContainer() {
     const fetchOneChat = async (user_id: string) => {
         axios
             .get<IMongoPopulatedMessages[]>(
-                `http://localhost:8080/api/messages/list?user=${user_id}`,
-                {
-                    withCredentials: true,
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
+                `http://localhost:8080/api/messages/list?user=${user_id}`
             )
             .then((response) => {
                 const data = response.data;
@@ -85,18 +75,13 @@ export function ChatContainer() {
     const submitMessage = (message: string) => {
         const newMessage: INew_Message = {
             timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
-            from: user._id,
+            from: (user as IUser)._id,
             to: selectedUser?._id.toString() as string,
             message: message,
             type: 'user',
         };
         axios
-            .post<CUDResponse>('http://localhost:8080/api/messages/save', newMessage, {
-                withCredentials: true,
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            .post<CUDResponse>('http://localhost:8080/api/messages/save', newMessage)
             .then(() => {
                 // Using as string cause the message submitting is only triggered when a destination user is selected, so we are going to have this user id
                 fetchOneChat(selectedUser?._id.toString() as string);

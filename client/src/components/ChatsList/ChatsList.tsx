@@ -35,7 +35,7 @@ export function ChatList({ chats, chatSelectionHandler, showNewChat }: IChatList
                                 );
                             Object.entries(chats).forEach(([otherUserId, messages]) => {
                                 const otherUser =
-                                    messages[0].from.toString() === user._id
+                                    messages[0].from.toString() === user?._id
                                         ? (messages[0].to as IUserShortInfo)
                                         : (messages[0].from as IUserShortInfo);
 
